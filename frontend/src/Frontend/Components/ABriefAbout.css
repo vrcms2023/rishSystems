@@ -1,0 +1,30 @@
+.ABriefAbout h3,
+.ABriefAbout .title {
+  font-size: 2.5rem;
+  border: 0px;
+  /* border-left-width: 15px;
+  border-style: Solid; */
+  height: 100px;
+  line-height: 170px;
+  display: flex;
+  justify-content: end;
+}
+
+.ABriefAbout .title::before,
+.ABriefAbout h3::before {
+  content: "";
+  border-left-width: 12px;
+  border-style: Solid;
+  margin-right: 15px;
+}
+
+.ABriefAbout img {
+  object-fit: cover;
+  object-position: right;
+  width: 100%;
+  height: 100%;
+}
+
+.ABriefAbout label {
+  color: #333 !important;
+}

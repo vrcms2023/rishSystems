@@ -1,0 +1,169 @@
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+// Components
+import BriefIntroFrontend from "../../Common/BriefIntro";
+import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
+import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
+import EditIcon from "../../Common/AdminEditIcon";
+import ModelBg from "../../Common/ModelBg";
+import Banner from "../../Common/Banner";
+
+import { removeActiveClass } from "../../util/ulrUtil";
+import {
+  getFormDynamicFields,
+  imageDimensionsJson,
+} from "../../util/dynamicFormFields";
+import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
+
+// Images Imports
+import Title from "../../Common/Title";
+import Search from "../../Common/Search";
+
+// Styles
+import "./Careers.css";
+import JobPost from "../Components/JobPost";
+import JobPostFrom from "../../Admin/Components/forms/JobpostForm";
+
+const Careers = () => {
+  const editComponentObj = {
+    addjob: false,
+    banner: false,
+    briefIntro: false,
+    about: false,
+    vision: false,
+    mission: false,
+  };
+
+  const pageType = "careers";
+  const isAdmin = useAdminLoginStatus();
+  const [componentEdit, SetComponentEdit] = useState(editComponentObj);
+  const [show, setShow] = useState(false);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    removeActiveClass();
+  }, []);
+
+  const editHandler = (name, value) => {
+    SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setShow(!show);
+    document.body.style.overflow = "hidden";
+  };
+
+  return (
+    <>
+      {/* Page Banner Component */}
+      <div className="position-relative careersPage">
+        {isAdmin ? (
+          <EditIcon editHandler={() => editHandler("banner", true)} />
+        ) : (
+          ""
+        )}
+        <Banner
+          getBannerAPIURL={`banner/clientBannerIntro/${pageType}-banner/`}
+          bannerState={componentEdit.banner}
+        />
+      </div>
+
+      {componentEdit.banner ? (
+        <div className="adminEditTestmonial">
+          <ImageInputsForm
+            editHandler={editHandler}
+            componentType="banner"
+            pageType={`${pageType}-banner`}
+            imageLabel="Banner Image"
+            showDescription={false}
+            showExtraFormFields={getFormDynamicFields(`${pageType}-banner`)}
+            dimensions={imageDimensionsJson("banner")}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+
+      {/* Introduction */}
+      {isAdmin ? (
+        <EditIcon editHandler={() => editHandler("briefIntro", true)} />
+      ) : (
+        ""
+      )}
+      <BriefIntroFrontend
+        introState={componentEdit.briefIntro}
+        pageType={pageType}
+      />
+
+      {componentEdit.briefIntro ? (
+        <div className="adminEditTestmonial">
+          <AdminBriefIntro
+            editHandler={editHandler}
+            componentType="briefIntro"
+            pageType={pageType}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+
+      <div className="container mt-4 my-md-5 careerItems">
+        {isAdmin ? (
+          <div className="text-end mb-4">
+            <Link
+              to="#"
+              className="btn btn-primary"
+              onClick={() => editHandler("addjob", true)}
+            >
+              Add New Career{" "}
+              <i className="fa fa-plus ms-2" aria-hidden="true"></i>
+            </Link>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {componentEdit.addjob ? (
+          <div className="adminEditTestmonial">
+            <JobPostFrom
+              editHandler={editHandler}
+              componentType="addjob"
+              type="add"
+            />
+          </div>
+        ) : (
+          ""
+        )}
+
+        <div className="row">
+          <div className="col-md-6">
+            <Title title="Careers" cssClass="fs-3" />
+          </div>
+          <div className="col-md-6">
+            <Search
+              setObject={setPosts}
+              clientSearchURL={"/careers/searchCareers/"}
+              adminSearchURL={"/careers/createCareer/"}
+              clientDefaultURL={"/careers/clientCareersList/"}
+              searchfiledDeatails={"Job Title / Comapny Name / Location "}
+            />
+          </div>
+        </div>
+
+        <div className="row mb-5">
+          <JobPost
+            addJobs={componentEdit.addjob}
+            posts={posts}
+            setPosts={setPosts}
+          />
+        </div>
+      </div>
+
+      {show && <ModelBg />}
+    </>
+  );
+};
+
+export default Careers;

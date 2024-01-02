@@ -1,17 +1,17 @@
-body {
+/* body {
   margin: 0;
   font-family: "Poppins", sans-serif !important;
   font-size: 16px !important;
   background-color: #fff !important;
   color: #666666 !important;
-  /* white-space: pre-line; */
-  /* background-image: url('https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'); */
+} */
+/* white-space: pre-line; */
+/* background-image: url('https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'); */
 
-  /* background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.7)), 
+/* background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.7)), 
                 url('https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') */
-}
 
-.btn-primary {
+/* .btn-primary {
   background-color: #a8c849 !important;
   color: #fff !important;
   border: 0px !important;
@@ -75,7 +75,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 9991;
+  z-index: 3331;
   background: rgba(0, 0, 0, 0.6);
 }
 
@@ -176,15 +176,19 @@ body {
   transition: none !important;
 }
 
-.headerBottomMargin {
+/* .headerBottomMargin {
   margin-top: 80px !important;
+} */
+
+.headerBottomMargin .editIcon {
+  margin-top: 50px;
 }
 
-.banner {
+/* .banner {
   background-size: cover;
   background-position: top center;
   height: 400px;
-}
+} */
 .newBanner {
   background-image: url("Images/project-banner.jpg");
 }
@@ -204,7 +208,6 @@ body {
 .noImg {
   object-fit: cover;
 }
-
 .homeCarousel::after {
   content: "";
   display: block;
@@ -242,4 +245,17 @@ body {
   .homeCarousel::after {
     height: 50vh;
   }
+}
+
+/* Buttons Styling */
+
+.btn {
+  border: 0px !important;
+  border-radius: 0 !important;
+  padding: 8px 35px !important;
+  font-size: 1.2rem;
+}
+
+.react-confirm-alert-overlay {
+  z-index: 99999 !important;
 }

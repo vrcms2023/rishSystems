@@ -1,0 +1,34 @@
+.ABrief h3,
+.ABrief .title {
+  font-size: 2.5rem;
+  border: 0px;
+  /* border-left-width: 15px;
+  border-style: Solid; */
+  height: 100px;
+  line-height: 170px;
+  display: flex;
+  justify-content: end;
+}
+
+.ABrief .title::before,
+.ABrief h3::before {
+  content: "";
+  border-left-width: 12px;
+  border-style: Solid;
+  margin-right: 15px;
+}
+
+.ABrief label {
+  color: #333 !important;
+}
+
+.ABriefImg img {
+  object-fit: cover;
+  -o-object-position: center;
+}
+
+@media (max-width: 756px) {
+  .ABriefImg img {
+    display: none;
+  }
+}

@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { registerUser, userLogin, getUser, verfyAccount } from "./authActions";
+import {
+  registerUser,
+  userLogin,
+  getUser,
+  getRefreshToken,
+} from "./authActions";
 import { removeAllCookies } from "../../util/cookieUtil";
 
 // initialize userToken from local storage
@@ -83,6 +88,22 @@ const authSlice = createSlice({
       state.userInfo = payload; // registration successful
     },
     [getUser.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+
+    // Refesh Token
+    [getRefreshToken.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [getRefreshToken.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.access = payload.access;
+      state.refresh = payload.refresh;
+    },
+    [getRefreshToken.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },

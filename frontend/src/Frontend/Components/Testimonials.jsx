@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Title from "../../Common/Title";
 import { Link } from "react-router-dom";
+import AdminTestimonials from "../../Admin/Components/forms/ImgTitleIntoForm-List";
+import ModelBg from "../../Common/ModelBg";
+
+import EditIcon from "../../Common/AdminEditIcon";
 
 import leftArrow from "../../Images/left.png";
 import rightArrow from "../../Images/right.png";
@@ -8,8 +12,23 @@ import testimonialUser from "../../Images/testimonial.jpg";
 
 import "./Testimonials.css";
 import { getBaseURL } from "../../util/ulrUtil";
+import { getImagePath } from "../../util/commonUtil";
 
 const Testimonials = ({ testimonis }) => {
+  const editComponentObj = {
+    logo: false,
+    menu: false,
+  };
+
+  const [admin, setAdmin] = useState(true);
+  const [componentEdit, SetComponentEdit] = useState(editComponentObj);
+  const [show, setShow] = useState(false);
+
+  const editHandler = (name, value) => {
+    SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setShow(!show);
+  };
+
   const [index, setIndex] = useState(0);
   const baseURL = getBaseURL();
   useEffect(() => {
@@ -36,8 +55,13 @@ const Testimonials = ({ testimonis }) => {
     }
   }, [index]);
 
-  const test = testimonis?.map((item, indexPeople) => {
-    const { imageUrl, title, description } = item;
+  const ListOfTestimonials = testimonis?.map((item, indexPeople) => {
+    const {
+      testimonial_description,
+      testimonial_sub_title,
+      testimonial_title,
+      path,
+    } = item;
     let position = "nextSlide";
     if (indexPeople === index) {
       position = "activeSlide";
@@ -51,39 +75,39 @@ const Testimonials = ({ testimonis }) => {
     return (
       <div className={`${position} article position-absolute `} key={item.id}>
         <Title
-          title={title}
-          cssClass="mb-2 fw-normal fs-2 text-uppercase text-white"
+          title={item.testimonial_title}
+          cssClass="mb-2 fw-normal px-3 fs-2 text-uppercase text-white"
         />
 
-        {!imageUrl ? (
+        {!item.path ? (
           <i className="fa fa-user text-white" aria-hidden="true"></i>
         ) : (
           <img
-            src={`${baseURL}${imageUrl}`}
-            className="rounded-circle my-4 testimonialImg"
+            src={getImagePath(item.path)}
+            className="rounded-circle my-4 testimonialImg shadow-lg border border-3"
             alt="User"
           />
         )}
-        <p className="text-white mt-3 px-0 px-md-5">{description}</p>
-        <div className="text-center">
+        <p className="mt-3 mb-5 px-3 px-md-5 text-white fs-6">
+          {item.testimonial_description}
+        </p>
+        <div className="d-flex justify-content-center gap-5">
           <Link to="" onClick={() => setIndex(index + 1)}>
             {" "}
-            <img src={leftArrow} alt="Previous" width="42" height="42" />
+            {/* <img src={leftArrow} alt="Previous" width="42" height="42" /> */}
+            <i className="fa fa-chevron-left fs-1" aria-hidden="true"></i>
           </Link>
           <Link to="" onClick={() => setIndex(index - 1)}>
             {" "}
-            <img src={rightArrow} alt="Next" width="42" height="42" />
+            {/* <img src={rightArrow} alt="Next" width="42" height="42" /> */}
+            <i className="fa fa-chevron-right fs-1" aria-hidden="true"></i>
           </Link>
         </div>
       </div>
     );
   });
 
-  return (
-    <div className="col-md-6 p-5 testimonials text-center position-relative">
-      {test}
-    </div>
-  );
+  return <>{ListOfTestimonials}</>;
 };
 
 export default Testimonials;

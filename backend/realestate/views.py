@@ -214,12 +214,12 @@ class updateSpecificationsView(RetrieveUpdateAPIView):
                 id = temp_dict['id']
                 title = temp_dict['title']
                 feature = temp_dict['feature']
-                updated_By = temp_dict['updated_By']
+                updated_by = temp_dict['updated_by']
                 
                 obj = self.get_object(id)
                 obj.title = title
                 obj.feature = feature
-                obj.updated_By = updated_By
+                obj.updated_by = updated_by
                
                 obj.save()
                 instances.append(obj)

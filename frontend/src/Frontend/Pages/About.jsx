@@ -1,15 +1,48 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Title from "../../Common/Title";
-import BriefIntro from "../../Common/BriefIntro";
+import { toast } from "react-toastify";
+import BriefIntroFrontend from "../../Common/BriefIntro";
+import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
+import AboutImageInputsForm from "../../Admin/Components/forms/aboutusImgTitleIntoForm";
+import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
+import EditIcon from "../../Common/AdminEditIcon";
+import ModelBg from "../../Common/ModelBg";
+import AddEditAdminNews from "../../Admin/Components/News";
+import { removeActiveClass } from "../../util/ulrUtil";
+import {
+  getFormDynamicFields,
+  getAboutUSSectionFields,
+  imageDimensionsJson,
+} from "../../util/dynamicFormFields";
+import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 
-import Img1 from "../../Images/project1.png";
-import Img2 from "../../Images/future.png";
-import Img3 from "../../Images/quality.png";
+import Banner from "../../Common/Banner";
+import AboutSection from "../Components/AboutSection";
+import { axiosClientServiceApi, axiosServiceApi } from "../../util/axiosUtil";
+import { getImagePath } from "../../util/commonUtil";
+import { confirmAlert } from "react-confirm-alert";
+import DeleteDialog from "../../Common/DeleteDialog";
+import { sortByUpdatedDate } from "../../util/dataFormatUtil";
+import moment from "moment";
 
 import "./About.css";
-import { removeActiveClass } from "../../util/ulrUtil";
 
 const About = () => {
+  const editComponentObj = {
+    banner: false,
+    briefIntro: false,
+    addSection: false,
+    editSection: false,
+  };
+
+  const pageType = "aboutus";
+  const isAdmin = useAdminLoginStatus();
+  const [componentEdit, SetComponentEdit] = useState(editComponentObj);
+  const [aboutList, setAboutList] = useState([]);
+  const [show, setShow] = useState(false);
+  const [editCarousel, setEditCarousel] = useState({});
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -18,156 +51,255 @@ const About = () => {
     removeActiveClass();
   }, []);
 
+  useEffect(() => {
+    getAboutUsList();
+  }, []);
+
+  const editHandler = (name, value, item) => {
+    SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setShow(!show);
+    if (item?.id) {
+      setEditCarousel(item);
+    }
+    document.body.style.overflow = "hidden";
+  };
+
+  const getAboutUsList = async (id) => {
+    try {
+      let response = await axiosClientServiceApi.get(`aboutus/clientAboutus/`);
+      let data = sortByUpdatedDate(response.data.aboutus);
+      setAboutList(data);
+    } catch (error) {
+      console.log("Unable to get the intro");
+    }
+  };
+
+  useEffect(() => {
+    if (!componentEdit.editSection && !componentEdit.addSection) {
+      getAboutUsList();
+      setEditCarousel({});
+    }
+  }, [componentEdit.editSection, componentEdit.addSection]);
+
+  const deleteAboutSection = (item) => {
+    const id = item.id;
+    const name = item.aboutus_title;
+
+    const deleteSection = async () => {
+      const response = await axiosServiceApi.delete(
+        `/aboutus/updateAboutus/${id}/`,
+      );
+      if (response.status === 204) {
+        const list = aboutList.filter((list) => list.id !== id);
+        setAboutList(list);
+        toast.success(`${name} is deleted`);
+      }
+    };
+
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <DeleteDialog
+            onClose={onClose}
+            callback={deleteSection}
+            message={`deleting the ${name} Service?`}
+          />
+        );
+      },
+    });
+  };
+
   return (
     <>
-      <div className="headerBottomMargin">
-        <div className="banner aboutBanner"></div>
+      {/* Page Banner Component */}
+      <div className="position-relative">
+        {isAdmin ? (
+          <EditIcon editHandler={() => editHandler("banner", true)} />
+        ) : (
+          ""
+        )}
+        <Banner
+          getBannerAPIURL={`banner/clientBannerIntro/${pageType}-banner/`}
+          bannerState={componentEdit.banner}
+        />
       </div>
+      {componentEdit.banner ? (
+        <div className="adminEditTestmonial">
+          <ImageInputsForm
+            editHandler={editHandler}
+            componentType="banner"
+            pageType={`${pageType}-banner`}
+            imageLabel="Banner Image"
+            showDescription={false}
+            showExtraFormFields={getFormDynamicFields(`${pageType}-banner`)}
+            dimensions={imageDimensionsJson("banner")}
+          />
+        </div>
+      ) : (
+        ""
+      )}
 
       {/* Introduction */}
-      <BriefIntro title="Welcome To HPR Infra">
-        We believe that construction is a man made wonder. The thought of
-        bringing imagination to real life structures excites us, each day the
-        passion in us grows as we contribute to this industry.
-      </BriefIntro>
+      {isAdmin ? (
+        <EditIcon editHandler={() => editHandler("briefIntro", true)} />
+      ) : (
+        ""
+      )}
 
-      <div className="container  my-md-5 py-md-4">
-        <div className="row shadow-lg">
-          <div className="col-12 col-md-8  py-4 p-md-5">
-            <img
-              src={Img1}
-              alt=""
-              className="d-md-none w-100 mb-3 shadow-md rounded-2"
-            />
-            <Title title="About HPR Infra" cssClass="text-dark fs-4" />
-            <p>
-              HPR has ventured in the real estate world with a humble beginning
-              in the year 2004, with Director D. Hari Srinivas who has vision
-              and has successfully completed several projects in Hyderabad.
-              Riding on the growth wave of real-estate, the group has
-              diversified strategically into the development of land.
-            </p>
-            <p>
-              Adibhatla, a village in R.R.District, Telangana is most talked
-              about prominent place for investmentsin plots and lands for future
-              appreciation.
-            </p>
-            <p>
-              The village is adjacent to ORR in between Nagarjuna Sagar Highway
-              and Sri Salilam Highway.
-            </p>
-            <p className="">
-              Abibaltla had become prominent because of IT SEZ & Aero Space SEZ.
-              TCS, CTS, and small other companies had been allotted land in IT
-              SEZ. TCS, which is about to complete the construction is expected
-              to generate an employment of 27,000 employees in Adibatla Campus.
-            </p>
-            <p>
-              Tata Advanced Systems, a group company of Tata’s started their
-              manufacturing facility for Helicopter units, wings manufacturing
-              in collaboration with LOCKHEED MARTIN and SIKORSKY AIRCRAFT
-              CORPORATION in the Aerospace SEZ, Adibatla.
-            </p>
-            <p>
-              SAMUHA Engineering a cluster of small manufacturing ancillary
-              units had started theri operation in Aerospace SEZ. Samuha
-              Engineering is expected to generate an employment of 10,000
-              employees.
-            </p>
-            <p>
-              In addition to the above companies at Adibhatla, there is
-              developed land available in Fab City on Srisailam Highway,
-              Thukkuguda. Celkon, a mobile company had expressed their
-              willingness to start their manufacturing operation at Fab City.
-              Telangan Govt. Is in talks with Various mobile manufacturing
-              companies to set up their establishments in Fab city.
-            </p>
-            <p>
-              Airport at Shamshabad is hardly 15 minutes drive from Thukkuguda.
-            </p>
-            <p>
-              Hardware Park, near Thukkuguda is already holding so many
-              companies creating an employment of 3000.
-            </p>
-            <p>
-              The ITIR project announced by the Central Govt. is expected to
-              further fuel the growth in this area. News related to this project
-              can be viewed in the links provided below.
-            </p>
+      <BriefIntroFrontend
+        introState={componentEdit.briefIntro}
+        pageType={pageType}
+      />
+
+      {componentEdit.briefIntro ? (
+        <div className="adminEditTestmonial">
+          <AdminBriefIntro
+            editHandler={editHandler}
+            componentType="briefIntro"
+            pageType={pageType}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+
+      <div className="container-fluid container-lg my-md-5 ">
+        <div className="row">
+          <div className="col-md-6 fs-3 mt-4 mt-md-0">
+            <Title title="About Us" cssClass="fs-1" />
           </div>
-          <div className="col-12 col-md-4 d-none d-md-block p-0 ">
-            <img
-              src={Img1}
-              alt=""
-              className="w-100 h-100"
-              style={{ objectFit: "cover", backgroundPosition: "center" }}
-            />
-          </div>
+          {isAdmin ? (
+            <div className="col-md-6">
+              <div className="d-flex justify-content-end align-items-center mb-3">
+                <span className="fw-bold me-2">Add content </span>
+                <button
+                  type="submit"
+                  className="btn btn-primary px-3"
+                  onClick={() => editHandler("addSection", true)}
+                >
+                  {" "}
+                  <i className="fa fa-plus" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
 
-        <div className="row shadow-lg my-5">
-          <div className="col-12 col-md-4 d-none d-md-block p-0 ">
-            <img
-              src={Img2}
-              alt=""
-              className="w-100 h-100"
-              style={{ objectFit: "cover", backgroundPosition: "center" }}
+        {componentEdit.editSection || componentEdit.addSection ? (
+          <div className="adminEditTestmonial">
+            <AddEditAdminNews
+              editHandler={editHandler}
+              category="about"
+              editCarousel={editCarousel}
+              setEditCarousel={setEditCarousel}
+              componentType={`${
+                componentEdit.editSection ? "editSection" : "addSection"
+              }`}
+              imageGetURL="aboutus/clientAboutus/"
+              imagePostURL="aboutus/createAboutus/"
+              imageUpdateURL="aboutus/updateAboutus/"
+              imageDeleteURL="aboutus/updateAboutus/"
+              imageLabel="Add About us Banner"
+              showDescription={false}
+              showExtraFormFields={getAboutUSSectionFields()}
+              dimensions={imageDimensionsJson("aboutus")}
             />
           </div>
-          <div className="col-md-8  py-4 p-md-5">
-            <img
-              src={Img2}
-              alt=""
-              className="d-md-none w-100 mb-3 shadow-md rounded-2"
-            />
-            <Title title="Our Vision" cssClass="text-dark fs-4" />
-            <p>
-              Our vision and intent now encompass to not just build better homes
-              or offices, but to provide a better quality of life for people who
-              are a part of any facility which the Group has created. The focus
-              is to strive to impart better quality through the development of
-              world-class neighborhoods, which will enrich the lives of anyone
-              living or working within these self-contained environs.
-            </p>
-          </div>
-        </div>
+        ) : (
+          ""
+        )}
 
-        <div className="row shadow-lg ">
-          <div className="col-12 col-md-8 py-4 p-md-5">
-            <img
-              src={Img3}
-              alt=""
-              className="d-md-none w-100 mb-3 shadow-md rounded-2"
-            />
-            <Title
-              title="What makes us a futuristic group?"
-              cssClass="text-dark fs-4"
-            />
-            <p className="lh-lg">
-              <strong>To excel in delivery of work.</strong>
-              <br />
-              <strong>
-                To adhere to the highest standards of professional ethics.
-              </strong>
-              <br />
-              <strong> To introduce several ‘firsts’ in the industry.</strong>
+        <div className="row aboutPage">
+          {aboutList.length > 0 ? (
+            aboutList.map((item, index) => (
+              <>
+                <div
+                  key={item.id}
+                  className={`row mb-2 ${
+                    isAdmin
+                      ? "border border-warning mb-3 position-relative"
+                      : ""
+                  } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
+                >
+                  {isAdmin ? (
+                    <>
+                      <EditIcon
+                        editHandler={() =>
+                          editHandler("editSection", true, item)
+                        }
+                      />
+                      <Link
+                        className="deleteSection"
+                        onClick={() => deleteAboutSection(item)}
+                      >
+                        <i
+                          className="fa fa-trash-o text-danger fs-4"
+                          aria-hidden="true"
+                        ></i>
+                      </Link>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                  <div className="col-12 col-lg-7 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
+                    {item.aboutus_title ? (
+                      <Title
+                        title={item.aboutus_title}
+                        cssClass="fs-1 fw-bold mb-1"
+                      />
+                    ) : (
+                      ""
+                    )}
+
+                    {item.aboutus_sub_title ? (
+                      <Title
+                        title={item.aboutus_sub_title}
+                        cssClass="fs-5 text-secondary mb-2"
+                      />
+                    ) : (
+                      ""
+                    )}
+                    {/* <p>{moment(item.created_at).format('DD-MM-YYYY hh:mm:ss')}</p> */}
+                    {item.aboutus_sub_title ? (
+                      <Title
+                        title={item.aboutus_sub_title}
+                        cssClass="fs-5 text-secondary mb-2"
+                      />
+                    ) : (
+                      ""
+                    )}
+
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: item.aboutus_description,
+                      }}
+                    />
+                  </div>
+
+                  <div className="col-lg-5 d-none d-lg-block h-100">
+                    <div className="h-100 p-3 p-md-5 py-md-4 d-flex flex-column justify-content-center align-items-center reset ">
+                      <img
+                        src={getImagePath(item.path)}
+                        alt=""
+                        className="img-fluid"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <hr className="border-secondary" />
+              </>
+            ))
+          ) : (
+            <p className="text-center text-muted py-5">
+              Please add page contents...
             </p>
-            <p>
-              To maintain transparency with our Investors, Associates, Clients,
-              Service Providers, Employees and contribute to the society at
-              large.
-            </p>
-          </div>
-          <div className="col-12 col-md-4 d-none d-md-block p-0">
-            <img
-              src={Img3}
-              alt=""
-              className="w-100  h-100"
-              style={{ objectFit: "cover", backgroundPosition: "center" }}
-            />
-          </div>
+          )}
         </div>
       </div>
+
+      {show && <ModelBg />}
     </>
   );
 };

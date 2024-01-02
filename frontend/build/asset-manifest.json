@@ -1,34 +1,31 @@
 {
   "files": {
-    "main.css": "/static/css/main.d4e488c4.css",
-    "main.js": "/static/js/main.6622c223.js",
+    "main.css": "/static/css/main.3f8fd4fd.css",
+    "main.js": "/static/js/main.41019fae.js",
     "static/js/787.4038979a.chunk.js": "/static/js/787.4038979a.chunk.js",
     "static/media/contact.png": "/static/media/contact.83bf8b1e7c83e5b1f778.png",
-    "static/media/carousel1.jpg": "/static/media/carousel1.12c7fc3ef8caf23bed66.jpg",
     "static/media/quality.png": "/static/media/quality.f74fbe0a84e5874699ac.png",
     "static/media/testimonial.jpg": "/static/media/testimonial.59af3b9d3cf82b6bf2ec.jpg",
     "static/media/professional.png": "/static/media/professional.2423974be848f3f8e155.png",
-    "static/media/insrued.png": "/static/media/insrued.584017f25bf4aa2cadeb.png",
     "static/media/project1.png": "/static/media/project1.2472d64384605c2721c4.png",
     "static/media/transparency.png": "/static/media/transparency.14deca1184c028ce63b4.png",
-    "static/media/carousel2.jpg": "/static/media/carousel2.f84b9f80132c46bab646.jpg",
-    "static/media/carousel3.jpg": "/static/media/carousel3.921bd8c8fb7841256046.jpg",
     "static/media/ourculture.png": "/static/media/ourculture.7a1f4dc8d25cb6404706.png",
     "static/media/Banner_11.jpg": "/static/media/Banner_11.51d35719ffe2c1897db4.jpg",
+    "static/media/Banner_8.jpg": "/static/media/Banner_8.2281444a59690b6685e4.jpg",
     "static/media/Banner_12.jpg": "/static/media/Banner_12.375950af7b7da34055fd.jpg",
+    "static/media/whoweare.jpg": "/static/media/whoweare.deddaf7f23254d49477a.jpg",
     "static/media/project-banner.jpg": "/static/media/project-banner.3159bc687db2a6cffe00.jpg",
     "static/media/Banner_13.jpg": "/static/media/Banner_13.c3b7f7f9980d0ac464be.jpg",
-    "static/media/ongoing.png": "/static/media/ongoing.039a144eb4e45c850256.png",
-    "static/media/future.png": "/static/media/future.3ea49ede11dc0d6a4761.png",
-    "static/media/completed.png": "/static/media/completed.311d6e6664056575947c.png",
-    "static/media/hpr-infra-logo.png": "/static/media/hpr-infra-logo.f72207c02a0e4f2f7087.png",
+    "static/media/service1.png": "/static/media/service1.108663cf31c90326f69c.png",
+    "static/media/insrued.png": "/static/media/insrued.a732fafdfaf4e22cc94f.png",
+    "static/media/logo.svg": "/static/media/logo.765306903a83c8b00acf7c3c072ba8f6.svg",
     "index.html": "/index.html",
-    "main.d4e488c4.css.map": "/static/css/main.d4e488c4.css.map",
-    "main.6622c223.js.map": "/static/js/main.6622c223.js.map",
+    "main.3f8fd4fd.css.map": "/static/css/main.3f8fd4fd.css.map",
+    "main.41019fae.js.map": "/static/js/main.41019fae.js.map",
     "787.4038979a.chunk.js.map": "/static/js/787.4038979a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d4e488c4.css",
-    "static/js/main.6622c223.js"
+    "static/css/main.3f8fd4fd.css",
+    "static/js/main.41019fae.js"
   ]
 }

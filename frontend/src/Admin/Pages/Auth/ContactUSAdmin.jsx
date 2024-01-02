@@ -34,14 +34,12 @@ const ContactUSAdmin = () => {
     <div className="container-fluid pt-5" style={{ marginTop: "120px" }}>
       <div className="row px-3 px-lg-5">
         <div className="text-end d-flex justify-content-between">
-          <Title
-            title={"List of user contacts"}
-            cssClass="text-center blue-500 fs-4"
-          />
+          <Title title={"Contact List "} cssClass="text-start fs-4" />
           <Button
             type="submit"
             cssClass="btn btn-secondary"
-            label="Back to Menu"
+            label="Back"
+            icon="fa-chevron-left"
             handlerChange={() => navigate("/main")}
           />
         </div>

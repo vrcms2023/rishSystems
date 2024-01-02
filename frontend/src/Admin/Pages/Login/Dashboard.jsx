@@ -116,7 +116,7 @@ const Dashboard = () => {
     const deleteDashBoardProject = async () => {
       const data = {
         isActive: false,
-        publish: false
+        publish: false,
       };
       callService(id, data, project, "project Deleted");
     };

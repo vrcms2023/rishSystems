@@ -50,7 +50,7 @@ class ContactUSAPIView(generics.CreateAPIView):
             }
             client_message = get_template('customer-mesg.html').render(client_ctx)
             client_msg = EmailMessage(
-                   ' Thank you contact VRCMS' ,
+                   ' Thank you contact LEOMTech' ,
                     client_message,
                     settings.EMAIL_HOST_USER,
                     [serializer.data["email"]]

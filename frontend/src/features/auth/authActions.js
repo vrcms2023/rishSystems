@@ -27,12 +27,6 @@ export const userLogin = createAsyncThunk(
     } catch (error) {
       // return custom error message from API if any
       return rejectWithValue(error);
-      // if (error) {
-      //   // const key = Object.keys(error.response.data)
-      //   return rejectWithValue(error);
-      // } else {
-      //   return rejectWithValue(error);
-      // }
     }
   },
 );
@@ -49,16 +43,6 @@ export const registerUser = createAsyncThunk(
       });
     } catch (error) {
       return rejectWithValue(error);
-      // if (error) {
-      //   //const key = Object.keys(error.response.data)
-      //   return rejectWithValue(error);
-      // } else {
-      //   if(typeof(error) === 'object') {
-      //     const key = Object.keys(error)
-      //     return rejectWithValue(error[key]);
-      //   }
-      //   return rejectWithValue(error);
-      // }
     }
   },
 );
@@ -69,6 +53,26 @@ export const getUser = createAsyncThunk(
     try {
       const { data } = await axiosServiceApi.get(`/user/auth/users/me/`);
       localStorage.setItem("userName", data.userName);
+
+      return data;
+    } catch (error) {
+      // return custom error message from API if any
+      if (error.response && error.response.data) {
+        const key = Object.keys(error.response.data);
+        return rejectWithValue(error.response.data[key][0]);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  },
+);
+
+export const getRefreshToken = createAsyncThunk(
+  "auth/getRefreshToken",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosServiceApi.get(`/user/auth/jwt/refresh/`);
+      console.log(data);
 
       return data;
     } catch (error) {

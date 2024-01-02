@@ -26,7 +26,7 @@ class GallerySerializer(serializers.ModelSerializer):
         instance.contentType = self.get_content_type(instance.path)
         instance.imageTitle = validated_data.get('imageTitle', instance.imageTitle)
         instance.imageDescription = validated_data.get('imageDescription', instance.imageDescription)
-        instance.updated_By = validated_data.get('updated_By', instance.updated_By)
+        instance.updated_by = validated_data.get('updated_by', instance.updated_by)
   
         instance.save()
         return instance

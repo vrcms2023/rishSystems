@@ -59,6 +59,15 @@ const ChangePassword = () => {
       <div className="bg-white d-flex justify-content-center align-items-center flex-column">
         <div className="container">
           <div className="d-flex flex-column justify-content-center align-items-center">
+            <div className="d-grid gap-2 mt-4">
+              <Button
+                type="submit"
+                cssClass="btn btn-secondary"
+                label="Back"
+                icon="fa-chevron-left"
+                handlerChange={() => navigate("/main")}
+              />
+            </div>
             <form onSubmit={handleSubmit(resetPassword)} className="shadow-lg">
               {serverError ? (
                 <p className="fw-bold">
@@ -67,10 +76,12 @@ const ChangePassword = () => {
               ) : (
                 ""
               )}
+
               <Title
                 title="Change Password"
                 cssClass="text-center text-dark mb-4 fw-bold fs-4"
               />
+
               {success ? (
                 <>
                   <div>
@@ -152,14 +163,6 @@ const ChangePassword = () => {
                       cssClass="btn btn-lg btn-primary"
                       handlerChange={loginHandler}
                       label="Reset Password"
-                    />
-                  </div>
-                  <div className="d-grid gap-2 mt-4">
-                    <Button
-                      type="submit"
-                      cssClass="btn btn-secondary"
-                      label="Back to Menu"
-                      handlerChange={() => navigate("/main")}
                     />
                   </div>
                 </>

@@ -1,74 +1,106 @@
-import React from "react";
-import banner1 from "../../Images/carousel1.jpg";
-import banner2 from "../../Images/carousel2.jpg";
-import banner3 from "../../Images/carousel3.jpg";
+import React, { useEffect, useState } from "react";
 
-const Carousel = () => {
+// Components
+import { axiosClientServiceApi } from "../../util/axiosUtil";
+import { getBaseURL } from "../../util/ulrUtil";
+import { getImagePath } from "../../util/commonUtil";
+
+// Styles
+import "./Carousel.css";
+
+const Carousel = ({ carouselState }) => {
+  const [carousel, setCarousel] = useState([]);
+  const baseURL = getBaseURL();
+
+  useEffect(() => {
+    const getCarousels = async () => {
+      try {
+        const response = await axiosClientServiceApi.get(
+          `carousel/clientCarousel/`,
+        );
+
+        if (response?.status == 200) {
+          let key = Object.keys(response.data);
+          setCarousel(response.data[key]);
+        }
+      } catch (error) {
+        console.log("unable to access ulr because of server is down");
+      }
+    };
+    if (!carouselState) {
+      getCarousels();
+    }
+  }, [carouselState]);
+
   return (
     <div
       id="carouselExampleIndicators"
       className="homeCarousel carousel slide"
       data-bs-ride="carousel"
     >
-      {/* <div className="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="0"
-          className="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="2"
-          aria-label="Slide 3"
-        ></button>
-      </div> */}
       <div className="carousel-inner">
-        <div className="carousel-item active">
-          <img
-            // src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-            src={banner1}
-            className="d-block w-100"
-            alt="..."
-          />
-          <div className="carousel-caption d-none d-md-block">
-            <h1 className="text-white fw-bold">HPR INFRA</h1>
-            <p className="text-light fw-normal fs-5">Cognitive Capabilities.</p>
+        {carousel.length > 0 ? (
+          carousel?.map((item, index) => (
+            <div
+              className={`carousel-item ${index == 0 ? "active" : ""}`}
+              key={item.id}
+            >
+              <img
+                src={getImagePath(item.path)}
+                alt={item.alternitivetext}
+                className="d-block w-100"
+              />
+
+              <div className="carousel-caption ">
+                {item.carouse_title ? (
+                  <h1 className="fw-bold">{item.carouse_title}</h1>
+                ) : (
+                  ""
+                )}
+
+                {item.carouse_sub_title ? (
+                  <span className="fw-normal subtitle fs-6">
+                    {item.carouse_sub_title}
+                  </span>
+                ) : (
+                  ""
+                )}
+
+                {item.carouse_description ? (
+                  <p className="fw-normal description fs-5">
+                    {item.carouse_description}
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="d-flex justify-content-center align-items-center fs-5 text-muted text-center noImg">
+            Please add images for Carousel...
           </div>
-        </div>
-        <div className="carousel-item">
-          <img
-            // src="https://images.unsplash.com/photo-1560184897-ae75f418493e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-            src={banner2}
-            className="d-block w-100"
-            alt="..."
-          />
-          <div className="carousel-caption d-none d-md-block">
-            <h1 className="text-white fw-bold">HPR INFRA</h1>
-            <p className="text-light fw-normal fs-5">Cognitive Capabilities.</p>
+        )}
+        {/* {carousel?.map((item, index) => (
+          <div
+            className={`carousel-item ${index == 0 ? "active" : ""}`}
+            key={item.id}
+          >
+            <img
+              src={getImagePath(item.path)}
+              alt={item.alternitivetext}
+              className="d-block w-100"
+            />
+            <div className="carousel-caption d-none d-md-block">
+              <h1 className="fw-bold">
+                {item.carouse_title ? item.carouse_title : ""}{" "}
+              </h1>
+              <p className="fw-normal fs-5">
+                {item.carouse_description ? item.carouse_description : ""}{" "}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="carousel-item">
-          <img
-            // src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-            src={banner3}
-            className="d-block w-100"
-            alt="..."
-          />
-          <div className="carousel-caption d-none d-md-block">
-            <h1 className="text-white fw-bold">HPR INFRA</h1>
-            <p className="text-light fw-normal fs-5">Cognitive Capabilities.</p>
-          </div>
-        </div>
+        ))} */}
       </div>
       <button
         className="carousel-control-prev"

@@ -150,7 +150,7 @@ const AddProject = () => {
         ...getProjectStatus(),
         projectTitle: projectName,
         created_by: userName,
-        updated_By: userName,
+        updated_by: userName,
         userID: getCookie("userId"),
         status: projectType[0].projectLabel,
         isActive: true,
@@ -230,9 +230,9 @@ const AddProject = () => {
       ...getProjectStatus(),
       ...getAboutUsStatus(),
       projectTitle: projectName,
-      updated_By: userName,
+      updated_by: userName,
       percentValue: percentValue,
-      publish : projectPublish
+      publish: projectPublish,
     };
     const basicProjectDetails = axiosServiceApi.put(
       `/project/editProject/${newProject.id}/`,
@@ -241,7 +241,7 @@ const AddProject = () => {
 
     const amenitiesData = {
       projectID: newProject.id,
-      updated_By: userName,
+      updated_by: userName,
       amenitie: amenities.amenitie,
       feature: amenities.feature,
       googleMap: amenities.googleMap,
@@ -268,7 +268,7 @@ const AddProject = () => {
         const specification = {
           id: item.id,
           projectID: newProject.id,
-          updated_By: userName,
+          updated_by: userName,
           title: item.title,
           feature: item.feature,
         };
@@ -276,7 +276,7 @@ const AddProject = () => {
       } else {
         const specification = {
           projectID: newProject.id,
-          updated_By: userName,
+          updated_by: userName,
           created_by: userName,
           title: item.title,
           feature: item.feature,
@@ -719,7 +719,7 @@ const AddProject = () => {
                     <label className="form-label">Add PDF's (Upload PDF)</label>
                     <FileUpload
                       project={newProject}
-                      updated_By={userName}
+                      updated_by={userName}
                       category="PDF"
                       gallerysetState={setPdfObject}
                       galleryState={pdfObject}
@@ -745,7 +745,7 @@ const AddProject = () => {
                     </label>
                     <FileUpload
                       project={newProject}
-                      updated_By={userName}
+                      updated_by={userName}
                       category="Plans"
                       gallerysetState={setPlanObject}
                       galleryState={planObject}
@@ -771,7 +771,7 @@ const AddProject = () => {
                     </label>
                     <FileUpload
                       project={newProject}
-                      updated_By={userName}
+                      updated_by={userName}
                       category="availability"
                       gallerysetState={setAvailabileObject}
                       galleryState={availabileObject}
@@ -798,7 +798,7 @@ const AddProject = () => {
                     <FileUpload
                       title=""
                       project={newProject}
-                      updated_By={userName}
+                      updated_by={userName}
                       category="price"
                       gallerysetState={setPriceObject}
                       galleryState={priceObject}
@@ -886,7 +886,7 @@ const AddProject = () => {
                   <FileUpload
                     title="Add Images"
                     project={newProject}
-                    updated_By={userName}
+                    updated_by={userName}
                     category="images"
                     gallerysetState={setImgGallery}
                     galleryState={imgGallery}

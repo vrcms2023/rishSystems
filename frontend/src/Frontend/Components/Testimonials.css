@@ -1,3 +1,37 @@
+/* Testimonial Block Styles */
+.testimonials {
+  /* background: rgb(22, 93, 61);
+  background: linear-gradient(
+    135deg,
+    rgba(22, 93, 61, 1) 0%,
+    rgba(168, 200, 73, 1) 100%
+  ); */
+  min-height: 530px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 70px 75px !important;
+}
+
+.testimonials p {
+  font-size: 0.9rem;
+}
+
+.testimonials .testimonialImg {
+  width: 125px;
+  height: 125px;
+  object-fit: cover;
+}
+
+.testimonials i.fa {
+  color: #3f3f3f;
+}
+
+.testimonials i.fa:hover {
+  color: #fff;
+}
+
 .article {
   /* top: 0;
     left: 0; */

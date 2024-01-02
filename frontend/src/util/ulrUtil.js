@@ -1,3 +1,5 @@
+import { getCookie } from "./cookieUtil";
+
 export function getBaseURL() {
   return process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_SERVER_URL
@@ -9,12 +11,26 @@ export function getBaseURL() {
 // }
 
 export function removeActiveClass() {
-  const id = document.getElementById("projectLink");
-  if (id) {
-    id.classList.remove("active");
-  }
+  const menuIDs = ['ServicesnavbarDropdown','KnowledgeHubnavbarDropdown']
+  menuIDs.forEach((menuID)=>{
+    const id = document.getElementById(menuID);
+    if (id) {
+      id.classList.remove("active");
+    }
+  })
+ 
 }
 
 export function hideHandBurgerIcon(pathList) {
   return pathList.indexOf(window.location.pathname) >= 0 ? true : false;
 }
+
+export const getUserName = () => {
+  return getCookie("userName");
+};
+
+export const getReactHostDetils = () => {
+  return process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_SERVER_URL
+    : "http://localhost:3000";
+};

@@ -1,9 +1,8 @@
 import React from "react";
 import "./spinner.css";
 
-export default function LoadingSpinner() {
-  const iconStyle = { width: "100px", height: "100px" };
-
+export default function LoadingSpinner(isLoading) {
+  const iconStyle = { width: "60px", height: "60px" };
   return (
     <>
       <div className="overlay show"></div>
@@ -11,8 +10,9 @@ export default function LoadingSpinner() {
         {/* <div class="loader"></div> */}
         <div className="d-flex justify-content-center align-item-center">
           <div className="spinner-border" style={iconStyle} role="status">
-            <span className="sr-only">Loading...</span>
+            {" "}
           </div>
+          <span className="sr-only">Loading...</span>
         </div>
       </div>
     </>

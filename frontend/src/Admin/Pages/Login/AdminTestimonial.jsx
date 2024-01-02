@@ -106,7 +106,7 @@ export const AdminTestimonial = () => {
         ? testimonialObject[0].originalname
         : null,
       imageUrl: testimonialObject[0]?.path ? testimonialObject[0].path : null,
-      updated_By: userName,
+      updated_by: userName,
       id: id,
       created_by: testimonialProject?.created_by
         ? testimonialProject?.created_by
@@ -116,7 +116,7 @@ export const AdminTestimonial = () => {
     try {
       let response = "";
       if (editState) {
-        testimonial.updated_By = userName;
+        testimonial.updated_by = userName;
         response = await axiosServiceApi.put(
           `/testimonials/updateTestimonials/${id}/`,
           {

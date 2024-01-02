@@ -48,26 +48,26 @@ const ProjectTabs = () => {
 
   const getProjects = async (projectid) => {
     // const {value} = e.target
-    try{
-    const response = await axiosClientServiceApi.get(
-      `/project/getSelectedClientProject/${projectid}/`,
-    );
-    if (response?.status == 200) {
-      const projectData = response.data;
-      setProjectTitle(projectData.project.projectTitle);
-      setprojectid(projectData.project.id);
-      setProjectHome(projectData.project);
-      setAmenities(projectData.amenitie[0]);
-      filtersImgPdfs(projectData, "images");
-      filtersImgPdfs(projectData, "pdfs");
-      filtersImgPdfs(projectData, "price");
-      filtersImgPdfs(projectData, "plan");
-      filtersImgPdfs(projectData, "avl");
-      setSpecifications(projectData?.specificationData);
+    try {
+      const response = await axiosClientServiceApi.get(
+        `/project/getSelectedClientProject/${projectid}/`,
+      );
+      if (response?.status == 200) {
+        const projectData = response.data;
+        setProjectTitle(projectData.project.projectTitle);
+        setprojectid(projectData.project.id);
+        setProjectHome(projectData.project);
+        setAmenities(projectData.amenitie[0]);
+        filtersImgPdfs(projectData, "images");
+        filtersImgPdfs(projectData, "pdfs");
+        filtersImgPdfs(projectData, "price");
+        filtersImgPdfs(projectData, "plan");
+        filtersImgPdfs(projectData, "avl");
+        setSpecifications(projectData?.specificationData);
+      }
+    } catch (error) {
+      console.log("unable to access ulr because of server is down");
     }
-  }catch(error){
-    console.log("unable to access ulr because of server is down")
-  }
   };
 
   const filtersImgPdfs = (proj, type) => {

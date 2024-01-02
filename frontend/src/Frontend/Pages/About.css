@@ -1,0 +1,25 @@
+.aboutPage ul {
+  padding: 0;
+  margin: 25px 0;
+  list-style: none;
+}
+
+.aboutPage ul li:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.aboutPage ul li:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.aboutPage ul li {
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #ededed;
+}
+
+.aboutPage hr:last-child {
+  display: none;
+}

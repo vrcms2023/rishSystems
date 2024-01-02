@@ -40,7 +40,7 @@ const Login = () => {
       setCookie("userId", userInfo.id);
       setCookie("is_admin", JSON.parse(userInfo.is_admin));
       setCookie("is_appAccess", JSON.parse(userInfo.is_appAccess));
-      navigate("/main");
+      navigate("/");
     } else {
       if (getCookie("email")) {
         removeAllCookies();
@@ -128,7 +128,7 @@ const Login = () => {
           </div>
         </form>
         <button className="btn btn-secondary" onClick={() => navigate("/")}>
-          Back to HPR Infra website
+          Back to LEOM TECH
         </button>
       </div>
     </div>
