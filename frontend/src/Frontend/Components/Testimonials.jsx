@@ -75,7 +75,7 @@ const Testimonials = ({ testimonis }) => {
       <div className={`${position} article position-absolute `} key={item.id}>
         <Title
           title={item.testimonial_title}
-          cssClass="mb-2 fw-normal px-3 fs-2 text-uppercase text-white"
+          cssClass="mb-2 fw-normal px-3 fs-2 text-uppercase text-black"
         />
 
         {!item.path ? (
@@ -87,7 +87,7 @@ const Testimonials = ({ testimonis }) => {
             alt="User"
           />
         )}
-        <p className="mt-3 mb-5 px-3 px-md-5 text-white fs-6">
+        <p className="mt-3 mb-5 px-3 px-md-5 text-black fs-6">
           {item.testimonial_description}
         </p>
         <div className="d-flex justify-content-center gap-5">

@@ -1,7 +1,7 @@
 {
   "name": "VRCMS Theme One",
   "fontFamily": "Poppins, 'Fira Sans', sans-serif, Arial, verdana",
-  "background": "#f0f0f0",
+  "background": "#ffffff",
   "bodyBgImage": "",
 
   "textColor": "#333333",
@@ -31,15 +31,15 @@
   "carouselSlideTitleColor": "#ffffff",
   "carouselSlideCaptionColor": "#ffffff",
 
-  "ABriefBg": "#3F3F3F",
+  "ABriefBg": "#2A5CA0",
   "ABriefTextColor": "#ffffff",
   "ABriefTitleBorderColor": "#27AAE1",
 
-  "ABriefAboutBg": "#3F3F3F",
-  "ABriefAboutTextColor": "#ffffff",
+  "ABriefAboutBg": "#ffffff",
+  "ABriefAboutTextColor": "#000000",
   "ABriefAboutTitleBorderColor": "#27AAE1",
 
-  "testimonialsBg": "#27AAE1",
+  "testimonialsBg": "#3CD9D2",
   "testimonialsHeadingColor": "#27AAE1",
   "testimonialsTextColor": "#27AAE1",
 

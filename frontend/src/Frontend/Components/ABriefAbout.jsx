@@ -29,6 +29,8 @@ const ABriefAbout = ({ title, cssClass, linkClass, dimensions }) => {
   const [show, setShow] = useState(false);
   const [bannerData, setBannerData] = useState("");
 
+  console.log(bannerData)
+
   const editHandler = (name, value) => {
     SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
     setShow(!show);
@@ -55,6 +57,9 @@ const ABriefAbout = ({ title, cssClass, linkClass, dimensions }) => {
 
   return (
     <>
+    <div className="col-md-5 p-0 d-flex align-items-center justify-content-end">
+        <img src={getImagePath(bannerData?.path)} alt="" className="" />
+      </div>
       <div className="col-md-7">
         {/* Edit News */}
         {isAdmin ? (
@@ -63,21 +68,19 @@ const ABriefAbout = ({ title, cssClass, linkClass, dimensions }) => {
           ""
         )}
         <div className="row h-100">
-          <div className="col-md-12 p-4 pt-0 p-lg-5 pt-lg-0 d-flex justify-content-start align-items-start flex-column">
-            {bannerData ? (
+          <div className="col-md-12 p-4 pt-0 p-lg-5 pt-lg-0 d-flex justify-content-center align-items-start flex-column">
+            {bannerData.banner_title ? (
               <Title title={bannerData.banner_title} cssClass={cssClass} />
             ) : (
               ""
             )}
 
-            {/* <Title
-              title={
-                bannerData?.banner_title
-                  ? bannerData?.banner_title
-                  : "Update the title"
-              }
-              cssClass={cssClass}
-            /> */}
+            {bannerData.banner_subTitle ? (
+              <Title title={bannerData.banner_subTitle} cssClass="fs-1 fw-bold" />
+            ) : (
+              ""
+            )}
+           
             <div>
               <p className="lh-md mt-4">
                 {bannerData?.banner_descripiton
@@ -93,9 +96,7 @@ const ABriefAbout = ({ title, cssClass, linkClass, dimensions }) => {
           </div>
         </div>
       </div>
-      <div className="col-md-5 p-0 text-center">
-        <img src={getImagePath(bannerData?.path)} alt="" className="" />
-      </div>
+      
 
       {componentEdit.whoweare ? (
         <div className="adminEditTestmonial">
