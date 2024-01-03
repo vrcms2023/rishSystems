@@ -10,16 +10,35 @@
   justify-content: end;
 }
 
-.ABrief .title::before,
+/* .ABrief .title::before,
 .ABrief h3::before {
   content: "";
   border-left-width: 12px;
   border-style: Solid;
   margin-right: 15px;
-}
+} */
 
 .ABrief label {
   color: #333 !important;
+}
+
+.briefServices {
+  background-image: url("../../Images/logo-symbol.svg");
+  background-repeat: no-repeat;
+  background-position: 180px -50px;
+  background-size: 95%;
+}
+
+.ABriefImg .servicesList li {
+  display: flex;
+  justify-content: between;
+  align-items: center;
+  gap: 10px;
+  margin: 25px 0;
+}
+
+.ABriefImg .servicesList li a{
+  color: #000;
 }
 
 .ABriefImg img {

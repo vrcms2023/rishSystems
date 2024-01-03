@@ -1,5 +1,8 @@
 footer {
-  
+  background-image: url("../../Images/logo-symbol.svg");
+  background-repeat: no-repeat;
+  background-position: 120% -250px;
+  background-size: 40%;
 }
 footer ul {
   list-style: none;
@@ -29,6 +32,7 @@ footer .socialLinks i {
 }
 
 .footerCopyRights {
+  border-top: 1px solid rgba(255, 255, 255, .1);
   font-size: 1rem !important;
 }
 

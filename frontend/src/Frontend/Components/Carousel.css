@@ -16,8 +16,14 @@
   min-height: 300px;
 }
 
+.carousel-item {
+  border-bottom-right-radius: 250px;
+  border-bottom-left-radius: 250px;
+  overflow: hidden;
+  box-shadow: 0 15px 0px #3CD9D2;
+}
 .carousel-item img {
-  height: 85vh;
+  height: 65vh;
   object-fit: cover;
 }
 

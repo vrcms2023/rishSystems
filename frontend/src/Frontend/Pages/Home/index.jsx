@@ -137,7 +137,7 @@ const Home = () => {
 
         {/* Services */}
         <div className="container py-5 homeServices">
-          <h2 className="mb-5">What We Do</h2>
+          <h2 className="mb-5 ">What We Do</h2>
           <HomeServices />
         </div>
 
@@ -145,7 +145,7 @@ const Home = () => {
         <div className="row ABriefAbout">
           <ABriefAbout
             title="Who We Are "
-            cssClass="mb-2 fw-bold title mb-4"
+            cssClass="mb-2 fw-bold title text-black"
             linkClass="btn btn-primary mt-5"
             dimensions={imageDimensionsJson("whoweare")}
           />
@@ -165,7 +165,7 @@ const Home = () => {
 
         {/* Careers - ABrief */}
         <div className="row">
-          <div className="col-md-6 ABrief">
+          <div className="col-md-8 ABrief">
             <ABrief
               title="Careers"
               cssClass="mb-2 fw-bold title mb-4"
@@ -175,7 +175,7 @@ const Home = () => {
             />
           </div>
 
-          <div className="col-md-6 p-5 testimonials text-center">
+          <div className="col-md-4 p-5 testimonials text-center">
             {isAdmin ? (
               <EditIcon editHandler={() => editHandler("testmonial", true)} />
             ) : (

@@ -207,7 +207,7 @@ footer {
         }
     
         .dby, .dby a  {
-            color:${({ theme }) => theme.secondaryColor};
+            color:${({ theme }) => theme.white};
         }
 
         .dby a:hover  {
