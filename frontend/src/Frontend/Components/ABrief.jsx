@@ -3,21 +3,22 @@ import { Link } from "react-router-dom";
 
 // Component Import
 import Title from "../../Common/Title";
-import NewsForm from "../../Admin/Components/News/index";
 
-// Styles
-import "./ABrief.css";
 
-// Image Import
-import CareerImg from "../../Images/insrued.png";
-import EditIcon from "../../Common/AdminEditIcon";
 import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 import ModelBg from "../../Common/ModelBg";
-import BriefIntroAdmin from "../../Admin/Components/BriefIntro";
+
 import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
 import { getImagePath } from "../../util/commonUtil";
 import { getFormDynamicFields } from "../../util/dynamicFormFields";
+
+// Image Import
+
+import EditIcon from "../../Common/AdminEditIcon";
+
+// Styles
+import "./ABrief.css";
 
 const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
   const editComponentObj = {
@@ -83,7 +84,7 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
 
       <div className="col-md-5 ps-0 ABriefImg ">
         <img
-          src={bannerdata?.path ? getImagePath(bannerdata.path) : CareerImg}
+          src={bannerdata?.path ? getImagePath(bannerdata.path) : getImagePath('/media/images/dummy-image-square.png')}
           alt=""
           className="w-100 h-100 img-fluid"
         />

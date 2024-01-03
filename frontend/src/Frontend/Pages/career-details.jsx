@@ -16,7 +16,6 @@ import { getFormDynamicFields } from "../../util/dynamicFormFields";
 import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 
 // Images Imports
-import CareersBanner from "../../Images/Banner_8.jpg";
 import Title from "../../Common/Title";
 
 // Styles

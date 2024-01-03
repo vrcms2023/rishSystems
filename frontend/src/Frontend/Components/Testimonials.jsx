@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Title from "../../Common/Title";
 import { Link } from "react-router-dom";
-import AdminTestimonials from "../../Admin/Components/forms/ImgTitleIntoForm-List";
-import ModelBg from "../../Common/ModelBg";
+// import AdminTestimonials from "../../Admin/Components/forms/ImgTitleIntoForm-List";
+// import ModelBg from "../../Common/ModelBg";
 
-import EditIcon from "../../Common/AdminEditIcon";
+// import EditIcon from "../../Common/AdminEditIcon";
 
-import leftArrow from "../../Images/left.png";
-import rightArrow from "../../Images/right.png";
-import testimonialUser from "../../Images/testimonial.jpg";
+// import leftArrow from "../../Images/left.png";
+// import rightArrow from "../../Images/right.png";
 
 import "./Testimonials.css";
 import { getBaseURL } from "../../util/ulrUtil";

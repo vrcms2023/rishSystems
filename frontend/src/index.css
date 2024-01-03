@@ -190,19 +190,19 @@
   height: 400px;
 } */
 .newBanner {
-  background-image: url("Images/project-banner.jpg");
+  /* background-image: url("Images/project-banner.jpg"); */
 }
 
 .projectBanner {
-  background-image: url("Images/Banner_13.jpg");
+  /* background-image: url("Images/Banner_13.jpg"); */
 }
 
 .aboutBanner {
-  background-image: url("Images/Banner_12.jpg");
+  /* background-image: url("Images/Banner_12.jpg"); */
 }
 
 .contactBanner {
-  background-image: url("Images/Banner_11.jpg");
+  /* background-image: url("Images/Banner_11.jpg"); */
 }
 
 .noImg {

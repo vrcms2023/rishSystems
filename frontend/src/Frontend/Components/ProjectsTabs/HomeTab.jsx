@@ -1,12 +1,12 @@
 import React from "react";
 import Title from "../../../Common/Title";
-import HomeImg from "../../../Images/project1.png";
 import { getCookie, setCookie, removeCookie } from "../../../util/cookieUtil";
 import { useNavigate } from "react-router-dom";
 import { getBaseURL } from "../../../util/ulrUtil";
 
 import { confirmAlert } from "react-confirm-alert";
 import DeleteDialog from "../../../Common/DeleteDialog";
+import { getImagePath } from "../../../util/commonUtil";
 
 const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
   const navigate = useNavigate();
@@ -86,7 +86,7 @@ const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
           src={
             isProjectImg
               ? `${baseURL}${projectImages[0].imgs[0].path}`
-              : HomeImg
+              : getImagePath('/media/images/dummy-image-square.png')
           }
           className="rounded img-fluid w-50"
           alt="..."

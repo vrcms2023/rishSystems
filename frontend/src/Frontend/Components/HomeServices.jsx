@@ -7,7 +7,6 @@ import Title from "../../Common/Title";
 // Styles
 import "./HomeServices.css";
 
-import serviceImg1 from "../../Images/service1.png";
 import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 import ServiceForm from "../../Admin/Components/forms/ImgTitleIntoForm-List";
 import ModelBg from "../../Common/ModelBg";
@@ -70,7 +69,7 @@ const HomeServices = ({ title }) => {
             </div>
             <div className="col-md-6 p-2 homeServiceImg">
               <img
-                src={item.path ? getImagePath(item.path) : serviceImg1}
+                src={item.path ? getImagePath(item.path) : getImagePath('/media/images/dummy-image-square.png')}
                 alt={item.alternitivetext}
                 className="img-fluid w-100 h-100"
               />

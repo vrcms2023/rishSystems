@@ -22,13 +22,13 @@ import {
   getFormDynamicFields,
   imageDimensionsJson,
 } from "../../util/dynamicFormFields";
+import { getFooterValues } from "../../features/footer/footerActions";
 
 // Styles
 import "./Contact.css";
 
 // images
-import ContactBanner from "../../Images/contact.png";
-import { getFooterValues } from "../../features/footer/footerActions";
+
 
 const Contact = () => {
   const editComponentObj = {

@@ -10,7 +10,7 @@ import NewsForm from "../../Admin/Components/News/index";
 import "./ABriefAbout.css";
 
 // Images
-import whoweare from "../../Images/whoweare.jpg";
+
 import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 import EditIcon from "../../Common/AdminEditIcon";
 import ModelBg from "../../Common/ModelBg";
