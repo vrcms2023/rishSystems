@@ -127,7 +127,7 @@ const UserAdmin = () => {
                 <th>Email</th>
                 <th>Type</th>
                 <th colSpan={2}>Status</th>
-                {/* <th>Action</th> */}
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -167,7 +167,7 @@ const UserAdmin = () => {
                       ""
                     )}
                   </td>
-                  {/* <td>
+                   <td>
                     {user.id !== userId && !user.is_admin ? (
                       <Link to="" onClick={() => handleUserDelete(user)}>
                         <i
@@ -179,7 +179,7 @@ const UserAdmin = () => {
                     ) : (
                       ""
                     )}
-                  </td> */}
+                  </td>
                 </tr>
               ))}
             </tbody>
