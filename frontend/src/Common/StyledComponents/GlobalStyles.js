@@ -184,7 +184,7 @@ body {
 }
 
 footer {
-    background-color:${({ theme }) => theme.secondaryColor}; 
+    background-color:${({ theme }) => theme.primaryColor}; 
     color:${({ theme }) => theme.white};
 
     a {

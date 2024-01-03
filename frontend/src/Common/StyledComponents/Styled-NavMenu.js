@@ -12,6 +12,10 @@ export const StyledMenu = styled.menu`
 
   .nav-item.dropdown ul {
     background-color: ${({ theme }) => theme.navbarChildLinkBgColor};
+
+    @media (max-width: 991px) {
+      background-color: ${({ theme }) => theme.navbarChildLinkHoverColor};
+    }
   }
 
   .nav-item.dropdown ul li a {
@@ -20,6 +24,11 @@ export const StyledMenu = styled.menu`
     &:hover {
       color: ${({ theme }) => theme.navbarChildLinkHoverColor};
       background-color: ${({ theme }) => theme.navbarChildLinkBgColor};
+
+      @media (max-width: 991px) {
+        background-color: ${({ theme }) => theme.navbarChildLinkBgColor};
+      }
     }
+    
   }
 `;

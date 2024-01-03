@@ -299,16 +299,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
             )}
           </ul>
         </li>
-        <li className="nav-item">
-          <NavLink
-            to="/careers"
-            className={({ isActive }) =>
-              isActive ? "nav-Link active" : "nav-Link"
-            }
-          >
-            Careers
-          </NavLink>
-        </li>
+        
         <li className="nav-item dropdown">
           <NavLink
             id="KnowledgeHubnavbarDropdown"
@@ -322,12 +313,15 @@ export const ClientMenu = ({ serviceMenuList }) => {
                 : "nav-Link dropdown-toggle isChildAvailable",
             )}
           >
-            KnowledgeHub
+            Clients
           </NavLink>
           <ul className="dropdown-menu" aria-labelledby="KnowledgeHubnavbarDropdown">
             <li>
               <Link to="/news" className="dropdown-item">
-                News and Updates
+                Case Studies
+              </Link>
+              <Link to="/news" className="dropdown-item">
+                Client List
               </Link>
             </li>
             {/* <li>
@@ -337,6 +331,38 @@ export const ClientMenu = ({ serviceMenuList }) => {
             </li> */}
           </ul>
         </li>
+        <li className="nav-item">
+          <NavLink
+            to="/careers"
+            className={({ isActive }) =>
+              isActive ? "nav-Link active" : "nav-Link"
+            }
+          >
+            Careers
+          </NavLink>
+          
+        </li>
+        <li className="nav-item">
+          <NavLink
+            to="/projects"
+            className={({ isActive }) =>
+              isActive ? "nav-Link active" : "nav-Link"
+            }
+          >
+            Projects
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink
+            to="/gallery"
+            className={({ isActive }) =>
+              isActive ? "nav-Link active" : "nav-Link"
+            }
+          >
+            Gallery
+          </NavLink>
+        </li>
+        
         <li className="nav-item">
           <NavLink
             to="/contact"
