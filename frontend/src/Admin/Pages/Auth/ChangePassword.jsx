@@ -58,16 +58,20 @@ const ChangePassword = () => {
     <div className="login">
       <div className="bg-white d-flex justify-content-center align-items-center flex-column">
         <div className="container">
-          <div className="d-flex flex-column justify-content-center align-items-center">
-            <div className="d-grid gap-2 mt-4">
+        <div className="row mt-4">
+          <div className="col-12">
               <Button
                 type="submit"
-                cssClass="btn btn-secondary"
+                cssClass="btn btn-secondary float-end"
                 label="Back"
                 icon="fa-chevron-left"
                 handlerChange={() => navigate("/main")}
               />
+          </div>
+            
             </div>
+          <div className="row d-flex flex-column justify-content-center align-items-center">
+            
             <form onSubmit={handleSubmit(resetPassword)} className="shadow-lg">
               {serverError ? (
                 <p className="fw-bold">

@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { getCookie } from "../../../util/cookieUtil";
 import { confirmAlert } from "react-confirm-alert";
 import DeleteDialog from "../../../Common/DeleteDialog";
+import Search from "../../../Common/Search";
 
 const UserAdmin = () => {
   const [userDetails, setUserDetails] = useState([]);
@@ -92,17 +93,28 @@ const UserAdmin = () => {
   };
 
   return (
-    <div className="container-fluid pt-5" style={{ marginTop: "120px" }}>
+    <div className="container-fluid pt-5">
+      <div className="row px-3 px-lg-5 mb-4">
+        <div className="col-12" >
+          <Button
+              type="submit"
+              cssClass="btn btn-secondary float-end"
+              label="Back"
+              icon="fa-chevron-left"
+              handlerChange={() => navigate("/main")}
+            />
+        </div>
+      </div>
       <div className="row px-3 px-lg-5">
         <div className="text-end d-flex justify-content-between">
           <Title title={"User's"} cssClass="text-start fs-4" />
-          <Button
-            type="submit"
-            cssClass="btn btn-secondary"
-            label="Back"
-            icon="fa-chevron-left"
-            handlerChange={() => navigate("/main")}
-          />
+          <Search
+              setObject={userDetails}
+              clientSearchURL={""}
+              adminSearchURL={""}
+              clientDefaultURL={""}
+              searchfiledDeatails={"Name / Email ID / Admin Type "}
+            />
         </div>
       </div>
 
@@ -113,8 +125,8 @@ const UserAdmin = () => {
               <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Admin type</th>
-                <th colSpan={2}>Active status</th>
+                <th>Type</th>
+                <th colSpan={2}>Status</th>
                 {/* <th>Action</th> */}
               </tr>
             </thead>

@@ -40,7 +40,7 @@ const JobBriefDetails = ({ jobDetails }) => {
         <a
           className="btn btn-primary mt-3 mt-lg-0"
           href={`mailto:${
-            jobDetails.contactEmail
+            jobDetails.contactEmail 
               ? jobDetails.contactEmail
               : "contact@leomtech.com"
           }`}
