@@ -262,7 +262,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
             data-bs-toggle="dropdown"
             aria-expanded="false"
             role="button"
-            to="/leomservices"
+            to="/rishservices"
             className={useCallback(({ isActive }) =>
               isActive
                 ? "nav-Link dropdown-toggle isChildAvailable active"
@@ -317,18 +317,21 @@ export const ClientMenu = ({ serviceMenuList }) => {
           </NavLink>
           <ul className="dropdown-menu" aria-labelledby="KnowledgeHubnavbarDropdown">
             <li>
-              <Link to="/news" className="dropdown-item">
+              <Link to="/" className="dropdown-item">
                 Case Studies
               </Link>
-              <Link to="/news" className="dropdown-item">
+              <Link to="/" className="dropdown-item">
                 Client List
               </Link>
+              <Link to="/news" className="dropdown-item">
+                News
+              </Link>
             </li>
-            {/* <li>
+            <li>
               <Link to="#" className="dropdown-item">
                 Testimonials
               </Link>
-            </li> */}
+            </li>
           </ul>
         </li>
         <li className="nav-item">
@@ -374,18 +377,35 @@ export const ClientMenu = ({ serviceMenuList }) => {
           </NavLink>
         </li>
         {isAdmin ? (
-          <li className="nav-item adminSettingsLink">
-            <NavLink
-              to="/main"
-              className={({ isActive }) =>
-                isActive
-                  ? "bg-secondary p-2 px-5 p-md-2 rounded text-white nav-Link active"
-                  : "bg-secondary p-2 px-5 p-md-2 rounded text-white nav-Link"
-              }
-            >
-              Admin Settings
-            </NavLink>
-          </li>
+          <li className="nav-item dropdown">
+          <NavLink
+            id="KnowledgeHubnavbarDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            role="button"
+            to="khub"
+            className={({ isActive }) =>
+            isActive
+            ? "nav-Link dropdown-toggle isChildAvailable active"
+            : "nav-Link dropdown-toggle isChildAvailable"
+          }
+          >
+            Admin Settings
+          </NavLink>
+          <ul className="dropdown-menu" aria-labelledby="KnowledgeHubnavbarDropdown">
+              <li>
+                <Link to="/contactUSList" className="dropdown-item">
+                  Contact List
+                </Link>
+                <Link to="/userAdmin" className="dropdown-item">
+                  Users
+                </Link>
+                <Link to="/change_password" className="dropdown-item">
+                  Change Password
+                </Link>
+              </li>
+            </ul>
+        </li>
         ) : (
           ""
         )}

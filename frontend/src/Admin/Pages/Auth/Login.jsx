@@ -128,7 +128,7 @@ const Login = () => {
           </div>
         </form>
         <button className="btn btn-secondary" onClick={() => navigate("/")}>
-          Back to LEOM TECH
+          Back to Rishsystems
         </button>
       </div>
     </div>

@@ -83,8 +83,8 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
     <div className="row h-100">
       {/* Edit News */}
 
-      <div className="col-md-5 ps-0 ABriefImg d-flex justify-content-center align-items-center">
-        <div className="bg-white text-black ms-5 me-2 p-4 py-5">
+      <div className="d-none col-lg-6 p-0 ABriefImg d-md-flex justify-content-center align-items-center">
+        <div className="bg-white text-black m-3 ms-lg-5 p-4 py-5">
           <p>
             {/* <img src={Logo} alt="logo" className="img-fluid text-white" /> */}
             
@@ -125,7 +125,7 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
         /> */}
 
       </div>
-      <div className="col-md-7 p-4 pt-0 d-flex justify-content-center align-items-start flex-column position-relative briefServices">
+      <div className="col-12 col-lg-6 p-4 d-flex justify-content-center align-items-start flex-column position-relative briefServices">
         {isAdmin ? (
           <EditIcon editHandler={() => editHandler("homecareers", true)} />
         ) : (
@@ -143,7 +143,7 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
           cssClass={cssClass}
         /> */}
 
-        <p className="lh-md mt-4">
+        <p className="lh-md mt-md-3">
           {bannerdata?.banner_descripiton
             ? bannerdata.banner_descripiton
             : "upload Description"}

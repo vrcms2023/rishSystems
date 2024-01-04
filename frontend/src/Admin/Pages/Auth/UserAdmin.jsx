@@ -94,7 +94,7 @@ const UserAdmin = () => {
 
   return (
     <div className="container-fluid pt-5">
-      <div className="row px-3 px-lg-5 mb-4">
+      {/* <div className="row px-3 px-lg-5 mb-4">
         <div className="col-12" >
           <Button
               type="submit"
@@ -104,7 +104,7 @@ const UserAdmin = () => {
               handlerChange={() => navigate("/main")}
             />
         </div>
-      </div>
+      </div> */}
       <div className="row px-3 px-lg-5">
         <div className="text-end d-flex justify-content-between">
           <Title title={"User's"} cssClass="text-start fs-4" />

@@ -11,7 +11,8 @@
   "lightBlue": "#EAF5F8",
   "primaryColor": "#17427f",
   "primaryHoverColor": "#006690",
-  "secondaryColor": "#3F3F3F",
+  "secondaryColor": "#3CD9D2",
+  "teritoryColor": "#2A5CA0",
   "transparent": "transparent",
 
   "topStripBgColor": "#000000",
