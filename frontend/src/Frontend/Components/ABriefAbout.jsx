@@ -57,7 +57,7 @@ const ABriefAbout = ({ title, cssClass, linkClass, dimensions }) => {
 
   return (
     <>
-    <div className="col-md-5 p-0 d-flex align-items-center justify-content-end">
+    <div className="col-md-5 pb-5 p-md-0  d-flex align-items-center justify-content-center justify-content-md-end">
         <img src={getImagePath(bannerData?.path)} alt="" className="" />
       </div>
       <div className="col-md-7">

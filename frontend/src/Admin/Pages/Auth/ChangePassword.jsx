@@ -58,7 +58,7 @@ const ChangePassword = () => {
     <div className="login">
       <div className="bg-white d-flex justify-content-center align-items-center flex-column">
         <div className="container">
-        <div className="row mt-4">
+        {/* <div className="row mt-4">
           <div className="col-12">
               <Button
                 type="submit"
@@ -68,8 +68,7 @@ const ChangePassword = () => {
                 handlerChange={() => navigate("/main")}
               />
           </div>
-            
-            </div>
+        </div> */}
           <div className="row d-flex flex-column justify-content-center align-items-center">
             
             <form onSubmit={handleSubmit(resetPassword)} className="shadow-lg">

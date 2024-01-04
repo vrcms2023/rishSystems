@@ -4,8 +4,8 @@
   border: 0px;
   /* border-left-width: 15px;
   border-style: Solid; */
-  height: 100px;
-  line-height: 170px;
+  /* height: 100px;
+  line-height: 170px; */
   display: flex;
   justify-content: end;
 }

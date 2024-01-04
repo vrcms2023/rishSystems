@@ -28,6 +28,7 @@ import { useAdminLoginStatus } from "../../../Common/customhook/useAdminLoginSta
 
 import "./Home.css";
 import { Link } from "react-router-dom";
+import Features from "../../Components/Features";
 
 const Home = () => {
   const editComponentObj = {
@@ -116,7 +117,7 @@ const Home = () => {
         ) : (
           ""
         )}
-        <div className="row">
+        <div className="row mt-4">
           <BriefIntroFrontend
             introState={componentEdit.briefIntro}
             pageType="Home"
@@ -135,14 +136,18 @@ const Home = () => {
           ""
         )}
 
-        {/* Services */}
+        {/* Services 
         <div className="container py-5 homeServices">
-          <h2 className="mb-5 ">What We Do</h2>
+          <h2 className="mb-5">What We Do</h2>
           <HomeServices />
         </div>
+*/}
+
+        {/* Features */}
+        <Features />
 
         {/* ABriefAbout */}
-        <div className="row ABriefAbout">
+        <div className="row ABriefAbout mb-5">
           <ABriefAbout
             title="Who We Are "
             cssClass="mb-2 fw-bold title text-black"
@@ -151,25 +156,13 @@ const Home = () => {
           />
         </div>
 
-        {/* End Of Edit News */}
-        <div className="row py-5 homeNews">
-          <div className="col-md-12 d-flex justify-content-center align-items-center">
-            <div className="container">
-              <h2 className="mb-5">News</h2>
-              <div className="row">
-                <HomeNews news={news} setNews={setNews} />
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Careers - ABrief */}
         <div className="row">
           <div className="col-md-8 ABrief">
             <ABrief
               title="Careers"
-              cssClass="mb-2 fw-bold title mb-4"
-              linkClass="btn btn-primary mt-5"
+              cssClass="fw-bold title"
+              linkClass="btn btn-primary mt-2"
               moreLink="/careers"
               dimensions={imageDimensionsJson("homeCareers")}
             />
@@ -197,6 +190,18 @@ const Home = () => {
             ) : (
               ""
             )} */}
+          </div>
+        </div>
+
+        {/* End Of Edit News */}
+        <div className="row py-5 homeNews">
+          <div className="col-md-12 d-flex justify-content-center align-items-center">
+            <div className="container">
+              <h2 className="mb-5">News</h2>
+              <div className="row">
+                <HomeNews news={news} setNews={setNews} />
+              </div>
+            </div>
           </div>
         </div>
       </div>

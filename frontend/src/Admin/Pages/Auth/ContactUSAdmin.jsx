@@ -35,7 +35,7 @@ const ContactUSAdmin = () => {
 
   return (
     <div className="container-fluid pt-5">
-      <div className="row px-3 px-lg-5 mb-4">
+      {/* <div className="row px-3 px-lg-5 mb-4">
         <div className="col-12" >
           <Button
               type="submit"
@@ -45,7 +45,7 @@ const ContactUSAdmin = () => {
               handlerChange={() => navigate("/main")}
             />
         </div>
-      </div>
+      </div> */}
       <div className="row px-3 px-lg-5">
         <div className="col-12 d-flex justify-content-between">
           <Title title={"Contact list"} cssClass="text-start fs-4" />
