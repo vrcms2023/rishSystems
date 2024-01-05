@@ -328,7 +328,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
               </Link>
             </li>
             <li>
-              <Link to="#" className="dropdown-item">
+              <Link to="/testimonials" className="dropdown-item">
                 Testimonials
               </Link>
             </li>

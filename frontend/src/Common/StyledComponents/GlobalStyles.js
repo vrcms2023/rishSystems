@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import careerBgImg from '../../Images/careers-bg.jpg'
 
 export const GlobalStyles = createGlobalStyle`
 
@@ -214,5 +215,41 @@ footer {
             color:${({ theme }) => theme.primaryHoverColor};
         }
     }
+}
+
+.homeCareers {
+    background-color:${({ theme }) => theme.teritoryColor};
+    background-image:url(${careerBgImg});
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    div, p {
+        text-align: center !important;
+    }
+
+    .briefIntro {
+        padding-left: 0 !important;
+        padding-bottom: 0 !important;
+        
+    }
+
+    @media (max-width: 991px) {
+    
+        .briefIntro {
+            padding-left: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+    }
+}
+
+.testimonialList img{
+    width: 120px;
+    height: 120px;
+    box-shadow: 0 5px 5px ${({ theme }) => theme.teritoryColor};
+}
+.testimonialList:last-child {
+    border: none !important
 }
 `;

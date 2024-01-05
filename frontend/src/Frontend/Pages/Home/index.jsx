@@ -52,7 +52,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -156,7 +156,7 @@ const Home = () => {
           />
         </div>
 
-        {/* Careers - ABrief */}
+        {/*  ABrief */}
         <div className="row">
           <div className="col-md-8 ABrief">
             <ABrief
@@ -202,6 +202,20 @@ const Home = () => {
                 <HomeNews news={news} setNews={setNews} />
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Careers */}
+        <div className="row homeCareers py-5">
+        <div className="col-lg-6"></div>
+        <div className="col-md-12 col-lg-6 pe-lg-5">
+            <BriefIntroFrontend
+            introState={componentEdit.briefIntro}
+            pageType="careers"
+          />
+          <div className="bg-white px-5 pb-4">
+          <Link to="/careers" className="btn-btn-primary">Careers</Link>
+          </div>
           </div>
         </div>
       </div>

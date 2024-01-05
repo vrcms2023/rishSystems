@@ -57,6 +57,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import GlobalTheme from "./Common/StyledComponents/GlobalStyles";
 import ThemeOne from "./Common/StyledThemes/ThemeOne.json";
 import { GlobalStyles } from "./Common/StyledComponents/GlobalStyles";
+import TestimonialsList from "./Frontend/Pages/TestimonialsList";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -128,6 +129,7 @@ function App() {
               element={<CareerDetails />}
             />
             <Route exact path="/contact" element={<Contact />} />
+            <Route exact path="/testimonials" element={<TestimonialsList />} />
             <Route exact path="/news" element={<NewsAndUpdates />} />
             {/* <Route exact path="/testmonial" element={<Testimonial />} /> */}
             <Route exact path="/login" element={<Login />} />
