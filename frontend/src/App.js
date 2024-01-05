@@ -59,6 +59,7 @@ import ThemeOne from "./Common/StyledThemes/ThemeOne.json";
 import { GlobalStyles } from "./Common/StyledComponents/GlobalStyles";
 import TestimonialsList from "./Frontend/Pages/TestimonialsList";
 import ClientsList from './Frontend/Pages/ClientsList'
+import CaseStudies from './Frontend/Pages/CaseStudies'
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -132,6 +133,7 @@ function App() {
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/testimonials" element={<TestimonialsList />} />
             <Route exact path="/clients" element={<ClientsList />} />
+            <Route exact path="/casestudies" element={<CaseStudies />} />
             <Route exact path="/news" element={<NewsAndUpdates />} />
             {/* <Route exact path="/testmonial" element={<Testimonial />} /> */}
             <Route exact path="/login" element={<Login />} />
