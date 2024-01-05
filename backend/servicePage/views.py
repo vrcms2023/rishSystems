@@ -89,7 +89,7 @@ class ClientServiceAPIView(APIView):
       
         snippets = self.get_object()
         serviceList = ServiceSerializer(snippets, many=True)
-        return Response({"servicesList" : serviceList.data}, status=status.HTTP_200_OK)
+        return Response({"services" : serviceList.data}, status=status.HTTP_200_OK)
     
 
 class ClientSelectedServiceAPIView(APIView):

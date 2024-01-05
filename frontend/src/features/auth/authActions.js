@@ -72,8 +72,6 @@ export const getRefreshToken = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axiosServiceApi.get(`/user/auth/jwt/refresh/`);
-      console.log(data);
-
       return data;
     } catch (error) {
       // return custom error message from API if any

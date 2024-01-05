@@ -40,7 +40,6 @@ const Search = ({
       }
       let key = Object.keys(response.data);
       const data = sortCreatedDateByDesc(response.data[key]);
-      console.log(data);
       setObject(data);
     } catch (error) {
       console.log("Unable to get the  data");

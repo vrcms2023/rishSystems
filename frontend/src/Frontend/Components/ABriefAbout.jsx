@@ -29,8 +29,6 @@ const ABriefAbout = ({ title, cssClass, linkClass, dimensions }) => {
   const [show, setShow] = useState(false);
   const [bannerData, setBannerData] = useState("");
 
-  console.log(bannerData)
-
   const editHandler = (name, value) => {
     SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
     setShow(!show);
