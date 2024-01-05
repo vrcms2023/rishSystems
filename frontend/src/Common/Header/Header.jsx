@@ -320,7 +320,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
               <Link to="/" className="dropdown-item">
                 Case Studies
               </Link>
-              <Link to="/" className="dropdown-item">
+              <Link to="/clients" className="dropdown-item">
                 Client List
               </Link>
               <Link to="/news" className="dropdown-item">
