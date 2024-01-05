@@ -19,7 +19,7 @@ import {
   imageDimensionsJson,
 } from "../../util/dynamicFormFields";
 import { axiosClientServiceApi, axiosServiceApi } from "../../util/axiosUtil";
-import { getImagePath, urlStringFormat } from "../../util/commonUtil";
+import { getImagePath, urlStringFormat, TitleStringFormat } from "../../util/commonUtil";
 
 // CSS Imports
 import "./services.css";
@@ -90,8 +90,9 @@ const Services = () => {
   }, [selectedServiceProject]);
 
   const getSelectedServiceObject = async (id) => {
-    if (!id) {
+    if (!id && !getCookie("access")) {
       navigate("/");
+      return;
     }
     try {
       let response = await axiosClientServiceApi.get(
@@ -223,6 +224,7 @@ const Services = () => {
         <AddService
           setSelectedServiceProject={setSelectedServiceProject}
           selectedServiceProject={selectedServiceProject}
+          pageType="service"
         />
       ) : (
         ""
@@ -287,7 +289,7 @@ const Services = () => {
           {/* {selectedServiceProject.services_page_title} */}
           <div className="col-12 col-md-8">
             <Title
-              title={selectedServiceProject?.services_page_title}
+              title={TitleStringFormat(selectedServiceProject.services_page_title)}
               cssClass="fs-3 mb-2"
             />
           </div>

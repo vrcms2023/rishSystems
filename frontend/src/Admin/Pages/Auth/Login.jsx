@@ -41,6 +41,7 @@ const Login = () => {
       setCookie("is_admin", JSON.parse(userInfo.is_admin));
       setCookie("is_appAccess", JSON.parse(userInfo.is_appAccess));
       navigate("/");
+      window.location.reload();
     } else {
       if (getCookie("email")) {
         removeAllCookies();
