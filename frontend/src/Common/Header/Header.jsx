@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { useNavigate, Link, NavLink } from "react-router-dom";
 import Button from "../Button";
 import {
@@ -33,6 +33,7 @@ import {
   urlStringFormat,
 } from "../../util/commonUtil";
 import { sortByCreatedDate } from "../../util/dataFormatUtil";
+import { getServiceValues } from "../../features/services/serviceActions";
 
 const Header = () => {
   const editComponentObj = {
@@ -46,7 +47,9 @@ const Header = () => {
   const [userName, setUserName] = useState("");
   const [loginState, setLoginState] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
+  const { serviceMenu, serviceerror } = useSelector((state) => state.serviceMenu);
   const dispatch = useDispatch();
+  const onPageLoadAction = useRef(true);
 
   const pathList = [
     "/login",
@@ -81,6 +84,18 @@ const Header = () => {
     setShow(!show);
     document.body.style.overflow = "hidden";
   };
+
+  useEffect(()=>{
+    if(serviceMenu.length === 0 && onPageLoadAction.current){
+      onPageLoadAction.current = false
+      dispatch(getServiceValues())
+    }else {
+      setServiceMenuList(serviceMenu)
+      if (!getCookie("pageLoadServiceName") && serviceMenu.length > 0) {
+        storeServiceMenuValueinCookie(serviceMenu[0]);
+      }
+    }
+  },[serviceMenu])
 
   useEffect(() => {
     if (userInfo || getCookie("access")) {
@@ -125,7 +140,7 @@ const Header = () => {
       }
     };
 
-    getServiceMenuList();
+    //getServiceMenuList();
   }, []);
 
   const links = document.querySelectorAll("#navbarSupportedContent li");
@@ -272,14 +287,14 @@ export const ClientMenu = ({ serviceMenuList }) => {
             Services
           </NavLink>
           <ul className="dropdown-menu" aria-labelledby="ServicesnavbarDropdown">
-            {}
-            {isAdmin ? (
+             {}
+            {serviceMenuList.length === 0 && isAdmin ? (
               <li>
                 <Link to="/services/" className="dropdown-item">
                   Add New Service
                 </Link>
               </li>
-            ) : (
+            ) : ( 
               serviceMenuList &&
               serviceMenuList.map((item) => (
                 <li key={item.id}>
@@ -296,7 +311,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
                   </Link>
                 </li>
               ))
-            )}
+             )} 
           </ul>
         </li>
         

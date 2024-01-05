@@ -7,7 +7,7 @@ export const useAdminLoginStatus = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (userInfo || getCookie("access")) {
+    if (getCookie("access")) {
       setLoginState(true);
     }
   }, [userInfo]);

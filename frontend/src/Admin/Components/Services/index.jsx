@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import Button from "../../../Common/Button";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   axiosClientServiceApi,
   axiosServiceApi,
 } from "../../../util/axiosUtil";
 import Error from "../Error";
-import { getCookie } from "../../../util/cookieUtil";
+import { getCookie, removeCookie } from "../../../util/cookieUtil";
 import { confirmAlert } from "react-confirm-alert";
 import DeleteDialog from "../../../Common/DeleteDialog";
 import Title from "../../../Common/Title";
@@ -15,14 +16,17 @@ import moment from "moment";
 import "./services.css";
 import { sortByCreatedDate } from "../../../util/dataFormatUtil";
 import { storeServiceMenuValueinCookie } from "../../../util/commonUtil";
+import { getServiceValues } from "../../../features/services/serviceActions";
 
-const AddService = ({ setSelectedServiceProject, selectedServiceProject }) => {
+const AddService = ({ setSelectedServiceProject, selectedServiceProject,pageType }) => {
   const [serviceName, setServiceName] = useState("");
   const [error, setError] = useState("");
   const [serviceList, setServiceList] = useState([]);
   const [editServiceObject, setEditServiceObject] = useState("");
   const [userName, setUserName] = useState("");
   const onPageLoadAction = useRef(true);
+  const { serviceMenu, serviceerror } = useSelector((state) => state.serviceMenu);
+  const dispatch = useDispatch();
 
   const onChangeHandler = (event) => {
     setError("");
@@ -52,6 +56,7 @@ const AddService = ({ setSelectedServiceProject, selectedServiceProject }) => {
     let data = {
       services_page_title: serviceName,
       created_by: userName,
+      pageType:pageType,
       publish: editServiceObject.publish ? true : false,
     };
     try {
@@ -70,7 +75,7 @@ const AddService = ({ setSelectedServiceProject, selectedServiceProject }) => {
       if (response?.status == 201 || response?.status == 200) {
         toast.success(`${serviceName} service is created `);
         setServiceName("");
-        getServiceList();
+        dispatch(getServiceValues());
 
         setSelectedServiceProject(response.data.services);
       } else {
@@ -82,28 +87,38 @@ const AddService = ({ setSelectedServiceProject, selectedServiceProject }) => {
     }
   }
 
-  const getServiceList = async () => {
-    try {
-      const response = await axiosServiceApi.get(`/services/createService/`);
-      if (response?.status === 200) {
-        const data = sortByCreatedDate(response.data.services);
-        setServiceList(data);
-        if (onPageLoadAction.current && !getCookie("pageLoadServiceID")) {
-          setSelectedServiceProject(data[0]);
-          onPageLoadAction.current = false;
-        }
-      }
-    } catch (e) {
-      console.log("unable to access ulr because of server is down");
-    }
-  };
+  // const getServiceList = async () => {
+  //   try {
+  //     const response = await axiosServiceApi.get(`/services/createService/`);
+  //     if (response?.status === 200) {
+  //       const data = sortByCreatedDate(response.data.services);
+  //       setServiceList(data);
+  //       if (onPageLoadAction.current && !getCookie("pageLoadServiceID")) {
+  //         setSelectedServiceProject(data[0]);
+  //         onPageLoadAction.current = false;
+  //       }
+  //     }
+  //   } catch (e) {
+  //     console.log("unable to access ulr because of server is down");
+  //   }
+  // };
 
   /**
    *  get Service list on page load
    */
   useEffect(() => {
-    getServiceList();
-  }, []);
+    if(serviceMenu?.length === 0 && onPageLoadAction.current){
+      onPageLoadAction.current = false
+      dispatch(getServiceValues());
+    } else if(serviceMenu){
+      setServiceList(serviceMenu);
+    }
+    if(serviceMenu?.length === 0 ){
+      removeCookie("pageLoadServiceID");
+      removeCookie("pageLoadServiceName");
+    }
+    
+  }, [serviceMenu]);
 
   const publishService = async (item) => {
     try {
@@ -120,7 +135,7 @@ const AddService = ({ setSelectedServiceProject, selectedServiceProject }) => {
           } successfully`,
         );
         setSelectedServiceProject(response.data.services);
-        getServiceList();
+        dispatch(getServiceValues());
       }
     } catch (error) {
       console.log("unable to publish the services");

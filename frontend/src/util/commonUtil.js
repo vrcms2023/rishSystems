@@ -52,3 +52,8 @@ export const urlStringFormat = (str) => {
   if (!str) return null;
   return str.replace(/\s+/g, "-").toLowerCase();
 };
+
+export const TitleStringFormat = (str) => {
+  if (!str) return null;
+  return str.replace("-", " ").toUpperCase();
+};

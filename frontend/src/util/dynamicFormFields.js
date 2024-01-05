@@ -116,7 +116,6 @@ export const getTestimonialsFields = (category) => {
 };
 
 export const getServiceFormFields = (id, title) => {
-  console.log("title", title);
   return {
     feature_title: {
       label: "Service Title",

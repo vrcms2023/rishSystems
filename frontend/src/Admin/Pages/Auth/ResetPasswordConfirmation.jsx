@@ -13,7 +13,7 @@ const ResetPasswordConfirmation = () => {
   const [success, setSuccess] = useState(false);
   const [serverError, setServerError] = useState(false);
   let { uid, token } = useParams();
-  console.log(uid, token);
+
 
   const resetPassword = async (formData) => {
     const data = {
