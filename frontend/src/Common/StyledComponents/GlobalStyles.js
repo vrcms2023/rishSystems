@@ -61,12 +61,6 @@ body {
     p { color:${({ theme }) => theme.carouselSlideCaptionColor}; }
 }
 
-.briefIntro {
-    background-color:${({ theme }) => theme.briefIntroBg}; 
-    h3 { color:${({ theme }) => theme.briefIntroTitleColor};     }
-    p { color:${({ theme }) => theme.briefIntroTextColor}; }
-}
-
 
 .ABrief {
     background-color:${({ theme }) => theme.ABriefBg}; 
