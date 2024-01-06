@@ -8,12 +8,14 @@
 /backend/media/
 /backend/build/
 /frontend/build/
+__pycache__/
 # testing
 /coverage
 # /backend/*
 # production
 /build/
 /media/
+/envs/
 
 # misc
 .DS_Store
@@ -43,5 +45,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.pyc
+*.py[cod]
+*$py.class
 # *.py
 # *.pyc
