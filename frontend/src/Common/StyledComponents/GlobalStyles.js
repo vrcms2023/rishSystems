@@ -43,19 +43,6 @@ body {
     }
 }
 
-.topStrip {
-    background-color: ${({ theme }) => theme.topStripBgColor};
-    color: ${({ theme }) => theme.topStripColor};
-
-    a {
-        color: ${({ theme }) => theme.white};
-    }
-
-    a:hover {
-        color: ${({ theme }) => theme.primaryColor};
-    }
-}
-
 .carousel-caption {
     h1 { color:${({ theme }) => theme.carouselSlideTitleColor};     }
     p { color:${({ theme }) => theme.carouselSlideCaptionColor}; }

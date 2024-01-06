@@ -16,7 +16,10 @@
   "transparent": "transparent",
 
   "topStripBgColor": "#000000",
-  "topStripColor": "#ffffff",
+  "topStripTextColor": "#ffffff",
+  "topStripTitleColor": "",
+  "topStripLinkColor": "#ffffff",
+  "topStripLinkHoverColor": "#3CD9D2",
 
   "navbarBg": "rgba(23, 66, 124, 1)",
   "navbarTextColor": "#ffffff",

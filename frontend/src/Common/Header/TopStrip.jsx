@@ -10,7 +10,7 @@ import { logout } from "../../features/auth/authSlice";
 import { useAdminLoginStatus } from "../customhook/useAdminLoginStatus";
 
 // Stylesheet
-import "./TopStrip.css";
+import {TopStripStyled} from "../StyledComponents/Styled-Topstrip"
 
 const TopStrip = () => {
   const [footerValues, setFooterValues] = useState([]);
@@ -46,6 +46,7 @@ const TopStrip = () => {
     window.location.reload();
   }
   return (
+    <TopStripStyled>
     <div className="d-flex justify-content-center justify-content-md-between align-items-center topStrip">
       <div className="d-none d-md-flex">
         <Title title="Welcome to RishSystems" cssClass={"fs-6 fw-normal"} />
@@ -85,6 +86,7 @@ const TopStrip = () => {
         )}
       </div>
     </div>
+    </TopStripStyled>
   );
 };
 export default TopStrip;
