@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Title from "../../Common/Title";
 import { Link } from "react-router-dom";
-// import AdminTestimonials from "../../Admin/Components/forms/ImgTitleIntoForm-List";
-// import ModelBg from "../../Common/ModelBg";
 
-// import EditIcon from "../../Common/AdminEditIcon";
-
-// import leftArrow from "../../Images/left.png";
-// import rightArrow from "../../Images/right.png";
-
-import "./Testimonials.css";
+import Title from "../../Common/Title";
 import { getBaseURL } from "../../util/ulrUtil";
 import { getImagePath } from "../../util/commonUtil";
 
@@ -72,14 +64,14 @@ const Testimonials = ({ testimonis }) => {
       position = "lastSlide";
     }
     return (
-      <div className={`${position} article position-absolute `} key={item.id}>
+      <div className={`${position} article position-absolute`} key={item.id}>
         <Title
           title={item.testimonial_title}
-          cssClass="mb-2 fw-normal px-3 fs-2 text-uppercase text-black"
+          cssClass="mb-2 fw-normal px-3 fs-2 fw-bold title"
         />
 
         {!item.path ? (
-          <i className="fa fa-user text-white" aria-hidden="true"></i>
+          <i className="fa fa-user" aria-hidden="true"></i>
         ) : (
           <img
             src={getImagePath(item.path)}
@@ -87,7 +79,7 @@ const Testimonials = ({ testimonis }) => {
             alt="User"
           />
         )}
-        <p className="mt-3 mb-5 px-3 px-md-5 text-black fs-6">
+        <p className="mt-3 mb-5 px-3 px-md-5 fs-6">
           {item.testimonial_description}
         </p>
         <div className="d-flex justify-content-center gap-5">
