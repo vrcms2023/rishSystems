@@ -5,7 +5,6 @@ import { axiosClientServiceApi } from "../util/axiosUtil";
 // Styles
 
 import { BriefIntroStyled } from "./StyledComponents/Styled-BriefIntro";
-import "./BriefIntro.css";
 
 const BriefIntroFrontend = ({ pageType, introState }) => {
   const [introValue, setIntroValues] = useState([]);
