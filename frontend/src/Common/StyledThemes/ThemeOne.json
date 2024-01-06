@@ -58,8 +58,10 @@
   "newsCardLinkColor": "#17427f",
   "newsCardLinkHoverColor": "#3cd9d2",
 
+  "pageBannerTextColor": "#ffffff",
   "pageBannerTitleColor": "#ffffff",
-  "pageBannerCaptionColor": "#ffffff",
+  "pageBannerSubTitleColor": "#ffffff",
+  
 
   "footerBgColor": "#17427f",
   "footerTextColor": "#ffffff",

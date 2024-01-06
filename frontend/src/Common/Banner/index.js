@@ -50,7 +50,7 @@ const Banner = ({ getBannerAPIURL, bannerState, pageLoadServiceName }) => {
           ) : (
             <Title
               title={bannerdata.banner_title}
-              cssClass="title text-end text-white fs-2"
+              cssClass="title text-end fs-2"
             />
           )}
           {bannerdata.banner_subTitle === "" ? (
@@ -58,13 +58,13 @@ const Banner = ({ getBannerAPIURL, bannerState, pageLoadServiceName }) => {
           ) : (
             <Title
               title={bannerdata.banner_subTitle}
-              cssClass="subTitle text-end text-white fw-normal"
+              cssClass="subTitle text-end fw-normal"
             />
           )}
           {bannerdata.banner_descripiton === "" ? (
             ""
           ) : (
-            <small className="description text-end text-white d-block mt-2 fs-6">
+            <small className="description text-end d-block mt-2 fs-6">
               {bannerdata.banner_descripiton}
             </small>
           )}

@@ -92,17 +92,6 @@ body {
     }
 }
 
-
-
-.pageBanner {
-    .titleCaption {
-        h3 {color:${({ theme }) => theme.pageBannerTitleColor};}
-        p {color:${({ theme }) => theme.pageBannerCaptionColor};}
-    }
-}
-
-
-
 .btn-primary {
     background-color:${({ theme }) => theme.primaryColor} !important; 
     color:${({ theme }) => theme.white};
