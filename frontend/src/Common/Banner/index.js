@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { axiosClientServiceApi } from "../../util/axiosUtil";
-import { getBaseURL } from "../../util/ulrUtil";
 
 // Component
 import Title from "../Title";
+import { axiosClientServiceApi } from "../../util/axiosUtil";
+import { getBaseURL } from "../../util/ulrUtil";
+import { getImagePath } from "../../util/commonUtil";
 
 // Styles
-import "./banner.css";
-import { getImagePath } from "../../util/commonUtil";
+import { PageBannerStyled } from "../StyledComponents/Styled-PageBanner";
+
 
 const Banner = ({ getBannerAPIURL, bannerState, pageLoadServiceName }) => {
   const [bannerdata, setBannerData] = useState([]);
@@ -33,46 +34,48 @@ const Banner = ({ getBannerAPIURL, bannerState, pageLoadServiceName }) => {
   }, [bannerState, pageLoadServiceName]);
 
   return (
-    <div className="pageBanner">
-      <div
-        className={
-          (bannerdata.banner_descripiton && bannerdata.banner_title) ||
-          bannerdata.banner_descripiton ||
-          bannerdata.banner_title
-            ? "titleCaption d-flex align-items-end justify-content-end flex-column"
-            : ""
-        }
-      >
-        {bannerdata.banner_title === "" ? (
-          ""
-        ) : (
-          <Title
-            title={bannerdata.banner_title}
-            cssClass="title text-end text-white fs-2"
-          />
-        )}
-        {bannerdata.banner_subTitle === "" ? (
-          ""
-        ) : (
-          <Title
-            title={bannerdata.banner_subTitle}
-            cssClass="subTitle text-end text-white fw-normal"
-          />
-        )}
-        {bannerdata.banner_descripiton === "" ? (
-          ""
-        ) : (
-          <small className="description text-end text-white d-block mt-2 fs-6">
-            {bannerdata.banner_descripiton}
-          </small>
-        )}
+    <PageBannerStyled>
+      <div className="pageBanner">
+        <div
+          className={
+            (bannerdata.banner_descripiton && bannerdata.banner_title) ||
+            bannerdata.banner_descripiton ||
+            bannerdata.banner_title
+              ? "titleCaption d-flex align-items-end justify-content-end flex-column"
+              : ""
+          }
+        >
+          {bannerdata.banner_title === "" ? (
+            ""
+          ) : (
+            <Title
+              title={bannerdata.banner_title}
+              cssClass="title text-end text-white fs-2"
+            />
+          )}
+          {bannerdata.banner_subTitle === "" ? (
+            ""
+          ) : (
+            <Title
+              title={bannerdata.banner_subTitle}
+              cssClass="subTitle text-end text-white fw-normal"
+            />
+          )}
+          {bannerdata.banner_descripiton === "" ? (
+            ""
+          ) : (
+            <small className="description text-end text-white d-block mt-2 fs-6">
+              {bannerdata.banner_descripiton}
+            </small>
+          )}
+        </div>
+        <img
+          src={bannerdata.path ? getImagePath(bannerdata.path) : ""}
+          alt={bannerdata.alternitivetext}
+          className="w-100"
+        />
       </div>
-      <img
-        src={bannerdata.path ? getImagePath(bannerdata.path) : ""}
-        alt={bannerdata.alternitivetext}
-        className="w-100"
-      />
-    </div>
+    </PageBannerStyled>
   );
 };
 export default Banner;
