@@ -4,26 +4,28 @@ import { confirmAlert } from "react-confirm-alert";
 
 // Components
 import Title from "../../Common/Title";
-import AddEditAdminNews from "../../Admin/Components/News/index";
-import EditIcon from "../../Common/AdminEditIcon";
-import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 import DeleteDialog from "../../Common/DeleteDialog";
 import ModelBg from "../../Common/ModelBg";
+import AddEditAdminNews from "../../Admin/Components/News/index";
+import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
+
 import { getBaseURL } from "../../util/ulrUtil";
 import { getImagePath } from "../../util/commonUtil";
+import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 import {
   axiosClientServiceApi,
   axiosFileUploadServiceApi,
 } from "../../util/axiosUtil";
-import {
-  getFormDynamicFields,
-  getCarouselFields,
-  getNewslFields,
-} from "../../util/dynamicFormFields";
+import {  getNewslFields } from "../../util/dynamicFormFields";
 import moment from "moment";
+
+
+// Images
+import EditIcon from "../../Common/AdminEditIcon";
+
 // Styles
-import "./HomeNews.css";
-import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
+import { NewsStyled } from "../../Common/StyledComponents/Styled-News";
+
 
 const HomeNews = ({ addNewsState, news, setNews }) => {
   const location = useLocation();
@@ -113,6 +115,7 @@ const HomeNews = ({ addNewsState, news, setNews }) => {
       {news.length > 0 ? (
         news.map((item, index) => (
           <div className="col-md-6 col-lg-3 mb-4 mb-lg-0" key={item.id}>
+            <NewsStyled>
             <div className="card homeNews">
               {/* Edit News */}
               {isAdmin ? (
@@ -152,9 +155,9 @@ const HomeNews = ({ addNewsState, news, setNews }) => {
                   title={
                     item.news_title ? item.news_title : "Update news Title"
                   }
-                  cssClass="fs-6 fw-bold lh-sm mb-2"
+                  cssClass="fs-5 fw-bold lh-sm mb-2 lineClamp lc2"
                 />
-                <div className="card-text mb-4 lineClamp">
+                <div className="card-text mb-4 lineClamp lc5">  
                   {item.news_description ? (
                     <div
                       dangerouslySetInnerHTML={{
@@ -174,6 +177,7 @@ const HomeNews = ({ addNewsState, news, setNews }) => {
                 </Link>
               </div>
             </div>
+            </NewsStyled>
           </div>
         ))
       ) : (
