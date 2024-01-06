@@ -52,9 +52,11 @@
   "briefIntroTitleColor": "#006690",
   "briefIntroTextColor": "#3F3F3F",
 
-  "homeNewsCardBg": "#ffffff",
-  "homeNewsTitleColor": "#27AAE1",
-  "homeNewsNewsTitleColor": "#3F3F3F",
+  "newsCardBg": "#ffffff",
+  "newsCardTextColor": "#000000",
+  "newsCardTitleColor": "#17427f",
+  "newsCardLinkColor": "#17427f",
+  "newsCardLinkHoverColor": "#3cd9d2",
 
   "pageBannerTitleColor": "#ffffff",
   "pageBannerCaptionColor": "#ffffff",
