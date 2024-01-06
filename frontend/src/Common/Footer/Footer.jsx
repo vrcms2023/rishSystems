@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { axiosClientServiceApi } from "../../util/axiosUtil";
+
 // Components
-import { useAdminLoginStatus } from "../customhook/useAdminLoginStatus";
-
-import EditIcon from "../AdminEditIcon";
-
-// import Model from "../Model";
-// import ModelBg from "../ModelBg";
-
-import Logo from "../../../src/Images/logo.svg";
-
-import "./Styles.css";
-import Model from "../../Common/Model";
-import ModelBg from "../ModelBg";
 import FooterAdminFeilds from "../../Admin/Components/forms/FooterInputs";
 import ContactInputs from "../../Admin/Components/forms/ContactInputs";
 import AdminTermsPolicy from "../../Admin/Components/TermsPrivacy/index";
 import { getFooterValues } from "../../features/footer/footerActions";
 import { getCookie } from "../../util/cookieUtil";
 import { urlStringFormat } from "../../util/commonUtil";
+import { axiosClientServiceApi } from "../../util/axiosUtil";
+import { useAdminLoginStatus } from "../customhook/useAdminLoginStatus";
+
+// Modal
+import Model from "../../Common/Model";
+import ModelBg from "../ModelBg";
+
+// Images
+import EditIcon from "../AdminEditIcon";
+import Logo from "../../../src/Images/logo.svg";
+
+// Styles
+import { FooterStyled } from "../StyledComponents/Styled-Footer";
 
 const Footer = () => {
   const editComponentObj = {
@@ -102,7 +103,7 @@ const Footer = () => {
   }, [componentEdit.termsPolacy]);
 
   return (
-    <>
+    <FooterStyled>
       <footer className="text-center">
         <div className="container py-5 footerDetails">
           <div className="row">
@@ -335,7 +336,7 @@ const Footer = () => {
       )}
 
       {show && <ModelBg />}
-    </>
+    </FooterStyled>
   );
 };
 export default Footer;
