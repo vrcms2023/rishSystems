@@ -8,7 +8,6 @@
 
   "white": "#ffffff",
   "black": "#000000",
-  "lightBlue": "#EAF5F8",
   "primaryColor": "#17427f",
   "primaryHoverColor": "#006690",
   "secondaryColor": "#3CD9D2",
@@ -58,5 +57,11 @@
   "homeNewsNewsTitleColor": "#3F3F3F",
 
   "pageBannerTitleColor": "#ffffff",
-  "pageBannerCaptionColor": "#ffffff"
+  "pageBannerCaptionColor": "#ffffff",
+
+  "footerBgColor": "#17427f",
+  "footerTextColor": "#ffffff",
+  "footerTitleColor": "#ffffff",
+  "footerLinkColor": "#ffffff",
+  "footerLinkHoverColor": "#3cd9d2"
 }

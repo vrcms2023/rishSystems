@@ -158,38 +158,6 @@ body {
     border: 1px solid ${({ theme }) => theme.primaryColor} !important;  
 }
 
-footer {
-    background-color:${({ theme }) => theme.primaryColor}; 
-    color:${({ theme }) => theme.white};
-
-    a {
-        color:${({ theme }) => theme.white};
-    }
-
-    a:hover {
-        color:${({ theme }) => theme.primaryColor};
-    }
-
-    h5 {
-        color:${({ theme }) => theme.white};
-    }
-
-    .footerCopyRights {
-        background-color:${({ theme }) => theme.primaryColor}; 
-        
-        a:hover {
-            color:${({ theme }) => theme.secondaryColor};
-        }
-    
-        .dby, .dby a  {
-            color:${({ theme }) => theme.white};
-        }
-
-        .dby a:hover  {
-            color:${({ theme }) => theme.primaryHoverColor};
-        }
-    }
-}
 
 .homeCareers {
     background-color:${({ theme }) => theme.teritoryColor};
