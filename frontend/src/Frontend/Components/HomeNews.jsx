@@ -25,7 +25,7 @@ import moment from "moment";
 import "./HomeNews.css";
 import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 
-const HomeNews = ({ addNewsState, news, setNews }) => {
+const HomeNews = ({ addNewsState, news, setNews,setPageloadResults }) => {
   const location = useLocation();
   const baseURL = getBaseURL();
   const editComponentObj = {
@@ -57,8 +57,9 @@ const HomeNews = ({ addNewsState, news, setNews }) => {
           `/appNews/clientAppNews/`,
         );
         if (response?.status === 200) {
-          const data = sortCreatedDateByDesc(response.data.appNews);
-          setNews(data);
+          //const data = sortCreatedDateByDesc(response.data.appNews);
+          setPageloadResults(true)
+          setNews(response.data);
         }
       } catch (error) {
         console.log("unable to access ulr because of server is down");
@@ -143,7 +144,7 @@ const HomeNews = ({ addNewsState, news, setNews }) => {
               )}
 
               <img
-                src={getImagePath(item.path)}
+                src={item.path}
                 className="img-fluid"
                 alt={item.alternitivetext}
               />
@@ -238,7 +239,7 @@ const HomeNews = ({ addNewsState, news, setNews }) => {
             <div>
               <img
                 className="w-100"
-                src={getImagePath(obj.path)}
+                src={obj.path}
                 alt={obj.news_title}
               />
             </div>

@@ -6,6 +6,8 @@ from rest_framework.views import APIView
 from rest_framework import status
 from django.http import Http404
 from django.db.models import Q
+from common.CustomPagination import CustomPagination
+from common.utility import get_custom_paginated_data
 
 # Create your views here.
 
@@ -13,6 +15,7 @@ class CreateCareer(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = Careers.objects.all()
     serializer_class = CareerSerializer
+    pagination_class = CustomPagination
 
     """
     List all Careers, or create a new Careers.
@@ -20,6 +23,10 @@ class CreateCareer(generics.CreateAPIView):
 
     def get(self, request, format=None):
         snippets = Careers.objects.all()
+        results = get_custom_paginated_data(self, snippets)
+        if results is not None:
+            return results
+
         serializer = CareerSerializer(snippets, many=True)
         return Response({"careers": serializer.data}, status=status.HTTP_200_OK)
     
@@ -78,6 +85,7 @@ Client Service View
 class ClientCareerAPIView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = CareerSerializer
+    pagination_class = CustomPagination
   
     def get_object(self):
         try:
@@ -86,8 +94,11 @@ class ClientCareerAPIView(generics.ListAPIView):
             return Response( status=status.HTTP_404_NOT_FOUND)
 
     def get(self, request, format=None):
-      
         snippets = self.get_object()
+        results = get_custom_paginated_data(self, snippets)
+        if results is not None:
+            return results
+        
         serviceList = CareerSerializer(snippets, many=True)
         return Response({"careers" : serviceList.data}, status=status.HTTP_200_OK)
     
@@ -95,7 +106,7 @@ class ClientCareerAPIView(generics.ListAPIView):
 class ClientSelectedCareerAPIView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = CareerSerializer
-  
+    
     def get_object(self, pk):
         try:
             return Careers.objects.get(pk=pk)
@@ -111,7 +122,8 @@ class ClientSelectedCareerAPIView(generics.ListAPIView):
 class CareerSearchAPIView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = CareerSerializer
-  
+    pagination_class = CustomPagination
+    
     def get_object(self, query):
         try:
             return Careers.objects.filter(
@@ -122,5 +134,9 @@ class CareerSearchAPIView(generics.ListAPIView):
 
     def get(self, request, query, format=None):
         snippet = self.get_object(query)
+        results = get_custom_paginated_data(self, snippet)
+        if results is not None:
+            return results
+
         serializer = CareerSerializer(snippet, many=True)
         return Response({"careers": serializer.data}, status=status.HTTP_200_OK)

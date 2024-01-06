@@ -24,6 +24,9 @@ import Search from "../../Common/Search";
 import "./Careers.css";
 import JobPost from "../Components/JobPost";
 import JobPostFrom from "../../Admin/Components/forms/JobpostForm";
+import CustomPagination from "../../Common/CustomPagination";
+import { paginationDataFormat } from "../../util/commonUtil";
+import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 
 const Careers = () => {
   const editComponentObj = {
@@ -41,6 +44,11 @@ const Careers = () => {
   const [show, setShow] = useState(false);
   const [posts, setPosts] = useState([]);
 
+  const [paginationData, setPaginationData] = useState({})
+  const [pageLoadResult, setPageloadResults] = useState(false)
+  const [searchQuery, setSearchquery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -54,6 +62,12 @@ const Careers = () => {
     setShow(!show);
     document.body.style.overflow = "hidden";
   };
+
+  const setResponseData = (data) => {
+    setPosts(data.results.length > 0 ? sortCreatedDateByDesc(data.results) : []);
+    setPaginationData(paginationDataFormat(data))
+    setCurrentPage(1)
+  }
 
   return (
     <>
@@ -143,11 +157,14 @@ const Careers = () => {
           </div>
           <div className="col-md-6">
             <Search
-              setObject={setPosts}
+              setObject={setResponseData}
               clientSearchURL={"/careers/searchCareers/"}
               adminSearchURL={"/careers/createCareer/"}
               clientDefaultURL={"/careers/clientCareersList/"}
               searchfiledDeatails={"Job Title / Comapny Name / Location "}
+              setPageloadResults={setPageloadResults}
+              setSearchquery={setSearchquery}
+              searchQuery={searchQuery}
             />
           </div>
         </div>
@@ -156,9 +173,24 @@ const Careers = () => {
           <JobPost
             addJobs={componentEdit.addjob}
             posts={posts}
-            setPosts={setPosts}
+            setPosts={setResponseData}
+            setPageloadResults={setPageloadResults}
           />
         </div>
+        <div>
+        {paginationData?.total_count ? (
+           <CustomPagination 
+           paginationData={paginationData}  
+           paginationURL={isAdmin ? '/careers/createCareer/':'/careers/clientCareersList/'} 
+           paginationSearchURL={searchQuery ? `/careers/searchCareers/${searchQuery}/` : isAdmin ? '/careers/createCareer/': '/careers/clientCareersList/'}
+           searchQuery={searchQuery}
+           setCurrentPage={setCurrentPage}
+           currentPage={currentPage}
+           setResponseData={setResponseData}
+           pageLoadResult={pageLoadResult}/>
+        ):''}
+      </div>
+
       </div>
 
       {show && <ModelBg />}

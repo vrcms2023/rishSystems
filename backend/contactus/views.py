@@ -1,12 +1,16 @@
 from .models import ContactUS
 from .serializers import ContactUSSerializer
 from rest_framework import generics, permissions
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import  EmailMessage
 from django.template.loader import get_template
 from django.conf import settings
-
+from django.http import Http404
+from django.db.models import Q
+from common.CustomPagination import CustomPagination
+from common.utility import get_custom_paginated_data
 
 # Create your views here.
     
@@ -14,6 +18,7 @@ class ContactUSAPIView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
     queryset = ContactUS.objects.all()
     serializer_class = ContactUSSerializer
+    pagination_class = CustomPagination
 
     """
     List all contact us, or create a new contactus.
@@ -21,6 +26,10 @@ class ContactUSAPIView(generics.CreateAPIView):
 
     def get(self, request, format=None):
         snippets = ContactUS.objects.all()
+        results = get_custom_paginated_data(self, snippets)
+        if results is not None:
+            return results
+        
         serializer = ContactUSSerializer(snippets, many=True)
         return Response({"contactus": serializer.data}, status=status.HTTP_200_OK)
     
@@ -66,3 +75,26 @@ class ContactUSAPIView(generics.CreateAPIView):
             # )
             return Response(status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ContacListSearchAPIView(ListAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = ContactUSSerializer
+    pagination_class = CustomPagination
+
+    def get_object(self, query):
+        try:
+            return ContactUS.objects.filter(
+                Q(firstName__icontains=query) | Q(email__icontains=query) | Q(phoneNumber__icontains=query)
+            )
+        except ContactUS.DoesNotExist:
+            raise Http404
+
+    def get(self, request, query, format=None):
+        snippet = self.get_object(query)
+        results = get_custom_paginated_data(self, snippet)
+        if results is not None:
+            return results
+        
+        serializer = ContactUSSerializer(snippet, many=True)
+        return Response({"contactus": serializer.data}, status=status.HTTP_200_OK)
+    
