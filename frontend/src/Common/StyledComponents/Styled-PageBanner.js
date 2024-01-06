@@ -16,6 +16,10 @@ export const PageBannerStyled = styled.div`
         right: 0;
         background-color: rgba(0, 0, 0, 0.3);
         padding: 10px 100px 40px;
+
+        .title {color:${({ theme }) => theme.pageBannerTitleColor};}
+        .subTitle {color:${({ theme }) => theme.pageBannerSubTitleColor};}
+        .description {color:${({ theme }) => theme.pageBannerTextColor};}
         
         .title, .description {
             width: 50%;
