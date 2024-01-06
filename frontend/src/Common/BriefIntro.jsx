@@ -4,6 +4,7 @@ import { axiosClientServiceApi } from "../util/axiosUtil";
 
 // Styles
 
+import { BriefIntroStyled } from "./StyledComponents/Styled-BriefIntro";
 import "./BriefIntro.css";
 
 const BriefIntroFrontend = ({ pageType, introState }) => {
@@ -30,7 +31,8 @@ const BriefIntroFrontend = ({ pageType, introState }) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className=" p-4 mx-0 briefIntro">
+        <BriefIntroStyled>
+        <div className=" briefIntro">
           <div className="col-md-10 offset-md-1 py-2 py-md-4 ">
             {introValue.intro_title === "" ? (
               ""
@@ -55,6 +57,7 @@ const BriefIntroFrontend = ({ pageType, introState }) => {
             </p>
           </div>
         </div>
+        </BriefIntroStyled>
       </div>
     </div>
   );
