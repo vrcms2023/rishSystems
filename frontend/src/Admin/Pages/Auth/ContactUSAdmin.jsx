@@ -67,15 +67,17 @@ const ContactUSAdmin = () => {
           </div>
         </div>
       <div className="row px-3 px-lg-5">
-        <div className="text-end d-flex justify-content-between">
-          <Title title={"Contact List "} cssClass="text-start fs-4" />
-          <Button
-            type="submit"
-            cssClass="btn btn-secondary"
-            label="Back"
-            icon="fa-chevron-left"
-            handlerChange={() => navigate("/main")}
-          />
+
+        <div className="col-12 d-flex justify-content-between">
+          <Title title={"Contact list"} cssClass="fs-1 pageTitle" />
+          <Search
+              setObject={userDetails}
+              clientSearchURL={""}
+              adminSearchURL={""}
+              clientDefaultURL={""}
+              searchfiledDeatails={"Name / Email ID / Phone No. "}
+            />
+
         </div>
       </div>
 

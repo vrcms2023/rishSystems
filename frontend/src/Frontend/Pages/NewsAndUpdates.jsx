@@ -143,7 +143,7 @@ const NewsAndUpdates = () => {
 
         <div className="row mb-4">
           <div className="col-md-6">
-            <Title title="News And Updates" cssClass="blue-900 fs-4 mb-4" />
+            <Title title="News And Updates" cssClass="fs-1 pageTitle" />
           </div>
           <div className="col-md-6">
             <Search
