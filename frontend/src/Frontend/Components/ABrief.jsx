@@ -20,6 +20,7 @@ import EditIcon from "../../Common/AdminEditIcon";
 
 // Styles
 import "./ABrief.css";
+import Ancher from "../../Common/Ancher";
 
 const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
   const editComponentObj = {
@@ -150,9 +151,7 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
         </p>
 
         <div>
-          <Link to={moreLink} className={linkClass}>
-            More services
-          </Link>
+        <Ancher AncherLabel="More services" Ancherpath="/services" AncherClass="btn btn-secondary d-flex justify-content-center align-items-center gap-3" AnchersvgColor="#ffffff" />
         </div>
       </div>
       {componentEdit.homecareers ? (

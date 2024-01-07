@@ -9,9 +9,11 @@
   "white": "#ffffff",
   "black": "#000000",
   "primaryColor": "#17427f",
-  "primaryHoverColor": "#006690",
+  "primaryHoverColor": "#2A5CA0",
   "secondaryColor": "#3CD9D2",
+  "secondaryHoverColor": "#3CD9D2",
   "teritoryColor": "#2A5CA0",
+  "teritoryHoverColor": "#2A5CA0",
   "transparent": "transparent",
 
   "topStripBgColor": "#000000",

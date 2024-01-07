@@ -92,32 +92,44 @@ body {
     }
 }
 
+.btn {
+    border-radius: 50px !important;
+    transition: all .35s;
+
+    // &:hover svg { transform: rotate(-45deg);}
+    &:hover {
+      letter-spacing: .1rem;
+    }
+    &:hover svg { 
+      transform: translateX(10px);
+    }
+}
 .btn-primary {
-    background-color:${({ theme }) => theme.primaryColor} !important; 
+    background-color:${({ theme }) => theme.primaryColor}; 
     color:${({ theme }) => theme.white};
-    box-shadow: 0 4px 4px 0 ${({ theme }) => theme.secondaryColor};
 }
 .btn-primary:hover {
-    background-color:${({ theme }) => theme.primaryHoverColor}; 
+    background-color:${({ theme }) => theme.secondaryColor}; 
+    color:${({ theme }) => theme.primaryColor};
 }
 
 .btn-secondary {
     background-color:${({ theme }) => theme.secondaryColor}; 
     color:${({ theme }) => theme.white};
-    box-shadow: 0 4px 4px 0 ${({ theme }) => theme.secondaryColor};
 }
 
 .btn-secondary:hover {
     background-color:${({ theme }) => theme.primaryColor}; 
+    color:${({ theme }) => theme.secondaryColor};
 }
 
 .btn-outline {
-    border: 1px solid ${({ theme }) => theme.white} !important; 
-    color:${({ theme }) => theme.white};
+    border: 3px solid ${({ theme }) => theme.secondaryColor} !important; 
+    color:${({ theme }) => theme.primaryColor};
 }
 
 .btn-outline:hover {
-    border: 1px solid ${({ theme }) => theme.primaryColor} !important;  
+    
 }
 
 

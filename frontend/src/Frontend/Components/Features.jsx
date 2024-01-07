@@ -12,6 +12,7 @@ import shakeHands from '../../Images/shake-hands.svg'
 import globe from '../../Images/globe.svg'
 import spanners from '../../Images/spanners.svg'
 import check from '../../Images/check.svg'
+import Ancher from '../../Common/Ancher'
 
 
 const FeaturesComponent = () => {
@@ -50,7 +51,7 @@ const FeaturesComponent = () => {
                 
             </div>
        </div>
-       <Link to="btn btn-primary">Know more about</Link>
+       <Ancher AncherLabel="Know More About" Ancherpath="/about" AncherClass="btn btn-outline d-flex justify-content-center align-items-center gap-3" AnchersvgColor="#ffffff" />
        </div>
     </Features>
   )
