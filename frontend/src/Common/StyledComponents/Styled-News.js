@@ -12,13 +12,13 @@ export const NewsStyled = styled.div`
     
 
         .card-body {
-            a {
-                color:${({ theme }) => theme.primaryColor} !important; 
+            // a {
+            //     color:${({ theme }) => theme.primaryColor} !important; 
 
-                &:hover {
-                    color:${({ theme }) => theme.secondaryColor} !important; 
-                }
-            }
+            //     &:hover {
+            //         color:${({ theme }) => theme.secondaryColor} !important; 
+            //     }
+            // }
         }
     }
 

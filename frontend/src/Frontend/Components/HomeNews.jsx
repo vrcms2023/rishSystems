@@ -25,6 +25,7 @@ import EditIcon from "../../Common/AdminEditIcon";
 
 // Styles
 import { NewsStyled } from "../../Common/StyledComponents/Styled-News";
+import Ancher from "../../Common/Ancher";
 
 
 const HomeNews = ({ addNewsState, news, setNews }) => {
@@ -169,12 +170,7 @@ const HomeNews = ({ addNewsState, news, setNews }) => {
                   )}
                 </div>
                 {/* <p>{moment(item.created_at).format('DD-MM-YYYY hh:mm:ss')}</p> */}
-                <Link
-                  className="text-primary moreLink"
-                  onClick={() => handleModel(item)}
-                >
-                  Read more
-                </Link>
+                <Ancher AncherLabel="Read more" Ancherpath="/news" AncherClass="btn btn-more d-flex justify-content-center align-items-center gap-2" AnchersvgColor="#17427C" handleModel={() => handleModel(item)} />  
               </div>
             </div>
             </NewsStyled>
@@ -192,9 +188,10 @@ const HomeNews = ({ addNewsState, news, setNews }) => {
                   <p className="text-center fs-6">
                     Currently there are no news items found.
                   </p>
-                  <Link to="/news" className="btn btn-primary fs-6">
+                  <Ancher AncherLabel="Go To News" Ancherpath="/news" AncherClass="btn btn-secondary d-flex justify-content-center align-items-center gap-3" AnchersvgColor="#ffffff" />
+                  {/* <Link to="/news" className="btn btn-primary fs-6">
                     Go To News
-                  </Link>
+                  </Link> */}
                 </>
               )}
             </>

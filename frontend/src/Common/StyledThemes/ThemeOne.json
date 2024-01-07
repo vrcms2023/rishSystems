@@ -8,6 +8,7 @@
 
   "white": "#ffffff",
   "black": "#000000",
+  "lightgray": "#e3e3e3",
   "primaryColor": "#17427f",
   "primaryHoverColor": "#2A5CA0",
   "secondaryColor": "#3CD9D2",
