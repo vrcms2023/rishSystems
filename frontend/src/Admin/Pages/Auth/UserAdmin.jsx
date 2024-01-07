@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { getCookie } from "../../../util/cookieUtil";
 import { confirmAlert } from "react-confirm-alert";
 import DeleteDialog from "../../../Common/DeleteDialog";
+import Search from "../../../Common/Search";
 
 const UserAdmin = () => {
   const [userDetails, setUserDetails] = useState([]);
@@ -49,7 +50,7 @@ const UserAdmin = () => {
      // const response = await axiosServiceApi.delete(
        // `/user/auth/users/me/?current_password=Abcd@1234`,
      // );
-      console.log(response)
+      // console.log(response)
     };
 
     confirmAlert({
@@ -97,15 +98,13 @@ const UserAdmin = () => {
         <div className="text-end d-flex justify-content-between">
 
           <Title title={"User's"} cssClass="fs-1 pageTitle" />
-          <Search
+          {/* <Search
               setObject={userDetails}
               clientSearchURL={""}
               adminSearchURL={""}
               clientDefaultURL={""}
               searchfiledDeatails={"Name / Email ID / Admin Type "}
-            />
-
-
+            /> */}
         </div>
       </div>
 

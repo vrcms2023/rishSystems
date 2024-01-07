@@ -160,17 +160,6 @@ const Careers = () => {
               <Title title="Careers" cssClass="fs-3 pageTitle" />
             </div>
             <div className="col-md-6">
-              <Search
-                setObject={setPosts}
-                clientSearchURL={"/careers/searchCareers/"}
-                adminSearchURL={"/careers/createCareer/"}
-                clientDefaultURL={"/careers/clientCareersList/"}
-                searchfiledDeatails={"Job Title / Comapny Name / Location "}
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6">
             <Search
               setObject={setResponseData}
               clientSearchURL={"/careers/searchCareers/"}
@@ -182,7 +171,18 @@ const Careers = () => {
               searchQuery={searchQuery}
             />
           </div>
-        </div>
+            {/* <div className="col-md-6">
+              <Search
+                setObject={setPosts}
+                clientSearchURL={"/careers/searchCareers/"}
+                adminSearchURL={"/careers/createCareer/"}
+                clientDefaultURL={"/careers/clientCareersList/"}
+                searchfiledDeatails={"Job Title / Comapny Name / Location "}
+              />
+            </div> */}
+          </div>
+
+          
 
         <div className="row mb-5">
           <JobPost
