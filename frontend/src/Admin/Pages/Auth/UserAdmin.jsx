@@ -107,7 +107,7 @@ const UserAdmin = () => {
       </div> */}
       <div className="row px-3 px-lg-5">
         <div className="text-end d-flex justify-content-between">
-          <Title title={"User's"} cssClass="text-start fs-4" />
+          <Title title={"User's"} cssClass="fs-1 pageTitle" />
           <Search
               setObject={userDetails}
               clientSearchURL={""}

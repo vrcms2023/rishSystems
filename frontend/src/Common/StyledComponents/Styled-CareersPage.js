@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 export const CareersPageStyled = styled.div`
-    .pageTitle {
-        color: ${({ theme }) => theme.pageTitleColor};
-    }
-
     .jobTitle {
         color: ${({ theme }) => theme.primaryColor};
     }

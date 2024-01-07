@@ -244,6 +244,11 @@ body {
   cursor: pointer
 }
 
+.pageTitle {
+  color: ${({ theme }) => theme.pageTitleColor};
+}
+
+
 
 .newsModel {
         position: fixed;

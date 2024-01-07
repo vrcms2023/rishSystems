@@ -48,7 +48,7 @@ const ContactUSAdmin = () => {
       </div> */}
       <div className="row px-3 px-lg-5">
         <div className="col-12 d-flex justify-content-between">
-          <Title title={"Contact list"} cssClass="text-start fs-4" />
+          <Title title={"Contact list"} cssClass="fs-1 pageTitle" />
           <Search
               setObject={userDetails}
               clientSearchURL={""}
