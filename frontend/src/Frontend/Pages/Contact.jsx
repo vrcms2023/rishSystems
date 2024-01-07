@@ -25,10 +25,7 @@ import {
 import { getFooterValues } from "../../features/footer/footerActions";
 
 // Styles
-import "./Contact.css";
-
-// images
-
+import { ContactPageStyled } from "../../Common/StyledComponents/Styled-ContactPage";
 
 const Contact = () => {
   const editComponentObj = {
@@ -164,7 +161,7 @@ const Contact = () => {
   };
 
   return (
-    <>
+    <ContactPageStyled>
       {/* Page Banner Component */}
       <div className="position-relative">
         {isAdmin ? (
@@ -300,7 +297,7 @@ const Contact = () => {
               className="my-2 py-3 py-md-5 contactForm"
               onSubmit={onFormSubmit}
             >
-              <Title title="Quick contact" cssClass="text-black fw-bold mb-4" />
+              <Title title="Quick contact" cssClass="fw-bold fs-4 mb-5 text-center formTitle" />
 
               <div className="mb-3 row">
                 <label
@@ -454,7 +451,7 @@ const Contact = () => {
       )}
 
       {show && <ModelBg />}
-    </>
+    </ContactPageStyled>
   );
 };
 export default Contact;
