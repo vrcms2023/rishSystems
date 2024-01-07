@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
+// Components 
+import Button from "../../../Common/Button";
+import Title from "../../../Common/Title";
+import EditAdminPopupHeader from "../EditAdminPopupHeader";
 import { axiosServiceApi } from "../../../util/axiosUtil";
 import { getCookie } from "../../../util/cookieUtil";
-import Button from "../../../Common/Button";
-
-import EditAdminPopupHeader from "../EditAdminPopupHeader";
-import Title from "../../../Common/Title";
 
 export const BriefIntroAdmin = ({ editHandler, componentType, pageType }) => {
   const closeHandler = () => {
@@ -216,7 +217,7 @@ export const BriefIntroAdmin = ({ editHandler, componentType, pageType }) => {
               />
               <Button
                 type="submit"
-                cssClass="btn border"
+                cssClass="btn btn-more"
                 label={"Close"}
                 handlerChange={closeHandler}
               />
