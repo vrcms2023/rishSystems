@@ -240,6 +240,10 @@ body {
 .lc4 {-webkit-line-clamp: 4;}
 .lc5 {-webkit-line-clamp: 5;}
 
+.cursorPointer {
+  cursor: pointer
+}
+
 
 .newsModel {
         position: fixed;
