@@ -173,7 +173,7 @@ const JobPost = ({ editHandler, componentType, type, editPost }) => {
                   <button className="btn btn-primary">Save</button>
                   <Button
                     type="submit"
-                    cssClass="btn border"
+                    cssClass="btn btn-more"
                     label={"Close"}
                     handlerChange={closeHandler}
                   />

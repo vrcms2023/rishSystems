@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
+// Components
+import Button from "../../../Common/Button";
 import { getCookie } from "../../../util/cookieUtil";
 import EditAdminPopupHeader from "../EditAdminPopupHeader";
 import {
   axiosServiceApi,
-  axiosClientServiceApi,
 } from "../../../util/axiosUtil";
-import Button from "../../../Common/Button";
+
 
 const GoogleMap = ({ editHandler, componentType, mapValues }) => {
   const closeHandler = () => {
@@ -95,13 +97,12 @@ const GoogleMap = ({ editHandler, componentType, mapValues }) => {
 
           <div className="row">
             <div className="d-flex justify-content-center align-items-center gap-1 gap-md-3">
-              {/* <button className="btn btn-secondary mx-3">Clear</button> */}
               <button onClick={saveGoogleMapUrl} className="btn btn-primary">
                 Save
               </button>
               <Button
                 type="submit"
-                cssClass="btn border"
+                cssClass="btn btn-more"
                 label={"Close"}
                 handlerChange={closeHandler}
               />

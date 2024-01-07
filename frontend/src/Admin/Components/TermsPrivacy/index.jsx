@@ -114,7 +114,7 @@ const AdminTermsAndPrivacy = ({
             </button>
             <Button
               type="submit"
-              cssClass="btn border"
+              cssClass="btn btn-more"
               label={"Close"}
               handlerChange={closeHandler}
             />

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import EditAdminPopupHeader from "../EditAdminPopupHeader";
-import { getBaseURL } from "../../../util/ulrUtil";
-import { toast } from "react-toastify";
-import FileUpload from "../../Components/FileUpload";
-import { getCookie } from "../../../util/cookieUtil";
-import { axiosFileUploadServiceApi } from "../../../util/axiosUtil";
 import { confirmAlert } from "react-confirm-alert";
+import { toast } from "react-toastify";
+
+// Components
+import EditAdminPopupHeader from "../EditAdminPopupHeader";
+import FileUpload from "../../Components/FileUpload";
 import DeleteDialog from "../../../Common/DeleteDialog";
+import { getCookie } from "../../../util/cookieUtil";
+import { getBaseURL } from "../../../util/ulrUtil";
+import { axiosFileUploadServiceApi } from "../../../util/axiosUtil";
 
 const AboutImageInputsForm = ({
   editHandler,
