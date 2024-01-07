@@ -20,7 +20,7 @@ import EditIcon from "../../Common/AdminEditIcon";
 
 
 
-const JobPost = ({ addJobs, posts, setPosts }) => {
+const JobPost = ({ addJobs, posts, setPosts,setPageloadResults }) => {
   const editComponentObj = {
     job: false,
   };
@@ -49,13 +49,16 @@ const JobPost = ({ addJobs, posts, setPosts }) => {
     try {
       if (userCookie) {
         response = await axiosServiceApi.get(`/careers/createCareer/`);
+        setPageloadResults(true)
       } else {
         response = await axiosClientServiceApi.get(
           `/careers/clientCareersList/`,
         );
+        setPageloadResults(false)
       }
-      const data = sortCreatedDateByDesc(response.data.careers);
-      setPosts(data);
+      // const data = sortCreatedDateByDesc(response.data.careers);
+      setPosts(response.data);
+     
     } catch (error) {
       console.log("Unable to get the Career data");
     }

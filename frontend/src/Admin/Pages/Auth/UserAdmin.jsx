@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { getCookie } from "../../../util/cookieUtil";
 import { confirmAlert } from "react-confirm-alert";
 import DeleteDialog from "../../../Common/DeleteDialog";
-import Search from "../../../Common/Search";
 
 const UserAdmin = () => {
   const [userDetails, setUserDetails] = useState([]);
@@ -47,10 +46,10 @@ const UserAdmin = () => {
   const handleUserDelete = (user) => {
     console.log(user);
     const deleteUser = async () => {
-      // const response = await axiosServiceApi.delete(
-      //   `/user/auth/users/me/`,
-      // );
-      //console.log(response)
+     // const response = await axiosServiceApi.delete(
+       // `/user/auth/users/me/?current_password=Abcd@1234`,
+     // );
+      console.log(response)
     };
 
     confirmAlert({
@@ -93,20 +92,10 @@ const UserAdmin = () => {
   };
 
   return (
-    <div className="container-fluid pt-5">
-      {/* <div className="row px-3 px-lg-5 mb-4">
-        <div className="col-12" >
-          <Button
-              type="submit"
-              cssClass="btn btn-secondary float-end"
-              label="Back"
-              icon="fa-chevron-left"
-              handlerChange={() => navigate("/main")}
-            />
-        </div>
-      </div> */}
+    <div className="container-fluid pt-5" >
       <div className="row px-3 px-lg-5">
         <div className="text-end d-flex justify-content-between">
+
           <Title title={"User's"} cssClass="fs-1 pageTitle" />
           <Search
               setObject={userDetails}
@@ -115,6 +104,8 @@ const UserAdmin = () => {
               clientDefaultURL={""}
               searchfiledDeatails={"Name / Email ID / Admin Type "}
             />
+
+
         </div>
       </div>
 
@@ -125,8 +116,8 @@ const UserAdmin = () => {
               <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Type</th>
-                <th colSpan={2}>Status</th>
+                <th>Admin type</th>
+                <th colSpan={2}>Active status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -167,7 +158,7 @@ const UserAdmin = () => {
                       ""
                     )}
                   </td>
-                   <td>
+                  <td>
                     {user.id !== userId && !user.is_admin ? (
                       <Link to="" onClick={() => handleUserDelete(user)}>
                         <i
