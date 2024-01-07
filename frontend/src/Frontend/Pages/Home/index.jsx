@@ -140,17 +140,17 @@ const Home = () => {
           ""
         )}
 
-        {/* Services 
-        <div className="container py-5 homeServices">
+        {/* HOME List of Services  */}
+        {/* <div className="container py-5 homeServices">
           <h2 className="mb-5">What We Do</h2>
           <HomeServices />
         </div>
-*/}
+        */}
 
         {/* Features */}
         <Features />
 
-        {/* ABriefAbout */}
+        {/* HOME WHY CHOOSE RISHSYSTEMS */}
         <div className="row ABriefAbout mb-5">
           <ABriefAbout
             cssClass="mb-2 fw-bold title text-black"
@@ -158,7 +158,7 @@ const Home = () => {
           />
         </div>
 
-        {/*  ABrief */}
+        {/*  HOME Services */}
         <div className="row">
           <div className="col-md-8 ABrief">
             <ABrief
@@ -173,7 +173,9 @@ const Home = () => {
             ) : (
               ""
             )}
-            {/* End Of Edit Testimonials */}
+
+
+            {/* Testimonials */}
             {testimonis.length < 1 ? (
               (testimonis.length, "Current No Testimonials Found")
             ) : testimonis.length == 1 ? (
@@ -192,19 +194,20 @@ const Home = () => {
           </div>
         </div>
 
-        {/* End Of Edit News */}
+        {/* HOME News */}
         <div className="row py-5 homeNews">
           <div className="col-md-12 d-flex justify-content-center align-items-center">
             <div className="container">
-              <h2 className="mb-5">News</h2>
+              <h2 className="mb-5 fw-bold">News</h2>
               <div className="row">
                 <HomeNews news={news} setNews={setNews} />
               </div>
             </div>
           </div>
         </div>
+        
 
-        {/* Careers */}
+        {/* HOME Careers */}
         <div className="row homeCareers py-5">
         <div className="col-lg-6"></div>
         <div className="col-md-12 col-lg-6 pe-lg-5">

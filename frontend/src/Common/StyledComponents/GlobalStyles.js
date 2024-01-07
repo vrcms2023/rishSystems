@@ -128,10 +128,12 @@ body {
     color:${({ theme }) => theme.primaryColor};
 }
 
-.btn-outline:hover {
-    
-}
+.btn-outline:hover { }
 
+.btn-more {
+  border: 1px solid ${({ theme }) => theme.lightgray} !important; 
+  color:${({ theme }) => theme.primaryColor};
+}
 
 .homeCareers {
     background-color:${({ theme }) => theme.teritoryColor};
