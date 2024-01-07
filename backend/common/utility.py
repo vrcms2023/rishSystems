@@ -75,3 +75,9 @@ def get_about_us_data_From_request_Object(request):
         requestObj['aboutus_sub_title'] = request.data["aboutus_sub_title"]
         requestObj['aboutus_description'] = request.data["aboutus_description"]
         return requestObj
+
+def get_custom_paginated_data(self, snippets):
+        page = self.paginate_queryset(snippets)
+        if page is not None :
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)

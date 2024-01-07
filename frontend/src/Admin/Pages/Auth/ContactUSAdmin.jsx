@@ -5,13 +5,19 @@ import Button from "../../../Common/Button";
 import { useNavigate } from "react-router-dom";
 import { axiosServiceApi } from "../../../util/axiosUtil";
 import { toast } from "react-toastify";
-
-import './authCommonStyles.css'
 import Search from "../../../Common/Search";
+import CustomPagination from "../../../Common/CustomPagination";
+import { paginationDataFormat } from "../../../util/commonUtil";
+import { sortCreatedDateByDesc } from "../../../util/dataFormatUtil";
+
+
 
 const ContactUSAdmin = () => {
   const [userDetails, setUserDetails] = useState([]);
-
+  const [paginationData, setPaginationData] = useState({})
+  const [pageLoadResult, setPageloadResults] = useState(false)
+  const [searchQuery, setSearchquery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
   /**
@@ -20,11 +26,10 @@ const ContactUSAdmin = () => {
   const getAllUserDetails = async () => {
     try {
       const response = await axiosServiceApi.get(`/contactus/`);
-      if (response?.status == 200 && response.data?.contactus?.length > 0) {
-        setUserDetails(response.data.contactus);
-      } else {
-        setUserDetails([]);
-      }
+      if (response?.status == 200 && response.data?.results?.length > 0) {
+        setResponseData(response.data)
+        setPageloadResults(true)
+      } 
     } catch (error) {
       toast.error("Unable to load contactus details");
     }
@@ -33,70 +38,83 @@ const ContactUSAdmin = () => {
     getAllUserDetails();
   }, []);
 
+  
+
+
+  const setResponseData = (data) => {
+    setUserDetails(data.results.length > 0 ? sortCreatedDateByDesc(data.results) : []);
+    setPaginationData(paginationDataFormat(data))
+    setCurrentPage(1)
+  }
+
   return (
-    <div className="container-fluid pt-5">
-      {/* <div className="row px-3 px-lg-5 mb-4">
-        <div className="col-12" >
-          <Button
-              type="submit"
-              cssClass="btn btn-secondary float-end"
-              label="Back"
-              icon="fa-chevron-left"
-              handlerChange={() => navigate("/main")}
+    <div className="container-fluid pt-5" >
+       <div className="row mb-4">
+          <div className="col-md-6">
+            &nbsp;
+          </div>
+          <div className="col-md-6">
+            <Search
+              setObject={setResponseData}
+              clientSearchURL={"/contactus/searchContacts/"}
+              adminSearchURL={"/contactus/"}
+              clientDefaultURL={"/contactus/"}
+              searchfiledDeatails={"First Name / Email / Phone Number"}
+              setPageloadResults={setPageloadResults}
+              setSearchquery={setSearchquery}
+              searchQuery={searchQuery}
             />
+          </div>
         </div>
-      </div> */}
       <div className="row px-3 px-lg-5">
-        <div className="col-12 d-flex justify-content-between">
-          <Title title={"Contact list"} cssClass="text-start fs-4" />
-          <Search
-              setObject={userDetails}
-              clientSearchURL={""}
-              adminSearchURL={""}
-              clientDefaultURL={""}
-              searchfiledDeatails={"Name / Email ID / Phone No. "}
-            />
+        <div className="text-end d-flex justify-content-between">
+          <Title title={"Contact List "} cssClass="text-start fs-4" />
+          <Button
+            type="submit"
+            cssClass="btn btn-secondary"
+            label="Back"
+            icon="fa-chevron-left"
+            handlerChange={() => navigate("/main")}
+          />
         </div>
       </div>
 
       <div className="row px-3 px-lg-5 py-4 table-responsive">
+        {userDetails?.length > 0 ? (
         <table className="table table-striped table-hover">
           <thead>
             <tr>
-              <th>First name</th>
+              <th>FirstName</th>
               <th>Email</th>
-              <th>Phone number</th>
-              <th>Description</th>
+              <th>phoneNumber</th>
+              <th>description</th>
             </tr>
           </thead>
           <tbody>
-          <tr >
-                
-               {userDetails?.map((user) => (
+            {userDetails?.map((user) => (
               <tr key={user.id}>
                 <td>{user.firstName}</td>
-                <td>
-                <a
-                  className="btn btn-primary mt-3 mt-lg-0"
-                  href={`mailto:${
-                    user.email 
-                      ? user.email
-                      : ""
-                  }`}
-                >
-                {user.email}
-                </a>
-                </td> 
-                <td>
-                <a href={`tel:+91${user.phoneNumber}`}>Call {user.phoneNumber}</a>
-                {/* {user.phoneNumber} */}
-                </td>
+                <td>{user.email}</td>
+                <td>{user.phoneNumber}</td>
                 <td>{user.description} </td>
               </tr>
-            ))} 
-              </tr>
+            ))}
           </tbody>
         </table>
+        ) : 'No Result found'}
+      </div>
+      <div>
+        {paginationData?.total_count ? (
+           <CustomPagination 
+           paginationData={paginationData}  
+           paginationURL={'/contactus/'} 
+           paginationSearchURL={searchQuery ? `/contactus/searchContacts/${searchQuery}/`: '/contactus/'}
+           searchQuery={searchQuery}
+           setCurrentPage={setCurrentPage}
+           currentPage={currentPage}
+           setResponseData={setResponseData}
+           pageLoadResult={pageLoadResult}/>
+        ):''}
       </div>
     </div>
   );
