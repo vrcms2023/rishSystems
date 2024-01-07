@@ -19,8 +19,8 @@ import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus
 import Title from "../../Common/Title";
 
 // Styles
-import "./Careers.css";
 import JobBriefDetails from "../Components/JobBriefDetails";
+import { CareersPageStyled } from "../../Common/StyledComponents/Styled-CareersPage";
 
 const Careers = () => {
   const editComponentObj = {
@@ -110,45 +110,47 @@ const Careers = () => {
         pageType={pageType}
       />
 
-      <div className="container py-4 my-md-5 py-md-4">
-        <div className="row">
-          <div className="col-12 d-flex justify-content-between align-items-center gap-3">
-            <Title title="Careers Details" cssClass="fw-bold fs-4" />
-            <Link
-              to="/careers"
-              className="btn btn-secondary d-flex justify-content-center align-items-center gap-2"
-            >
-              <i className="fa fa-chevron-left" aria-hidden="true"></i>
-              <span className="d-none d-md-block">Back</span>
-            </Link>
-          </div>
-        </div>
-
-        <div className="row mt-4 d-flex flex-rowreverse">
-          <div className="col-md-9 px-3">
-            <JobBriefDetails jobDetails={posts} />
-            <div className="jobDescription p-4">
-              {posts.description ? (
-                <div dangerouslySetInnerHTML={{ __html: posts.description }} />
-              ) : (
-                ""
-              )}
-
-              {/* <div className="mt-3">
-                <span className="d-block">
-                  <strong>Department</strong> : Engineering - Software & QA
-                </span>
-                <span className="d-block">
-                  <strong>Employment Type</strong>: Full Time, Permanent
-                </span>
-              </div> */}
+      <CareersPageStyled>
+        <div className="container py-4 my-md-5 py-md-4">
+          <div className="row">
+            <div className="col-12 d-flex justify-content-between align-items-center gap-3">
+              <Title title="Careers Details" cssClass="fw-bold fs-4 pageTitle" />
+              <Link
+                to="/careers"
+                className="btn btn-secondary d-flex justify-content-center align-items-center gap-2"
+              >
+                <i className="fa fa-chevron-left" aria-hidden="true"></i>
+                <span className="d-none d-md-block">Back</span>
+              </Link>
             </div>
           </div>
-          <div className="col-md-3 mt-4 mt-md-0">
-            <JobCurrentOpenings />
+
+          <div className="row mt-4 d-flex flex-rowreverse">
+            <div className="col-md-9 px-3">
+              <JobBriefDetails jobDetails={posts} />
+              <div className="jobDescription p-4">
+                {posts.description ? (
+                  <div dangerouslySetInnerHTML={{ __html: posts.description }} />
+                ) : (
+                  ""
+                )}
+
+                {/* <div className="mt-3">
+                  <span className="d-block">
+                    <strong>Department</strong> : Engineering - Software & QA
+                  </span>
+                  <span className="d-block">
+                    <strong>Employment Type</strong>: Full Time, Permanent
+                  </span>
+                </div> */}
+              </div>
+            </div>
+            <div className="col-md-3 mt-4 mt-md-0">
+              <JobCurrentOpenings />
+            </div>
           </div>
         </div>
-      </div>
+      </CareersPageStyled>
 
       {componentEdit.briefIntro ? (
         <div className="adminEditTestmonial">

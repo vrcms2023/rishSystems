@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import Title from "../../Common/Title";
 import { showPosteddate } from "../../util/commonUtil";
 
 const JobBriefDetails = ({ jobDetails }) => {
   return (
-    <div className="jobBriefDetails p-4 p-md-5">
+    <div className="jobBriefDetails p-4">
       <Title
         title={jobDetails.job_title ? jobDetails.job_title : "Default Career"}
         cssClass="fw-bold"
