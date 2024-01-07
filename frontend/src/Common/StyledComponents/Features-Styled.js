@@ -13,6 +13,14 @@ export const Features = styled.div`
         justify-content-center;
         align-items: center;
 
+        a {
+            color: ${({ theme }) => theme.white};
+            svg {
+                stroke: ${({ theme }) => theme.white};
+            }
+
+        }
+
         .box1, .box2 {
             display: flex;
             flex-direction: column;

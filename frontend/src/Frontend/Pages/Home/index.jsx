@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 // Components
-
+import Ancher from "../../../Common/Ancher";
 import BriefIntroFrontend from "../../../Common/BriefIntro";
 import Carousel from "../../Components/Carousel";
 import Testimonials from "../../Components/Testimonials";
@@ -27,7 +27,6 @@ import { useAdminLoginStatus } from "../../../Common/customhook/useAdminLoginSta
 // Styles
 
 import "./Home.css";
-import { Link } from "react-router-dom";
 import Features from "../../Components/Features";
 
 const Home = () => {
@@ -117,11 +116,16 @@ const Home = () => {
         ) : (
           ""
         )}
-        <div className="row mt-4">
+        <div className="row my-4">
           <BriefIntroFrontend
             introState={componentEdit.briefIntro}
             pageType="Home"
           />
+          <div className="d-flex justify-content-center align-items-center">
+          <Ancher AncherLabel="Know More About" Ancherpath="/about" AncherClass="btn btn-outline d-flex justify-content-center align-items-center gap-3" AnchersvgColor="#17427C" />
+          
+          </div>
+          
         </div>
 
         {componentEdit.briefIntro ? (
@@ -149,9 +153,7 @@ const Home = () => {
         {/* ABriefAbout */}
         <div className="row ABriefAbout mb-5">
           <ABriefAbout
-            title="Who We Are "
             cssClass="mb-2 fw-bold title text-black"
-            linkClass="btn btn-primary mt-5"
             dimensions={imageDimensionsJson("whoweare")}
           />
         </div>
@@ -160,10 +162,7 @@ const Home = () => {
         <div className="row">
           <div className="col-md-8 ABrief">
             <ABrief
-              title="Careers"
               cssClass="fw-bold title"
-              linkClass="btn btn-primary mt-2"
-              moreLink="/careers"
               dimensions={imageDimensionsJson("homeCareers")}
             />
           </div>
@@ -213,8 +212,8 @@ const Home = () => {
             introState={componentEdit.briefIntro}
             pageType="careers"
           />
-          <div className="bg-white px-5 pb-4">
-          <Link to="/careers" className="btn-btn-primary">Careers</Link>
+          <div className="bg-white px-5 pb-4 d-flex justify-content-center align-items-center">
+            <Ancher AncherLabel="Careers" Ancherpath="/careers" AncherClass="btn btn-primary d-flex justify-content-center align-items-center gap-3 w-50" AnchersvgColor="#ffffff" />
           </div>
           </div>
         </div>
