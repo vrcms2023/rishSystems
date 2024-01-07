@@ -9,8 +9,8 @@ const DeleteDialog = (props) => {
       <p className="text-muted m-0">{message ? message : ""}</p>
       <div className="w-100">
         <hr className="mb-4" />
-        <div className="d-flex justify-content-center align-items-center flex-column flex-md-row gap-3 w-100">
-          <button className="btn btn-secondary" onClick={onClose}>
+        <div className="d-flex justify-content-center align-items-center flex-column flex-md-row gap-2 w-100">
+          <button className="btn btn-primary" onClick={onClose}>
             No
           </button>
           <button

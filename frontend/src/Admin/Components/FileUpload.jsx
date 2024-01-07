@@ -1,20 +1,17 @@
 import React, { useEffect, useState, useMemo } from "react";
-import Title from "../../Common/Title";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { FilePond, registerPlugin } from "react-filepond";
-import "filepond/dist/filepond.min.css";
-import RichTextEditor from "../../Frontend/Components/RichTextEditor";
-
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
-import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 
+// Components
+import Title from "../../Common/Title";
+import Button from "../../Common/Button";
+import Error from "./Error";
 import { getBaseURL } from "../../util/ulrUtil";
 import { getCookie } from "../../util/cookieUtil";
 import { axiosFileUploadServiceApi } from "../../util/axiosUtil";
-import Button from "../../Common/Button";
 import {
   InputField,
   InputFields,
@@ -22,9 +19,12 @@ import {
   RichTextInputEditor,
 } from "./forms/FormFields";
 import { getImagePath } from "../../util/commonUtil";
-import Error from "./Error";
+import RichTextEditor from "../../Frontend/Components/RichTextEditor";
 
+// CSS
+import "filepond/dist/filepond.min.css";
 import "./componentsCommonStyes.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 
 registerPlugin(
   FilePondPluginFileValidateType,
@@ -477,7 +477,7 @@ const FileUpload = ({
             </>
 
             <div className="row">
-              <div className="text-center ">
+              <div className="d-flex gap-2 justify-content-center align-items-center">
                 <button
                   type="button"
                   className="btn btn-secondary mx-3"
