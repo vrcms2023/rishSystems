@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import moment from "moment";
 import { toast } from "react-toastify";
+import { confirmAlert } from "react-confirm-alert";
+
 // Components
 import useAdminLoginStatus from "../../Common/customhook/useAdminLoginStatus";
-
-// Components
 import Title from "../../Common/Title";
-import EditIcon from "../../Common/AdminEditIcon";
 import ModelBg from "../../Common/ModelBg";
+import DeleteDialog from "../../Common/DeleteDialog";
 import JobPostFrom from "../../Admin/Components/forms/JobpostForm";
 import { axiosServiceApi } from "../../util/axiosUtil";
-import { confirmAlert } from "react-confirm-alert";
-import DeleteDialog from "../../Common/DeleteDialog";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
 import { getCookie } from "../../util/cookieUtil";
-
-// Styles
-import "./JobPost.css";
-import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
+import { getFirstShortDescription, sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 import { showPosteddate } from "../../util/commonUtil";
+
+import EditIcon from "../../Common/AdminEditIcon";
+// Styles
+
+
 
 const JobPost = ({ addJobs, posts, setPosts }) => {
   const editComponentObj = {
@@ -123,19 +122,18 @@ const JobPost = ({ addJobs, posts, setPosts }) => {
             <div className="d-flex gap-5 gap-sm-4 gap-md-3 gap-lg-3 justify-content-end mb-2 p-1">
               {isAdmin ? (
                 <>
-                  <div
-                    onClick={() => editHandler("job", true, item)}
-                    className="cursorPointer"
-                  >
-                    <i
+                  <div>
+                    <Link
+                      to=""
+                      onClick={() => editHandler("job", true, item)}
+                      className=" p-2"
+                    >
+                      <i
                       className="fa fa-pencil text-warning cursor-pointer fs-5"
                       aria-hidden="true"
                     ></i>
+                    </Link>
                   </div>
-
-                  {/* <EditIcon
-                    editHandler={() => editHandler("job", true, item)}
-                  /> */}
 
                   <div>
                     <Link
@@ -204,37 +202,45 @@ const JobPost = ({ addJobs, posts, setPosts }) => {
             <div className="p-3 jobPost">
               <small className="d-block location mb-3">
                 <i
-                  className="fa fa-map-marker fs-5 text-muted"
+                  className="fa fa-map-marker fs-4 me-1"
                   aria-hidden="true"
                 ></i>{" "}
                 {item.job_location}
               </small>
-              <Title title={item.job_title} cssClass="fs-5 fw-bold" />
-
               <div className="mt-0 mb-3">
-                <Title title="Company" cssClass="text-muted fw-bolder fs-6" />
+              <Title title={item.job_title} cssClass="fs-5 fw-bold jobTitle" />
+              </div>
+              <div className="mt-0 mb-3">
+                <Title title="Company" cssClass="fw-bold fs-6" />
                 <p className="m-0">{item.company_name} </p>
               </div>
               <div className="">
                 <Title
                   title="Job Description"
-                  cssClass="text-secondary fw-bolder"
+                  cssClass="fw-bold fs-6"
                 />
-                {/* <p className="m-0">
+                <p className="m-0">
                   <div
                     dangerouslySetInnerHTML={{
                       __html: getFirstShortDescription(item.description),
                     }}
                   />
-                </p> */}
+                </p>
               </div>
-              <span className="d-block mb-2">
-                <strong className="d-block">Experience</strong>
+
+              <div className="d-block my-2">
+              <Title
+                  title="Experience"
+                  cssClass="fw-bold fs-6"
+                />
                 {item.experience_from ? item.experience_from : 0} to{" "}
                 {item.experience_to ? item.experience_to : 0} Years
-              </span>
+              </div>
               <small className="d-block">
-                <strong className="d-block">Posted on</strong>
+              <Title
+                  title="Posted on"
+                  cssClass="fw-bold fs-6"
+                />
                 {showPosteddate(item.posted_date) == 0 ? (
                   "Today"
                 ) : (

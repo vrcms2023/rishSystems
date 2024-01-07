@@ -21,9 +21,9 @@ import Title from "../../Common/Title";
 import Search from "../../Common/Search";
 
 // Styles
-import "./Careers.css";
 import JobPost from "../Components/JobPost";
 import JobPostFrom from "../../Admin/Components/forms/JobpostForm";
+import { CareersPageStyled } from "../../Common/StyledComponents/Styled-CareersPage";
 
 const Careers = () => {
   const editComponentObj = {
@@ -137,28 +137,30 @@ const Careers = () => {
           ""
         )}
 
-        <div className="row">
-          <div className="col-md-6">
-            <Title title="Careers" cssClass="fs-3" />
+        <CareersPageStyled>
+          <div className="row">
+            <div className="col-md-6">
+              <Title title="Careers" cssClass="fs-3 pageTitle" />
+            </div>
+            <div className="col-md-6">
+              <Search
+                setObject={setPosts}
+                clientSearchURL={"/careers/searchCareers/"}
+                adminSearchURL={"/careers/createCareer/"}
+                clientDefaultURL={"/careers/clientCareersList/"}
+                searchfiledDeatails={"Job Title / Comapny Name / Location "}
+              />
+            </div>
           </div>
-          <div className="col-md-6">
-            <Search
-              setObject={setPosts}
-              clientSearchURL={"/careers/searchCareers/"}
-              adminSearchURL={"/careers/createCareer/"}
-              clientDefaultURL={"/careers/clientCareersList/"}
-              searchfiledDeatails={"Job Title / Comapny Name / Location "}
+
+          <div className="row mb-5">
+            <JobPost
+              addJobs={componentEdit.addjob}
+              posts={posts}
+              setPosts={setPosts}
             />
           </div>
-        </div>
-
-        <div className="row mb-5">
-          <JobPost
-            addJobs={componentEdit.addjob}
-            posts={posts}
-            setPosts={setPosts}
-          />
-        </div>
+        </CareersPageStyled>
       </div>
 
       {show && <ModelBg />}

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Title from "../../Common/Title";
 
 // Styles
-import "./JobPost.css";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
 
 const JobCurrentOpenings = () => {
