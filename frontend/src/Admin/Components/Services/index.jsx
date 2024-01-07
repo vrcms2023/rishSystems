@@ -200,16 +200,16 @@ const AddService = ({ setSelectedServiceProject, selectedServiceProject,pageType
               onChange={onChangeHandler}
             />
 
-            <div>
+            <div className="d-flex gap-2">
               <Button
                 type="submit"
-                cssClass="btn btn-primary mt-3"
+                cssClass="btn btn-secondary mt-3"
                 handlerChange={submitHandler}
                 label={editServiceObject?.id ? "Change Name" : "Save"}
               />
               {editServiceObject?.id ? (
                 <Button
-                  cssClass="btn btn-secondary mt-3 ms-2"
+                  cssClass="btn btn-primary mt-3"
                   handlerChange={CancelServiceNameChange}
                   label="Cancel"
                 />
