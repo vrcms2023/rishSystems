@@ -9,6 +9,8 @@
   "white": "#ffffff",
   "black": "#000000",
   "lightgray": "#e3e3e3",
+  "verylightgray": "#f6f6f6",
+
   "primaryColor": "#17427f",
   "primaryHoverColor": "#2A5CA0",
   "secondaryColor": "#3CD9D2",
@@ -70,5 +72,11 @@
   "footerTextColor": "#ffffff",
   "footerTitleColor": "#ffffff",
   "footerLinkColor": "#ffffff",
-  "footerLinkHoverColor": "#3cd9d2"
+  "footerLinkHoverColor": "#3cd9d2",
+
+  "pageTitleColor": "#17427f",
+  
+  "aboutPageBgColor": "",
+  "aboutPageTitleColor": "",
+  "aboutPageTextColor": ""
 }
