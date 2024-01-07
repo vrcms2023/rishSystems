@@ -10,7 +10,7 @@ export const CareersPageStyled = styled.div`
     }
 
     .title {
-        color: ${({ theme }) => theme.aboutPageTitleColor};
+        color: ${({ theme }) => theme.pageTitleColor};
     }
 
     .jobPost {
