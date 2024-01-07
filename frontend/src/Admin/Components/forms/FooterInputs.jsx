@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+
+// Components
+import { InputField } from "./FormFields";
+import EditAdminPopupHeader from "../EditAdminPopupHeader";
+import Button from "../../../Common/Button";
 import { getCookie } from "../../../util/cookieUtil";
 import {
-  axiosClientServiceApi,
   axiosServiceApi,
 } from "../../../util/axiosUtil";
-import EditAdminPopupHeader from "../EditAdminPopupHeader";
-import { InputField } from "./FormFields";
-import Button from "../../../Common/Button";
+
 
 const FooterAdminFeilds = ({ editHandler, componentType, footerValues }) => {
   const [userName, setUserName] = useState("");
@@ -140,7 +142,7 @@ const FooterAdminFeilds = ({ editHandler, componentType, footerValues }) => {
             </div>
           </div>
           <div className="row">
-            <div className="d-flex justify-content-center align-items-center gap-1 gap-md-3 mb-4">
+            <div className="d-flex justify-content-center align-items-center gap-2 mb-4">
               <button type="reset" className="btn btn-secondary">
                 Clear
               </button>
@@ -149,7 +151,7 @@ const FooterAdminFeilds = ({ editHandler, componentType, footerValues }) => {
               </button>
               <Button
                 type="submit"
-                cssClass="btn border"
+                cssClass="btn btn-more"
                 label={"Close"}
                 handlerChange={closeHandler}
               />

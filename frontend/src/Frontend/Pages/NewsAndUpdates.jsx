@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // Components
 
 import Title from "../../Common/Title";
 import Model from "../../Common/Model";
+import ModelBg from "../../Common/ModelBg";
+import Banner from "../../Common/Banner";
+import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
+import Search from "../../Common/Search";
 import EditIcon from "../../Common/AdminEditIcon";
+import HomeNews from "../Components/HomeNews";
 import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
-import News from "../Components/News";
-import { axiosClientServiceApi } from "../../util/axiosUtil";
+import AddEditAdminNews from "../../Admin/Components/News/index";
+
 import { removeActiveClass } from "../../util/ulrUtil";
 import {
   getFormDynamicFields,
-  getCarouselFields,
   getNewslFields,
   imageDimensionsJson,
 } from "../../util/dynamicFormFields";
+
 import ModelBg from "../../Common/ModelBg";
 import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 import AddEditAdminNews from "../../Admin/Components/News/index";
@@ -29,6 +35,7 @@ import Search from "../../Common/Search";
 import CustomPagination from "../../Common/CustomPagination";
 import { paginationDataFormat } from "../../util/commonUtil";
 import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
+
 
 const NewsAndUpdates = () => {
   const editComponentObj = {

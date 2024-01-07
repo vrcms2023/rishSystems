@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 // Components
 import Title from "../../Common/Title";
@@ -18,8 +17,9 @@ import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
 import { getImagePath } from "../../util/commonUtil";
 import { getFormDynamicFields } from "../../util/dynamicFormFields";
+import Ancher from "../../Common/Ancher";
 
-const ABriefAbout = ({ title, cssClass, linkClass, dimensions }) => {
+const ABriefAbout = ({ cssClass, dimensions, }) => {
   const editComponentObj = {
     whoweare: false,
   };
@@ -87,9 +87,7 @@ const ABriefAbout = ({ title, cssClass, linkClass, dimensions }) => {
               </p>
             </div>
             <div>
-              <Link to="" className={linkClass}>
-                Know More
-              </Link>
+            <Ancher AncherLabel="Know More" Ancherpath="/about" AncherClass="btn btn-secondary d-flex justify-content-center align-items-center gap-3" AnchersvgColor="#ffffff" />
             </div>
           </div>
         </div>

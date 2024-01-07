@@ -158,7 +158,7 @@ const JobPost = ({ editHandler, componentType, type, editPost }) => {
               </div>
 
               <div className="row">
-                <div className="d-flex justify-content-center align-items-center gap-1 gap-md-3">
+                <div className="d-flex justify-content-center align-items-center gap-2">
                   {!editPost?.id ? (
                     <button
                       className="btn btn-secondary m-3"
@@ -173,7 +173,7 @@ const JobPost = ({ editHandler, componentType, type, editPost }) => {
                   <button className="btn btn-primary">Save</button>
                   <Button
                     type="submit"
-                    cssClass="btn border"
+                    cssClass="btn btn-more"
                     label={"Close"}
                     handlerChange={closeHandler}
                   />

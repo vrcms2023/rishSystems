@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-// Styles
-import "./Search.css";
+// Components
 import { axiosClientServiceApi, axiosServiceApi } from "../../util/axiosUtil";
 import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 import { getCookie } from "../../util/cookieUtil";
@@ -58,7 +57,7 @@ const Search = ({
           onChange={onChangeInputHandler}
           onKeyDown={handleKeyDown}
         />
-        <span className="input-group-text" onClick={searchResults}>
+        <span className="input-group-text cursorPointer" onClick={searchResults}>
           <i className="fa fa-search" aria-hidden="true"></i>
         </span>
       </div>

@@ -4,26 +4,29 @@ import { confirmAlert } from "react-confirm-alert";
 
 // Components
 import Title from "../../Common/Title";
-import AddEditAdminNews from "../../Admin/Components/News/index";
-import EditIcon from "../../Common/AdminEditIcon";
-import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 import DeleteDialog from "../../Common/DeleteDialog";
 import ModelBg from "../../Common/ModelBg";
+import AddEditAdminNews from "../../Admin/Components/News/index";
+import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
+
 import { getBaseURL } from "../../util/ulrUtil";
 import { getImagePath } from "../../util/commonUtil";
+import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 import {
   axiosClientServiceApi,
   axiosFileUploadServiceApi,
 } from "../../util/axiosUtil";
-import {
-  getFormDynamicFields,
-  getCarouselFields,
-  getNewslFields,
-} from "../../util/dynamicFormFields";
+import {  getNewslFields } from "../../util/dynamicFormFields";
 import moment from "moment";
+
+
+// Images
+import EditIcon from "../../Common/AdminEditIcon";
+
 // Styles
-import "./HomeNews.css";
-import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
+import { NewsStyled } from "../../Common/StyledComponents/Styled-News";
+import Ancher from "../../Common/Ancher";
+
 
 const HomeNews = ({ addNewsState, news, setNews,setPageloadResults }) => {
   const location = useLocation();
@@ -114,6 +117,7 @@ const HomeNews = ({ addNewsState, news, setNews,setPageloadResults }) => {
       {news.length > 0 ? (
         news.map((item, index) => (
           <div className="col-md-6 col-lg-3 mb-4 mb-lg-0" key={item.id}>
+            <NewsStyled>
             <div className="card homeNews">
               {/* Edit News */}
               {isAdmin ? (
@@ -153,9 +157,9 @@ const HomeNews = ({ addNewsState, news, setNews,setPageloadResults }) => {
                   title={
                     item.news_title ? item.news_title : "Update news Title"
                   }
-                  cssClass="fs-6 fw-bold lh-sm mb-2"
+                  cssClass="fs-5 fw-bold lh-sm mb-2 lineClamp lc2"
                 />
-                <div className="card-text mb-4 lineClamp">
+                <div className="card-text mb-4 lineClamp lc5">  
                   {item.news_description ? (
                     <div
                       dangerouslySetInnerHTML={{
@@ -167,14 +171,10 @@ const HomeNews = ({ addNewsState, news, setNews,setPageloadResults }) => {
                   )}
                 </div>
                 {/* <p>{moment(item.created_at).format('DD-MM-YYYY hh:mm:ss')}</p> */}
-                <Link
-                  className="text-primary moreLink"
-                  onClick={() => handleModel(item)}
-                >
-                  Read more
-                </Link>
+                <Ancher AncherLabel="Read more" Ancherpath="/news" AncherClass="btn btn-more d-flex justify-content-center align-items-center gap-2" AnchersvgColor="#17427C" handleModel={() => handleModel(item)} />  
               </div>
             </div>
+            </NewsStyled>
           </div>
         ))
       ) : (
@@ -189,9 +189,10 @@ const HomeNews = ({ addNewsState, news, setNews,setPageloadResults }) => {
                   <p className="text-center fs-6">
                     Currently there are no news items found.
                   </p>
-                  <Link to="/news" className="btn btn-primary fs-6">
+                  <Ancher AncherLabel="Go To News" Ancherpath="/news" AncherClass="btn btn-secondary d-flex justify-content-center align-items-center gap-3" AnchersvgColor="#ffffff" />
+                  {/* <Link to="/news" className="btn btn-primary fs-6">
                     Go To News
-                  </Link>
+                  </Link> */}
                 </>
               )}
             </>

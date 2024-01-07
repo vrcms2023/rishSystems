@@ -43,28 +43,9 @@ body {
     }
 }
 
-.topStrip {
-    background-color: ${({ theme }) => theme.topStripBgColor};
-    color: ${({ theme }) => theme.topStripColor};
-
-    a {
-        color: ${({ theme }) => theme.white};
-    }
-
-    a:hover {
-        color: ${({ theme }) => theme.primaryColor};
-    }
-}
-
 .carousel-caption {
     h1 { color:${({ theme }) => theme.carouselSlideTitleColor};     }
     p { color:${({ theme }) => theme.carouselSlideCaptionColor}; }
-}
-
-.briefIntro {
-    background-color:${({ theme }) => theme.briefIntroBg}; 
-    h3 { color:${({ theme }) => theme.briefIntroTitleColor};     }
-    p { color:${({ theme }) => theme.briefIntroTextColor}; }
 }
 
 
@@ -90,13 +71,6 @@ body {
   theme,
 }) => theme.ABriefAboutTitleBorderColor}; }
 
-.testimonials {
-    background-color:${({ theme }) => theme.testimonialsBg}; 
-    color:${({ theme }) => theme.white};
-}
-.testimonials h3 {color:${({ theme }) => theme.testimonialsHeadingColor};}
-.testimonials p {color:${({ theme }) => theme.testimonialsTextColor};}
-
 
 .homeServices {
     color:${({ theme }) => theme.secondaryColor}; 
@@ -118,103 +92,47 @@ body {
     }
 }
 
+.btn {
+    border-radius: 50px !important;
+    transition: all .35s;
 
-.homeNews {
-    background-color:""; 
-    color:${({ theme }) => theme.secondaryColor}; 
-
-    h2 {
-        border-color: ${({ theme }) => theme.homeNewsTitleColor} !important; 
+    // &:hover svg { transform: rotate(-45deg);}
+    &:hover {
+      letter-spacing: .1rem;
     }
-
-    .card {
-        background-color: color:${({ theme }) => theme.homeNewsCardBg}; 
-    }
-
-    .card-body {
-        h3 {
-            color:${({ theme }) => theme.homeNewsNewsTitleColor}; 
-        }
-
-        a {
-            color:${({ theme }) => theme.primaryColor} !important; 
-
-            &:hover {
-                color:${({ theme }) => theme.secondaryColor} !important; 
-            }
-        }
+    &:hover svg { 
+      transform: translateX(10px);
     }
 }
-
-
-.pageBanner {
-    .titleCaption {
-        h3 {color:${({ theme }) => theme.pageBannerTitleColor};}
-        p {color:${({ theme }) => theme.pageBannerCaptionColor};}
-    }
-}
-
-
-
 .btn-primary {
-    background-color:${({ theme }) => theme.primaryColor} !important; 
+    background-color:${({ theme }) => theme.primaryColor}; 
     color:${({ theme }) => theme.white};
-    box-shadow: 0 4px 4px 0 ${({ theme }) => theme.secondaryColor};
 }
 .btn-primary:hover {
-    background-color:${({ theme }) => theme.primaryHoverColor}; 
+    background-color:${({ theme }) => theme.secondaryColor}; 
+    color:${({ theme }) => theme.primaryColor};
 }
 
 .btn-secondary {
     background-color:${({ theme }) => theme.secondaryColor}; 
     color:${({ theme }) => theme.white};
-    box-shadow: 0 4px 4px 0 ${({ theme }) => theme.secondaryColor};
 }
 
 .btn-secondary:hover {
     background-color:${({ theme }) => theme.primaryColor}; 
+    color:${({ theme }) => theme.secondaryColor};
 }
 
 .btn-outline {
-    border: 1px solid ${({ theme }) => theme.white} !important; 
-    color:${({ theme }) => theme.white};
+    border: 3px solid ${({ theme }) => theme.secondaryColor} !important; 
+    color:${({ theme }) => theme.primaryColor};
 }
 
-.btn-outline:hover {
-    border: 1px solid ${({ theme }) => theme.primaryColor} !important;  
-}
+.btn-outline:hover { }
 
-footer {
-    background-color:${({ theme }) => theme.primaryColor}; 
-    color:${({ theme }) => theme.white};
-
-    a {
-        color:${({ theme }) => theme.white};
-    }
-
-    a:hover {
-        color:${({ theme }) => theme.primaryColor};
-    }
-
-    h5 {
-        color:${({ theme }) => theme.white};
-    }
-
-    .footerCopyRights {
-        background-color:${({ theme }) => theme.primaryColor}; 
-        
-        a:hover {
-            color:${({ theme }) => theme.secondaryColor};
-        }
-    
-        .dby, .dby a  {
-            color:${({ theme }) => theme.white};
-        }
-
-        .dby a:hover  {
-            color:${({ theme }) => theme.primaryHoverColor};
-        }
-    }
+.btn-more {
+  border: 1px solid ${({ theme }) => theme.lightgray} !important; 
+  color:${({ theme }) => theme.primaryColor};
 }
 
 .homeCareers {
@@ -244,6 +162,64 @@ footer {
     }
 }
 
+// Testimonial Component Styles
+
+.testimonials {
+    background-color:${({ theme }) => theme.testimonialsBg}; 
+    color:${({ theme }) => theme.testimonialsTextColor};
+    min-height: 530px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    // padding: 70px 75px !important;
+
+    .testimonialImg {
+        width: 125px;
+        height: 125px;
+        object-fit: cover;
+        box-shadow: 0 5px 5px rgba(0,0,0, .5) !important
+      }
+
+      i.fa {
+        color:${({ theme }) => theme.testimonialsLinkColor};
+
+        &:hover {
+            color:${({ theme }) => theme.testimonialsLinkHoverColor};
+        }
+      }
+
+    .title {color:${({ theme }) => theme.testimonialsHeadingColor};}
+    p {color:${({ theme }) => theme.testimonialsTextColor};}
+
+    .article {
+        /* top: 0;
+          left: 0; */
+        /* width: 100%;
+          height: 100%; */
+        opacity: 0;
+        transition: all 0.3s linear;
+      }
+      
+      .article.activeSlide {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      
+      .fa-user {
+        font-size: 100px;
+      }
+      .article.lastSlide {
+        /* transform: translateX(-100%); */
+      }
+      
+      .article.nextSlide {
+        /* transform: translateX(100%); */
+      }
+}
+
+// End of Testimonial Component Styles //
+
 .testimonialList img{
     width: 120px;
     height: 120px;
@@ -252,4 +228,64 @@ footer {
 .testimonialList:last-child {
     border: none !important
 }
+
+.lineClamp {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.lc1 {-webkit-line-clamp: 1;}
+.lc2 {-webkit-line-clamp: 2;}
+.lc3 {-webkit-line-clamp: 3;}
+.lc4 {-webkit-line-clamp: 4;}
+.lc5 {-webkit-line-clamp: 5;}
+
+.cursorPointer {
+  cursor: pointer
+}
+
+
+.newsModel {
+        position: fixed;
+        z-index: 999999;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        // width: 500px;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .newsModel img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        object-position: 0%;
+      }
+      
+      .newsModalWrapper {
+        width: 70%;
+        margin: auto;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      
+      .newsModalWrapper .newsDetails {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+      
+      @media (max-width: 768px) {
+        .newsModalWrapper {
+          width: 100%;
+        }
+      
+        .newsModalWrapper .newsDetails {
+          max-height: 300px;
+        }
+    }
+
 `;

@@ -21,12 +21,15 @@ import Title from "../../Common/Title";
 import Search from "../../Common/Search";
 
 // Styles
-import "./Careers.css";
 import JobPost from "../Components/JobPost";
 import JobPostFrom from "../../Admin/Components/forms/JobpostForm";
+
 import CustomPagination from "../../Common/CustomPagination";
 import { paginationDataFormat } from "../../util/commonUtil";
 import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
+
+import { CareersPageStyled } from "../../Common/StyledComponents/Styled-CareersPage";
+
 
 const Careers = () => {
   const editComponentObj = {
@@ -151,10 +154,22 @@ const Careers = () => {
           ""
         )}
 
-        <div className="row">
-          <div className="col-md-6">
-            <Title title="Careers" cssClass="fs-3" />
+        <CareersPageStyled>
+          <div className="row">
+            <div className="col-md-6">
+              <Title title="Careers" cssClass="fs-3 pageTitle" />
+            </div>
+            <div className="col-md-6">
+              <Search
+                setObject={setPosts}
+                clientSearchURL={"/careers/searchCareers/"}
+                adminSearchURL={"/careers/createCareer/"}
+                clientDefaultURL={"/careers/clientCareersList/"}
+                searchfiledDeatails={"Job Title / Comapny Name / Location "}
+              />
+            </div>
           </div>
+
           <div className="col-md-6">
             <Search
               setObject={setResponseData}
@@ -190,6 +205,9 @@ const Careers = () => {
            pageLoadResult={pageLoadResult}/>
         ):''}
       </div>
+
+
+        </CareersPageStyled>
 
       </div>
 
