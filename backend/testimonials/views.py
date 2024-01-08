@@ -5,7 +5,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from django.http import Http404
-from common.utility import get_testimonial_data_From_request_Object 
+from common.utility import get_testimonial_data_From_request_Object, get_custom_paginated_data
+from django.db.models import Q
+from common.CustomPagination import CustomPagination
 
 # Create your views here.
     
@@ -13,6 +15,7 @@ class CreateTestimonials(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = Testimonials.objects.all()
     serializer_class = TestimonialsSerializer
+    pagination_class = CustomPagination
 
     """
     List all Testimonials, or create a new Testimonials.
@@ -20,6 +23,10 @@ class CreateTestimonials(generics.CreateAPIView):
 
     def get(self, request, format=None):
         snippets = Testimonials.objects.all()
+        results = get_custom_paginated_data(self, snippets)
+        if results is not None:
+            return results
+
         serializer = TestimonialsSerializer(snippets, many=True)
         return Response({"testimonial": serializer.data}, status=status.HTTP_200_OK)
     
@@ -69,6 +76,7 @@ class ClientTestimonials(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
     queryset = Testimonials.objects.all()
     serializer_class = TestimonialsSerializer
+    pagination_class = CustomPagination
 
     """
     List all Testimonials, or create a new Testimonials.
@@ -76,6 +84,31 @@ class ClientTestimonials(generics.CreateAPIView):
 
     def get(self, request, format=None):
         snippets = Testimonials.objects.all()
+        results = get_custom_paginated_data(self, snippets)
+        if results is not None:
+            return results
+
         serializer = TestimonialsSerializer(snippets, many=True)
         return Response({"testimonial": serializer.data}, status=status.HTTP_200_OK)
 
+class TestimonialsSearchAPIView(generics.ListAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = TestimonialsSerializer
+    pagination_class = CustomPagination
+  
+    def get_object(self, query):
+        try:
+            return Testimonials.objects.filter(
+                Q(testimonial_title__icontains=query) | Q(testimonial_description__icontains=query)
+            )
+        except Testimonials.DoesNotExist:
+            raise Http404
+
+    def get(self, request, query, format=None):
+        snippet = self.get_object(query)
+        results = get_custom_paginated_data(self, snippet)
+        if results is not None:
+            return results
+
+        serializer = TestimonialsSerializer(snippet, many=True)
+        return Response({"testimonial": serializer.data}, status=status.HTTP_200_OK)

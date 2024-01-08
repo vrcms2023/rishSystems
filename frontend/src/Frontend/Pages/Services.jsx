@@ -23,7 +23,11 @@ import {
   imageDimensionsJson,
 } from "../../util/dynamicFormFields";
 import { axiosClientServiceApi, axiosServiceApi } from "../../util/axiosUtil";
-import { getImagePath, urlStringFormat, TitleStringFormat } from "../../util/commonUtil";
+import {
+  getImagePath,
+  urlStringFormat,
+  TitleStringFormat,
+} from "../../util/commonUtil";
 import { sortByCreatedDate } from "../../util/dataFormatUtil";
 import { getCookie, removeCookie } from "../../util/cookieUtil";
 
@@ -193,158 +197,163 @@ const Services = () => {
       {/* End Of Page Banner Component */}
 
       <ServicesStyled>
-      {/* Introduction */}
-      {isAdmin ? (
-        <EditIcon editHandler={() => editHandler("briefIntro", true)} />
-      ) : (
-        ""
-      )}
-      <BriefIntroFrontend
-        introState={componentEdit.briefIntro}
-        pageType={pageType}
-      />
-
-      {componentEdit.briefIntro ? (
-        <div className="adminEditTestmonial">
-          <AdminBriefIntro
-            editHandler={editHandler}
-            componentType="briefIntro"
-            pageType={pageType}
-          />
-        </div>
-      ) : (
-        ""
-      )}
-
-      {/* End Of Introduction */}
-
-      {/* Add Service Page */}
-      {isAdmin ? (
-        <AddService
-          setSelectedServiceProject={setSelectedServiceProject}
-          selectedServiceProject={selectedServiceProject}
-          pageType="service"
+        {/* Introduction */}
+        {isAdmin ? (
+          <EditIcon editHandler={() => editHandler("briefIntro", true)} />
+        ) : (
+          ""
+        )}
+        <BriefIntroFrontend
+          introState={componentEdit.briefIntro}
+          pageType={pageType}
         />
-      ) : (
-        ""
-      )}
-      {/* End of Add Service Page */}
 
-      <div className="container my-md-5 py-md-4 servicesPage" id="servicesPage">
-        {isAdmin && selectedServiceProject?.id ? (
-          <div className="d-flex justify-content-end align-items-center mb-3">
-            <span className="mx-2 text-dark">
-              {" "}
-              Add data in
-              <span className="badge bg-warning text-dark fs-6 mx-1">
-                {selectedServiceProject.services_page_title}
-              </span>
-              page
-            </span>
-            <button
-              type="submit"
-              className="btn btn-primary px-3"
-              onClick={() => editHandler("addSection", true)}
-              // style={{ position: "absolute", right: "60px" }}
-            >
-              {/* Add data */}
-              <i className="fa fa-plus" aria-hidden="true"></i>
-            </button>
-          </div>
-        ) : (
-          ""
-        )}
-
-        {componentEdit.editSection || componentEdit.addSection ? (
+        {componentEdit.briefIntro ? (
           <div className="adminEditTestmonial">
-            <AddEditAdminNews
+            <AdminBriefIntro
               editHandler={editHandler}
-              category="services"
-              editCarousel={editCarousel}
-              setEditCarousel={setEditCarousel}
-              componentType={`${
-                componentEdit.editSection ? "editSection" : "addSection"
-              }`}
-              imageGetURL="services/createServiceFeatures/"
-              imagePostURL="services/createServiceFeatures/"
-              imageUpdateURL="services/updateFeatureService/"
-              imageDeleteURL="services/updateFeatureService/"
-              imageLabel="Add Service Banner"
-              showDescription={false}
-              showExtraFormFields={getServiceFormFields(
-                selectedServiceProject ? selectedServiceProject?.id : "",
-                selectedServiceProject
-                  ? selectedServiceProject?.services_page_title
-                  : "",
-              )}
-              dimensions={imageDimensionsJson("addService")}
+              componentType="briefIntro"
+              pageType={pageType}
             />
           </div>
         ) : (
           ""
         )}
 
-        <div className="row ">
-          {/* {selectedServiceProject.services_page_title} */}
-          <div className="col-12 col-md-8">
-            <Title
-              title={TitleStringFormat(selectedServiceProject.services_page_title)}
-              cssClass="fs-1 mb-2 pageTitle"
-            />
+        {/* End Of Introduction */}
+
+        {/* Add Service Page */}
+        {isAdmin ? (
+          <AddService
+            setSelectedServiceProject={setSelectedServiceProject}
+            selectedServiceProject={selectedServiceProject}
+            pageType="service"
+          />
+        ) : (
+          ""
+        )}
+        {/* End of Add Service Page */}
+
+        <div
+          className="container my-md-5 py-md-4 servicesPage"
+          id="servicesPage"
+        >
+          {isAdmin && selectedServiceProject?.id ? (
+            <div className="d-flex justify-content-end align-items-center mb-3">
+              <span className="mx-2 text-dark">
+                {" "}
+                Add data in
+                <span className="badge bg-warning text-dark fs-6 mx-1">
+                  {selectedServiceProject.services_page_title}
+                </span>
+                page
+              </span>
+              <button
+                type="submit"
+                className="btn btn-primary px-3"
+                onClick={() => editHandler("addSection", true)}
+                // style={{ position: "absolute", right: "60px" }}
+              >
+                {/* Add data */}
+                <i className="fa fa-plus" aria-hidden="true"></i>
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
+
+          {componentEdit.editSection || componentEdit.addSection ? (
+            <div className="adminEditTestmonial">
+              <AddEditAdminNews
+                editHandler={editHandler}
+                category="services"
+                editCarousel={editCarousel}
+                setEditCarousel={setEditCarousel}
+                componentType={`${
+                  componentEdit.editSection ? "editSection" : "addSection"
+                }`}
+                imageGetURL="services/createServiceFeatures/"
+                imagePostURL="services/createServiceFeatures/"
+                imageUpdateURL="services/updateFeatureService/"
+                imageDeleteURL="services/updateFeatureService/"
+                imageLabel="Add Service Banner"
+                showDescription={false}
+                showExtraFormFields={getServiceFormFields(
+                  selectedServiceProject ? selectedServiceProject?.id : "",
+                  selectedServiceProject
+                    ? selectedServiceProject?.services_page_title
+                    : "",
+                )}
+                dimensions={imageDimensionsJson("addService")}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+
+          <div className="row ">
+            {/* {selectedServiceProject.services_page_title} */}
+            <div className="col-12 col-md-8">
+              <Title
+                title={TitleStringFormat(
+                  selectedServiceProject.services_page_title,
+                )}
+                cssClass="fs-1 mb-2 pageTitle"
+              />
+            </div>
           </div>
-        </div>
-        {selectedServiceList.map((item, index) => (
-          <div
-            className={`row mb-5${
-              isAdmin ? "border border-warning mb-3 position-relative" : ""
-            } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
-            key={item.id}
-          >
-            {isAdmin ? (
-              <>
-                <EditIcon
-                  editHandler={() => editHandler("editSection", true, item)}
+          {selectedServiceList.map((item, index) => (
+            <div
+              className={`row mb-5${
+                isAdmin ? "border border-warning mb-3 position-relative" : ""
+              } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
+              key={item.id}
+            >
+              {isAdmin ? (
+                <>
+                  <EditIcon
+                    editHandler={() => editHandler("editSection", true, item)}
+                  />
+                  <Link
+                    className="deleteSection"
+                    onClick={() => deleteSelectedSectionInPage(item)}
+                  >
+                    <i
+                      className="fa fa-trash-o text-danger fs-4"
+                      aria-hidden="true"
+                    ></i>
+                  </Link>
+                </>
+              ) : (
+                ""
+              )}
+              <div className="col-md-6">
+                <Title
+                  title={
+                    item.feature_title
+                      ? item.feature_title
+                      : "Update Feature title"
+                  }
+                  cssClass="fs-1 fw-bold mt-3 mb-1"
                 />
-                <Link
-                  className="deleteSection"
-                  onClick={() => deleteSelectedSectionInPage(item)}
-                >
-                  <i
-                    className="fa fa-trash-o text-danger fs-4"
-                    aria-hidden="true"
-                  ></i>
-                </Link>
-              </>
-            ) : (
-              ""
-            )}
-            <div className="col-md-6">
-              <Title
-                title={
-                  item.feature_title
-                    ? item.feature_title
-                    : "Update Feature title"
-                }
-                cssClass="fs-1 fw-bold mt-3 mb-1"
-              />
-              <Title
-                title={
-                  item.feature_sub_title
-                    ? item.feature_sub_title
-                    : "Update Feature sub title"
-                }
-                cssClass="fs-5 text-secondary mb-2"
-              />
-              <div
-                dangerouslySetInnerHTML={{ __html: item.feature_description }}
-              />
+                <Title
+                  title={
+                    item.feature_sub_title
+                      ? item.feature_sub_title
+                      : "Update Feature sub title"
+                  }
+                  cssClass="fs-5 text-secondary mb-2"
+                />
+                <div
+                  dangerouslySetInnerHTML={{ __html: item.feature_description }}
+                />
+              </div>
+              <div className="col-md-6">
+                <img src={getImagePath(item.path)} alt="" />
+              </div>
             </div>
-            <div className="col-md-6">
-              <img src={getImagePath(item.path)} alt="" />
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       </ServicesStyled>
 
       {show && <ModelBg />}

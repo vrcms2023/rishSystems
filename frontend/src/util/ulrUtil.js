@@ -11,14 +11,17 @@ export function getBaseURL() {
 // }
 
 export function removeActiveClass() {
-  const menuIDs = ['ServicesnavbarDropdown','KnowledgeHubnavbarDropdown', 'AdminSettingnavbarDropdown']
-  menuIDs.forEach((menuID)=>{
+  const menuIDs = [
+    "ServicesnavbarDropdown",
+    "KnowledgeHubnavbarDropdown",
+    "AdminSettingnavbarDropdown",
+  ];
+  menuIDs.forEach((menuID) => {
     const id = document.getElementById(menuID);
     if (id) {
       id.classList.remove("active");
     }
-  })
- 
+  });
 }
 
 export function hideHandBurgerIcon(pathList) {

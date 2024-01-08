@@ -27,7 +27,6 @@ import CustomPagination from "../../Common/CustomPagination";
 import { paginationDataFormat } from "../../util/commonUtil";
 import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 
-
 const NewsAndUpdates = () => {
   const editComponentObj = {
     addNews: false,
@@ -43,12 +42,10 @@ const NewsAndUpdates = () => {
   const [showModal, setShowModal] = useState(false);
   const [obj, setObj] = useState({});
 
-  const [paginationData, setPaginationData] = useState({})
-  const [pageLoadResult, setPageloadResults] = useState(false)
+  const [paginationData, setPaginationData] = useState({});
+  const [pageLoadResult, setPageloadResults] = useState(false);
   const [searchQuery, setSearchquery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
-
 
   useEffect(() => {
     removeActiveClass();
@@ -57,14 +54,12 @@ const NewsAndUpdates = () => {
       id.classList.add("active");
     }
   });
-  
 
   const setResponseData = (data) => {
     setNews(data.results.length > 0 ? sortCreatedDateByDesc(data.results) : []);
-    setPaginationData(paginationDataFormat(data))
-    setCurrentPage(1)
-  }
-
+    setPaginationData(paginationDataFormat(data));
+    setCurrentPage(1);
+  };
 
   const articleHandler = (id) => {
     const searchObj = news.find((newsItem) => newsItem.id === id);
@@ -176,19 +171,31 @@ const NewsAndUpdates = () => {
             setPageloadResults={setPageloadResults}
           />
           <div>
-          
-        {paginationData?.total_count ? (
-           <CustomPagination 
-           paginationData={paginationData}  
-           paginationURL={isAdmin ? '/appNews/createAppNews/':'/appNews/clientAppNews/'} 
-           paginationSearchURL={searchQuery ? `appNews/searchAppNews/${searchQuery}/` : isAdmin ? '/appNews/createAppNews/': '/appNews/clientAppNews/'}
-           searchQuery={searchQuery}
-           setCurrentPage={setCurrentPage}
-           currentPage={currentPage}
-           setResponseData={setResponseData}
-           pageLoadResult={pageLoadResult}/>
-        ):''}
-      </div>
+            {paginationData?.total_count ? (
+              <CustomPagination
+                paginationData={paginationData}
+                paginationURL={
+                  isAdmin
+                    ? "/appNews/createAppNews/"
+                    : "/appNews/clientAppNews/"
+                }
+                paginationSearchURL={
+                  searchQuery
+                    ? `appNews/searchAppNews/${searchQuery}/`
+                    : isAdmin
+                    ? "/appNews/createAppNews/"
+                    : "/appNews/clientAppNews/"
+                }
+                searchQuery={searchQuery}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+                setResponseData={setResponseData}
+                pageLoadResult={pageLoadResult}
+              />
+            ) : (
+              ""
+            )}
+          </div>
         </div>
       </div>
       {showModal && <Model obj={obj} closeModel={closeModel} flag="news" />}

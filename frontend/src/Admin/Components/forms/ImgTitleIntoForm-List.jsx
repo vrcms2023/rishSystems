@@ -11,6 +11,7 @@ import {
   getObjectTitle,
   getObjectDescription,
   getImagePath,
+  getDummyImage,
 } from "../../../util/commonUtil";
 import { axiosFileUploadServiceApi } from "../../../util/axiosUtil";
 
@@ -53,7 +54,11 @@ const AdminBanner = ({
         const response = await axiosFileUploadServiceApi.get(getImageListURL);
         if (response?.status === 200) {
           let key = Object.keys(response.data);
-          setcarouseData(response.data[key]);
+          if (key.length > 1) {
+            setcarouseData(response.data.results);
+          } else {
+            setcarouseData(response.data[key]);
+          }
         }
       } catch (e) {
         console.log("unable to access ulr because of server is down");
@@ -114,7 +119,9 @@ const AdminBanner = ({
                         aria-hidden="true"
                       ></i>
                       <img
-                        src={getImagePath(item.path)}
+                        src={
+                          item.path ? getImagePath(item.path) : getDummyImage()
+                        }
                         alt={item.alternitivetext}
                         className="w-100 d-none d-lg-block"
                       />

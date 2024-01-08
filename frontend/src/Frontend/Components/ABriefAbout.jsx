@@ -19,7 +19,7 @@ import { getImagePath } from "../../util/commonUtil";
 import { getFormDynamicFields } from "../../util/dynamicFormFields";
 import Ancher from "../../Common/Ancher";
 
-const ABriefAbout = ({ cssClass, dimensions, }) => {
+const ABriefAbout = ({ cssClass, dimensions }) => {
   const editComponentObj = {
     whoweare: false,
   };
@@ -55,7 +55,7 @@ const ABriefAbout = ({ cssClass, dimensions, }) => {
 
   return (
     <>
-    <div className="col-md-5 pb-5 p-md-0  d-flex align-items-center justify-content-center justify-content-md-end">
+      <div className="col-md-5 pb-5 p-md-0  d-flex align-items-center justify-content-center justify-content-md-end">
         <img src={getImagePath(bannerData?.path)} alt="" className="" />
       </div>
       <div className="col-md-7">
@@ -74,11 +74,14 @@ const ABriefAbout = ({ cssClass, dimensions, }) => {
             )}
 
             {bannerData.banner_subTitle ? (
-              <Title title={bannerData.banner_subTitle} cssClass="fs-1 fw-bold" />
+              <Title
+                title={bannerData.banner_subTitle}
+                cssClass="fs-1 fw-bold"
+              />
             ) : (
               ""
             )}
-           
+
             <div>
               <p className="lh-md mt-4">
                 {bannerData?.banner_descripiton
@@ -87,12 +90,16 @@ const ABriefAbout = ({ cssClass, dimensions, }) => {
               </p>
             </div>
             <div>
-            <Ancher AncherLabel="Know More" Ancherpath="/about" AncherClass="btn btn-secondary d-flex justify-content-center align-items-center gap-3" AnchersvgColor="#ffffff" />
+              <Ancher
+                AncherLabel="Know More"
+                Ancherpath="/about"
+                AncherClass="btn btn-secondary d-flex justify-content-center align-items-center gap-3"
+                AnchersvgColor="#ffffff"
+              />
             </div>
           </div>
         </div>
       </div>
-      
 
       {componentEdit.whoweare ? (
         <div className="adminEditTestmonial">

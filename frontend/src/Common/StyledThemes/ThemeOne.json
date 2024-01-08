@@ -11,7 +11,7 @@
   "gray": "#333333",
   "lightgray": "#e3e3e3",
   "verylightgray": "#f6f6f6",
-  "error":"#f23838",
+  "error": "#f23838",
 
   "primaryColor": "#17427f",
   "primaryHoverColor": "#2A5CA0",
@@ -68,7 +68,6 @@
   "pageBannerTextColor": "#ffffff",
   "pageBannerTitleColor": "#ffffff",
   "pageBannerSubTitleColor": "#ffffff",
-  
 
   "footerBgColor": "#17427f",
   "footerTextColor": "#ffffff",
@@ -77,7 +76,7 @@
   "footerLinkHoverColor": "#3cd9d2",
 
   "pageTitleColor": "#17427f",
-  
+
   "aboutPageBgColor": "",
   "aboutPageTitleColor": "",
   "aboutPageTextColor": ""

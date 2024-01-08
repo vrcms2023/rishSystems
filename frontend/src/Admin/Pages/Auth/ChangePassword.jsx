@@ -57,10 +57,10 @@ const ChangePassword = () => {
 
   return (
     <LoginStyled>
-    <div className="login">
-      <div className="bg-white d-flex justify-content-center align-items-center flex-column">
-        <div className="container">
-        {/* <div className="row mt-4">
+      <div className="login">
+        <div className="bg-white d-flex justify-content-center align-items-center flex-column">
+          <div className="container">
+            {/* <div className="row mt-4">
           <div className="col-12">
               <Button
                 type="submit"
@@ -71,112 +71,115 @@ const ChangePassword = () => {
               />
           </div>
         </div> */}
-          <div className="row d-flex flex-column justify-content-center align-items-center">
-            
-            <form onSubmit={handleSubmit(resetPassword)} className="shadow-lg">
-              {serverError ? (
-                <p className="fw-bold">
-                  {serverError && <Error>{serverError}</Error>}
-                </p>
-              ) : (
-                ""
-              )}
+            <div className="row d-flex flex-column justify-content-center align-items-center">
+              <form
+                onSubmit={handleSubmit(resetPassword)}
+                className="shadow-lg"
+              >
+                {serverError ? (
+                  <p className="fw-bold">
+                    {serverError && <Error>{serverError}</Error>}
+                  </p>
+                ) : (
+                  ""
+                )}
 
-              <Title
-                title="Change Password"
-                cssClass="text-center text-dark mb-4 fw-bold fs-4"
-              />
+                <Title
+                  title="Change Password"
+                  cssClass="text-center text-dark mb-4 fw-bold fs-4"
+                />
 
-              {success ? (
-                <>
-                  <div>
-                    Your password Updated successfully, login with new password
-                  </div>
-                  <div className="mt-3">
-                    Click here to login ?{" "}
-                    <Link onClick={dispatch(logout())} to="/login">
-                      Login
-                    </Link>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="currentPassord"
-                      className="form-label text-dark fw-normal"
-                    >
-                      Current Password
-                    </label>
-                    <input
-                      type="password"
-                      {...register("current_password", {
-                        required: true,
-                      })}
-                      required
-                      name="current_password"
-                      onChange={inputHandler}
-                      className="form-control"
-                      id="signPassord"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="signPassord"
-                      className="form-label text-dark fw-normal"
-                    >
-                      New Password
-                    </label>
-                    <input
-                      type="password"
-                      {...register("new_password", {
-                        required: true,
-                      })}
-                      required
-                      name="new_password"
-                      onChange={inputHandler}
-                      className="form-control"
-                      id="signPassord"
-                    />
-                    <small className="text-muted">
-                      Passwords must be at least 6 characters.
-                    </small>
-                  </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="signPassordRe"
-                      className="form-label text-dark fw-normal"
-                    >
-                      Re-enter password
-                    </label>
-                    <input
-                      type="password"
-                      {...register("re_new_password", {
-                        required: true,
-                      })}
-                      required
-                      name="re_new_password"
-                      onChange={inputHandler}
-                      className="form-control"
-                      id="signPassordRe"
-                    />
-                  </div>
+                {success ? (
+                  <>
+                    <div>
+                      Your password Updated successfully, login with new
+                      password
+                    </div>
+                    <div className="mt-3">
+                      Click here to login ?{" "}
+                      <Link onClick={dispatch(logout())} to="/login">
+                        Login
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="mb-3">
+                      <label
+                        htmlFor="currentPassord"
+                        className="form-label text-dark fw-normal"
+                      >
+                        Current Password
+                      </label>
+                      <input
+                        type="password"
+                        {...register("current_password", {
+                          required: true,
+                        })}
+                        required
+                        name="current_password"
+                        onChange={inputHandler}
+                        className="form-control"
+                        id="signPassord"
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label
+                        htmlFor="signPassord"
+                        className="form-label text-dark fw-normal"
+                      >
+                        New Password
+                      </label>
+                      <input
+                        type="password"
+                        {...register("new_password", {
+                          required: true,
+                        })}
+                        required
+                        name="new_password"
+                        onChange={inputHandler}
+                        className="form-control"
+                        id="signPassord"
+                      />
+                      <small className="text-muted">
+                        Passwords must be at least 6 characters.
+                      </small>
+                    </div>
+                    <div className="mb-3">
+                      <label
+                        htmlFor="signPassordRe"
+                        className="form-label text-dark fw-normal"
+                      >
+                        Re-enter password
+                      </label>
+                      <input
+                        type="password"
+                        {...register("re_new_password", {
+                          required: true,
+                        })}
+                        required
+                        name="re_new_password"
+                        onChange={inputHandler}
+                        className="form-control"
+                        id="signPassordRe"
+                      />
+                    </div>
 
-                  <div className="d-grid gap-2 mt-4">
-                    <Button
-                      type="submit"
-                      cssClass="btn btn-lg btn-primary"
-                      handlerChange={loginHandler}
-                      label="Reset Password"
-                    />
-                  </div>
-                </>
-              )}
-            </form>
+                    <div className="d-grid gap-2 mt-4">
+                      <Button
+                        type="submit"
+                        cssClass="btn btn-lg btn-primary"
+                        handlerChange={loginHandler}
+                        label="Reset Password"
+                      />
+                    </div>
+                  </>
+                )}
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </LoginStyled>
   );
 };

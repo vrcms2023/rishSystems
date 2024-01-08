@@ -86,7 +86,7 @@ const HomeTab = ({ project, projectImages, pdfs, isProjectImg }) => {
           src={
             isProjectImg
               ? `${baseURL}${projectImages[0].imgs[0].path}`
-              : getImagePath('/media/images/dummy-image-square.png')
+              : getImagePath("/media/images/dummy-image-square.png")
           }
           className="rounded img-fluid w-50"
           alt="..."

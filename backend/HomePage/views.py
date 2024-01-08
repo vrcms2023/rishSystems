@@ -6,7 +6,10 @@ from .serializers import CarouselSerializer, HomeIntroSerializer, ClientLogoSeri
 from .models import Carousel, HomeIntro, ClientLogo
 from rest_framework import status
 from django.http import Http404
-from common.utility import get_carousel_data_From_request_Object 
+from common.utility import get_carousel_data_From_request_Object, get_custom_paginated_data
+from django.db.models import Q
+from common.CustomPagination import CustomPagination
+
 
 # Create your views here.
 
@@ -165,6 +168,7 @@ class ClientLogoAPIView(generics.CreateAPIView):
      permission_classes = [permissions.IsAuthenticated]
      serializer_class = ClientLogoSerializer
      queryset = ClientLogo.objects.all()
+     pagination_class = CustomPagination
 
      """
      List all ClientLogo, or create a new ClientLogo.
@@ -173,6 +177,10 @@ class ClientLogoAPIView(generics.CreateAPIView):
 
      def get(self, request, format=None):
         snippets = ClientLogo.objects.all()
+        results = get_custom_paginated_data(self, snippets)
+        if results is not None:
+            return results
+
         serializer = ClientLogoSerializer(snippets, many=True)
         return Response({"clientLogo": serializer.data}, status=status.HTTP_200_OK)
     
@@ -219,6 +227,7 @@ class ClientLogoImagesView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
     queryset = ClientLogo.objects.all()
     serializer_class = ClientLogoSerializer
+    pagination_class = CustomPagination
 
     """
     List all ClientLogo, or create a new ClientLogo.
@@ -226,5 +235,32 @@ class ClientLogoImagesView(generics.CreateAPIView):
 
     def get(self, request, format=None):
         snippets = ClientLogo.objects.all()
+        results = get_custom_paginated_data(self, snippets)
+        if results is not None:
+            return results
+
         serializer = ClientLogoSerializer(snippets, many=True)
+        return Response({"clientLogo": serializer.data}, status=status.HTTP_200_OK)
+    
+
+class ClientLogoSearchAPIView(generics.ListAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = ClientLogoSerializer
+    pagination_class = CustomPagination
+  
+    def get_object(self, query):
+        try:
+            return ClientLogo.objects.filter(
+                Q(client_title__icontains=query) | Q(client_description__icontains=query)
+            )
+        except ClientLogo.DoesNotExist:
+            raise Http404
+
+    def get(self, request, query, format=None):
+        snippet = self.get_object(query)
+        results = get_custom_paginated_data(self, snippet)
+        if results is not None:
+            return results
+
+        serializer = ClientLogoSerializer(snippet, many=True)
         return Response({"clientLogo": serializer.data}, status=status.HTTP_200_OK)

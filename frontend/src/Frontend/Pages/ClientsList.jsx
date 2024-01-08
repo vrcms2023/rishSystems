@@ -1,34 +1,37 @@
-import React, {useState, useEffect} from 'react'
-import EditIcon from '../../Common/AdminEditIcon';
-import Banner from '../../Common/Banner';
-import BriefIntroFrontend from '../../Common/BriefIntro';
-import ImageInputsForm from '../../Admin/Components/forms/ImgTitleIntoForm';
+import React, { useState, useEffect } from "react";
+import EditIcon from "../../Common/AdminEditIcon";
+import Banner from "../../Common/Banner";
+import BriefIntroFrontend from "../../Common/BriefIntro";
+import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
-import { getFormDynamicFields, imageDimensionsJson } from '../../util/dynamicFormFields';
-import useAdminLoginStatus from '../../Common/customhook/useAdminLoginStatus';
-import { axiosClientServiceApi, axiosServiceApi } from '../../util/axiosUtil';
-import { getImagePath } from '../../util/commonUtil';
-import Title from '../../Common/Title';
-import { Link } from 'react-router-dom';
-import { confirmAlert } from 'react-confirm-alert';
-import DeleteDialog from '../../Common/DeleteDialog';
-import AddEditAdminNews from "../../Admin/Components/News";
-import { toast } from 'react-toastify';
-
 import {
-  getClinetLogsFields,
-  } from "../../util/dynamicFormFields";
-import { removeActiveClass } from '../../util/ulrUtil';
+  getFormDynamicFields,
+  imageDimensionsJson,
+} from "../../util/dynamicFormFields";
+import useAdminLoginStatus from "../../Common/customhook/useAdminLoginStatus";
+import { axiosClientServiceApi, axiosServiceApi } from "../../util/axiosUtil";
+import { getImagePath, paginationDataFormat } from "../../util/commonUtil";
+import Title from "../../Common/Title";
+import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import DeleteDialog from "../../Common/DeleteDialog";
+import AddEditAdminNews from "../../Admin/Components/News";
+import { toast } from "react-toastify";
 
+import { getClinetLogsFields } from "../../util/dynamicFormFields";
+import { removeActiveClass } from "../../util/ulrUtil";
+import Search from "../../Common/Search";
+import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
+import CustomPagination from "../../Common/CustomPagination";
 
-const TestimonialsList = () => {
+const ClientsList = () => {
   const editComponentObj = {
     banner: false,
     briefIntro: false,
     addSection: false,
     editSection: false,
   };
-  
+
   const pageType = "clients";
   const isAdmin = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
@@ -36,6 +39,18 @@ const TestimonialsList = () => {
   const [show, setShow] = useState(false);
   const [editCarousel, setEditCarousel] = useState({});
 
+  const [paginationData, setPaginationData] = useState({});
+  const [pageLoadResult, setPageloadResults] = useState(false);
+  const [searchQuery, setSearchquery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const setResponseData = (data) => {
+    setClientsList(
+      data.results.length > 0 ? sortCreatedDateByDesc(data.results) : [],
+    );
+    setPaginationData(paginationDataFormat(data));
+    setCurrentPage(1);
+  };
 
   useEffect(() => {
     const getCAseStutiesvalues = async () => {
@@ -44,7 +59,7 @@ const TestimonialsList = () => {
           `/client/getAllClientLogos/`,
         );
         if (response?.status === 200) {
-          setClientsList(response.data.clientLogo);
+          setResponseData(response.data);
         }
       } catch (error) {
         console.log("unable to access ulr because of server is down");
@@ -54,7 +69,6 @@ const TestimonialsList = () => {
       getCAseStutiesvalues();
     }
   }, [componentEdit.addSection, componentEdit.editSection]);
-
 
   useEffect(() => {
     const id = document.getElementById("KnowledgeHubnavbarDropdown");
@@ -68,6 +82,8 @@ const TestimonialsList = () => {
     setShow(!show);
     if (item?.id) {
       setEditCarousel(item);
+    } else {
+      setEditCarousel({});
     }
     document.body.style.overflow = "hidden";
   };
@@ -102,8 +118,8 @@ const TestimonialsList = () => {
 
   return (
     <>
-    {/* Page Banner Component */}
-    <div className="position-relative">
+      {/* Page Banner Component */}
+      <div className="position-relative">
         {isAdmin ? (
           <EditIcon editHandler={() => editHandler("banner", true)} />
         ) : (
@@ -129,7 +145,6 @@ const TestimonialsList = () => {
       ) : (
         ""
       )}
-
 
       {/* Brief Introduction */}
       {isAdmin ? (
@@ -161,6 +176,19 @@ const TestimonialsList = () => {
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
             <Title title="Clients" cssClass="fs-1 pageTitle" />
           </div>
+
+          <div className="col-md-6">
+            <Search
+              setObject={setResponseData}
+              clientSearchURL={"/client/searchClientLogos/"}
+              adminSearchURL={"/client/createClientLogo/"}
+              clientDefaultURL={"/client/getAllClientLogos/"}
+              searchfiledDeatails={"client Title / client description "}
+              setPageloadResults={setPageloadResults}
+              setSearchquery={setSearchquery}
+              searchQuery={searchQuery}
+            />
+          </div>
           {isAdmin ? (
             <div className="col-md-6">
               <div className="d-flex justify-content-end align-items-center mb-3">
@@ -168,7 +196,7 @@ const TestimonialsList = () => {
                 <button
                   type="submit"
                   className="btn btn-primary px-3"
-                  onClick={() => editHandler("addSection", true)}
+                  onClick={() => editHandler("addSection", true, {})}
                 >
                   {" "}
                   <i className="fa fa-plus" aria-hidden="true"></i>
@@ -246,7 +274,6 @@ const TestimonialsList = () => {
                       ""
                     )}
 
-                  
                     <div
                       dangerouslySetInnerHTML={{
                         __html: item.client_description,
@@ -273,10 +300,33 @@ const TestimonialsList = () => {
             </p>
           )}
         </div>
+        {paginationData?.total_count ? (
+          <CustomPagination
+            paginationData={paginationData}
+            paginationURL={
+              isAdmin
+                ? "/client/createClientLogo/"
+                : "/client/getAllClientLogos/"
+            }
+            paginationSearchURL={
+              searchQuery
+                ? `/client/searchClientLogos/${searchQuery}/`
+                : isAdmin
+                ? "/client/createClientLogo/"
+                : "/client/getAllClientLogos/"
+            }
+            searchQuery={searchQuery}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+            setResponseData={setResponseData}
+            pageLoadResult={pageLoadResult}
+          />
+        ) : (
+          ""
+        )}
       </div>
-      
     </>
-  )
-}
+  );
+};
 
-export default TestimonialsList
+export default ClientsList;

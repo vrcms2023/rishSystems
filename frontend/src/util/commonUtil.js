@@ -18,8 +18,17 @@ export const getDateValue = (dt) => {
 };
 
 export const getImagePath = (path) => {
+  if (!path) return null;
   const baseURL = getBaseURL();
+  if (path && path.split("/")[0] !== "" && path.split("/")[0] !== "media") {
+    return path;
+  }
   return `${baseURL}${path}`;
+};
+
+export const getDummyImage = () => {
+  const baseURL = getBaseURL();
+  return `${baseURL}/media/images/dummy-image-square.png`;
 };
 
 export const getObjectTitle = (type, item) => {
@@ -57,11 +66,11 @@ export const TitleStringFormat = (str) => {
   if (!str) return null;
   return str.replace("-", " ").toUpperCase();
 };
-export const paginationDataFormat =(data)=>{
+export const paginationDataFormat = (data) => {
   return {
     total_count: data.total_count,
-    per_page_size : data.per_page_size,
-    next_url :data.next,
-    previous_url : data.previous
-  }
-}
+    per_page_size: data.per_page_size,
+    next_url: data.next,
+    previous_url: data.previous,
+  };
+};
