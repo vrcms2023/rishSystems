@@ -432,6 +432,12 @@ export const ClientMenu = ({ serviceMenuList }) => {
                 <Link to="/change_password" className="dropdown-item">
                   Change Password
                 </Link>
+                <Link to="/addproject" className="dropdown-item">
+                  Add Project
+                </Link>
+                <Link to="/dashboard" className="dropdown-item">
+                  Dashboard
+                </Link>
               </li>
             </ul>
           </li>
