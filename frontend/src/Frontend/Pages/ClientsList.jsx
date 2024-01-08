@@ -84,6 +84,8 @@ const TestimonialsList = () => {
     setShow(!show);
     if (item?.id) {
       setEditCarousel(item);
+    }else {
+      setEditCarousel({});
     }
     document.body.style.overflow = "hidden";
   };
@@ -180,9 +182,9 @@ const TestimonialsList = () => {
           <div className="col-md-6">
                 <Search
                   setObject={setResponseData}
-                  clientSearchURL={"/client/searchtestimonials/"}
-                  adminSearchURL={"/client/getAllClientLogos/"}
-                  clientDefaultURL={"/client/searchClientLogos/"}
+                  clientSearchURL={"/client/searchClientLogos/"}
+                  adminSearchURL={"/client/createClientLogo/"}
+                  clientDefaultURL={"/client/getAllClientLogos/"}
                   searchfiledDeatails={"client Title / client description "}
                   setPageloadResults={setPageloadResults}
                   setSearchquery={setSearchquery}
@@ -196,7 +198,7 @@ const TestimonialsList = () => {
                 <button
                   type="submit"
                   className="btn btn-primary px-3"
-                  onClick={() => editHandler("addSection", true)}
+                  onClick={() => editHandler("addSection", true,{})}
                 >
                   {" "}
                   <i className="fa fa-plus" aria-hidden="true"></i>
@@ -310,7 +312,7 @@ const TestimonialsList = () => {
                     }
                     paginationSearchURL={
                       searchQuery
-                        ? `/client/client/${searchQuery}/`
+                        ? `/client/searchClientLogos/${searchQuery}/`
                         : isAdmin
                         ? "/client/createClientLogo/"
                         : "/client/getAllClientLogos/"

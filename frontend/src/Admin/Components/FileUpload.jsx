@@ -186,7 +186,13 @@ const FileUpload = ({
    * Create dynamic file image
    */
   const creteFileObj = async () => {
-    let response = await fetch(`${baseURL}${editImage.path}`);
+    let imageURL = ''
+    if(editImage.path.split('/')[0] !== 'media'){
+      imageURL = editImage.path
+    }else {
+      imageURL = `${baseURL}${editImage.path}`
+    }
+    let response = await fetch(imageURL);
     let data = await response.blob();
     let metadata = "";
     if (editImage.contentType) {

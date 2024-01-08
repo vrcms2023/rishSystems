@@ -18,9 +18,18 @@ export const getDateValue = (dt) => {
 };
 
 export const getImagePath = (path) => {
+  if(!path) return null
   const baseURL = getBaseURL();
+  if(path && path.split('/')[0] !== '' && path.split('/')[0] !== 'media'){
+    return path
+  }
   return `${baseURL}${path}`;
 };
+
+export const getDummyImage = () => {
+  const baseURL = getBaseURL();
+  return `${baseURL}/media/images/dummy-image-square.png`;
+}
 
 export const getObjectTitle = (type, item) => {
   const carouse_Field = "carouse_title";
