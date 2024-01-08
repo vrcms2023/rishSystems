@@ -18,8 +18,6 @@ import { confirmAlert } from "react-confirm-alert";
 import DeleteDialog from "../../Common/DeleteDialog";
 import AddEditAdminNews from "../../Admin/Components/News";
 import { toast } from "react-toastify";
-
-
 import { getCaseStudiesFields } from "../../util/dynamicFormFields";
 import { removeActiveClass } from "../../util/ulrUtil";
 import Search from "../../Common/Search";
@@ -71,7 +69,6 @@ const CaseStudies = () => {
         const response = await axiosClientServiceApi.get(
           `/caseStudies/clientCaseStudies/`,
         );
-        console.log(response, "response")
         if (response?.status === 200) {
           setResponseData(response.data);
           setPageloadResults(1);
@@ -242,7 +239,6 @@ const CaseStudies = () => {
         <div className="row aboutPage">
           {clientsList.length > 0 ? (
             clientsList.map((item, index) => (
-              
               <>
                 <div
                   key={item.id}
@@ -272,11 +268,11 @@ const CaseStudies = () => {
                   ) : (
                     ""
                   )}
-                  <div className="col-12 col-lg-9 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
+                  <div className="col-12 col-lg-7 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
                     {item.case_studies_title ? (
                       <Title
                         title={item.case_studies_title}
-                        cssClass="fs-3 fw-bold mb-1"
+                        cssClass="fs-1 fw-bold mb-1"
                       />
                     ) : (
                       ""
@@ -287,20 +283,16 @@ const CaseStudies = () => {
                         __html: item.case_studies_description,
                       }}
                     />
-                    <div className=''>
-                    <Ancher AncherClass='btn btn-outline d-flex gap-2 justify-content-center align-items-center' AnchersvgColor="#17427C" AncherLabel="More" />
-                    </div>
                   </div>
 
-                  <div className="col-lg-3 d-none d-lg-block h-100">
+                  <div className="col-lg-5 d-none d-lg-block h-100">
                     <div className="h-100 p-3 p-md-5 py-md-4 d-flex flex-column justify-content-center align-items-center reset ">
                       <img
                         src={getImagePath(item.path)}
                         alt=""
-                        className="img-fluid rounded-circle shadow-lg border border-4"
+                        className="img-fluid"
                       />
                     </div>
-                    
                   </div>
                 </div>
                 <hr className="border-secondary" />
