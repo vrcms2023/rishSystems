@@ -10,7 +10,7 @@ import {
 } from "../../util/dynamicFormFields";
 import useAdminLoginStatus from "../../Common/customhook/useAdminLoginStatus";
 import { axiosClientServiceApi, axiosServiceApi } from "../../util/axiosUtil";
-import { getImagePath } from "../../util/commonUtil";
+import { getImagePath, paginationDataFormat } from "../../util/commonUtil";
 import Title from "../../Common/Title";
 import { Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
@@ -20,6 +20,9 @@ import { toast } from "react-toastify";
 
 import { getClinetLogsFields } from "../../util/dynamicFormFields";
 import { removeActiveClass } from "../../util/ulrUtil";
+import Search from "../../Common/Search";
+import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
+import CustomPagination from "../../Common/CustomPagination";
 
 const TestimonialsList = () => {
   const editComponentObj = {
@@ -36,6 +39,21 @@ const TestimonialsList = () => {
   const [show, setShow] = useState(false);
   const [editCarousel, setEditCarousel] = useState({});
 
+  const [paginationData, setPaginationData] = useState({});
+  const [pageLoadResult, setPageloadResults] = useState(false);
+  const [searchQuery, setSearchquery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const setResponseData = (data) => {
+    
+    setClientsList(
+      data.results.length > 0 ? sortCreatedDateByDesc(data.results) : [],
+    );
+    setPaginationData(paginationDataFormat(data));
+    setCurrentPage(1);
+  };
+
+
   useEffect(() => {
     const getCAseStutiesvalues = async () => {
       try {
@@ -43,7 +61,7 @@ const TestimonialsList = () => {
           `/client/getAllClientLogos/`,
         );
         if (response?.status === 200) {
-          setClientsList(response.data.clientLogo);
+          setResponseData(response.data)
         }
       } catch (error) {
         console.log("unable to access ulr because of server is down");
@@ -158,6 +176,19 @@ const TestimonialsList = () => {
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
             <Title title="Clients" cssClass="fs-1 pageTitle" />
           </div>
+          
+          <div className="col-md-6">
+                <Search
+                  setObject={setResponseData}
+                  clientSearchURL={"/client/searchtestimonials/"}
+                  adminSearchURL={"/client/getAllClientLogos/"}
+                  clientDefaultURL={"/client/searchClientLogos/"}
+                  searchfiledDeatails={"client Title / client description "}
+                  setPageloadResults={setPageloadResults}
+                  setSearchquery={setSearchquery}
+                  searchQuery={searchQuery}
+                />
+              </div>
           {isAdmin ? (
             <div className="col-md-6">
               <div className="d-flex justify-content-end align-items-center mb-3">
@@ -269,6 +300,30 @@ const TestimonialsList = () => {
             </p>
           )}
         </div>
+        {paginationData?.total_count ? (
+                  <CustomPagination
+                    paginationData={paginationData}
+                    paginationURL={
+                      isAdmin
+                        ? "/client/createClientLogo/"
+                        : "/client/getAllClientLogos/"
+                    }
+                    paginationSearchURL={
+                      searchQuery
+                        ? `/client/client/${searchQuery}/`
+                        : isAdmin
+                        ? "/client/createClientLogo/"
+                        : "/client/getAllClientLogos/"
+                    }
+                    searchQuery={searchQuery}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                    setResponseData={setResponseData}
+                    pageLoadResult={pageLoadResult}
+                  />
+                ) : (
+                  ""
+                )}
       </div>
     </>
   );

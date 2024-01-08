@@ -6,15 +6,20 @@ import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
 import {
   getFormDynamicFields,
+  getTestimonialsFields,
   imageDimensionsJson,
 } from "../../util/dynamicFormFields";
 import useAdminLoginStatus from "../../Common/customhook/useAdminLoginStatus";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
-import { getImagePath } from "../../util/commonUtil";
+import { getImagePath, paginationDataFormat } from "../../util/commonUtil";
 
 import { removeActiveClass } from "../../util/ulrUtil";
 
 import Title from "../../Common/Title";
+import Search from "../../Common/Search";
+import CustomPagination from "../../Common/CustomPagination";
+import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
+import AdminBanner from "../../Admin/Components/forms/ImgTitleIntoForm-List";
 
 const TestimonialsList = () => {
   const editComponentObj = {
@@ -22,6 +27,7 @@ const TestimonialsList = () => {
     briefIntro: false,
     addSection: false,
     editSection: false,
+    testmonial: false,
   };
 
   const pageType = "testimonial";
@@ -31,6 +37,11 @@ const TestimonialsList = () => {
   const [show, setShow] = useState(false);
   const [editCarousel, setEditCarousel] = useState({});
 
+  const [paginationData, setPaginationData] = useState({});
+  const [pageLoadResult, setPageloadResults] = useState(false);
+  const [searchQuery, setSearchquery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     removeActiveClass();
     const id = document.getElementById("KnowledgeHubnavbarDropdown");
@@ -38,6 +49,14 @@ const TestimonialsList = () => {
       id.classList.add("active");
     }
   });
+
+  const setResponseData = (data) => {
+    setTestmonis(
+      data.results.length > 0 ? sortCreatedDateByDesc(data.results) : [],
+    );
+    setPaginationData(paginationDataFormat(data));
+    setCurrentPage(1);
+  };
 
   const editHandler = (name, value, item) => {
     SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -54,9 +73,10 @@ const TestimonialsList = () => {
         const response = await axiosClientServiceApi.get(
           `/testimonials/clientTestimonials/`,
         );
-        console.log(response, "testimonials response");
+       
         if (response?.status === 200) {
-          setTestmonis(response.data.testimonial);
+          setResponseData(response.data);
+          setPageloadResults(1)
         }
       } catch (e) {
         console.log("unable to access ulr because of server is down");
@@ -102,6 +122,36 @@ const TestimonialsList = () => {
           <div className="col-md-12">
             <Title title="Testimonials" cssClass="fs-1 pageTitle" />
           </div>
+          <div className="col-md-6">
+                <Search
+                  setObject={setResponseData}
+                  clientSearchURL={"/testimonials/searchtestimonials/"}
+                  adminSearchURL={"/testimonials/createTestimonials/"}
+                  clientDefaultURL={"/testimonials/clientTestimonials/"}
+                  searchfiledDeatails={"Testimonial Title / Testimonial description "}
+                  setPageloadResults={setPageloadResults}
+                  setSearchquery={setSearchquery}
+                  searchQuery={searchQuery}
+                />
+              </div>
+              {isAdmin ? (
+            <div className="col-md-6">
+              <div className="d-flex justify-content-end align-items-center mb-3">
+                <span className="fw-bold me-2">Add / Edit Testimonials </span>
+                <button
+                  type="submit"
+                  className="btn btn-primary px-3"
+                  onClick={() => editHandler("testmonial", true)}
+                >
+                  {" "}
+                  <i className="fa fa-pencil" aria-hidden="true"></i>
+                </button>
+              </div>
+              
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <div className="row">
           <div className="col-md-12">
@@ -128,6 +178,55 @@ const TestimonialsList = () => {
               ))}
           </div>
         </div>
+        <div>
+                
+        {componentEdit.testmonial ? (
+          
+        <div className="adminEditTestmonial">
+          <AdminBanner
+            editHandler={editHandler}
+            componentType="testmonial"
+            getImageListURL="testimonials/clientTestimonials/"
+            deleteImageURL="testimonials/updateTestimonials/"
+            imagePostURL="testimonials/createTestimonials/"
+            imageUpdateURL="testimonials/updateTestimonials/"
+            imageLabel="Add your Image"
+            titleTitle="Testmonial Name"
+            descriptionTitle="Testimonial Writeup "
+            showDescription={false}
+            showExtraFormFields={getTestimonialsFields("testmonial")}
+            dimensions={imageDimensionsJson("testimonial")}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+          
+          {paginationData?.total_count ? (
+                  <CustomPagination
+                    paginationData={paginationData}
+                    paginationURL={
+                      isAdmin
+                        ? "/testimonials/createTestimonials/"
+                        : "/testimonials/clientTestimonials/"
+                    }
+                    paginationSearchURL={
+                      searchQuery
+                        ? `/testimonials/searchtestimonials/${searchQuery}/`
+                        : isAdmin
+                        ? "/testimonials/createTestimonials/"
+                        : "/testimonials/clientTestimonials/"
+                    }
+                    searchQuery={searchQuery}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                    setResponseData={setResponseData}
+                    pageLoadResult={pageLoadResult}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
       </div>
     </>
   );

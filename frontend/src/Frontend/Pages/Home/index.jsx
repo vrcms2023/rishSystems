@@ -65,7 +65,7 @@ const Home = () => {
           `/testimonials/clientTestimonials/`,
         );
         if (response?.status === 200) {
-          setTestmonis(response.data.testimonial);
+          setTestmonis(response.data.results);
         }
       } catch (e) {
         console.log("unable to access ulr because of server is down");
@@ -171,6 +171,7 @@ const Home = () => {
           </div>
 
           <div className="col-md-4 p-5 testimonials text-center">
+          testmonial
             {isAdmin ? (
               <EditIcon editHandler={() => editHandler("testmonial", true)} />
             ) : (
@@ -188,11 +189,11 @@ const Home = () => {
               ""
             )}
 
-            {/* {testimonis.length > 0 ? (
+            {testimonis.length > 0 ? (
               <Testimonials testimonis={testimonis} />
             ) : (
               ""
-            )} */}
+            )}
           </div>
         </div>
 
