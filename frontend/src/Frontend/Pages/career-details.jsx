@@ -9,7 +9,7 @@ import EditIcon from "../../Common/AdminEditIcon";
 import ModelBg from "../../Common/ModelBg";
 import Banner from "../../Common/Banner";
 import JobCurrentOpenings from "../Components/JobCurrentOpenings";
-import { axiosClientServiceApi } from "../../util/axiosUtil";
+import { axiosClientServiceApi, axiosServiceApi } from "../../util/axiosUtil";
 
 import { removeActiveClass } from "../../util/ulrUtil";
 import { getFormDynamicFields } from "../../util/dynamicFormFields";
@@ -48,12 +48,21 @@ const Careers = () => {
 
   useEffect(() => {
     const getCareerData = async () => {
+      let response = "";
       try {
-        let response = await axiosClientServiceApi.get(
-          `/careers/clientSelectedCareers/${id}/`,
-        );
-
-        setPosts(response.data.careers);
+        if (isAdmin) {
+          response = await axiosServiceApi.get(`/careers/createCareer/${id}/`);
+        } else {
+          response = await axiosClientServiceApi.get(
+            `/careers/clientSelectedCareers/${id}/`,
+          );
+        }
+        let keys = Object.keys(response.data);
+        if (keys.length > 1) {
+          setPosts(response.data.results);
+        } else {
+          setPosts(response.data.careers);
+        }
       } catch (error) {
         console.log("Unable to get the Career data");
       }
