@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 export const AboutPageStyled = styled.div`
-    .pageTitle {
-        color: ${({ theme }) => theme.pageTitleColor};
-    }
-
     .title {
         color: ${({ theme }) => theme.aboutPageTitleColor};
     }

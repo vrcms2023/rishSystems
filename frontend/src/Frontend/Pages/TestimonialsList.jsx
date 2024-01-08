@@ -8,7 +8,11 @@ import { getFormDynamicFields, imageDimensionsJson } from '../../util/dynamicFor
 import useAdminLoginStatus from '../../Common/customhook/useAdminLoginStatus';
 import { axiosClientServiceApi } from '../../util/axiosUtil';
 import { getImagePath } from '../../util/commonUtil';
+
 import { removeActiveClass } from '../../util/ulrUtil';
+
+import Title from '../../Common/Title';
+
 
 
 const TestimonialsList = () => {
@@ -96,9 +100,7 @@ const TestimonialsList = () => {
       <div className="container my-5">
         <div className="row">
           <div className="col-md-12">
-            <h1 className="title">
-              Testimonials
-            </h1>
+            <Title title="Testimonials" cssClass="fs-1 pageTitle" />
           </div>
         </div>
         <div className="row">
@@ -106,8 +108,8 @@ const TestimonialsList = () => {
           {testimonis.length && testimonis.map(item => (
           <div className='py-4 d-flex flex-column flex-column-reverse flex-md-row gap-3 gap-md-5 border-bottom justify-content-center align-items-center testimonialList'>
             <div>
-              <h4 className='fw-bold'>{item.testimonial_title}</h4>
-              <h3>{item.testimonial_sub_title}</h3>
+              <Title title={item.testimonial_title} cssClass="fs-3 fw-bold" />
+              <Title title={item.testimonial_sub_title} cssClass="fs-5 fw-bold" />
               <p>{item.testimonial_description}</p>
             </div>
             <img src={getImagePath(item.path)} alt={item.testimonial_title} className='rounded-circle img-fluid'/>

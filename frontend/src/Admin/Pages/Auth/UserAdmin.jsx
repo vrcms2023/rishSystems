@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Title from "../../../Common/Title";
-import Button from "../../../Common/Button";
 import { useNavigate } from "react-router-dom";
+
+import Title from "../../../Common/Title";
+
 import { axiosServiceApi } from "../../../util/axiosUtil";
 import { toast } from "react-toastify";
 import { getCookie } from "../../../util/cookieUtil";
 import { confirmAlert } from "react-confirm-alert";
 import DeleteDialog from "../../../Common/DeleteDialog";
+
 
 const UserAdmin = () => {
   const [userDetails, setUserDetails] = useState([]);
@@ -49,7 +51,7 @@ const UserAdmin = () => {
      // const response = await axiosServiceApi.delete(
        // `/user/auth/users/me/?current_password=Abcd@1234`,
      // );
-      console.log(response)
+      // console.log(response)
     };
 
     confirmAlert({
@@ -95,14 +97,15 @@ const UserAdmin = () => {
     <div className="container-fluid pt-5" >
       <div className="row px-3 px-lg-5">
         <div className="text-end d-flex justify-content-between">
-          <Title title={"User's"} cssClass="text-start fs-4" />
-          <Button
-            type="submit"
-            cssClass="btn btn-secondary"
-            label="Back"
-            icon="fa-chevron-left"
-            handlerChange={() => navigate("/main")}
-          />
+
+          <Title title={"User's"} cssClass="fs-1 pageTitle" />
+          {/* <Search
+              setObject={userDetails}
+              clientSearchURL={""}
+              adminSearchURL={""}
+              clientDefaultURL={""}
+              searchfiledDeatails={"Name / Email ID / Admin Type "}
+            /> */}
         </div>
       </div>
 

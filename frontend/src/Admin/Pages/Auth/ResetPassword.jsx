@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import Button from "../../../Common/Button";
 import { useForm } from "react-hook-form";
+
+import Button from "../../../Common/Button";
 import { axiosClientServiceApi } from "../../../util/axiosUtil";
 import Title from "../../../Common/Title";
 import Error from "../../Components/Error";
+
+import { LoginStyled } from "../../../Common/StyledComponents/Styled-Login";
 
 const ResetPassword = () => {
   const { register, handleSubmit } = useForm();
@@ -39,6 +42,7 @@ const ResetPassword = () => {
   };
 
   return (
+    <LoginStyled>
     <div className="login">
       <div className="bg-white d-flex justify-content-center align-items-center flex-column">
         <div className="container">
@@ -84,6 +88,7 @@ const ResetPassword = () => {
         </div>
       </div>
     </div>
+    </LoginStyled>
   );
 };
 

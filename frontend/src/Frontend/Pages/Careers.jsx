@@ -159,18 +159,10 @@ const Careers = () => {
               <div className="col-md-6">
                 <Title title="Careers" cssClass="fs-3 pageTitle" />
               </div>
-              <div className="col-md-6">
-                <Search
-                  setObject={setPosts}
-                  clientSearchURL={"/careers/searchCareers/"}
-                  adminSearchURL={"/careers/createCareer/"}
-                  clientDefaultURL={"/careers/clientCareersList/"}
-                  searchfiledDeatails={"Job Title / Comapny Name / Location "}
-                />
-              </div>
-            </div>
+              
 
             <div className="col-md-6">
+
               <Search
                 setObject={setResponseData}
                 clientSearchURL={"/careers/searchCareers/"}
@@ -189,9 +181,8 @@ const Careers = () => {
               addJobs={componentEdit.addjob}
               posts={posts}
               setPosts={setResponseData}
-              setPageloadResults={setPageloadResults}
-            />
           </div>
+
           <div>
           {paginationData?.total_count ? (
             <CustomPagination 
@@ -206,6 +197,20 @@ const Careers = () => {
           ):''}
           </div>
           </CareersPageStyled>
+
+            {/* <div className="col-md-6">
+              <Search
+                setObject={setPosts}
+                clientSearchURL={"/careers/searchCareers/"}
+                adminSearchURL={"/careers/createCareer/"}
+                clientDefaultURL={"/careers/clientCareersList/"}
+                searchfiledDeatails={"Job Title / Comapny Name / Location "}
+              />
+            </div> */}
+          </div>
+
+          
+
 
         </div>
 </div>

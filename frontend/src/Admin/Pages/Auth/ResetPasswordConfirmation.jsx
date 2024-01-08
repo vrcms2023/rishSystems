@@ -7,6 +7,7 @@ import { axiosClientServiceApi } from "../../../util/axiosUtil";
 import Title from "../../../Common/Title";
 import Error from "../../Components/Error";
 import { useParams } from "react-router-dom";
+import { LoginStyled } from "../../../Common/StyledComponents/Styled-Login";
 
 const ResetPasswordConfirmation = () => {
   const { register, handleSubmit } = useForm();
@@ -52,6 +53,7 @@ const ResetPasswordConfirmation = () => {
   };
 
   return (
+    <LoginStyled>
     <div className="login">
       <div className="bg-white d-flex justify-content-center align-items-center flex-column">
         <div className="container">
@@ -132,6 +134,7 @@ const ResetPasswordConfirmation = () => {
         </div>
       </div>
     </div>
+    </LoginStyled>
   );
 };
 

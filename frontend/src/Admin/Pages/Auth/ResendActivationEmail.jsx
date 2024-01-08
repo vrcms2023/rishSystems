@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import Button from "../../../Common/Button";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
+import Button from "../../../Common/Button";
 import { axiosClientServiceApi } from "../../../util/axiosUtil";
 import Title from "../../../Common/Title";
 import Error from "../../Components/Error";
-import { Link } from "react-router-dom";
+
+// CSS Styles
+import { LoginStyled } from "../../../Common/StyledComponents/Styled-Login";
 
 const ResendActivationEmail = () => {
   const { register, handleSubmit } = useForm();
@@ -39,6 +43,7 @@ const ResendActivationEmail = () => {
   };
 
   return (
+    <LoginStyled>
     <div className="login">
       <div className="bg-white d-flex justify-content-center align-items-center flex-column">
         <div className="container">
@@ -92,6 +97,7 @@ const ResendActivationEmail = () => {
         </div>
       </div>
     </div>
+    </LoginStyled>
   );
 };
 

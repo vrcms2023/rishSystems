@@ -2,10 +2,12 @@ import React from "react";
 import Login from "./Login";
 import Registration from "./Registration";
 
-import "./Login.css";
+// CSS Styles
+import { LoginStyled } from "../../../Common/StyledComponents/Styled-Login";
 
 const AuthForm = () => {
   return (
+    <LoginStyled>
     <div className="container-fluid">
       <div className="row authForm d-flex justify-contnet-center align-items-center">
         <div className="col-12 col-md-6">
@@ -16,6 +18,7 @@ const AuthForm = () => {
         </div>
       </div>
     </div>
+    </LoginStyled>
   );
 };
 

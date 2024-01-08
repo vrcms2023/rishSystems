@@ -159,7 +159,7 @@ const TestimonialsList = () => {
       <div className="container-fluid container-lg my-md-5 ">
         <div className="row">
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
-            <Title title="Clients" cssClass="fs-1" />
+            <Title title="Clients" cssClass="fs-1 pageTitle" />
           </div>
           {isAdmin ? (
             <div className="col-md-6">

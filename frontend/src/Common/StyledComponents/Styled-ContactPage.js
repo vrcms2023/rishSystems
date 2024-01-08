@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 export const ContactPageStyled = styled.div`
-    .pageTitle {
-        color: ${({ theme }) => theme.pageTitleColor};
-    }
-
     .formTitle {
         color: ${({ theme }) => theme.primaryColor};
     }
