@@ -180,7 +180,7 @@ const Careers = () => {
             <JobPost
               addJobs={componentEdit.addjob}
               posts={posts}
-              setPosts={setResponseData}
+              setPosts={setResponseData} />
           </div>
 
           <div>
@@ -196,26 +196,15 @@ const Careers = () => {
             pageLoadResult={pageLoadResult}/>
           ):''}
           </div>
+          </div>
           </CareersPageStyled>
 
-            {/* <div className="col-md-6">
-              <Search
-                setObject={setPosts}
-                clientSearchURL={"/careers/searchCareers/"}
-                adminSearchURL={"/careers/createCareer/"}
-                clientDefaultURL={"/careers/clientCareersList/"}
-                searchfiledDeatails={"Job Title / Comapny Name / Location "}
-              />
-            </div> */}
-          </div>
+      </div>
 
-          
-
-
-        </div>
-</div>
       {show && <ModelBg />}
-    </>
+ 
+ </div>
+ </>
   );
 };
 
