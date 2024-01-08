@@ -24,7 +24,7 @@ import Search from "../../Common/Search";
 import CustomPagination from "../../Common/CustomPagination";
 import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 
-const TestimonialsList = () => {
+const CaseStudies = () => {
   const editComponentObj = {
     banner: false,
     briefIntro: false,
@@ -335,4 +335,4 @@ const TestimonialsList = () => {
   );
 };
 
-export default TestimonialsList;
+export default CaseStudies;
