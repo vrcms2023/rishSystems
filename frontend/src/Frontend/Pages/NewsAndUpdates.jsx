@@ -48,11 +48,10 @@ const NewsAndUpdates = () => {
   const [searchQuery, setSearchquery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    removeActiveClass();
-  }, []);
+
 
   useEffect(() => {
+    removeActiveClass();
     const id = document.getElementById("KnowledgeHubnavbarDropdown");
     if (id) {
       id.classList.add("active");

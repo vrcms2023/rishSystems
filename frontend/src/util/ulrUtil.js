@@ -11,7 +11,7 @@ export function getBaseURL() {
 // }
 
 export function removeActiveClass() {
-  const menuIDs = ['ServicesnavbarDropdown','KnowledgeHubnavbarDropdown']
+  const menuIDs = ['ServicesnavbarDropdown','KnowledgeHubnavbarDropdown', 'AdminSettingnavbarDropdown']
   menuIDs.forEach((menuID)=>{
     const id = document.getElementById(menuID);
     if (id) {

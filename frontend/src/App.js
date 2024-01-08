@@ -93,10 +93,10 @@ function App() {
     }
   }, [userInfo]);
 
-  useEffect(() => {
-    removeActiveClass();
-    //HideMenu()
-  }, []);
+  // useEffect(() => {
+  //   removeActiveClass();
+  //   //HideMenu()
+  // });
 
   const HideMenu = () => {
     pathList.forEach((item) => {

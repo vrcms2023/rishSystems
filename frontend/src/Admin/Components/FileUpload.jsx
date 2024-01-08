@@ -153,6 +153,10 @@ const FileUpload = ({
             formData.append("news_description", editorState);
           } else if (key === "aboutus_description") {
             formData.append("aboutus_description", editorState);
+          } else if (key === "case_studies_description") {
+            formData.append("case_studies_description", editorState);
+          } else if (key === "client_description") {
+            formData.append("client_description", editorState);
           } else if (
             key === "banner_descripiton" &&
             listofAboutSection.indexOf(pageType) > -1
@@ -184,10 +188,17 @@ const FileUpload = ({
   const creteFileObj = async () => {
     let response = await fetch(`${baseURL}${editImage.path}`);
     let data = await response.blob();
-    let metadata = {
-      type: `image/${editImage.contentType.replace(".", "")}`,
-    };
-    return new File([data], editImage.originalname, metadata);
+    let metadata =''
+    if(editImage.contentType){
+      metadata = {
+        type: `image/${editImage.contentType.replace(".", "")}`,
+      };
+      return new File([data], editImage.originalname, metadata);
+    } else {
+      return new File([data], editImage.originalname);
+    }
+    
+   
   };
   /**
    * update image
@@ -401,6 +412,10 @@ const FileUpload = ({
                       ? editImage?.banner_descripiton
                       : editImage?.aboutus_description
                       ? editImage?.aboutus_description
+                      : editImage?.client_description
+                      ? editImage?.client_description
+                      : editImage?.case_studies_description
+                      ? editImage?.case_studies_description
                       : ""
                   }
                 />

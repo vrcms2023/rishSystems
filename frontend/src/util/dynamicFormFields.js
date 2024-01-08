@@ -45,6 +45,36 @@ export const getAboutUSSectionFields = () => {
   };
 };
 
+export const getCaseStudiesFields = () => {
+  return {
+    case_studies_title: {
+      label: "Title",
+      type: "text",
+      fieldName: "case_studies_title",
+    },
+    case_studies_description: {
+      label: "Description",
+      type: "richText",
+      fieldName: "case_studies_description",
+    },
+  };
+};
+
+export const getClinetLogsFields = () => {
+  return {
+    client_title: {
+      label: "Title",
+      type: "text",
+      fieldName: "client_title",
+    },
+    client_description: {
+      label: "Description",
+      type: "richText",
+      fieldName: "client_description",
+    },
+  };
+};
+
 export const getCarouselFields = (category) => {
   return {
     carouse_title: {

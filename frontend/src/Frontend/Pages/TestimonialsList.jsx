@@ -8,7 +8,11 @@ import { getFormDynamicFields, imageDimensionsJson } from '../../util/dynamicFor
 import useAdminLoginStatus from '../../Common/customhook/useAdminLoginStatus';
 import { axiosClientServiceApi } from '../../util/axiosUtil';
 import { getImagePath } from '../../util/commonUtil';
+
+import { removeActiveClass } from '../../util/ulrUtil';
+
 import Title from '../../Common/Title';
+
 
 
 const TestimonialsList = () => {
@@ -25,6 +29,15 @@ const TestimonialsList = () => {
   const [testimonis, setTestmonis] = useState([]);
   const [show, setShow] = useState(false);
   const [editCarousel, setEditCarousel] = useState({});
+
+
+  useEffect(() => {
+    removeActiveClass();
+    const id = document.getElementById("KnowledgeHubnavbarDropdown");
+    if (id) {
+      id.classList.add("active");
+    }
+  });
 
   const editHandler = (name, value, item) => {
     SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));

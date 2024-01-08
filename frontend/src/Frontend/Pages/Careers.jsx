@@ -153,24 +153,51 @@ const Careers = () => {
         ) : (
           ""
         )}
+        <div>
+          <CareersPageStyled>
+            <div className="row">
+              <div className="col-md-6">
+                <Title title="Careers" cssClass="fs-3 pageTitle" />
+              </div>
+              
 
-        <CareersPageStyled>
-          <div className="row">
             <div className="col-md-6">
-              <Title title="Careers" cssClass="fs-3 pageTitle" />
+
+              <Search
+                setObject={setResponseData}
+                clientSearchURL={"/careers/searchCareers/"}
+                adminSearchURL={"/careers/createCareer/"}
+                clientDefaultURL={"/careers/clientCareersList/"}
+                searchfiledDeatails={"Job Title / Comapny Name / Location "}
+                setPageloadResults={setPageloadResults}
+                setSearchquery={setSearchquery}
+                searchQuery={searchQuery}
+              />
             </div>
-            <div className="col-md-6">
-            <Search
-              setObject={setResponseData}
-              clientSearchURL={"/careers/searchCareers/"}
-              adminSearchURL={"/careers/createCareer/"}
-              clientDefaultURL={"/careers/clientCareersList/"}
-              searchfiledDeatails={"Job Title / Comapny Name / Location "}
-              setPageloadResults={setPageloadResults}
-              setSearchquery={setSearchquery}
-              searchQuery={searchQuery}
-            />
+
+
+          <div className="row mb-5">
+            <JobPost
+              addJobs={componentEdit.addjob}
+              posts={posts}
+              setPosts={setResponseData}
           </div>
+
+          <div>
+          {paginationData?.total_count ? (
+            <CustomPagination 
+            paginationData={paginationData}  
+            paginationURL={isAdmin ? '/careers/createCareer/':'/careers/clientCareersList/'} 
+            paginationSearchURL={searchQuery ? `/careers/searchCareers/${searchQuery}/` : isAdmin ? '/careers/createCareer/': '/careers/clientCareersList/'}
+            searchQuery={searchQuery}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+            setResponseData={setResponseData}
+            pageLoadResult={pageLoadResult}/>
+          ):''}
+          </div>
+          </CareersPageStyled>
+
             {/* <div className="col-md-6">
               <Search
                 setObject={setPosts}
@@ -184,33 +211,9 @@ const Careers = () => {
 
           
 
-        <div className="row mb-5">
-          <JobPost
-            addJobs={componentEdit.addjob}
-            posts={posts}
-            setPosts={setResponseData}
-            setPageloadResults={setPageloadResults}
-          />
+
         </div>
-        <div>
-        {paginationData?.total_count ? (
-           <CustomPagination 
-           paginationData={paginationData}  
-           paginationURL={isAdmin ? '/careers/createCareer/':'/careers/clientCareersList/'} 
-           paginationSearchURL={searchQuery ? `/careers/searchCareers/${searchQuery}/` : isAdmin ? '/careers/createCareer/': '/careers/clientCareersList/'}
-           searchQuery={searchQuery}
-           setCurrentPage={setCurrentPage}
-           currentPage={currentPage}
-           setResponseData={setResponseData}
-           pageLoadResult={pageLoadResult}/>
-        ):''}
-      </div>
-
-
-        </CareersPageStyled>
-
-      </div>
-
+</div>
       {show && <ModelBg />}
     </>
   );
