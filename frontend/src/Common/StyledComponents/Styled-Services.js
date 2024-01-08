@@ -39,24 +39,8 @@ export const ServicesStyled = styled.div`
         }
       }
       
-      .deleteSection {
-        position: absolute;
-        top: 55px;
-        right: 0px;
-        z-index: 999;
-        cursor: pointer;
-        margin-top: 5px;
-        width: auto !important;
-        border: 2px dashed rgb(255, 193, 7);
-        background-color: ${({ theme }) => theme.white};
-        padding: 5px 12px;
-      }
       
-      .editIcon {
-        right: 0px;
-        padding: 0 !important;
-      }
-
+      
       .servicePageLinks {
         li {
             cursor: pointer;
