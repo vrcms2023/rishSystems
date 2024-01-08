@@ -5,10 +5,7 @@ import { toast } from "react-toastify";
 import Button from "../../../Common/Button";
 import { getCookie } from "../../../util/cookieUtil";
 import EditAdminPopupHeader from "../EditAdminPopupHeader";
-import {
-  axiosServiceApi,
-} from "../../../util/axiosUtil";
-
+import { axiosServiceApi } from "../../../util/axiosUtil";
 
 const GoogleMap = ({ editHandler, componentType, mapValues }) => {
   const closeHandler = () => {

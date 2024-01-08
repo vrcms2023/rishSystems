@@ -188,8 +188,8 @@ const FileUpload = ({
   const creteFileObj = async () => {
     let response = await fetch(`${baseURL}${editImage.path}`);
     let data = await response.blob();
-    let metadata =''
-    if(editImage.contentType){
+    let metadata = "";
+    if (editImage.contentType) {
       metadata = {
         type: `image/${editImage.contentType.replace(".", "")}`,
       };
@@ -197,8 +197,6 @@ const FileUpload = ({
     } else {
       return new File([data], editImage.originalname);
     }
-    
-   
   };
   /**
    * update image

@@ -114,7 +114,10 @@ const Careers = () => {
         <div className="container py-4 my-md-5 py-md-4">
           <div className="row">
             <div className="col-12 d-flex justify-content-between align-items-center gap-3">
-              <Title title="Careers Details" cssClass="fw-bold fs-4 pageTitle" />
+              <Title
+                title="Careers Details"
+                cssClass="fw-bold fs-4 pageTitle"
+              />
               <Link
                 to="/careers"
                 className="btn btn-secondary d-flex justify-content-center align-items-center gap-2"
@@ -130,7 +133,9 @@ const Careers = () => {
               <JobBriefDetails jobDetails={posts} />
               <div className="jobDescription p-4">
                 {posts.description ? (
-                  <div dangerouslySetInnerHTML={{ __html: posts.description }} />
+                  <div
+                    dangerouslySetInnerHTML={{ __html: posts.description }}
+                  />
                 ) : (
                   ""
                 )}

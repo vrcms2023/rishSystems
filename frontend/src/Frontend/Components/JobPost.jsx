@@ -12,15 +12,16 @@ import JobPostFrom from "../../Admin/Components/forms/JobpostForm";
 import { axiosServiceApi } from "../../util/axiosUtil";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
 import { getCookie } from "../../util/cookieUtil";
-import { getFirstShortDescription, sortCreatedDateByDesc } from "../../util/dataFormatUtil";
+import {
+  getFirstShortDescription,
+  sortCreatedDateByDesc,
+} from "../../util/dataFormatUtil";
 import { showPosteddate } from "../../util/commonUtil";
 
 import EditIcon from "../../Common/AdminEditIcon";
 // Styles
 
-
-
-const JobPost = ({ addJobs, posts, setPosts,setPageloadResults }) => {
+const JobPost = ({ addJobs, posts, setPosts, setPageloadResults }) => {
   const editComponentObj = {
     job: false,
   };
@@ -49,16 +50,15 @@ const JobPost = ({ addJobs, posts, setPosts,setPageloadResults }) => {
     try {
       if (userCookie) {
         response = await axiosServiceApi.get(`/careers/createCareer/`);
-        setPageloadResults(true)
+        setPageloadResults(true);
       } else {
         response = await axiosClientServiceApi.get(
           `/careers/clientCareersList/`,
         );
-        setPageloadResults(false)
+        setPageloadResults(false);
       }
       // const data = sortCreatedDateByDesc(response.data.careers);
       setPosts(response.data);
-     
     } catch (error) {
       console.log("Unable to get the Career data");
     }
@@ -132,9 +132,9 @@ const JobPost = ({ addJobs, posts, setPosts,setPageloadResults }) => {
                       className=" p-2"
                     >
                       <i
-                      className="fa fa-pencil text-warning cursor-pointer fs-5"
-                      aria-hidden="true"
-                    ></i>
+                        className="fa fa-pencil text-warning cursor-pointer fs-5"
+                        aria-hidden="true"
+                      ></i>
                     </Link>
                   </div>
 
@@ -211,17 +211,17 @@ const JobPost = ({ addJobs, posts, setPosts,setPageloadResults }) => {
                 {item.job_location}
               </small>
               <div className="mt-0 mb-3">
-              <Title title={item.job_title} cssClass="fs-5 fw-bold jobTitle" />
+                <Title
+                  title={item.job_title}
+                  cssClass="fs-5 fw-bold jobTitle"
+                />
               </div>
               <div className="mt-0 mb-3">
                 <Title title="Company" cssClass="fw-bold fs-6" />
                 <p className="m-0">{item.company_name} </p>
               </div>
               <div className="">
-                <Title
-                  title="Job Description"
-                  cssClass="fw-bold fs-6"
-                />
+                <Title title="Job Description" cssClass="fw-bold fs-6" />
                 <p className="m-0">
                   <div
                     dangerouslySetInnerHTML={{
@@ -232,18 +232,12 @@ const JobPost = ({ addJobs, posts, setPosts,setPageloadResults }) => {
               </div>
 
               <div className="d-block my-2">
-              <Title
-                  title="Experience"
-                  cssClass="fw-bold fs-6"
-                />
+                <Title title="Experience" cssClass="fw-bold fs-6" />
                 {item.experience_from ? item.experience_from : 0} to{" "}
                 {item.experience_to ? item.experience_to : 0} Years
               </div>
               <small className="d-block">
-              <Title
-                  title="Posted on"
-                  cssClass="fw-bold fs-6"
-                />
+                <Title title="Posted on" cssClass="fw-bold fs-6" />
                 {showPosteddate(item.posted_date) == 0 ? (
                   "Today"
                 ) : (

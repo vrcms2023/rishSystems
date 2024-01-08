@@ -10,7 +10,7 @@ import { logout } from "../../features/auth/authSlice";
 import { useAdminLoginStatus } from "../customhook/useAdminLoginStatus";
 
 // Stylesheet
-import {TopStripStyled} from "../StyledComponents/Styled-Topstrip"
+import { TopStripStyled } from "../StyledComponents/Styled-Topstrip";
 
 const TopStrip = () => {
   const [footerValues, setFooterValues] = useState([]);
@@ -47,45 +47,47 @@ const TopStrip = () => {
   }
   return (
     <TopStripStyled>
-    <div className="d-flex justify-content-center justify-content-md-between align-items-center topStrip">
-      <div className="d-none d-md-flex">
-        <Title title="Welcome to RishSystems" cssClass={"fs-6 fw-normal"} />
-      </div>
-      <div className="d-flex justify-content-between gap-4 quickContact">
-        <span className="d-none d-md-flex">
-          {" "}
-          {footerValues?.phonen_number ? footerValues?.phonen_number : ""}{" "}
-        </span>
-
-        {footerValues.emailid ? (
+      <div className="d-flex justify-content-center justify-content-md-between align-items-center topStrip">
+        <div className="d-none d-md-flex">
+          <Title title="Welcome to RishSystems" cssClass={"fs-6 fw-normal"} />
+        </div>
+        <div className="d-flex justify-content-between gap-4 quickContact">
           <span className="d-none d-md-flex">
-            <i className="fa fa-paper-plane me-1" aria-hidden="true"></i>
-            <a href={`mailto:${footerValues.emailid}`}>
-              {footerValues.emailid}{" "}
-            </a>
+            {" "}
+            {footerValues?.phonen_number
+              ? footerValues?.phonen_number
+              : ""}{" "}
           </span>
-        ) : (
-          ""
-        )}
 
-        {isAdmin ? (
-          <>
+          {footerValues.emailid ? (
             <span className="d-none d-md-flex">
-              <i className="fa fa-user-o" aria-hidden="true"></i> &nbsp;
-              {userName}
-            </span>
-
-            <span>
-              <a href="#nolink" onClick={logOutHandler}>
-                Logout
+              <i className="fa fa-paper-plane me-1" aria-hidden="true"></i>
+              <a href={`mailto:${footerValues.emailid}`}>
+                {footerValues.emailid}{" "}
               </a>
             </span>
-          </>
-        ) : (
-          ""
-        )}
+          ) : (
+            ""
+          )}
+
+          {isAdmin ? (
+            <>
+              <span className="d-none d-md-flex">
+                <i className="fa fa-user-o" aria-hidden="true"></i> &nbsp;
+                {userName}
+              </span>
+
+              <span>
+                <a href="#nolink" onClick={logOutHandler}>
+                  Logout
+                </a>
+              </span>
+            </>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
-    </div>
     </TopStripStyled>
   );
 };

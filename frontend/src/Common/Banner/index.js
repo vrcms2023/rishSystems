@@ -9,7 +9,6 @@ import { getImagePath } from "../../util/commonUtil";
 // Styles
 import { PageBannerStyled } from "../StyledComponents/Styled-PageBanner";
 
-
 const Banner = ({ getBannerAPIURL, bannerState, pageLoadServiceName }) => {
   const [bannerdata, setBannerData] = useState([]);
   const baseURL = getBaseURL();

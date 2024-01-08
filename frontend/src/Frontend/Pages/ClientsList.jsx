@@ -1,25 +1,25 @@
-import React, {useState, useEffect} from 'react'
-import EditIcon from '../../Common/AdminEditIcon';
-import Banner from '../../Common/Banner';
-import BriefIntroFrontend from '../../Common/BriefIntro';
-import ImageInputsForm from '../../Admin/Components/forms/ImgTitleIntoForm';
+import React, { useState, useEffect } from "react";
+import EditIcon from "../../Common/AdminEditIcon";
+import Banner from "../../Common/Banner";
+import BriefIntroFrontend from "../../Common/BriefIntro";
+import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
-import { getFormDynamicFields, imageDimensionsJson } from '../../util/dynamicFormFields';
-import useAdminLoginStatus from '../../Common/customhook/useAdminLoginStatus';
-import { axiosClientServiceApi, axiosServiceApi } from '../../util/axiosUtil';
-import { getImagePath } from '../../util/commonUtil';
-import Title from '../../Common/Title';
-import { Link } from 'react-router-dom';
-import { confirmAlert } from 'react-confirm-alert';
-import DeleteDialog from '../../Common/DeleteDialog';
-import AddEditAdminNews from "../../Admin/Components/News";
-import { toast } from 'react-toastify';
-
 import {
-  getClinetLogsFields,
-  } from "../../util/dynamicFormFields";
-import { removeActiveClass } from '../../util/ulrUtil';
+  getFormDynamicFields,
+  imageDimensionsJson,
+} from "../../util/dynamicFormFields";
+import useAdminLoginStatus from "../../Common/customhook/useAdminLoginStatus";
+import { axiosClientServiceApi, axiosServiceApi } from "../../util/axiosUtil";
+import { getImagePath } from "../../util/commonUtil";
+import Title from "../../Common/Title";
+import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import DeleteDialog from "../../Common/DeleteDialog";
+import AddEditAdminNews from "../../Admin/Components/News";
+import { toast } from "react-toastify";
 
+import { getClinetLogsFields } from "../../util/dynamicFormFields";
+import { removeActiveClass } from "../../util/ulrUtil";
 
 const TestimonialsList = () => {
   const editComponentObj = {
@@ -28,14 +28,13 @@ const TestimonialsList = () => {
     addSection: false,
     editSection: false,
   };
-  
+
   const pageType = "clients";
   const isAdmin = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [clientsList, setClientsList] = useState([]);
   const [show, setShow] = useState(false);
   const [editCarousel, setEditCarousel] = useState({});
-
 
   useEffect(() => {
     const getCAseStutiesvalues = async () => {
@@ -54,7 +53,6 @@ const TestimonialsList = () => {
       getCAseStutiesvalues();
     }
   }, [componentEdit.addSection, componentEdit.editSection]);
-
 
   useEffect(() => {
     const id = document.getElementById("KnowledgeHubnavbarDropdown");
@@ -102,8 +100,8 @@ const TestimonialsList = () => {
 
   return (
     <>
-    {/* Page Banner Component */}
-    <div className="position-relative">
+      {/* Page Banner Component */}
+      <div className="position-relative">
         {isAdmin ? (
           <EditIcon editHandler={() => editHandler("banner", true)} />
         ) : (
@@ -129,7 +127,6 @@ const TestimonialsList = () => {
       ) : (
         ""
       )}
-
 
       {/* Brief Introduction */}
       {isAdmin ? (
@@ -246,7 +243,6 @@ const TestimonialsList = () => {
                       ""
                     )}
 
-                  
                     <div
                       dangerouslySetInnerHTML={{
                         __html: item.client_description,
@@ -274,9 +270,8 @@ const TestimonialsList = () => {
           )}
         </div>
       </div>
-      
     </>
-  )
-}
+  );
+};
 
-export default TestimonialsList
+export default TestimonialsList;

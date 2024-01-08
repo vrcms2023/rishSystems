@@ -10,7 +10,6 @@ import { getCookie } from "../../../util/cookieUtil";
 import { confirmAlert } from "react-confirm-alert";
 import DeleteDialog from "../../../Common/DeleteDialog";
 
-
 const UserAdmin = () => {
   const [userDetails, setUserDetails] = useState([]);
   const [isSuperAdmin, setisSuperAdmin] = useState("");
@@ -48,9 +47,9 @@ const UserAdmin = () => {
   const handleUserDelete = (user) => {
     console.log(user);
     const deleteUser = async () => {
-     // const response = await axiosServiceApi.delete(
-       // `/user/auth/users/me/?current_password=Abcd@1234`,
-     // );
+      // const response = await axiosServiceApi.delete(
+      // `/user/auth/users/me/?current_password=Abcd@1234`,
+      // );
       // console.log(response)
     };
 
@@ -94,10 +93,9 @@ const UserAdmin = () => {
   };
 
   return (
-    <div className="container-fluid pt-5" >
+    <div className="container-fluid pt-5">
       <div className="row px-3 px-lg-5">
         <div className="text-end d-flex justify-content-between">
-
           <Title title={"User's"} cssClass="fs-1 pageTitle" />
           {/* <Search
               setObject={userDetails}

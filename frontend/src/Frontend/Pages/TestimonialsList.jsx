@@ -1,19 +1,20 @@
-import React, {useState, useEffect} from 'react'
-import EditIcon from '../../Common/AdminEditIcon';
-import Banner from '../../Common/Banner';
-import BriefIntroFrontend from '../../Common/BriefIntro';
-import ImageInputsForm from '../../Admin/Components/forms/ImgTitleIntoForm';
+import React, { useState, useEffect } from "react";
+import EditIcon from "../../Common/AdminEditIcon";
+import Banner from "../../Common/Banner";
+import BriefIntroFrontend from "../../Common/BriefIntro";
+import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
-import { getFormDynamicFields, imageDimensionsJson } from '../../util/dynamicFormFields';
-import useAdminLoginStatus from '../../Common/customhook/useAdminLoginStatus';
-import { axiosClientServiceApi } from '../../util/axiosUtil';
-import { getImagePath } from '../../util/commonUtil';
+import {
+  getFormDynamicFields,
+  imageDimensionsJson,
+} from "../../util/dynamicFormFields";
+import useAdminLoginStatus from "../../Common/customhook/useAdminLoginStatus";
+import { axiosClientServiceApi } from "../../util/axiosUtil";
+import { getImagePath } from "../../util/commonUtil";
 
-import { removeActiveClass } from '../../util/ulrUtil';
+import { removeActiveClass } from "../../util/ulrUtil";
 
-import Title from '../../Common/Title';
-
-
+import Title from "../../Common/Title";
 
 const TestimonialsList = () => {
   const editComponentObj = {
@@ -22,14 +23,13 @@ const TestimonialsList = () => {
     addSection: false,
     editSection: false,
   };
-  
+
   const pageType = "testimonial";
   const isAdmin = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [testimonis, setTestmonis] = useState([]);
   const [show, setShow] = useState(false);
   const [editCarousel, setEditCarousel] = useState({});
-
 
   useEffect(() => {
     removeActiveClass();
@@ -54,7 +54,7 @@ const TestimonialsList = () => {
         const response = await axiosClientServiceApi.get(
           `/testimonials/clientTestimonials/`,
         );
-        console.log(response, "testimonials response")
+        console.log(response, "testimonials response");
         if (response?.status === 200) {
           setTestmonis(response.data.testimonial);
         }
@@ -69,8 +69,8 @@ const TestimonialsList = () => {
 
   return (
     <>
-    {/* Page Banner Component */}
-    <div className="position-relative">
+      {/* Page Banner Component */}
+      <div className="position-relative">
         {isAdmin ? (
           <EditIcon editHandler={() => editHandler("banner", true)} />
         ) : (
@@ -105,22 +105,32 @@ const TestimonialsList = () => {
         </div>
         <div className="row">
           <div className="col-md-12">
-          {testimonis.length && testimonis.map(item => (
-          <div className='py-4 d-flex flex-column flex-column-reverse flex-md-row gap-3 gap-md-5 border-bottom justify-content-center align-items-center testimonialList'>
-            <div>
-              <Title title={item.testimonial_title} cssClass="fs-3 fw-bold" />
-              <Title title={item.testimonial_sub_title} cssClass="fs-5 fw-bold" />
-              <p>{item.testimonial_description}</p>
-            </div>
-            <img src={getImagePath(item.path)} alt={item.testimonial_title} className='rounded-circle img-fluid'/>
-          </div>))}
-
+            {testimonis.length &&
+              testimonis.map((item) => (
+                <div className="py-4 d-flex flex-column flex-column-reverse flex-md-row gap-3 gap-md-5 border-bottom justify-content-center align-items-center testimonialList">
+                  <div>
+                    <Title
+                      title={item.testimonial_title}
+                      cssClass="fs-3 fw-bold"
+                    />
+                    <Title
+                      title={item.testimonial_sub_title}
+                      cssClass="fs-5 fw-bold"
+                    />
+                    <p>{item.testimonial_description}</p>
+                  </div>
+                  <img
+                    src={getImagePath(item.path)}
+                    alt={item.testimonial_title}
+                    className="rounded-circle img-fluid"
+                  />
+                </div>
+              ))}
           </div>
         </div>
       </div>
-      
     </>
-  )
-}
+  );
+};
 
-export default TestimonialsList
+export default TestimonialsList;
