@@ -15,7 +15,12 @@ const JobCurrentOpenings = () => {
         const response = await axiosClientServiceApi.get(
           `/careers/clientCareersList/`,
         );
-        setPosts(response.data.careers);
+        let keys = Object.keys(response.data);
+        if (keys.length > 1) {
+          setPosts(response.data.results);
+        } else {
+          setPosts(response.data.careers);
+        }
       } catch (error) {
         console.log("Unable to get the Career data");
       }
