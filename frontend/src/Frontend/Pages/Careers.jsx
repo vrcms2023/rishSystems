@@ -180,7 +180,8 @@ const Careers = () => {
             <JobPost
               addJobs={componentEdit.addjob}
               posts={posts}
-              setPosts={setResponseData} />
+              setPosts={setResponseData} 
+              setPageloadResults={setPageloadResults}/>
           </div>
 
           <div>
