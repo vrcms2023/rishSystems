@@ -16,8 +16,9 @@ import AddEditAdminNews from "../../Admin/Components/News";
 import { toast } from 'react-toastify';
 
 import {
-    getAboutUSSectionFields,
+  getCaseStudiesFields,
   } from "../../util/dynamicFormFields";
+import { removeActiveClass } from '../../util/ulrUtil';
 
 
 const TestimonialsList = () => {
@@ -43,14 +44,43 @@ const TestimonialsList = () => {
     }
     document.body.style.overflow = "hidden";
   };
+  
+  useEffect(() => {
+    const getCAseStutiesvalues = async () => {
+      try {
+        const response = await axiosClientServiceApi.get(
+          `/caseStudies/clientCaseStudies/`,
+        );
+        if (response?.status === 200) {
+          setClientsList(response.data.caseStudies);
+        }
+      } catch (error) {
+        console.log("unable to access ulr because of server is down");
+      }
+    };
+    if (!componentEdit.addSection || !componentEdit.editSection) {
+      getCAseStutiesvalues();
+    }
+  }, [componentEdit.addSection, componentEdit.editSection]);
+
+
+
+  useEffect(() => {
+    removeActiveClass();
+    const id = document.getElementById("KnowledgeHubnavbarDropdown");
+    if (id) {
+      id.classList.add("active");
+    }
+  });
+
 
   const deleteAboutSection = (item) => {
     const id = item.id;
-    const name = item.aboutus_title;
+    const name = item.case_studies_title;
 
     const deleteSection = async () => {
       const response = await axiosServiceApi.delete(
-        `/aboutus/updateAboutus/${id}/`,
+        `/caseStudies/updateCaseStudies/${id}/`,
       );
       if (response.status === 204) {
         const list = clientsList.filter((list) => list.id !== id);
@@ -162,13 +192,13 @@ const TestimonialsList = () => {
               componentType={`${
                 componentEdit.editSection ? "editSection" : "addSection"
               }`}
-              imageGetURL="aboutus/clientAboutus/"
-              imagePostURL="aboutus/createAboutus/"
-              imageUpdateURL="aboutus/updateAboutus/"
-              imageDeleteURL="aboutus/updateAboutus/"
-              imageLabel="Add Client Logo"
+              imageGetURL="caseStudies/createCaseStudies/"
+              imagePostURL="caseStudies/createCaseStudies/"
+              imageUpdateURL="caseStudies/updateCaseStudies/"
+              imageDeleteURL="caseStudies/updateCaseStudies/"
+              imageLabel="Image"
               showDescription={false}
-              showExtraFormFields={getAboutUSSectionFields()}
+              showExtraFormFields={getCaseStudiesFields()}
               dimensions={imageDimensionsJson("aboutus")}
             />
           </div>
@@ -209,36 +239,19 @@ const TestimonialsList = () => {
                     ""
                   )}
                   <div className="col-12 col-lg-7 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
-                    {item.aboutus_title ? (
+                    {item.case_studies_title ? (
                       <Title
-                        title={item.aboutus_title}
+                        title={item.case_studies_title}
                         cssClass="fs-1 fw-bold mb-1"
                       />
                     ) : (
                       ""
                     )}
 
-                    {item.aboutus_sub_title ? (
-                      <Title
-                        title={item.aboutus_sub_title}
-                        cssClass="fs-5 text-secondary mb-2"
-                      />
-                    ) : (
-                      ""
-                    )}
-                    {/* <p>{moment(item.created_at).format('DD-MM-YYYY hh:mm:ss')}</p> */}
-                    {item.aboutus_sub_title ? (
-                      <Title
-                        title={item.aboutus_sub_title}
-                        cssClass="fs-5 text-secondary mb-2"
-                      />
-                    ) : (
-                      ""
-                    )}
-
+                  
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: item.aboutus_description,
+                        __html: item.case_studies_description,
                       }}
                     />
                   </div>

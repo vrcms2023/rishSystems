@@ -335,9 +335,13 @@ export const ClientMenu = ({ serviceMenuList }) => {
               <Link to="/casestudies" className="dropdown-item">
                 Case Studies
               </Link>
+              </li>
+            <li>
               <Link to="/clients" className="dropdown-item">
                 Client List
               </Link>
+              </li>
+            <li>
               <Link to="/news" className="dropdown-item">
                 News
               </Link>
@@ -394,7 +398,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
         {isAdmin ? (
           <li className="nav-item dropdown">
           <NavLink
-            id="KnowledgeHubnavbarDropdown"
+            id="AdminSettingnavbarDropdown"
             data-bs-toggle="dropdown"
             aria-expanded="false"
             role="button"
@@ -407,7 +411,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
           >
             Admin Settings
           </NavLink>
-          <ul className="dropdown-menu" aria-labelledby="KnowledgeHubnavbarDropdown">
+          <ul className="dropdown-menu" aria-labelledby="AdminSettingnavbarDropdown">
               <li>
                 <Link to="/contactUSList" className="dropdown-item">
                   Contact List

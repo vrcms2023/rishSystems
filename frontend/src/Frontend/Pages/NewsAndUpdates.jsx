@@ -21,17 +21,8 @@ import {
   imageDimensionsJson,
 } from "../../util/dynamicFormFields";
 
-import ModelBg from "../../Common/ModelBg";
-import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
-import AddEditAdminNews from "../../Admin/Components/News/index";
-import Banner from "../../Common/Banner";
-
 // Styles
-import "./NewsAndUpdates.css";
-import { Link } from "react-router-dom";
 import AdminBanner from "../../Admin/Components/forms/ImgTitleIntoForm-List";
-import HomeNews from "../Components/HomeNews";
-import Search from "../../Common/Search";
 import CustomPagination from "../../Common/CustomPagination";
 import { paginationDataFormat } from "../../util/commonUtil";
 import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
@@ -57,11 +48,10 @@ const NewsAndUpdates = () => {
   const [searchQuery, setSearchquery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    removeActiveClass();
-  }, []);
+
 
   useEffect(() => {
+    removeActiveClass();
     const id = document.getElementById("KnowledgeHubnavbarDropdown");
     if (id) {
       id.classList.add("active");

@@ -16,7 +16,6 @@ class HomeIntro(BaseModel):
     pageType =      models.CharField(max_length=100, null=False)
    
 
-class ClientLogo(BaseModel):
-    clientTitle =    models.CharField(max_length=500, null=True, blank=True)
-    imageDescription = models.CharField(max_length=5000, null=True, blank=True)
-    alt_text =      models.CharField(max_length=500, null=True, blank=True)
+class ClientLogo(ImageModel):
+    client_title =    models.CharField(max_length=500, null=True, blank=True)
+    client_description = models.CharField(max_length=5000, null=True, blank=True)

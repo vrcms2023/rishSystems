@@ -16,8 +16,9 @@ import AddEditAdminNews from "../../Admin/Components/News";
 import { toast } from 'react-toastify';
 
 import {
-    getAboutUSSectionFields,
+  getClinetLogsFields,
   } from "../../util/dynamicFormFields";
+import { removeActiveClass } from '../../util/ulrUtil';
 
 
 const TestimonialsList = () => {
@@ -35,6 +36,33 @@ const TestimonialsList = () => {
   const [show, setShow] = useState(false);
   const [editCarousel, setEditCarousel] = useState({});
 
+
+  useEffect(() => {
+    const getCAseStutiesvalues = async () => {
+      try {
+        const response = await axiosClientServiceApi.get(
+          `/client/getAllClientLogos/`,
+        );
+        if (response?.status === 200) {
+          setClientsList(response.data.clientLogo);
+        }
+      } catch (error) {
+        console.log("unable to access ulr because of server is down");
+      }
+    };
+    if (!componentEdit.addSection || !componentEdit.editSection) {
+      getCAseStutiesvalues();
+    }
+  }, [componentEdit.addSection, componentEdit.editSection]);
+
+
+  useEffect(() => {
+    const id = document.getElementById("KnowledgeHubnavbarDropdown");
+    if (id) {
+      id.classList.add("active");
+    }
+  });
+
   const editHandler = (name, value, item) => {
     SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
     setShow(!show);
@@ -46,11 +74,11 @@ const TestimonialsList = () => {
 
   const deleteAboutSection = (item) => {
     const id = item.id;
-    const name = item.aboutus_title;
+    const name = item.client_title;
 
     const deleteSection = async () => {
       const response = await axiosServiceApi.delete(
-        `/aboutus/updateAboutus/${id}/`,
+        `/client/updateClientLogo/${id}/`,
       );
       if (response.status === 204) {
         const list = clientsList.filter((list) => list.id !== id);
@@ -162,13 +190,13 @@ const TestimonialsList = () => {
               componentType={`${
                 componentEdit.editSection ? "editSection" : "addSection"
               }`}
-              imageGetURL="aboutus/clientAboutus/"
-              imagePostURL="aboutus/createAboutus/"
-              imageUpdateURL="aboutus/updateAboutus/"
-              imageDeleteURL="aboutus/updateAboutus/"
+              imageGetURL="client/createClientLogo/"
+              imagePostURL="client/createClientLogo/"
+              imageUpdateURL="client/updateClientLogo/"
+              imageDeleteURL="client/updateClientLogo/"
               imageLabel="Add Client Logo"
               showDescription={false}
-              showExtraFormFields={getAboutUSSectionFields()}
+              showExtraFormFields={getClinetLogsFields()}
               dimensions={imageDimensionsJson("aboutus")}
             />
           </div>
@@ -209,36 +237,19 @@ const TestimonialsList = () => {
                     ""
                   )}
                   <div className="col-12 col-lg-7 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
-                    {item.aboutus_title ? (
+                    {item.client_title ? (
                       <Title
-                        title={item.aboutus_title}
+                        title={item.client_title}
                         cssClass="fs-1 fw-bold mb-1"
                       />
                     ) : (
                       ""
                     )}
 
-                    {item.aboutus_sub_title ? (
-                      <Title
-                        title={item.aboutus_sub_title}
-                        cssClass="fs-5 text-secondary mb-2"
-                      />
-                    ) : (
-                      ""
-                    )}
-                    {/* <p>{moment(item.created_at).format('DD-MM-YYYY hh:mm:ss')}</p> */}
-                    {item.aboutus_sub_title ? (
-                      <Title
-                        title={item.aboutus_sub_title}
-                        cssClass="fs-5 text-secondary mb-2"
-                      />
-                    ) : (
-                      ""
-                    )}
-
+                  
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: item.aboutus_description,
+                        __html: item.client_description,
                       }}
                     />
                   </div>

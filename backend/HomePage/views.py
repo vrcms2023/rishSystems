@@ -200,7 +200,7 @@ class ClientLogoUpdateAndDeleteView(APIView):
         serializer = ClientLogoSerializer(snippet)
         return Response({"clientLogo": serializer.data}, status=status.HTTP_200_OK)
 
-    def put(self, request, pk, format=None):
+    def patch(self, request, pk, format=None):
         snippet = self.get_object(pk)
         serializer = ClientLogoSerializer(snippet, data=request.data)
         if serializer.is_valid():
