@@ -69,7 +69,11 @@ const HomeServices = ({ title }) => {
             </div>
             <div className="col-md-6 p-2 homeServiceImg">
               <img
-                src={item.path ? getImagePath(item.path) : getImagePath('/media/images/dummy-image-square.png')}
+                src={
+                  item.path
+                    ? getImagePath(item.path)
+                    : getImagePath("/media/images/dummy-image-square.png")
+                }
                 alt={item.alternitivetext}
                 className="img-fluid w-100 h-100"
               />

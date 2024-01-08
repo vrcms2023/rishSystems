@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-// Components 
+// Components
 import Button from "../../../Common/Button";
 import Title from "../../../Common/Title";
 import EditAdminPopupHeader from "../EditAdminPopupHeader";

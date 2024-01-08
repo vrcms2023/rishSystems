@@ -7,10 +7,7 @@ import { InputField } from "./FormFields";
 import EditAdminPopupHeader from "../EditAdminPopupHeader";
 import Button from "../../../Common/Button";
 import { getCookie } from "../../../util/cookieUtil";
-import {
-  axiosServiceApi,
-} from "../../../util/axiosUtil";
-
+import { axiosServiceApi } from "../../../util/axiosUtil";
 
 const FooterAdminFeilds = ({ editHandler, componentType, footerValues }) => {
   const [userName, setUserName] = useState("");

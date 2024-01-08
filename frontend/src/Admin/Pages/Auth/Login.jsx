@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-
 import Title from "../../../Common/Title";
 import Button from "../../../Common/Button";
 import Error from "../../Components/Error";
@@ -60,91 +59,100 @@ const Login = () => {
 
   return (
     <LoginStyled>
-      
       <div className="text-center">
-        <button className="btn btn-secondary mt-4" onClick={() => navigate("/")}>
-              Back to Home
+        <button
+          className="btn btn-secondary mt-4"
+          onClick={() => navigate("/")}
+        >
+          Back to Home
         </button>
       </div>
-    <div className="login">
-      
-      <div className="d-flex justify-content-center align-items-center flex-column">
-        <form onSubmit={handleSubmit(submitForm)} className="shadow-lg">
-          <CSRFToken />
-          {error ? (
-            <p className="fw-bold">{error && <Error>{error}</Error>}</p>
-          ) : (
-            ""
-          )}
-          <input
-            type="hidden"
-            {...register("csrfmiddlewaretoken")}
-            name="csrfmiddlewaretoken"
-            value="m6pDnuW9RPTEuK66x0H4oc09JSfyv6bD"
-          />
-          <Title
-            title="Admin login"
-            cssClass="text-center text-dark mb-4 fw-bold fs-4"
-          />
-          <div className="mb-3">
-            <label
-              htmlFor="userName"
-              className="form-label text-dark fw-normal"
-            >
-              Email
-            </label>
+      <div className="login">
+        <div className="d-flex justify-content-center align-items-center flex-column">
+          <form onSubmit={handleSubmit(submitForm)} className="shadow-lg">
+            <CSRFToken />
+            {error ? (
+              <p className="fw-bold">{error && <Error>{error}</Error>}</p>
+            ) : (
+              ""
+            )}
             <input
-              type="text"
-              {...register("email")}
-              name="email"
-              className="form-control bg-light"
-              id="userName"
-              aria-describedby="emailHelp"
+              type="hidden"
+              {...register("csrfmiddlewaretoken")}
+              name="csrfmiddlewaretoken"
+              value="m6pDnuW9RPTEuK66x0H4oc09JSfyv6bD"
             />
-            {/* <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div> */}
-          </div>
-          <div className="mb-3">
-            <label
-              htmlFor="signPassord"
-              className="form-label text-dark fw-normal"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              {...register("password")}
-              name="password"
-              className="form-control bg-light"
-              id="signPassord"
+            <Title
+              title="Admin login"
+              cssClass="text-center text-dark mb-4 fw-bold fs-4"
             />
-          </div>
+            <div className="mb-3">
+              <label
+                htmlFor="userName"
+                className="form-label text-dark fw-normal"
+              >
+                Email
+              </label>
+              <input
+                type="text"
+                {...register("email")}
+                name="email"
+                className="form-control bg-light"
+                id="userName"
+                aria-describedby="emailHelp"
+              />
+              {/* <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div> */}
+            </div>
+            <div className="mb-3">
+              <label
+                htmlFor="signPassord"
+                className="form-label text-dark fw-normal"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                {...register("password")}
+                name="password"
+                className="form-control bg-light"
+                id="signPassord"
+              />
+            </div>
 
-          <div className="d-grid gap-2 mt-4">
-            <Button
-              type="submit"
-              cssClass="btn btn-lg btn-primary"
-              handlerChange={loginHandler}
-              label="Login"
-            />
-          </div>
-          
-          <div className="my-4 d-flex flex-column gap-1 loginLinks">
-            <div className="">
-              <small>Don't have an account ? <Link to="/register" className="">Sign Up </Link></small>
+            <div className="d-grid gap-2 mt-4">
+              <Button
+                type="submit"
+                cssClass="btn btn-lg btn-primary"
+                handlerChange={loginHandler}
+                label="Login"
+              />
             </div>
-            <div className="">
-            <small>Forgot your Password ?{" "}
-              <Link to="/reset_password  ">Reset Password </Link></small>
+
+            <div className="my-4 d-flex flex-column gap-1 loginLinks">
+              <div className="">
+                <small>
+                  Don't have an account ?{" "}
+                  <Link to="/register" className="">
+                    Sign Up{" "}
+                  </Link>
+                </small>
+              </div>
+              <div className="">
+                <small>
+                  Forgot your Password ?{" "}
+                  <Link to="/reset_password  ">Reset Password </Link>
+                </small>
+              </div>
+              <div className="">
+                <small>
+                  Not Activate your account ?{" "}
+                  <Link to="/resend_activation">Activate</Link>
+                </small>
+              </div>
             </div>
-            <div className="">
-            <small>Not Activate your account ?{" "}
-              <Link to="/resend_activation">Activate</Link></small>
-            </div>
-          </div>
-        </form>
-        
+          </form>
+        </div>
       </div>
-    </div>
     </LoginStyled>
   );
 };

@@ -50,46 +50,46 @@ const Activation = () => {
 
   return (
     <LoginStyled>
-    <div className="login">
-      <div className="bg-white d-flex justify-content-center align-items-center flex-column">
-        <div className="container">
-          <div
-            className="d-flex flex-column justify-content-center align-items-center"
-            style={{ margin: "100px 0" }}
-          >
-            <Title
-              title="Verify your Account"
-              cssClass="text-center text-dark mb-4 fw-bold fs-4"
-            />
+      <div className="login">
+        <div className="bg-white d-flex justify-content-center align-items-center flex-column">
+          <div className="container">
+            <div
+              className="d-flex flex-column justify-content-center align-items-center"
+              style={{ margin: "100px 0" }}
+            >
+              <Title
+                title="Verify your Account"
+                cssClass="text-center text-dark mb-4 fw-bold fs-4"
+              />
 
-            {verified ? (
-              <h5>
-                {" "}
-                Your Account verfied please click here to login{" "}
-                <Link to="/login  ">Login</Link>
-              </h5>
-            ) : (
-              <div>
-                <p className="fw-bold">
-                  {serverError && <Error>{serverError}</Error>}
-                </p>
-                <br />
-                {serverError && (
-                  <p className="text-center">Please contact your admin</p>
-                )}
-              </div>
-            )}
-            {isLoading ? (
-              <div className="d-grid gap-2 mt-4">
-                <h5> Please wait your account is verfication in process </h5>
-              </div>
-            ) : (
-              ""
-            )}
+              {verified ? (
+                <h5>
+                  {" "}
+                  Your Account verfied please click here to login{" "}
+                  <Link to="/login  ">Login</Link>
+                </h5>
+              ) : (
+                <div>
+                  <p className="fw-bold">
+                    {serverError && <Error>{serverError}</Error>}
+                  </p>
+                  <br />
+                  {serverError && (
+                    <p className="text-center">Please contact your admin</p>
+                  )}
+                </div>
+              )}
+              {isLoading ? (
+                <div className="d-grid gap-2 mt-4">
+                  <h5> Please wait your account is verfication in process </h5>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </LoginStyled>
   );
 };

@@ -4,11 +4,10 @@ import React, { useEffect, useState } from "react";
 import Title from "../Title";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
 import { getBaseURL } from "../../util/ulrUtil";
-import { getImagePath } from "../../util/commonUtil";
+import { getDummyImage, getImagePath } from "../../util/commonUtil";
 
 // Styles
 import { PageBannerStyled } from "../StyledComponents/Styled-PageBanner";
-
 
 const Banner = ({ getBannerAPIURL, bannerState, pageLoadServiceName }) => {
   const [bannerdata, setBannerData] = useState([]);
@@ -70,7 +69,9 @@ const Banner = ({ getBannerAPIURL, bannerState, pageLoadServiceName }) => {
           )}
         </div>
         <img
-          src={bannerdata.path ? getImagePath(bannerdata.path) : ""}
+          src={
+            bannerdata?.path ? getImagePath(bannerdata.path) : getDummyImage()
+          }
           alt={bannerdata.alternitivetext}
           className="w-100"
         />

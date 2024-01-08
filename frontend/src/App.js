@@ -25,8 +25,8 @@ import Careers from "./Frontend/Pages/Careers";
 import CareerDetails from "./Frontend/Pages/career-details";
 import Contact from "./Frontend/Pages/Contact";
 import TestimonialsList from "./Frontend/Pages/TestimonialsList";
-import ClientsList from './Frontend/Pages/ClientsList'
-import CaseStudies from './Frontend/Pages/CaseStudies'
+import ClientsList from "./Frontend/Pages/ClientsList";
+import CaseStudies from "./Frontend/Pages/CaseStudies";
 import ProtectedRoute from "./Frontend/Components/ProtectedRoute";
 import ProjectTabs from "./Frontend/Components/ProjectsTabs/ProjecTabs";
 import NewsAndUpdates from "./Frontend/Pages/NewsAndUpdates";
@@ -118,9 +118,9 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/about" element={<About />} />
-          <Route exact path="/projects" element={<Projects />} />
-          <Route exact path="/project-details" element={<ProjectTabs />} />
-          <Route exact path="/gallery" element={<ProjectGallery />} />
+            <Route exact path="/projects" element={<Projects />} />
+            <Route exact path="/project-details" element={<ProjectTabs />} />
+            <Route exact path="/gallery" element={<ProjectGallery />} />
             <Route exact path="/services" element={<Services />} />
             <Route exact path="/services/:uid/" element={<Services />} />
             <Route exact path="/careers" element={<Careers />} />
@@ -176,59 +176,59 @@ function App() {
                 </ProtectedRoute>
               }
             />
-          <Route
-            exact
-            path="/addproject"
-            element={
-              <ProtectedRoute>
-                <AddProject />{" "}
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/editproject/:id"
-            element={
-              <ProtectedRoute>
-                <AddProject />{" "}
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />{" "}
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/userAdmin"
-            element={
-              <ProtectedRoute>
-                <UserAdmin />{" "}
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/adminNews"
-            element={
-              <ProtectedRoute>
-                {" "}
-                <AdminNews />{" "}
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/testimonial"
-            element={
-              <ProtectedRoute>
-                {" "}
-                <AdminTestimonial />
+            <Route
+              exact
+              path="/addproject"
+              element={
+                <ProtectedRoute>
+                  <AddProject />{" "}
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/editproject/:id"
+              element={
+                <ProtectedRoute>
+                  <AddProject />{" "}
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />{" "}
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/userAdmin"
+              element={
+                <ProtectedRoute>
+                  <UserAdmin />{" "}
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/adminNews"
+              element={
+                <ProtectedRoute>
+                  {" "}
+                  <AdminNews />{" "}
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/testimonial"
+              element={
+                <ProtectedRoute>
+                  {" "}
+                  <AdminTestimonial />
                 </ProtectedRoute>
               }
             />

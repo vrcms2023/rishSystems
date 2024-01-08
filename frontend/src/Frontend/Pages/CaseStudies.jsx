@@ -1,25 +1,28 @@
-import React, {useState, useEffect} from 'react'
-import EditIcon from '../../Common/AdminEditIcon';
-import Banner from '../../Common/Banner';
-import BriefIntroFrontend from '../../Common/BriefIntro';
-import ImageInputsForm from '../../Admin/Components/forms/ImgTitleIntoForm';
+import React, { useState, useEffect } from "react";
+import EditIcon from "../../Common/AdminEditIcon";
+import Banner from "../../Common/Banner";
+import BriefIntroFrontend from "../../Common/BriefIntro";
+import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
-import { getFormDynamicFields, imageDimensionsJson } from '../../util/dynamicFormFields';
-import useAdminLoginStatus from '../../Common/customhook/useAdminLoginStatus';
-import { axiosClientServiceApi, axiosServiceApi } from '../../util/axiosUtil';
-import { getImagePath } from '../../util/commonUtil';
-import Title from '../../Common/Title';
-import { Link } from 'react-router-dom';
-import { confirmAlert } from 'react-confirm-alert';
-import DeleteDialog from '../../Common/DeleteDialog';
-import AddEditAdminNews from "../../Admin/Components/News";
-import { toast } from 'react-toastify';
-
 import {
-  getCaseStudiesFields,
-  } from "../../util/dynamicFormFields";
-import { removeActiveClass } from '../../util/ulrUtil';
+  getFormDynamicFields,
+  imageDimensionsJson,
+} from "../../util/dynamicFormFields";
+import useAdminLoginStatus from "../../Common/customhook/useAdminLoginStatus";
+import { axiosClientServiceApi, axiosServiceApi } from "../../util/axiosUtil";
+import { getImagePath, paginationDataFormat } from "../../util/commonUtil";
+import Title from "../../Common/Title";
+import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import DeleteDialog from "../../Common/DeleteDialog";
+import AddEditAdminNews from "../../Admin/Components/News";
+import { toast } from "react-toastify";
 
+import { getCaseStudiesFields } from "../../util/dynamicFormFields";
+import { removeActiveClass } from "../../util/ulrUtil";
+import Search from "../../Common/Search";
+import CustomPagination from "../../Common/CustomPagination";
+import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 
 const TestimonialsList = () => {
   const editComponentObj = {
@@ -28,7 +31,7 @@ const TestimonialsList = () => {
     addSection: false,
     editSection: false,
   };
-  
+
   const pageType = "casestudies";
   const isAdmin = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
@@ -36,15 +39,30 @@ const TestimonialsList = () => {
   const [show, setShow] = useState(false);
   const [editCarousel, setEditCarousel] = useState({});
 
+  const [paginationData, setPaginationData] = useState({});
+  const [pageLoadResult, setPageloadResults] = useState(false);
+  const [searchQuery, setSearchquery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const setResponseData = (data) => {
+    setClientsList(
+      data.results.length > 0 ? sortCreatedDateByDesc(data.results) : [],
+    );
+    setPaginationData(paginationDataFormat(data));
+    setCurrentPage(1);
+  };
+
   const editHandler = (name, value, item) => {
     SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
     setShow(!show);
     if (item?.id) {
       setEditCarousel(item);
+    } else {
+      setEditCarousel({});
     }
     document.body.style.overflow = "hidden";
   };
-  
+
   useEffect(() => {
     const getCAseStutiesvalues = async () => {
       try {
@@ -52,7 +70,8 @@ const TestimonialsList = () => {
           `/caseStudies/clientCaseStudies/`,
         );
         if (response?.status === 200) {
-          setClientsList(response.data.caseStudies);
+          setResponseData(response.data);
+          setPageloadResults(1);
         }
       } catch (error) {
         console.log("unable to access ulr because of server is down");
@@ -63,8 +82,6 @@ const TestimonialsList = () => {
     }
   }, [componentEdit.addSection, componentEdit.editSection]);
 
-
-
   useEffect(() => {
     removeActiveClass();
     const id = document.getElementById("KnowledgeHubnavbarDropdown");
@@ -72,7 +89,6 @@ const TestimonialsList = () => {
       id.classList.add("active");
     }
   });
-
 
   const deleteAboutSection = (item) => {
     const id = item.id;
@@ -104,8 +120,8 @@ const TestimonialsList = () => {
 
   return (
     <>
-    {/* Page Banner Component */}
-    <div className="position-relative">
+      {/* Page Banner Component */}
+      <div className="position-relative">
         {isAdmin ? (
           <EditIcon editHandler={() => editHandler("banner", true)} />
         ) : (
@@ -131,7 +147,6 @@ const TestimonialsList = () => {
       ) : (
         ""
       )}
-
 
       {/* Brief Introduction */}
       {isAdmin ? (
@@ -162,6 +177,21 @@ const TestimonialsList = () => {
         <div className="row">
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
             <Title title="Case Studies" cssClass="fs-1 pageTitle" />
+          </div>
+
+          <div className="col-md-6">
+            <Search
+              setObject={setResponseData}
+              clientSearchURL={"/caseStudies/searchCaseStudies/"}
+              adminSearchURL={"/caseStudies/createCaseStudies/"}
+              clientDefaultURL={"/caseStudies/clientCaseStudies/"}
+              searchfiledDeatails={
+                "Case studies Title / Case studies description "
+              }
+              setPageloadResults={setPageloadResults}
+              setSearchquery={setSearchquery}
+              searchQuery={searchQuery}
+            />
           </div>
           {isAdmin ? (
             <div className="col-md-6">
@@ -248,7 +278,6 @@ const TestimonialsList = () => {
                       ""
                     )}
 
-                  
                     <div
                       dangerouslySetInnerHTML={{
                         __html: item.case_studies_description,
@@ -275,10 +304,35 @@ const TestimonialsList = () => {
             </p>
           )}
         </div>
+        <div>
+          {paginationData?.total_count ? (
+            <CustomPagination
+              paginationData={paginationData}
+              paginationURL={
+                isAdmin
+                  ? "/caseStudies/createCaseStudies/"
+                  : "/caseStudies/clientCaseStudies/"
+              }
+              paginationSearchURL={
+                searchQuery
+                  ? `/caseStudies/searchCaseStudies/${searchQuery}/`
+                  : isAdmin
+                  ? "/caseStudies/createCaseStudies/"
+                  : "/caseStudies/clientCaseStudies/"
+              }
+              searchQuery={searchQuery}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+              setResponseData={setResponseData}
+              pageLoadResult={pageLoadResult}
+            />
+          ) : (
+            ""
+          )}
+        </div>
       </div>
-      
     </>
-  )
-}
+  );
+};
 
-export default TestimonialsList
+export default TestimonialsList;

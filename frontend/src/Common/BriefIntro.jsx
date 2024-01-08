@@ -31,31 +31,31 @@ const BriefIntroFrontend = ({ pageType, introState }) => {
     <div className="container-fluid">
       <div className="row">
         <BriefIntroStyled>
-        <div className=" briefIntro">
-          <div className="col-md-10 offset-md-1 py-2 py-md-4 ">
-            {introValue.intro_title === "" ? (
-              ""
-            ) : (
-              <Title
-                title={introValue.intro_title}
-                cssClass="mb-0 fw-bold fs-2 text-center"
-              />
-            )}
-            {introValue.subTitle === "" ? (
-              ""
-            ) : (
-              <Title
-                title={introValue.subTitle}
-                cssClass="mb-3 fw-bold text-secondary text-center"
-              />
-            )}
-            <p className="text-center lh-md m-0 fw-medium">
-              {introValue.intro_desc
-                ? introValue.intro_desc
-                : "Please Update Brief Intro"}
-            </p>
+          <div className=" briefIntro">
+            <div className="col-md-10 offset-md-1 py-2 py-md-4 ">
+              {introValue.intro_title === "" ? (
+                ""
+              ) : (
+                <Title
+                  title={introValue.intro_title}
+                  cssClass="mb-0 fw-bold fs-2 text-center"
+                />
+              )}
+              {introValue.subTitle === "" ? (
+                ""
+              ) : (
+                <Title
+                  title={introValue.subTitle}
+                  cssClass="mb-3 fw-bold text-secondary text-center"
+                />
+              )}
+              <p className="text-center lh-md m-0 fw-medium">
+                {introValue.intro_desc
+                  ? introValue.intro_desc
+                  : "Please Update Brief Intro"}
+              </p>
+            </div>
           </div>
-        </div>
         </BriefIntroStyled>
       </div>
     </div>

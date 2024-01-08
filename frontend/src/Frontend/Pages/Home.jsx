@@ -22,16 +22,15 @@ const Home = () => {
 
   useEffect(() => {
     const getTestimonial = async () => {
-
-      try{
-          const response = await axiosClientServiceApi.get(
-            `/testimonials/clientTestimonials/`,
-          );
-          if (response?.status == 200) {
-            setTestmonis(response.data.testimonial);
-          }
-      } catch(e){
-        console.log("unable to access ulr because of server is down")
+      try {
+        const response = await axiosClientServiceApi.get(
+          `/testimonials/clientTestimonials/`,
+        );
+        if (response?.status == 200) {
+          setTestmonis(response.data.testimonial);
+        }
+      } catch (e) {
+        console.log("unable to access ulr because of server is down");
       }
     };
     getTestimonial();

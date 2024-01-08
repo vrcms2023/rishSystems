@@ -60,7 +60,6 @@ const Footer = () => {
   }, [footerData]);
 
   const showModel = (type) => {
-
     if (type === "PP") {
       setTermsAndConditionData({
         title: "Privacy Polacy",

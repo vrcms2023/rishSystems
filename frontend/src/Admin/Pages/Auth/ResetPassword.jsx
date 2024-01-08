@@ -43,51 +43,54 @@ const ResetPassword = () => {
 
   return (
     <LoginStyled>
-    <div className="login">
-      <div className="bg-white d-flex justify-content-center align-items-center flex-column">
-        <div className="container">
-          <div className="d-flex flex-column justify-content-center align-items-center">
-            <form onSubmit={handleSubmit(resetPassword)} className="shadow-lg">
-              {serverError ? (
-                <p className="fw-bold">
-                  {serverError && <Error>{serverError}</Error>}
-                </p>
-              ) : (
-                ""
-              )}
-              <Title
-                title="Reset Password"
-                cssClass="text-center text-dark mb-4 fw-bold fs-4"
-              />
-              {success ? (
-                <div>Email sent to your resgister email id please check</div>
-              ) : (
-                <>
-                  <input
-                    type="text"
-                    {...register("email")}
-                    name="email"
-                    onChange={inputHandler}
-                    className="form-control bg-light"
-                    id="userName"
-                    aria-describedby="emailHelp"
-                  />
-
-                  <div className="d-grid gap-2 mt-4">
-                    <Button
-                      type="submit"
-                      cssClass="btn btn-lg btn-primary"
-                      handlerChange={loginHandler}
-                      label="Reset Password"
+      <div className="login">
+        <div className="bg-white d-flex justify-content-center align-items-center flex-column">
+          <div className="container">
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <form
+                onSubmit={handleSubmit(resetPassword)}
+                className="shadow-lg"
+              >
+                {serverError ? (
+                  <p className="fw-bold">
+                    {serverError && <Error>{serverError}</Error>}
+                  </p>
+                ) : (
+                  ""
+                )}
+                <Title
+                  title="Reset Password"
+                  cssClass="text-center text-dark mb-4 fw-bold fs-4"
+                />
+                {success ? (
+                  <div>Email sent to your resgister email id please check</div>
+                ) : (
+                  <>
+                    <input
+                      type="text"
+                      {...register("email")}
+                      name="email"
+                      onChange={inputHandler}
+                      className="form-control bg-light"
+                      id="userName"
+                      aria-describedby="emailHelp"
                     />
-                  </div>
-                </>
-              )}
-            </form>
+
+                    <div className="d-grid gap-2 mt-4">
+                      <Button
+                        type="submit"
+                        cssClass="btn btn-lg btn-primary"
+                        handlerChange={loginHandler}
+                        label="Reset Password"
+                      />
+                    </div>
+                  </>
+                )}
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </LoginStyled>
   );
 };

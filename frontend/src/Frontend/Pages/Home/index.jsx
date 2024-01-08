@@ -65,7 +65,7 @@ const Home = () => {
           `/testimonials/clientTestimonials/`,
         );
         if (response?.status === 200) {
-          setTestmonis(response.data.testimonial);
+          setTestmonis(response.data.results);
         }
       } catch (e) {
         console.log("unable to access ulr because of server is down");
@@ -122,10 +122,13 @@ const Home = () => {
             pageType="Home"
           />
           <div className="d-flex justify-content-center align-items-center">
-          <Ancher AncherLabel="Know More About" Ancherpath="/about" AncherClass="btn btn-outline d-flex justify-content-center align-items-center gap-3" AnchersvgColor="#17427C" />
-          
+            <Ancher
+              AncherLabel="Know More About"
+              Ancherpath="/about"
+              AncherClass="btn btn-outline d-flex justify-content-center align-items-center gap-3"
+              AnchersvgColor="#17427C"
+            />
           </div>
-          
         </div>
 
         {componentEdit.briefIntro ? (
@@ -168,13 +171,12 @@ const Home = () => {
           </div>
 
           <div className="col-md-4 p-5 testimonials text-center">
+            testmonial
             {isAdmin ? (
               <EditIcon editHandler={() => editHandler("testmonial", true)} />
             ) : (
               ""
             )}
-
-
             {/* Testimonials */}
             {testimonis.length < 1 ? (
               (testimonis.length, "Current No Testimonials Found")
@@ -185,12 +187,11 @@ const Home = () => {
             ) : (
               ""
             )}
-
-            {/* {testimonis.length > 0 ? (
+            {testimonis.length > 0 ? (
               <Testimonials testimonis={testimonis} />
             ) : (
               ""
-            )} */}
+            )}
           </div>
         </div>
 
@@ -205,19 +206,23 @@ const Home = () => {
             </div>
           </div>
         </div>
-        
 
         {/* HOME Careers */}
         <div className="row homeCareers py-5">
-        <div className="col-lg-6"></div>
-        <div className="col-md-12 col-lg-6 pe-lg-5">
+          <div className="col-lg-6"></div>
+          <div className="col-md-12 col-lg-6 pe-lg-5">
             <BriefIntroFrontend
-            introState={componentEdit.briefIntro}
-            pageType="careers"
-          />
-          <div className="bg-white px-5 pb-4 d-flex justify-content-center align-items-center">
-            <Ancher AncherLabel="Careers" Ancherpath="/careers" AncherClass="btn btn-primary d-flex justify-content-center align-items-center gap-3 w-50" AnchersvgColor="#ffffff" />
-          </div>
+              introState={componentEdit.briefIntro}
+              pageType="careers"
+            />
+            <div className="bg-white px-5 pb-4 d-flex justify-content-center align-items-center">
+              <Ancher
+                AncherLabel="Careers"
+                Ancherpath="/careers"
+                AncherClass="btn btn-primary d-flex justify-content-center align-items-center gap-3 w-50"
+                AnchersvgColor="#ffffff"
+              />
+            </div>
           </div>
         </div>
       </div>

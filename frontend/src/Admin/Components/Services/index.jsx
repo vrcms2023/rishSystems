@@ -17,14 +17,20 @@ import { sortByCreatedDate } from "../../../util/dataFormatUtil";
 import { storeServiceMenuValueinCookie } from "../../../util/commonUtil";
 import { getServiceValues } from "../../../features/services/serviceActions";
 
-const AddService = ({ setSelectedServiceProject, selectedServiceProject,pageType }) => {
+const AddService = ({
+  setSelectedServiceProject,
+  selectedServiceProject,
+  pageType,
+}) => {
   const [serviceName, setServiceName] = useState("");
   const [error, setError] = useState("");
   const [serviceList, setServiceList] = useState([]);
   const [editServiceObject, setEditServiceObject] = useState("");
   const [userName, setUserName] = useState("");
   const onPageLoadAction = useRef(true);
-  const { serviceMenu, serviceerror } = useSelector((state) => state.serviceMenu);
+  const { serviceMenu, serviceerror } = useSelector(
+    (state) => state.serviceMenu,
+  );
   const dispatch = useDispatch();
 
   const onChangeHandler = (event) => {
@@ -55,7 +61,7 @@ const AddService = ({ setSelectedServiceProject, selectedServiceProject,pageType
     let data = {
       services_page_title: serviceName,
       created_by: userName,
-      pageType:pageType,
+      pageType: pageType,
       publish: editServiceObject.publish ? true : false,
     };
     try {
@@ -106,17 +112,16 @@ const AddService = ({ setSelectedServiceProject, selectedServiceProject,pageType
    *  get Service list on page load
    */
   useEffect(() => {
-    if(serviceMenu?.length === 0 && onPageLoadAction.current){
-      onPageLoadAction.current = false
+    if (serviceMenu?.length === 0 && onPageLoadAction.current) {
+      onPageLoadAction.current = false;
       dispatch(getServiceValues());
-    } else if(serviceMenu){
+    } else if (serviceMenu) {
       setServiceList(serviceMenu);
     }
-    if(serviceMenu?.length === 0 ){
+    if (serviceMenu?.length === 0) {
       removeCookie("pageLoadServiceID");
       removeCookie("pageLoadServiceName");
     }
-    
   }, [serviceMenu]);
 
   const publishService = async (item) => {

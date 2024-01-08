@@ -26,7 +26,8 @@ export const ServicesStyled = styled.div`
             margin: 40px 25px;
 
             li {
-                border-bottom: 1px solid color: ${({ theme }) => theme.lightgray};
+                border-bottom: 1px solid color: ${({ theme }) =>
+                  theme.lightgray};
                 padding: 7px;
               }
         }
@@ -76,8 +77,8 @@ export const ServicesStyled = styled.div`
       }
 
       .servicePageLinks {
-        background-color: ${({ theme }) => theme.white  };
+        background-color: ${({ theme }) => theme.white};
       }
 
       
-`
+`;
