@@ -292,5 +292,9 @@ body {
           max-height: 300px;
         }
     }
-
+    .error {
+      color: ${({ theme }) => theme.error};
+      text-align: center;
+      margin: 0.5rem 0
+    }
 `;

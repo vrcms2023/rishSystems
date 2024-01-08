@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin, getUser } from "../../../features/auth/authActions";
+
+
 import Title from "../../../Common/Title";
 import Button from "../../../Common/Button";
-import { Link, useNavigate } from "react-router-dom";
 import Error from "../../Components/Error";
 import {
   removeAllCookies,
@@ -12,10 +14,11 @@ import {
   setCookie,
   getCookie,
 } from "../../../util/cookieUtil";
-
-import "./Login.css";
-import { toast } from "react-toastify";
+import { userLogin, getUser } from "../../../features/auth/authActions";
 import CSRFToken from "../../../Frontend/Components/CRSFToken";
+
+// CSS Styles
+import { LoginStyled } from "../../../Common/StyledComponents/Styled-Login";
 
 const Login = () => {
   const { access, userInfo, error } = useSelector((state) => state.auth);
@@ -56,8 +59,16 @@ const Login = () => {
   const loginHandler = () => {};
 
   return (
+    <LoginStyled>
+      
+      <div className="text-center">
+        <button className="btn btn-secondary mt-4" onClick={() => navigate("/")}>
+              Back to Home
+        </button>
+      </div>
     <div className="login">
-      <div className="bg-white d-flex justify-content-center align-items-center flex-column">
+      
+      <div className="d-flex justify-content-center align-items-center flex-column">
         <form onSubmit={handleSubmit(submitForm)} className="shadow-lg">
           <CSRFToken />
           {error ? (
@@ -116,23 +127,25 @@ const Login = () => {
               label="Login"
             />
           </div>
-          <div className="mt-3">
-            Don't have an account ? <Link to="/register">Sign Up </Link>
-          </div>
-          <div className="mt-3">
-            Forgot your Password ?{" "}
-            <Link to="/reset_password  ">Reset Password </Link>
-          </div>
-          <div className="mt-3">
-            Not Activate your account ?{" "}
-            <Link to="/resend_activation">Activate</Link>
+          
+          <div className="my-4 d-flex flex-column gap-1 loginLinks">
+            <div className="">
+              <small>Don't have an account ? <Link to="/register" className="">Sign Up </Link></small>
+            </div>
+            <div className="">
+            <small>Forgot your Password ?{" "}
+              <Link to="/reset_password  ">Reset Password </Link></small>
+            </div>
+            <div className="">
+            <small>Not Activate your account ?{" "}
+              <Link to="/resend_activation">Activate</Link></small>
+            </div>
           </div>
         </form>
-        <button className="btn btn-secondary" onClick={() => navigate("/")}>
-          Back to Rishsystems
-        </button>
+        
       </div>
     </div>
+    </LoginStyled>
   );
 };
 

@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../../features/auth/authSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { LoginStyled } from "../../../Common/StyledComponents/Styled-Login";
 
 const ChangePassword = () => {
   const { register, handleSubmit } = useForm();
@@ -55,6 +56,7 @@ const ChangePassword = () => {
   };
 
   return (
+    <LoginStyled>
     <div className="login">
       <div className="bg-white d-flex justify-content-center align-items-center flex-column">
         <div className="container">
@@ -175,6 +177,7 @@ const ChangePassword = () => {
         </div>
       </div>
     </div>
+    </LoginStyled>
   );
 };
 
