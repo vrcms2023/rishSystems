@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { confirmAlert } from "react-confirm-alert";
 
 // Components
 import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
@@ -10,6 +12,8 @@ import Banner from "../../Common/Banner";
 import Title from "../../Common/Title";
 import BriefIntroFrontend from "../../Common/BriefIntro";
 import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
+
+import DeleteDialog from "../../Common/DeleteDialog";
 import AddService from "../../Admin/Components/Services";
 import AddEditAdminNews from "../../Admin/Components/News";
 import { getReactHostDetils, removeActiveClass } from "../../util/ulrUtil";
@@ -20,14 +24,11 @@ import {
 } from "../../util/dynamicFormFields";
 import { axiosClientServiceApi, axiosServiceApi } from "../../util/axiosUtil";
 import { getImagePath, urlStringFormat, TitleStringFormat } from "../../util/commonUtil";
-
-// CSS Imports
-import "./services.css";
-import { toast } from "react-toastify";
-import { confirmAlert } from "react-confirm-alert";
-import DeleteDialog from "../../Common/DeleteDialog";
 import { sortByCreatedDate } from "../../util/dataFormatUtil";
 import { getCookie, removeCookie } from "../../util/cookieUtil";
+
+// CSS Imports
+import { ServicesStyled } from "../../Common/StyledComponents/Styled-Services";
 
 const Services = () => {
   const editComponentObj = {
@@ -191,6 +192,7 @@ const Services = () => {
 
       {/* End Of Page Banner Component */}
 
+      <ServicesStyled>
       {/* Introduction */}
       {isAdmin ? (
         <EditIcon editHandler={() => editHandler("briefIntro", true)} />
@@ -216,7 +218,7 @@ const Services = () => {
 
       {/* End Of Introduction */}
 
-      {/* Add News Service Page */}
+      {/* Add Service Page */}
       {isAdmin ? (
         <AddService
           setSelectedServiceProject={setSelectedServiceProject}
@@ -226,7 +228,7 @@ const Services = () => {
       ) : (
         ""
       )}
-      {/* End of Add News Service Page */}
+      {/* End of Add Service Page */}
 
       <div className="container my-md-5 py-md-4 servicesPage" id="servicesPage">
         {isAdmin && selectedServiceProject?.id ? (
@@ -343,6 +345,7 @@ const Services = () => {
           </div>
         ))}
       </div>
+      </ServicesStyled>
 
       {show && <ModelBg />}
     </>
