@@ -297,4 +297,15 @@ body {
       text-align: center;
       margin: 0.5rem 0
     }
+
+
+    .page-link {
+      color: ${({ theme }) => theme.primaryColor} !important;
+    }
+
+    .active>.page-link, .page-link.active {
+      background-color: ${({ theme }) => theme.primaryColor} !important; 
+      color: ${({ theme }) => theme.white} !important;
+      border-color: ${({ theme }) => theme.primaryColor} !important;
+    }
 `;
