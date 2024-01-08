@@ -8,12 +8,15 @@ import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
 import EditIcon from "../../Common/AdminEditIcon";
 import ModelBg from "../../Common/ModelBg";
 import Banner from "../../Common/Banner";
+import CustomPagination from "../../Common/CustomPagination";
 
 import { removeActiveClass } from "../../util/ulrUtil";
 import {
   getFormDynamicFields,
   imageDimensionsJson,
 } from "../../util/dynamicFormFields";
+import { paginationDataFormat } from "../../util/commonUtil";
+import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 
 // Images Imports
@@ -23,11 +26,6 @@ import Search from "../../Common/Search";
 // Styles
 import JobPost from "../Components/JobPost";
 import JobPostFrom from "../../Admin/Components/forms/JobpostForm";
-
-import CustomPagination from "../../Common/CustomPagination";
-import { paginationDataFormat } from "../../util/commonUtil";
-import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
-
 import { CareersPageStyled } from "../../Common/StyledComponents/Styled-CareersPage";
 
 

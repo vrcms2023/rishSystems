@@ -34,7 +34,7 @@ const CustomPagination = ({ paginationData, paginationURL, paginationSearchURL, 
 
     return(
         <nav aria-label="Page navigation example">
-            <ul className="pagination justify-content-center">
+            <ul className="pagination justify-content-end">
                 <li className={`page-item ${previous_url ? '' : 'disabled'}`}>
                     <Link to={'#'}  onClick={() => getSelectedPageData(currentPage-1)} className="page-link" tabIndex="-1">Previous</Link>
                 </li>
