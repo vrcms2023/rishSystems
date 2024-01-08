@@ -4,6 +4,7 @@ import Banner from "../../Common/Banner";
 import BriefIntroFrontend from "../../Common/BriefIntro";
 import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
+import Ancher from '../../Common/Ancher';
 import {
   getFormDynamicFields,
   imageDimensionsJson,
@@ -17,7 +18,6 @@ import { confirmAlert } from "react-confirm-alert";
 import DeleteDialog from "../../Common/DeleteDialog";
 import AddEditAdminNews from "../../Admin/Components/News";
 import { toast } from "react-toastify";
-
 import { getCaseStudiesFields } from "../../util/dynamicFormFields";
 import { removeActiveClass } from "../../util/ulrUtil";
 import Search from "../../Common/Search";
