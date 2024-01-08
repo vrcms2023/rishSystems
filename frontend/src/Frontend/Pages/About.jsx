@@ -61,7 +61,7 @@ const About = () => {
     setShow(!show);
     if (item?.id) {
       setEditCarousel(item);
-    }else {
+    } else {
       setEditCarousel({});
     }
     document.body.style.overflow = "hidden";

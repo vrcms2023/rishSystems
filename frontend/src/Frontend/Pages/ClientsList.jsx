@@ -45,14 +45,12 @@ const TestimonialsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const setResponseData = (data) => {
-    
     setClientsList(
       data.results.length > 0 ? sortCreatedDateByDesc(data.results) : [],
     );
     setPaginationData(paginationDataFormat(data));
     setCurrentPage(1);
   };
-
 
   useEffect(() => {
     const getCAseStutiesvalues = async () => {
@@ -61,7 +59,7 @@ const TestimonialsList = () => {
           `/client/getAllClientLogos/`,
         );
         if (response?.status === 200) {
-          setResponseData(response.data)
+          setResponseData(response.data);
         }
       } catch (error) {
         console.log("unable to access ulr because of server is down");
@@ -84,7 +82,7 @@ const TestimonialsList = () => {
     setShow(!show);
     if (item?.id) {
       setEditCarousel(item);
-    }else {
+    } else {
       setEditCarousel({});
     }
     document.body.style.overflow = "hidden";
@@ -178,19 +176,19 @@ const TestimonialsList = () => {
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
             <Title title="Clients" cssClass="fs-1 pageTitle" />
           </div>
-          
+
           <div className="col-md-6">
-                <Search
-                  setObject={setResponseData}
-                  clientSearchURL={"/client/searchClientLogos/"}
-                  adminSearchURL={"/client/createClientLogo/"}
-                  clientDefaultURL={"/client/getAllClientLogos/"}
-                  searchfiledDeatails={"client Title / client description "}
-                  setPageloadResults={setPageloadResults}
-                  setSearchquery={setSearchquery}
-                  searchQuery={searchQuery}
-                />
-              </div>
+            <Search
+              setObject={setResponseData}
+              clientSearchURL={"/client/searchClientLogos/"}
+              adminSearchURL={"/client/createClientLogo/"}
+              clientDefaultURL={"/client/getAllClientLogos/"}
+              searchfiledDeatails={"client Title / client description "}
+              setPageloadResults={setPageloadResults}
+              setSearchquery={setSearchquery}
+              searchQuery={searchQuery}
+            />
+          </div>
           {isAdmin ? (
             <div className="col-md-6">
               <div className="d-flex justify-content-end align-items-center mb-3">
@@ -198,7 +196,7 @@ const TestimonialsList = () => {
                 <button
                   type="submit"
                   className="btn btn-primary px-3"
-                  onClick={() => editHandler("addSection", true,{})}
+                  onClick={() => editHandler("addSection", true, {})}
                 >
                   {" "}
                   <i className="fa fa-plus" aria-hidden="true"></i>
@@ -303,29 +301,29 @@ const TestimonialsList = () => {
           )}
         </div>
         {paginationData?.total_count ? (
-                  <CustomPagination
-                    paginationData={paginationData}
-                    paginationURL={
-                      isAdmin
-                        ? "/client/createClientLogo/"
-                        : "/client/getAllClientLogos/"
-                    }
-                    paginationSearchURL={
-                      searchQuery
-                        ? `/client/searchClientLogos/${searchQuery}/`
-                        : isAdmin
-                        ? "/client/createClientLogo/"
-                        : "/client/getAllClientLogos/"
-                    }
-                    searchQuery={searchQuery}
-                    setCurrentPage={setCurrentPage}
-                    currentPage={currentPage}
-                    setResponseData={setResponseData}
-                    pageLoadResult={pageLoadResult}
-                  />
-                ) : (
-                  ""
-                )}
+          <CustomPagination
+            paginationData={paginationData}
+            paginationURL={
+              isAdmin
+                ? "/client/createClientLogo/"
+                : "/client/getAllClientLogos/"
+            }
+            paginationSearchURL={
+              searchQuery
+                ? `/client/searchClientLogos/${searchQuery}/`
+                : isAdmin
+                ? "/client/createClientLogo/"
+                : "/client/getAllClientLogos/"
+            }
+            searchQuery={searchQuery}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+            setResponseData={setResponseData}
+            pageLoadResult={pageLoadResult}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </>
   );

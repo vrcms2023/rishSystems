@@ -44,7 +44,6 @@ const TestimonialsList = () => {
   const [searchQuery, setSearchquery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  
   const setResponseData = (data) => {
     setClientsList(
       data.results.length > 0 ? sortCreatedDateByDesc(data.results) : [],
@@ -58,7 +57,7 @@ const TestimonialsList = () => {
     setShow(!show);
     if (item?.id) {
       setEditCarousel(item);
-    }else {
+    } else {
       setEditCarousel({});
     }
     document.body.style.overflow = "hidden";
@@ -72,7 +71,7 @@ const TestimonialsList = () => {
         );
         if (response?.status === 200) {
           setResponseData(response.data);
-          setPageloadResults(1)
+          setPageloadResults(1);
         }
       } catch (error) {
         console.log("unable to access ulr because of server is down");
@@ -179,19 +178,21 @@ const TestimonialsList = () => {
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
             <Title title="Case Studies" cssClass="fs-1 pageTitle" />
           </div>
-        
+
           <div className="col-md-6">
-                <Search
-                  setObject={setResponseData}
-                  clientSearchURL={"/caseStudies/searchCaseStudies/"}
-                  adminSearchURL={"/caseStudies/createCaseStudies/"}
-                  clientDefaultURL={"/caseStudies/clientCaseStudies/"}
-                  searchfiledDeatails={"Case studies Title / Case studies description "}
-                  setPageloadResults={setPageloadResults}
-                  setSearchquery={setSearchquery}
-                  searchQuery={searchQuery}
-                />
-              </div>
+            <Search
+              setObject={setResponseData}
+              clientSearchURL={"/caseStudies/searchCaseStudies/"}
+              adminSearchURL={"/caseStudies/createCaseStudies/"}
+              clientDefaultURL={"/caseStudies/clientCaseStudies/"}
+              searchfiledDeatails={
+                "Case studies Title / Case studies description "
+              }
+              setPageloadResults={setPageloadResults}
+              setSearchquery={setSearchquery}
+              searchQuery={searchQuery}
+            />
+          </div>
           {isAdmin ? (
             <div className="col-md-6">
               <div className="d-flex justify-content-end align-items-center mb-3">
@@ -305,30 +306,30 @@ const TestimonialsList = () => {
         </div>
         <div>
           {paginationData?.total_count ? (
-                  <CustomPagination
-                    paginationData={paginationData}
-                    paginationURL={
-                      isAdmin
-                        ? "/caseStudies/createCaseStudies/"
-                        : "/caseStudies/clientCaseStudies/"
-                    }
-                    paginationSearchURL={
-                      searchQuery
-                        ? `/caseStudies/searchCaseStudies/${searchQuery}/`
-                        : isAdmin
-                        ? "/caseStudies/createCaseStudies/"
-                        : "/caseStudies/clientCaseStudies/"
-                    }
-                    searchQuery={searchQuery}
-                    setCurrentPage={setCurrentPage}
-                    currentPage={currentPage}
-                    setResponseData={setResponseData}
-                    pageLoadResult={pageLoadResult}
-                  />
-                ) : (
-                  ""
-                )}
-              </div>
+            <CustomPagination
+              paginationData={paginationData}
+              paginationURL={
+                isAdmin
+                  ? "/caseStudies/createCaseStudies/"
+                  : "/caseStudies/clientCaseStudies/"
+              }
+              paginationSearchURL={
+                searchQuery
+                  ? `/caseStudies/searchCaseStudies/${searchQuery}/`
+                  : isAdmin
+                  ? "/caseStudies/createCaseStudies/"
+                  : "/caseStudies/clientCaseStudies/"
+              }
+              searchQuery={searchQuery}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+              setResponseData={setResponseData}
+              pageLoadResult={pageLoadResult}
+            />
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </>
   );

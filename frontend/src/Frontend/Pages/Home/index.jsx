@@ -171,13 +171,12 @@ const Home = () => {
           </div>
 
           <div className="col-md-4 p-5 testimonials text-center">
-          testmonial
+            testmonial
             {isAdmin ? (
               <EditIcon editHandler={() => editHandler("testmonial", true)} />
             ) : (
               ""
             )}
-
             {/* Testimonials */}
             {testimonis.length < 1 ? (
               (testimonis.length, "Current No Testimonials Found")
@@ -188,7 +187,6 @@ const Home = () => {
             ) : (
               ""
             )}
-
             {testimonis.length > 0 ? (
               <Testimonials testimonis={testimonis} />
             ) : (
