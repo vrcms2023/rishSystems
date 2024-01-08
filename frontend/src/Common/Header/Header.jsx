@@ -47,7 +47,9 @@ const Header = () => {
   const [userName, setUserName] = useState("");
   const [loginState, setLoginState] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
-  const { serviceMenu, serviceerror } = useSelector((state) => state.serviceMenu);
+  const { serviceMenu, serviceerror } = useSelector(
+    (state) => state.serviceMenu,
+  );
   const dispatch = useDispatch();
   const onPageLoadAction = useRef(true);
 
@@ -85,17 +87,17 @@ const Header = () => {
     document.body.style.overflow = "hidden";
   };
 
-  useEffect(()=>{
-    if(serviceMenu.length === 0 && onPageLoadAction.current){
-      onPageLoadAction.current = false
-      dispatch(getServiceValues())
-    }else {
-      setServiceMenuList(serviceMenu)
+  useEffect(() => {
+    if (serviceMenu.length === 0 && onPageLoadAction.current) {
+      onPageLoadAction.current = false;
+      dispatch(getServiceValues());
+    } else {
+      setServiceMenuList(serviceMenu);
       if (!getCookie("pageLoadServiceName") && serviceMenu.length > 0) {
         storeServiceMenuValueinCookie(serviceMenu[0]);
       }
     }
-  },[serviceMenu])
+  }, [serviceMenu]);
 
   useEffect(() => {
     if (userInfo || getCookie("access")) {
@@ -286,15 +288,18 @@ export const ClientMenu = ({ serviceMenuList }) => {
           >
             Services
           </NavLink>
-          <ul className="dropdown-menu" aria-labelledby="ServicesnavbarDropdown">
-             {}
+          <ul
+            className="dropdown-menu"
+            aria-labelledby="ServicesnavbarDropdown"
+          >
+            {}
             {serviceMenuList.length === 0 && isAdmin ? (
               <li>
                 <Link to="/services/" className="dropdown-item">
                   Add New Service
                 </Link>
               </li>
-            ) : ( 
+            ) : (
               serviceMenuList &&
               serviceMenuList.map((item) => (
                 <li key={item.id}>
@@ -311,10 +316,10 @@ export const ClientMenu = ({ serviceMenuList }) => {
                   </Link>
                 </li>
               ))
-             )} 
+            )}
           </ul>
         </li>
-        
+
         <li className="nav-item dropdown">
           <NavLink
             id="KnowledgeHubnavbarDropdown"
@@ -330,17 +335,20 @@ export const ClientMenu = ({ serviceMenuList }) => {
           >
             Clients
           </NavLink>
-          <ul className="dropdown-menu" aria-labelledby="KnowledgeHubnavbarDropdown">
+          <ul
+            className="dropdown-menu"
+            aria-labelledby="KnowledgeHubnavbarDropdown"
+          >
             <li>
               <Link to="/casestudies" className="dropdown-item">
                 Case Studies
               </Link>
-              </li>
+            </li>
             <li>
               <Link to="/clients" className="dropdown-item">
                 Client List
               </Link>
-              </li>
+            </li>
             <li>
               <Link to="/news" className="dropdown-item">
                 News
@@ -362,7 +370,6 @@ export const ClientMenu = ({ serviceMenuList }) => {
           >
             Careers
           </NavLink>
-          
         </li>
         <li className="nav-item">
           <NavLink
@@ -384,7 +391,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
             Gallery
           </NavLink>
         </li>
-        
+
         <li className="nav-item">
           <NavLink
             to="/contact"
@@ -397,21 +404,24 @@ export const ClientMenu = ({ serviceMenuList }) => {
         </li>
         {isAdmin ? (
           <li className="nav-item dropdown">
-          <NavLink
-            id="AdminSettingnavbarDropdown"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            role="button"
-            to="khub"
-            className={({ isActive }) =>
-            isActive
-            ? "nav-Link dropdown-toggle isChildAvailable active"
-            : "nav-Link dropdown-toggle isChildAvailable"
-          }
-          >
-            Admin Settings
-          </NavLink>
-          <ul className="dropdown-menu" aria-labelledby="AdminSettingnavbarDropdown">
+            <NavLink
+              id="AdminSettingnavbarDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              role="button"
+              to="khub"
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-Link dropdown-toggle isChildAvailable active"
+                  : "nav-Link dropdown-toggle isChildAvailable"
+              }
+            >
+              Admin Settings
+            </NavLink>
+            <ul
+              className="dropdown-menu"
+              aria-labelledby="AdminSettingnavbarDropdown"
+            >
               <li>
                 <Link to="/contactUSList" className="dropdown-item">
                   Contact List
@@ -430,7 +440,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
                 </Link>
               </li>
             </ul>
-        </li>
+          </li>
         ) : (
           ""
         )}

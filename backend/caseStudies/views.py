@@ -6,6 +6,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from django.http import Http404
+from django.db.models import Q
+from common.CustomPagination import CustomPagination
+from common.utility import get_custom_paginated_data
 
 # Create your views here.
  
@@ -13,6 +16,7 @@ class CreateCaseStudies(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = CaseStudies.objects.all()
     serializer_class = CaseStudiesSerializer
+    pagination_class = CustomPagination
 
     """
     List all App news, or create a new App News.
@@ -20,6 +24,10 @@ class CreateCaseStudies(generics.CreateAPIView):
 
     def get(self, request, format=None):
         snippets = CaseStudies.objects.all()
+        results = get_custom_paginated_data(self, snippets)
+        if results is not None:
+            return results
+
         serializer = CaseStudiesSerializer(snippets, many=True)
         return Response({"caseStudies": serializer.data}, status=status.HTTP_200_OK)
     
@@ -65,6 +73,7 @@ class ClientViewCaseStudies(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
     queryset = CaseStudies.objects.all()
     serializer_class = CaseStudiesSerializer
+    pagination_class = CustomPagination
 
     """
     List all App news, or create a new App News.
@@ -72,6 +81,31 @@ class ClientViewCaseStudies(generics.CreateAPIView):
 
     def get(self, request, format=None):
         snippets = CaseStudies.objects.all()
+        results = get_custom_paginated_data(self, snippets)
+        if results is not None:
+            return results
+
         serializer = CaseStudiesSerializer(snippets, many=True)
         return Response({"caseStudies": serializer.data}, status=status.HTTP_200_OK)
     
+class CaseStudiesSearchAPIView(generics.ListAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = CaseStudiesSerializer
+    pagination_class = CustomPagination
+  
+    def get_object(self, query):
+        try:
+            return CaseStudies.objects.filter(
+                Q(case_studies_title__icontains=query) | Q(case_studies_description__icontains=query)
+            )
+        except CaseStudies.DoesNotExist:
+            raise Http404
+
+    def get(self, request, query, format=None):
+        snippet = self.get_object(query)
+        results = get_custom_paginated_data(self, snippet)
+        if results is not None:
+            return results
+
+        serializer = CaseStudiesSerializer(snippet, many=True)
+        return Response({"caseStudies": serializer.data}, status=status.HTTP_200_OK)

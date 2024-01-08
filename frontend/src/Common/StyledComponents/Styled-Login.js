@@ -51,4 +51,4 @@ export const LoginStyled = styled.div`
         text-decoration: underline;
     }
       
-`
+`;

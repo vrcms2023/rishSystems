@@ -297,7 +297,10 @@ const Contact = () => {
               className="my-2 py-3 py-md-5 contactForm"
               onSubmit={onFormSubmit}
             >
-              <Title title="Quick contact" cssClass="fw-bold fs-4 mb-5 text-center formTitle" />
+              <Title
+                title="Quick contact"
+                cssClass="fw-bold fs-4 mb-5 text-center formTitle"
+              />
 
               <div className="mb-3 row">
                 <label

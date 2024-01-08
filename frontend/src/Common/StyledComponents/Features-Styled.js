@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const Features = styled.div`
     .fatures {
         padding: 80px 0;

@@ -13,7 +13,7 @@ const Search = ({
   searchfiledDeatails,
   setPageloadResults,
   setSearchquery,
-  searchQuery
+  searchQuery,
 }) => {
   const userCookie = getCookie("access");
 
@@ -40,7 +40,7 @@ const Search = ({
         response = await axiosClientServiceApi.get(clientDefaultURL);
       }
       setObject(response.data);
-      setPageloadResults(false)
+      setPageloadResults(false);
     } catch (error) {
       console.log("Unable to get the  data");
     }
@@ -57,7 +57,10 @@ const Search = ({
           onChange={onChangeInputHandler}
           onKeyDown={handleKeyDown}
         />
-        <span className="input-group-text cursorPointer" onClick={searchResults}>
+        <span
+          className="input-group-text cursorPointer"
+          onClick={searchResults}
+        >
           <i className="fa fa-search" aria-hidden="true"></i>
         </span>
       </div>

@@ -16,9 +16,8 @@ import {
   axiosClientServiceApi,
   axiosFileUploadServiceApi,
 } from "../../util/axiosUtil";
-import {  getNewslFields } from "../../util/dynamicFormFields";
+import { getNewslFields } from "../../util/dynamicFormFields";
 import moment from "moment";
-
 
 // Images
 import EditIcon from "../../Common/AdminEditIcon";
@@ -27,8 +26,7 @@ import EditIcon from "../../Common/AdminEditIcon";
 import { NewsStyled } from "../../Common/StyledComponents/Styled-News";
 import Ancher from "../../Common/Ancher";
 
-
-const HomeNews = ({ addNewsState, news, setNews,setPageloadResults }) => {
+const HomeNews = ({ addNewsState, news, setNews, setPageloadResults }) => {
   const location = useLocation();
   const baseURL = getBaseURL();
   const editComponentObj = {
@@ -61,7 +59,7 @@ const HomeNews = ({ addNewsState, news, setNews,setPageloadResults }) => {
         );
         if (response?.status === 200) {
           //const data = sortCreatedDateByDesc(response.data.appNews);
-          setPageloadResults(true)
+          setPageloadResults(true);
           setNews(response.data);
         }
       } catch (error) {
@@ -118,62 +116,68 @@ const HomeNews = ({ addNewsState, news, setNews,setPageloadResults }) => {
         news.map((item, index) => (
           <div className="col-md-6 col-lg-3 mb-4 mb-lg-0" key={item.id}>
             <NewsStyled>
-            <div className="card homeNews">
-              {/* Edit News */}
-              {isAdmin ? (
-                <div className="d-flex justify-content-end gap-2">
-                  {/* <EditIcon editHandler={() => editHandler("news", true, item)} /> */}
-                  <Link
-                    onClick={() => editHandler("news", true, item)}
-                    className=" p-2"
-                  >
-                    <i
-                      className="fa fa-pencil fs-5 text-warning"
-                      aria-hidden="true"
-                    ></i>
-                  </Link>
+              <div className="card homeNews">
+                {/* Edit News */}
+                {isAdmin ? (
+                  <div className="d-flex justify-content-end gap-2">
+                    {/* <EditIcon editHandler={() => editHandler("news", true, item)} /> */}
+                    <Link
+                      onClick={() => editHandler("news", true, item)}
+                      className=" p-2"
+                    >
+                      <i
+                        className="fa fa-pencil fs-5 text-warning"
+                        aria-hidden="true"
+                      ></i>
+                    </Link>
 
-                  <Link
-                    onClick={(event) => DeleteNews(item.id, item.news_title)}
-                    className=" p-2"
-                  >
-                    <i
-                      className="fa fa-trash-o fs-5 text-danger"
-                      aria-hidden="true"
-                    ></i>
-                  </Link>
-                </div>
-              ) : (
-                ""
-              )}
+                    <Link
+                      onClick={(event) => DeleteNews(item.id, item.news_title)}
+                      className=" p-2"
+                    >
+                      <i
+                        className="fa fa-trash-o fs-5 text-danger"
+                        aria-hidden="true"
+                      ></i>
+                    </Link>
+                  </div>
+                ) : (
+                  ""
+                )}
 
-              <img
-                src={item.path}
-                className="img-fluid"
-                alt={item.alternitivetext}
-              />
-              <div className="card-body p-3">
-                <Title
-                  title={
-                    item.news_title ? item.news_title : "Update news Title"
-                  }
-                  cssClass="fs-5 fw-bold lh-sm mb-2 lineClamp lc2"
+                <img
+                  src={item.path}
+                  className="img-fluid"
+                  alt={item.alternitivetext}
                 />
-                <div className="card-text mb-4 lineClamp lc5">  
-                  {item.news_description ? (
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: item.news_description,
-                      }}
-                    ></div>
-                  ) : (
-                    "update new description"
-                  )}
+                <div className="card-body p-3">
+                  <Title
+                    title={
+                      item.news_title ? item.news_title : "Update news Title"
+                    }
+                    cssClass="fs-5 fw-bold lh-sm mb-2 lineClamp lc2"
+                  />
+                  <div className="card-text mb-4 lineClamp lc5">
+                    {item.news_description ? (
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: item.news_description,
+                        }}
+                      ></div>
+                    ) : (
+                      "update new description"
+                    )}
+                  </div>
+                  {/* <p>{moment(item.created_at).format('DD-MM-YYYY hh:mm:ss')}</p> */}
+                  <Ancher
+                    AncherLabel="Read more"
+                    Ancherpath="/news"
+                    AncherClass="btn btn-more d-flex justify-content-center align-items-center gap-2"
+                    AnchersvgColor="#17427C"
+                    handleModel={() => handleModel(item)}
+                  />
                 </div>
-                {/* <p>{moment(item.created_at).format('DD-MM-YYYY hh:mm:ss')}</p> */}
-                <Ancher AncherLabel="Read more" Ancherpath="/news" AncherClass="btn btn-more d-flex justify-content-center align-items-center gap-2" AnchersvgColor="#17427C" handleModel={() => handleModel(item)} />  
               </div>
-            </div>
             </NewsStyled>
           </div>
         ))
@@ -189,7 +193,12 @@ const HomeNews = ({ addNewsState, news, setNews,setPageloadResults }) => {
                   <p className="text-center fs-6">
                     Currently there are no news items found.
                   </p>
-                  <Ancher AncherLabel="Go To News" Ancherpath="/news" AncherClass="btn btn-secondary d-flex justify-content-center align-items-center gap-3" AnchersvgColor="#ffffff" />
+                  <Ancher
+                    AncherLabel="Go To News"
+                    Ancherpath="/news"
+                    AncherClass="btn btn-secondary d-flex justify-content-center align-items-center gap-3"
+                    AnchersvgColor="#ffffff"
+                  />
                   {/* <Link to="/news" className="btn btn-primary fs-6">
                     Go To News
                   </Link> */}
@@ -238,11 +247,7 @@ const HomeNews = ({ addNewsState, news, setNews,setPageloadResults }) => {
               </Link>
             </div>
             <div>
-              <img
-                className="w-100"
-                src={obj.path}
-                alt={obj.news_title}
-              />
+              <img className="w-100" src={obj.path} alt={obj.news_title} />
             </div>
             <div className="my-3 newsDetails">
               {obj.news_description ? (

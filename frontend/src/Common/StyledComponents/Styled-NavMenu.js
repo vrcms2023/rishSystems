@@ -29,6 +29,5 @@ export const StyledMenu = styled.menu`
         background-color: ${({ theme }) => theme.navbarChildLinkBgColor};
       }
     }
-    
   }
 `;

@@ -7,15 +7,15 @@ export const getServiceValues = createAsyncThunk(
   "serviceList",
   async (rejectWithValue) => {
     try {
-      if(getCookie("access")) {
+      if (getCookie("access")) {
         const { data } = await axiosServiceApi.get(`/services/createService/`);
         return data;
-      }else {
-        const { data } = await axiosClientServiceApi.get(`/services/clientServiceList/`);
+      } else {
+        const { data } = await axiosClientServiceApi.get(
+          `/services/clientServiceList/`,
+        );
         return data;
       }
-    
-      
     } catch (error) {
       // return custom error message from API if any
       if (error.response && error.response.data.message) {
