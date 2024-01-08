@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import Title from "../../../Common/Title";
 import Error from "../../Components/Error";
 
+// CSS Styles
+import { LoginStyled } from "../../../Common/StyledComponents/Styled-Login";
+
 const Activation = () => {
   const [verified, setVerified] = useState(false);
   let { uid, token } = useParams();
@@ -46,6 +49,7 @@ const Activation = () => {
   };
 
   return (
+    <LoginStyled>
     <div className="login">
       <div className="bg-white d-flex justify-content-center align-items-center flex-column">
         <div className="container">
@@ -86,6 +90,7 @@ const Activation = () => {
         </div>
       </div>
     </div>
+    </LoginStyled>
   );
 };
 

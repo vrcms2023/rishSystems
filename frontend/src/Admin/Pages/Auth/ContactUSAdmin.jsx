@@ -54,7 +54,16 @@ const ContactUSAdmin = () => {
             &nbsp;
           </div>
           <div className="col-md-6">
-            <Search
+            
+          </div>
+        </div>
+      <div className="row px-3 px-lg-5">
+
+        <div className="col-md-6">
+          <Title title={"Contact list"} cssClass="fs-1 pageTitle" />
+        </div>
+        <div className="col-md-6">
+        <Search
               setObject={setResponseData}
               clientSearchURL={"/contactus/searchContacts/"}
               adminSearchURL={"/contactus/"}
@@ -65,20 +74,6 @@ const ContactUSAdmin = () => {
               searchQuery={searchQuery}
             />
           </div>
-        </div>
-      <div className="row px-3 px-lg-5">
-
-        <div className="col-12 d-flex justify-content-between">
-          <Title title={"Contact list"} cssClass="fs-1 pageTitle" />
-          <Search
-              setObject={userDetails}
-              clientSearchURL={""}
-              adminSearchURL={""}
-              clientDefaultURL={""}
-              searchfiledDeatails={"Name / Email ID / Phone No. "}
-            />
-
-        </div>
       </div>
 
       <div className="row px-3 px-lg-5 py-4 table-responsive">

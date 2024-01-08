@@ -11,6 +11,7 @@
   "gray": "#333333",
   "lightgray": "#e3e3e3",
   "verylightgray": "#f6f6f6",
+  "error":"#f23838",
 
   "primaryColor": "#17427f",
   "primaryHoverColor": "#2A5CA0",

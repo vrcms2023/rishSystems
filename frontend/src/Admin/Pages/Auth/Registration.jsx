@@ -11,6 +11,9 @@ import { toast } from "react-toastify";
 import { removeAllCookies } from "../../../util/cookieUtil";
 import CSRFToken from "../../../Frontend/Components/CRSFToken";
 
+// CSS Styles
+import { LoginStyled } from "../../../Common/StyledComponents/Styled-Login";
+
 const Registration = () => {
   const [customError, setCustomError] = useState(null);
 
@@ -62,8 +65,15 @@ const Registration = () => {
   const loginHandler = () => {};
 
   return (
+    <LoginStyled>
+    
     <div className="login">
-      <div className="bg-white d-flex justify-content-center align-items-center flex-column">
+    <div className="text-center pt-4">
+      <button className="btn btn-secondary" onClick={() => navigate("/")}>
+        Back to HPR Infra website
+      </button>
+    </div>
+      <div className="d-flex justify-content-center align-items-center flex-column">
         <form onSubmit={handleSubmit(submitForm)} className="shadow-lg">
           <CSRFToken />
           <Title
@@ -148,12 +158,14 @@ const Registration = () => {
               id="signPassordRe"
             />
           </div>
-          <div className="mt-3">
-            Aleardy a User ? <Link to="/login">Login</Link>
-          </div>
-          <div className="mt-3">
-            Not Activate your account ?{" "}
-            <Link to="/resend_activation">Activate</Link>
+          <div className="my-4 d-flex flex-column gap-1 loginLinks">
+            <div className="mt-1">
+              Aleardy a User ? <Link to="/login">Login</Link>
+            </div>
+            <div className="mt-1">
+              Not Activate your account ?
+              <Link to="/resend_activation"> Activate</Link>
+            </div>
           </div>
           {/* <div className="mb-3 form-check">
                       <input type="checkbox" className="form-check-input" id="exampleCheck1" />
@@ -168,11 +180,9 @@ const Registration = () => {
             />
           </div>
         </form>
-        <button className="btn btn-secondary" onClick={() => navigate("/")}>
-          Back to HPR Infra website
-        </button>
       </div>
     </div>
+    </LoginStyled>
   );
 };
 
