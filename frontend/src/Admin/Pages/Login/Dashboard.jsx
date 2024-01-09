@@ -163,28 +163,28 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container-fluid" style={{ marginTop: "150px" }}>
+    <div className="container-fluid pt-5">
       {/* <div className='text-end'>
             <badge className="bg-light text-dark shadow rounded p-1">{userName ? (`You are logged as - ${userName}`):""}</badge>
         </div> */}
       <div className="row px-3 px-md-5 mb-3">
         <div className="text-end d-flex justify-content-between align-items-center flex-column flex-md-row">
           <Title title="Dashboard" cssClass="text-center blue-500 fs-4" />
-          <div>
+          <div className="d-flex gap-1 justify-content-between align-items-center">
             <Button
               type=""
-              cssClass="btn btn-success me-3"
+              cssClass="btn btn-primary"
               label="Add New Project"
               handlerChange={() => navigate("/addproject")}
             />
             {/* <Button type="" cssClass="btn btn-success" label="User Admin" handlerChange={() => navigate("/userAdmin")} /> */}
             {/* <Button type="submit" cssClass="btn btn-success" label="Application Pages" handlerChange={() => navigate("/applicationPages")} /> */}
-            <Button
+            {/* <Button
               type=""
               cssClass="btn btn-secondary"
-              label="Back to Menu"
+              label="Back"
               handlerChange={() => navigate("/main")}
-            />
+            /> */}
           </div>
         </div>
       </div>

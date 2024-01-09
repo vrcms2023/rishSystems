@@ -156,7 +156,7 @@ function App() {
               element={<ResetPasswordConfirmation />}
             />
             <Route path="*" element={<PageNotFound />} />
-            <Route
+            {/* <Route
               exact
               path="/main"
               element={
@@ -165,7 +165,7 @@ function App() {
                   <MainPage />{" "}
                 </ProtectedRoute>
               }
-            />
+            /> */}
             <Route
               exact
               path="/change_password"

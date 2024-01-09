@@ -370,7 +370,7 @@ const AddProject = () => {
   };
 
   return (
-    <div className="container-fluid pt-5" style={{ marginTop: "100px" }}>
+    <div className="container-fluid pt-5">
       <CSRFToken />
       <div className="row px-3 px-lg-5">
         <div className="text-end d-flex justify-content-between align-items-center flex-column flex-md-row">
@@ -378,19 +378,19 @@ const AddProject = () => {
             title={`${id ? "Edit Project" : "Add Project"}`}
             cssClass="text-center blue-500 fs-4 mb-3 mb-md-0"
           />
-          <div>
+          <div className="d-flex gap-1 justify-content-center align-items-center">
             <Button
               type=""
-              cssClass="btn btn-success me-3"
+              cssClass="btn btn-secondary"
               label="Dashboard"
               handlerChange={() => navigate("/dashboard")}
             />
-            <Button
+            {/* <Button
               type=""
               cssClass="btn btn-secondary "
-              label="Back to Menu"
+              label="Back"
               handlerChange={() => navigate("/main")}
-            />
+            /> */}
           </div>
         </div>
       </div>
@@ -452,14 +452,14 @@ const AddProject = () => {
                 <div className="d-flex">
                   <Button
                     label="Cancel"
-                    cssClass="btn btn-secondary mt-2 me-2 w-100"
+                    cssClass="btn btn-outline mt-2 me-2 w-100"
                     handlerChange={() => {
                       navigate("/dashboard");
                     }}
                   />
                   <Button
                     label="Save"
-                    cssClass="btn btn-success mt-2 ms-2 w-100"
+                    cssClass="btn btn-primary mt-2 ms-2 w-100"
                     handlerChange={addNewProject}
                   />
                 </div>
@@ -489,11 +489,11 @@ const AddProject = () => {
                   </span>
                 </h3>
               )}
-              <div>
+              <div className="d-flex justify-content-center align-items-center gap-1">
                 <Button
                   type="submit"
                   disabled={saveState}
-                  cssClass="btn btn-success mx-2"
+                  cssClass="btn btn-secondary"
                   label={id ? "Update Project" : "Save Project"}
                   handlerChange={saveProject}
                 />
@@ -908,10 +908,10 @@ const AddProject = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-12 text-center py-3">
+            <div className="col-lg-12 py-4 d-flex gap-1 justify-content-center align-items-center">
               <Button
                 type="submit"
-                cssClass="btn btn btn-outline-secondary"
+                cssClass="btn btn btn-secondary"
                 label="Cancel"
                 handlerChange={() => navigate("/dashboard")}
               />
@@ -923,7 +923,7 @@ const AddProject = () => {
               <Button
                 type="submit"
                 disabled={saveState}
-                cssClass="btn btn-success mx-2"
+                cssClass="btn btn-primary"
                 label={id ? "Update Project" : "Save Project"}
                 handlerChange={saveProject}
               />
