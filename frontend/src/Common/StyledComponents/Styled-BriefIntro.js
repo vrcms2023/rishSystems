@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BriefIntroStyled = styled.div`
-  background-color: ${({ theme }) => theme.briefIntroBg};
+  background-color: ${({ theme }) => theme.verylightgray};
   p {
     color: ${({ theme }) => theme.briefIntroTextColor};
   }

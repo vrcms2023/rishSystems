@@ -32,7 +32,7 @@ const BriefIntroFrontend = ({ pageType, introState }) => {
       <div className="row">
         <BriefIntroStyled>
           <div className=" briefIntro">
-            <div className="col-md-10 offset-md-1 py-2 py-md-4 ">
+            <div className="col-md-10 offset-md-1 py-2 py-md-5 ">
               {introValue.intro_title === "" ? (
                 ""
               ) : (

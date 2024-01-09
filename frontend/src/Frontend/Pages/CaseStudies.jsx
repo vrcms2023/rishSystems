@@ -23,6 +23,7 @@ import { removeActiveClass } from "../../util/ulrUtil";
 import Search from "../../Common/Search";
 import CustomPagination from "../../Common/CustomPagination";
 import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
+import { CaseStudiesPageStyled } from "../../Common/StyledComponents/Styled-Casestudies";
 
 const CaseStudies = () => {
   const editComponentObj = {
@@ -174,6 +175,27 @@ const CaseStudies = () => {
 
       {/* Add Clients */}
       <div className="container-fluid container-lg my-md-5 ">
+        
+        {isAdmin ? (
+          <div className="row">
+            <div className="col-md-12">
+              <div className="d-flex justify-content-end align-items-center mb-3">
+                <span className="fw-bold me-2">Add content </span>
+                <button
+                  type="submit"
+                  className="btn btn-primary px-3"
+                  onClick={() => editHandler("addSection", true)}
+                >
+                  {" "}
+                  <i className="fa fa-plus" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            </div>
+          ) : (
+            ""
+          )}
+        
         <div className="row">
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
             <Title title="Case Studies" cssClass="fs-1 pageTitle" />
@@ -193,25 +215,7 @@ const CaseStudies = () => {
               searchQuery={searchQuery}
             />
           </div>
-          {isAdmin ? (
-            <div className="col-md-6">
-              <div className="d-flex justify-content-end align-items-center mb-3">
-                <span className="fw-bold me-2">Add content </span>
-                <button
-                  type="submit"
-                  className="btn btn-primary px-3"
-                  onClick={() => editHandler("addSection", true)}
-                >
-                  {" "}
-                  <i className="fa fa-plus" aria-hidden="true"></i>
-                </button>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
         </div>
-
         {componentEdit.editSection || componentEdit.addSection ? (
           <div className="adminEditTestmonial">
             <AddEditAdminNews
@@ -236,7 +240,8 @@ const CaseStudies = () => {
           ""
         )}
 
-        <div className="row aboutPage">
+        <CaseStudiesPageStyled>
+        <div className=" caseStudie my-5">
           {clientsList.length > 0 ? (
             clientsList.map((item, index) => (
               <>
@@ -268,7 +273,7 @@ const CaseStudies = () => {
                   ) : (
                     ""
                   )}
-                  <div className="col-12 col-lg-7 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
+                  <div className="col-sm-9 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
                     {item.case_studies_title ? (
                       <Title
                         title={item.case_studies_title}
@@ -283,19 +288,21 @@ const CaseStudies = () => {
                         __html: item.case_studies_description,
                       }}
                     />
+
+                    <div>
+                      <Ancher AncherLabel="More" AncherClass="btn btn-outline d-flex gap-2 justify-content-center align-items-center" Ancherpath={`/casestudies-details/${item.id}/`} AnchersvgColor="#17427C" />
+                    </div>
                   </div>
 
-                  <div className="col-lg-5 d-none d-lg-block h-100">
-                    <div className="h-100 p-3 p-md-5 py-md-4 d-flex flex-column justify-content-center align-items-center reset ">
+                  <div className="col-sm-3 d-none d-sm-flex p-3 d-flex justify-content-center align-items-center">
                       <img
                         src={getImagePath(item.path)}
                         alt=""
-                        className="img-fluid"
+                        className="img-fluid shadow-lg border border-4 rounded-circle caseStudieImg"
                       />
-                    </div>
                   </div>
                 </div>
-                <hr className="border-secondary" />
+                
               </>
             ))
           ) : (
@@ -304,6 +311,7 @@ const CaseStudies = () => {
             </p>
           )}
         </div>
+        </CaseStudiesPageStyled>
         <div>
           {paginationData?.total_count ? (
             <CustomPagination
