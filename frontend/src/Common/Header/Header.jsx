@@ -373,6 +373,16 @@ export const ClientMenu = ({ serviceMenuList }) => {
         </li>
         <li className="nav-item">
           <NavLink
+            to="/team"
+            className={({ isActive }) =>
+              isActive ? "nav-Link active" : "nav-Link"
+            }
+          >
+            Team
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink
             to="/projects"
             className={({ isActive }) =>
               isActive ? "nav-Link active" : "nav-Link"
