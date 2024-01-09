@@ -8,7 +8,7 @@
 /backend/media/
 /backend/build/
 /frontend/build/
-**/__pycache__/
+/backend/**/__pycache__/
 # testing
 /coverage
 # /backend/*
