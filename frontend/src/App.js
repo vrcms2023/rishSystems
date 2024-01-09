@@ -60,6 +60,7 @@ import "./App.css";
 import "react-toastify/dist/ReactToastify.min.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import CaseStudiesDetails from "./Frontend/Pages/caseStudies-details";
+import Team from "./Frontend/Pages/Team";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -129,6 +130,7 @@ function App() {
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/testimonials" element={<TestimonialsList />} />
             <Route exact path="/clients" element={<ClientsList />} />
+            <Route exact path="/team" element={<Team />} />
             <Route exact path="/casestudies" element={<CaseStudies />} />
             <Route exact path="/casestudies-details/:id/" element={<CaseStudiesDetails />} />
             <Route exact path="/news" element={<NewsAndUpdates />} />
