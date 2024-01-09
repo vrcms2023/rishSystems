@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import BriefIntro from "../../Common/BriefIntro";
+import BriefIntroFrontend from "../../Common/BriefIntro";
 import { useDispatch, useSelector } from "react-redux";
 import { getClientProjects } from "../../features/project/clientProjectActions";
 import ProjectItem from "../Components/projectItem";
 import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
 import EditIcon from "../../Common/AdminEditIcon";
 import ModelBg from "../../Common/ModelBg";
-
+import Banner from "../../Common/Banner";
 import { dataFormatedByCatergoryName } from "../../util/dataFormatUtil";
-
+import {
+  getFormDynamicFields,
+  imageDimensionsJson,
+} from "../../util/dynamicFormFields";
 import "./Projects.css";
 import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 
@@ -17,7 +20,7 @@ const Projects = () => {
     banner: false,
     briefIntro: false,
   };
-
+  const pageType = "projects";
   const [admin, setAdmin] = useState(true);
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
@@ -62,7 +65,10 @@ const Projects = () => {
         ) : (
           ""
         )}
-        <div className=" banner projectBanner"></div>
+        <Banner
+          getBannerAPIURL={`banner/clientBannerIntro/${pageType}-banner/`}
+          bannerState={componentEdit.banner}
+        />
       </div>
 
       {/* Introduction */}
@@ -71,11 +77,16 @@ const Projects = () => {
       ) : (
         ""
       )}
-      <BriefIntro title="Welcome To HPR Infra Projects">
+      {/* <BriefIntro title="Welcome To HPR Infra Projects">
         We believe that construction is a man made wonder. The thought of
         bringing imagination to real life structures excites us, each day the
         passion in us grows as we contribute to this industry.
-      </BriefIntro>
+      </BriefIntro> */}
+
+      <BriefIntroFrontend
+        introState={componentEdit.briefIntro}
+        pageType={pageType}
+      />
 
       {ongoing?.length > 0 ? (
         <ProjectItem projectList={ongoing} projectType={ongoing} />
@@ -100,6 +111,22 @@ const Projects = () => {
       {componentEdit.banner ? (
         <div className="adminEditTestmonial">
           <ImageInputsForm editHandler={editHandler} componentType="banner" />
+        </div>
+      ) : (
+        ""
+      )}
+
+      {componentEdit.banner ? (
+        <div className="adminEditTestmonial">
+          <ImageInputsForm
+            editHandler={editHandler}
+            componentType="banner"
+            pageType={`${pageType}-banner`}
+            imageLabel="Project Banner Image"
+            showDescription={false}
+            showExtraFormFields={getFormDynamicFields(`${pageType}-banner`)}
+            dimensions={imageDimensionsJson("banner")}
+          />
         </div>
       ) : (
         ""

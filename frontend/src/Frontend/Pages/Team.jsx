@@ -1,40 +1,43 @@
-import React, { useState } from 'react'
-import ImageInputsForm from '../../Admin/Components/forms/ImgTitleIntoForm'
-import { getFormDynamicFields, imageDimensionsJson } from '../../util/dynamicFormFields'
-import Banner from '../../Common/Banner'
-import EditIcon from '../../Common/AdminEditIcon'
-import BriefIntroFrontend from '../../Common/BriefIntro'
-import useAdminLoginStatus from '../../Common/customhook/useAdminLoginStatus'
+import React, { useState } from "react";
+import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
+import {
+  getFormDynamicFields,
+  imageDimensionsJson,
+} from "../../util/dynamicFormFields";
+import Banner from "../../Common/Banner";
+import EditIcon from "../../Common/AdminEditIcon";
+import BriefIntroFrontend from "../../Common/BriefIntro";
+import useAdminLoginStatus from "../../Common/customhook/useAdminLoginStatus";
 import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
 
 const Team = () => {
-    const editComponentObj = {
-        banner: false,
-        briefIntro: false,
-        addSection: false,
-        editSection: false,
-    };
+  const editComponentObj = {
+    banner: false,
+    briefIntro: false,
+    addSection: false,
+    editSection: false,
+  };
 
-    const pageType = "teams";
-    const isAdmin = useAdminLoginStatus();
-    const [componentEdit, SetComponentEdit] = useState(editComponentObj);
-    const [show, setShow] = useState(false);
-    const [editCarousel, setEditCarousel] = useState({});
+  const pageType = "teams";
+  const isAdmin = useAdminLoginStatus();
+  const [componentEdit, SetComponentEdit] = useState(editComponentObj);
+  const [show, setShow] = useState(false);
+  const [editCarousel, setEditCarousel] = useState({});
 
-    const editHandler = (name, value, item) => {
-        SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
-        setShow(!show);
-        if (item?.id) {
-          setEditCarousel(item);
-        } else {
-          setEditCarousel({});
-        }
-        document.body.style.overflow = "hidden";
-      };
+  const editHandler = (name, value, item) => {
+    SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setShow(!show);
+    if (item?.id) {
+      setEditCarousel(item);
+    } else {
+      setEditCarousel({});
+    }
+    document.body.style.overflow = "hidden";
+  };
 
   return (
     <>
-        <div className="position-relative">
+      <div className="position-relative">
         {isAdmin ? (
           <EditIcon editHandler={() => editHandler("banner", true)} />
         ) : (
@@ -61,40 +64,37 @@ const Team = () => {
         ""
       )}
 
+      {/* Brief Introduction */}
+      {isAdmin ? (
+        <EditIcon editHandler={() => editHandler("briefIntro", true)} />
+      ) : (
+        ""
+      )}
 
-       {/* Brief Introduction */}
-       {isAdmin ? (
-            <EditIcon editHandler={() => editHandler("briefIntro", true)} />
-        ) : (
-            ""
-        )}
+      <BriefIntroFrontend
+        introState={componentEdit.briefIntro}
+        pageType={pageType}
+      />
 
-        <BriefIntroFrontend
-            introState={componentEdit.briefIntro}
+      {componentEdit.briefIntro ? (
+        <div className="adminEditTestmonial">
+          <AdminBriefIntro
+            editHandler={editHandler}
+            componentType="briefIntro"
             pageType={pageType}
-        />
-
-        {componentEdit.briefIntro ? (
-            <div className="adminEditTestmonial">
-            <AdminBriefIntro
-                editHandler={editHandler}
-                componentType="briefIntro"
-                pageType={pageType}
-            />
-            </div>
-        ) : (
-            ""
-        )}
-
-        <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    teams
-                </div>
-            </div>
+          />
         </div>
-    </>
-  )
-}
+      ) : (
+        ""
+      )}
 
-export default Team
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">teams</div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Team;

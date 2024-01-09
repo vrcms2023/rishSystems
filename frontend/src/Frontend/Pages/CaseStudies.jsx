@@ -4,7 +4,7 @@ import Banner from "../../Common/Banner";
 import BriefIntroFrontend from "../../Common/BriefIntro";
 import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import AdminBriefIntro from "../../Admin/Components/BriefIntro/index";
-import Ancher from '../../Common/Ancher';
+import Ancher from "../../Common/Ancher";
 import {
   getFormDynamicFields,
   imageDimensionsJson,
@@ -175,7 +175,6 @@ const CaseStudies = () => {
 
       {/* Add Clients */}
       <div className="container-fluid container-lg my-md-5 ">
-        
         {isAdmin ? (
           <div className="row">
             <div className="col-md-12">
@@ -191,11 +190,11 @@ const CaseStudies = () => {
                 </button>
               </div>
             </div>
-            </div>
-          ) : (
-            ""
-          )}
-        
+          </div>
+        ) : (
+          ""
+        )}
+
         <div className="row">
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
             <Title title="Case Studies" cssClass="fs-1 pageTitle" />
@@ -241,76 +240,80 @@ const CaseStudies = () => {
         )}
 
         <CaseStudiesPageStyled>
-        <div className=" caseStudie my-5">
-          {clientsList.length > 0 ? (
-            clientsList.map((item, index) => (
-              <>
-                <div
-                  key={item.id}
-                  className={`row mb-2 ${
-                    isAdmin
-                      ? "border border-warning mb-3 position-relative"
-                      : ""
-                  } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
-                >
-                  {isAdmin ? (
-                    <>
-                      <EditIcon
-                        editHandler={() =>
-                          editHandler("editSection", true, item)
-                        }
-                      />
-                      <Link
-                        className="deleteSection"
-                        onClick={() => deleteAboutSection(item)}
-                      >
-                        <i
-                          className="fa fa-trash-o text-danger fs-4"
-                          aria-hidden="true"
-                        ></i>
-                      </Link>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                  <div className="col-sm-9 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
-                    {item.case_studies_title ? (
-                      <Title
-                        title={item.case_studies_title}
-                        cssClass="fs-1 fw-bold mb-1"
-                      />
+          <div className=" caseStudie my-5">
+            {clientsList.length > 0 ? (
+              clientsList.map((item, index) => (
+                <>
+                  <div
+                    key={item.id}
+                    className={`row mb-2 ${
+                      isAdmin
+                        ? "border border-warning mb-3 position-relative"
+                        : ""
+                    } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
+                  >
+                    {isAdmin ? (
+                      <>
+                        <EditIcon
+                          editHandler={() =>
+                            editHandler("editSection", true, item)
+                          }
+                        />
+                        <Link
+                          className="deleteSection"
+                          onClick={() => deleteAboutSection(item)}
+                        >
+                          <i
+                            className="fa fa-trash-o text-danger fs-4"
+                            aria-hidden="true"
+                          ></i>
+                        </Link>
+                      </>
                     ) : (
                       ""
                     )}
+                    <div className="col-sm-9 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
+                      {item.case_studies_title ? (
+                        <Title
+                          title={item.case_studies_title}
+                          cssClass="fs-1 fw-bold mb-1"
+                        />
+                      ) : (
+                        ""
+                      )}
 
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: item.case_studies_description,
-                      }}
-                    />
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: item.case_studies_description,
+                        }}
+                      />
 
-                    <div>
-                      <Ancher AncherLabel="More" AncherClass="btn btn-outline d-flex gap-2 justify-content-center align-items-center" Ancherpath={`/casestudies-details/${item.id}/`} AnchersvgColor="#17427C" />
+                      <div>
+                        <Ancher
+                          AncherLabel="More"
+                          AncherClass="btn btn-outline d-flex gap-2 justify-content-center align-items-center"
+                          Ancherpath={`/casestudies-details/${item.id}/`}
+                          AnchersvgColor="#17427C"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="col-sm-3 d-none d-sm-flex p-3 d-flex justify-content-center align-items-center">
+                    <div className="col-sm-3 d-none d-sm-flex p-3 d-flex justify-content-center align-items-center">
                       <img
                         src={getImagePath(item.path)}
                         alt=""
                         className="img-fluid shadow-lg border border-4 rounded-circle caseStudieImg"
                       />
+                    </div>
                   </div>
-                </div>
-                
-              </>
-            ))
-          ) : (
-            <p className="text-center text-muted py-5">
-              Please add page contents...
-            </p>
-          )}
-        </div>
+                </>
+              ))
+            ) : (
+              <p className="text-center text-muted py-5">
+                Please add page contents...
+              </p>
+            )}
+          </div>
         </CaseStudiesPageStyled>
         <div>
           {paginationData?.total_count ? (
