@@ -59,6 +59,7 @@ import ThemeOne from "./Common/StyledThemes/ThemeOne.json";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.min.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import CaseStudiesDetails from "./Frontend/Pages/caseStudies-details";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -124,15 +125,12 @@ function App() {
             <Route exact path="/services" element={<Services />} />
             <Route exact path="/services/:uid/" element={<Services />} />
             <Route exact path="/careers" element={<Careers />} />
-            <Route
-              exact
-              path="/career-details/:id/"
-              element={<CareerDetails />}
-            />
+            <Route exact path="/career-details/:id/" element={<CareerDetails />} />
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/testimonials" element={<TestimonialsList />} />
             <Route exact path="/clients" element={<ClientsList />} />
             <Route exact path="/casestudies" element={<CaseStudies />} />
+            <Route exact path="/casestudies-details/:id/" element={<CaseStudiesDetails />} />
             <Route exact path="/news" element={<NewsAndUpdates />} />
             {/* <Route exact path="/testmonial" element={<Testimonial />} /> */}
             <Route exact path="/login" element={<Login />} />
