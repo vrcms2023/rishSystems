@@ -42,3 +42,16 @@ class ServiceImageModel(BaseModel):
 
     class Meta:
         abstract = True 
+
+
+class SocialMeidaModel(BaseModel):
+    twitter_url =       models.CharField(max_length=500, null=True, blank=True )
+    facebook_url =      models.CharField(max_length=500, null=True, blank=True )
+    linkedIn_url =      models.CharField(max_length=500, null=True, blank=True )
+    youtube_url =       models.CharField(max_length=500, null=True, blank=True )
+    instagram_url =     models.CharField(max_length=500, null=True, blank=True )
+    vimeo_url =         models.CharField(max_length=500, null=True, blank=True )
+    pinterest_url =     models.CharField(max_length=500, null=True, blank=True )
+
+    class Meta:
+        abstract = True 

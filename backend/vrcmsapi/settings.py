@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'servicePage',
     'careers',
     'footer',
+    'ourTeam',
     'debug_toolbar',
 ]
 

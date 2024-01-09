@@ -1,5 +1,4 @@
 from django.db import models
-import uuid
 from common.BaseModel import ImageModel, BaseModel
 
 class Carousel(ImageModel):
