@@ -13,6 +13,7 @@ import {
   getFormDynamicFields,
   imageDimensionsJson,
 } from "../../util/dynamicFormFields";
+import { getImagePath } from "../../util/commonUtil";
 
 const CaseStudiesDetails = () => {
   const editComponentObj = {
@@ -34,10 +35,10 @@ const CaseStudiesDetails = () => {
     const getCAseStutiesvalues = async () => {
       try {
         const response = await axiosClientServiceApi.get(
-          `/caseStudies/clientCaseStudies/`,
+          `/caseStudies/clientSelectedCaseStudies/${id}`,
         );
         if (response?.status === 200) {
-          setselectedCaseStudieDetails(response.data.results[0]);
+          setselectedCaseStudieDetails(response.data.caseStudies);
         }
       } catch (error) {
         console.log("unable to access ulr because of server is down");
@@ -125,7 +126,7 @@ const CaseStudiesDetails = () => {
             <div className="col-md-12 py-3 caseStudieDetails">
               <p>
                 <img
-                  src={selectedCaseStudieDetails.path}
+                  src={getImagePath(selectedCaseStudieDetails.path)}
                   alt={selectedCaseStudieDetails.case_studies_title}
                   className="pull-left border border-4 shadow-lg rounded-circle m-4"
                 />
