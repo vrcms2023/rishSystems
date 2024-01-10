@@ -212,9 +212,12 @@ const FileUpload = ({
       let formData = new FormData();
       if (files.length > 0) {
         formData.append("path", files[0].file);
-      } else {
+      } else if (editImage.path) {
         let file = await creteFileObj();
         formData.append("path", file);
+      } else if (!editImage.path) {
+        setError("Please add an image ");
+        return true;
       }
 
       formData.append("id", editImage.id);
@@ -240,6 +243,7 @@ const FileUpload = ({
     const arrURL = [];
     if (files.length === 0) {
       setError("Please add an image ");
+      return true;
     }
     if (files.length > 0) {
       files.forEach((element, index) => {
@@ -376,7 +380,7 @@ const FileUpload = ({
               ""
             )}
 
-            {editImage?.id ? (
+            {editImage?.id && editImage.path ? (
               <div>
                 <img
                   src={getImagePath(editImage.path, editImage.contentType)}

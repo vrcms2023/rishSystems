@@ -88,6 +88,26 @@ class ClientViewCaseStudies(generics.CreateAPIView):
         serializer = CaseStudiesSerializer(snippets, many=True)
         return Response({"caseStudies": serializer.data}, status=status.HTTP_200_OK)
     
+class ClientViewSelectedCaseStudies(generics.CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset = CaseStudies.objects.all()
+    serializer_class = CaseStudiesSerializer
+
+    """
+    get selected case studies.
+    """
+
+    def get_object(self, pk):
+        try:
+            return CaseStudies.objects.get(pk=pk)
+        except CaseStudies.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = CaseStudiesSerializer(snippet)
+        return Response({"caseStudies": serializer.data}, status=status.HTTP_200_OK)
+    
 class CaseStudiesSearchAPIView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = CaseStudiesSerializer
