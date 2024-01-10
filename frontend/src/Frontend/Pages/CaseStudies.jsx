@@ -243,68 +243,68 @@ const CaseStudies = () => {
           <div className=" caseStudie my-5">
             {clientsList.length > 0 ? (
               clientsList.map((item, index) => (
-                  <div
-                    key={item.id}
-                    className={`row mb-2 ${
-                      isAdmin
-                        ? "border border-warning mb-3 position-relative"
-                        : ""
-                    } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
-                  >
-                    {isAdmin ? (
-                      <>
-                        <EditIcon
-                          editHandler={() =>
-                            editHandler("editSection", true, item)
-                          }
-                        />
-                        <Link
-                          className="deleteSection"
-                          onClick={() => deleteAboutSection(item)}
-                        >
-                          <i
-                            className="fa fa-trash-o text-danger fs-4"
-                            aria-hidden="true"
-                          ></i>
-                        </Link>
-                      </>
+                <div
+                  key={item.id}
+                  className={`row mb-2 ${
+                    isAdmin
+                      ? "border border-warning mb-3 position-relative"
+                      : ""
+                  } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
+                >
+                  {isAdmin ? (
+                    <>
+                      <EditIcon
+                        editHandler={() =>
+                          editHandler("editSection", true, item)
+                        }
+                      />
+                      <Link
+                        className="deleteSection"
+                        onClick={() => deleteAboutSection(item)}
+                      >
+                        <i
+                          className="fa fa-trash-o text-danger fs-4"
+                          aria-hidden="true"
+                        ></i>
+                      </Link>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                  <div className="col-sm-9 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
+                    {item.case_studies_title ? (
+                      <Title
+                        title={item.case_studies_title}
+                        cssClass="fs-1 fw-bold mb-1"
+                      />
                     ) : (
                       ""
                     )}
-                    <div className="col-sm-9 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
-                      {item.case_studies_title ? (
-                        <Title
-                          title={item.case_studies_title}
-                          cssClass="fs-1 fw-bold mb-1"
-                        />
-                      ) : (
-                        ""
-                      )}
 
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: item.case_studies_description,
-                        }}
-                      />
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: item.case_studies_description,
+                      }}
+                    />
 
-                      <div>
-                        <Ancher
-                          AncherLabel="More"
-                          AncherClass="btn btn-outline d-flex gap-2 justify-content-center align-items-center"
-                          Ancherpath={`/casestudies-details/${item.id}/`}
-                          AnchersvgColor="#17427C"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-sm-3 d-none d-sm-flex p-3 d-flex justify-content-center align-items-center">
-                      <img
-                        src={getImagePath(item.path)}
-                        alt=""
-                        className="img-fluid shadow-lg border border-4 rounded-circle caseStudieImg"
+                    <div>
+                      <Ancher
+                        AncherLabel="More"
+                        AncherClass="btn btn-outline d-flex gap-2 justify-content-center align-items-center"
+                        Ancherpath={`/casestudies-details/${item.id}/`}
+                        AnchersvgColor="#17427C"
                       />
                     </div>
                   </div>
+
+                  <div className="col-sm-3 d-none d-sm-flex p-3 d-flex justify-content-center align-items-center">
+                    <img
+                      src={getImagePath(item.path)}
+                      alt=""
+                      className="img-fluid shadow-lg border border-4 rounded-circle caseStudieImg"
+                    />
+                  </div>
+                </div>
               ))
             ) : (
               <p className="text-center text-muted py-5">

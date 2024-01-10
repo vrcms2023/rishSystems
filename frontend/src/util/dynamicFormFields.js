@@ -178,6 +178,72 @@ export const getServiceFormFields = (id, title) => {
     },
   };
 };
+
+export const getTeamMemberFields = () => {
+  return {
+    team_member_name: {
+      label: "Name",
+      type: "text",
+      fieldName: "team_member_name",
+    },
+    team_member_email: {
+      label: "Email",
+      type: "text",
+      fieldName: "team_member_email",
+    },
+    team_member_designation: {
+      label: "Designation",
+      type: "text",
+      fieldName: "team_member_designation",
+    },
+    team_member_phone_number: {
+      label: "Phone Number",
+      type: "text",
+      fieldName: "team_member_phone_number",
+    },
+    team_member_about_us: {
+      label: "About ",
+      type: "textarea",
+      fieldName: "team_member_about_us",
+    },
+    twitter_url: {
+      label: "twitter url",
+      type: "text",
+      fieldName: "twitter_url",
+    },
+    facebook_url: {
+      label: "facebook url",
+      type: "text",
+      fieldName: "facebook_url",
+    },
+    linkedIn_url: {
+      label: "linkedIn url",
+      type: "text",
+      fieldName: "linkedIn_url",
+    },
+    youtube_url: {
+      label: "youtube url",
+      type: "text",
+      fieldName: "youtube_url",
+    },
+    instagram_url: {
+      label: "instagram url",
+      type: "text",
+      fieldName: "instagram_url",
+    },
+    vimeo_url: {
+      label: "vimeo url",
+      type: "text",
+      fieldName: "vimeo_url",
+    },
+    pinterest_url: {
+      label: "pinterest url",
+      type: "text",
+      fieldName: "pinterest_url",
+    },
+  };
+};
+
 export const imageDimensionsJson = (component) => {
   const imgDimension = {
     carousel: {
@@ -207,6 +273,10 @@ export const imageDimensionsJson = (component) => {
     banner: {
       w: "1500px",
       h: "400px",
+    },
+    teams: {
+      w: "300px",
+      h: "200px",
     },
   };
   return imgDimension[component];
