@@ -243,7 +243,6 @@ const CaseStudies = () => {
           <div className=" caseStudie my-5">
             {clientsList.length > 0 ? (
               clientsList.map((item, index) => (
-                <>
                   <div
                     key={item.id}
                     className={`row mb-2 ${
@@ -306,7 +305,6 @@ const CaseStudies = () => {
                       />
                     </div>
                   </div>
-                </>
               ))
             ) : (
               <p className="text-center text-muted py-5">
