@@ -16,9 +16,7 @@ const ProjectGallery = () => {
   const { clientProjects, error } = useSelector(
     (state) => state.clientProjects,
   );
-  useEffect(() => {
-    removeActiveClass();
-  }, []);
+
 
   const dispatch = useDispatch();
 
@@ -44,6 +42,9 @@ const ProjectGallery = () => {
     }
   }, []);
 
+  useEffect(() => {
+    removeActiveClass();
+  }, []);
   const formatData = (data) => {
     const project = data.projectList;
     const images = data.imageList;

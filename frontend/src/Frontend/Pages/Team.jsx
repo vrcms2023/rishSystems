@@ -21,6 +21,7 @@ import DeleteDialog from "../../Common/DeleteDialog";
 import { toast } from "react-toastify";
 import Search from "../../Common/Search";
 import CustomPagination from "../../Common/CustomPagination";
+import { removeActiveClass } from "../../util/ulrUtil";
 
 const Team = () => {
   const editComponentObj = {
@@ -105,7 +106,9 @@ const Team = () => {
       },
     });
   };
-
+  useEffect(() => {
+    removeActiveClass();
+  }, []);
   return (
     <>
       <div className="position-relative">
