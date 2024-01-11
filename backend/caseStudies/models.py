@@ -1,6 +1,4 @@
 from django.db import models
-import uuid
-from django.utils import timezone
 from common.BaseModel import ImageModel
 # Create your models here.
 

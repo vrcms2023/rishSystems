@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'careers',
     'footer',
     'ourTeam',
+    'imageAndVideoGallery',
     'debug_toolbar',
 ]
 
