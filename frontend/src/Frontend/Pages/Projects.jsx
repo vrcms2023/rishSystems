@@ -14,6 +14,7 @@ import {
 } from "../../util/dynamicFormFields";
 import "./Projects.css";
 import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
+import { removeActiveClass } from "../../util/ulrUtil";
 
 const Projects = () => {
   const editComponentObj = {
@@ -50,6 +51,10 @@ const Projects = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+  removeActiveClass()
   }, []);
 
   const editHandler = (name, value) => {
