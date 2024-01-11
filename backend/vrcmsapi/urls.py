@@ -21,7 +21,7 @@ urlpatterns = [
     path('api/v1/services/', include('servicePage.urls')),
     path('api/v1/careers/', include('careers.urls')),
     path('api/v1/footer/', include('footer.urls')),
-     path('api/v1/ourteam/', include('ourTeam.urls')),
+    path('api/v1/ourteam/', include('ourTeam.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name="index.html"))]
