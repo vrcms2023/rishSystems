@@ -113,37 +113,7 @@ const Header = () => {
     }
   }, [userInfo]);
 
-  const getServiceMenuPage = async () => {
-    try {
-      let response = await axiosClientServiceApi.get(
-        `/services/getSelectedClientService/${selectedServiceProject.id}/`,
-      );
-      setSelectedServiceProject(response.data.servicesFeatures);
-    } catch (error) {
-      console.log("Unable to get the intro");
-    }
-  };
 
-  useEffect(() => {
-    const getServiceMenuList = async () => {
-      try {
-        const response = await axiosClientServiceApi.get(
-          `/services/clientServiceList/`,
-        );
-        if (response?.status === 200) {
-          const data = sortByCreatedDate(response.data.servicesList);
-          if (!getCookie("pageLoadServiceName")) {
-            storeServiceMenuValueinCookie(data[0]);
-          }
-          setServiceMenuList(data);
-        }
-      } catch (e) {
-        console.log("unable to access ulr because of server is down");
-      }
-    };
-
-    //getServiceMenuList();
-  }, []);
 
   const links = document.querySelectorAll("#navbarSupportedContent li");
 
