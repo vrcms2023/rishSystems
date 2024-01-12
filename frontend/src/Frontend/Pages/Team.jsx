@@ -22,6 +22,7 @@ import { toast } from "react-toastify";
 import Search from "../../Common/Search";
 import CustomPagination from "../../Common/CustomPagination";
 import { removeActiveClass } from "../../util/ulrUtil";
+import { TeamStyled } from "../../Common/StyledComponents/Styled-Team";
 
 const Team = () => {
   const editComponentObj = {
@@ -67,6 +68,7 @@ const Team = () => {
         const response = await axiosClientServiceApi.get(
           `/ourteam/clentViewOurTeamDetails/`,
         );
+        console.log("team response", response)
         if (response?.status === 200) {
           setResponseData(response.data);
         }
@@ -180,6 +182,9 @@ const Team = () => {
               ""
             )}
           </div>
+          </div>
+
+          <div className="row">
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
             <Title title="Our Team" cssClass="fs-1 pageTitle" />
           </div>
@@ -190,13 +195,15 @@ const Team = () => {
               clientSearchURL={"/ourteam/OurteamSearchAPIView/"}
               adminSearchURL={"/ourteam/createteam/"}
               clientDefaultURL={"/ourteam/clentViewOurTeamDetails/"}
-              searchfiledDeatails={"name / email / phone number / designation"}
+              searchfiledDeatails={"Name"}
               setPageloadResults={setPageloadResults}
               setSearchquery={setSearchquery}
               searchQuery={searchQuery}
             />
           </div>
-
+          </div>
+          
+          
           {componentEdit.editSection || componentEdit.addSection ? (
             <div className="adminEditTestmonial">
               <AddEditTeam
@@ -220,14 +227,17 @@ const Team = () => {
           ) : (
             ""
           )}
-          <div className="col-md-12 teams">
+
+
+          <TeamStyled>
+          <div className="row ">
             {team.length > 0 ? (
               team.map((item, index) => (
                 <div
                   key={item.id}
-                  className={`row mb-2 ${
+                  className={`col-md-4 mb-2 px-4 ${
                     isAdmin
-                      ? "border border-warning mb-3 position-relative"
+                      ? "border border-warning position-relative"
                       : ""
                   } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
                 >
@@ -251,35 +261,106 @@ const Team = () => {
                   ) : (
                     ""
                   )}
-                  <div className="col-12 col-lg-7 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
-                    {item.team_member_name ? (
-                      <Title
-                        title={item.team_member_name}
-                        cssClass="fs-1 fw-bold mb-1"
-                      />
-                    ) : (
-                      ""
-                    )}
-                    {item.team_member_email ? (
-                      <p>{item.team_member_email}</p>
-                    ) : (
-                      ""
-                    )}
-                    {item.team_member_designation ? (
-                      <p>{item.team_member_designation}</p>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-
-                  <div className="col-lg-5 d-none d-lg-block h-100">
-                    <div className="h-100 p-3 p-md-5 py-md-4 d-flex flex-column justify-content-center align-items-center reset ">
-                      <img
+                  <img
                         src={getImagePath(item.path)}
                         alt=""
                         className="img-fluid"
                       />
-                    </div>
+
+                    <div className="">
+                    {item.team_member_name ? (
+                      <Title
+                        title={item.team_member_name}
+                        cssClass="fs-4 mt-2 title fw-bolder"
+                      />
+                    ) : (
+                      ""
+                    )}
+                    
+                    {item.team_member_designation ? (
+                      <small className="mb-1">{item.team_member_designation}</small>
+                    ) : (
+                      ""
+                    )}
+                    
+                    {item.team_member_about_us ? (
+                      <p className="aboutMe lineClamp lc3">{item.team_member_about_us}</p>
+                    ) : (
+                      ""
+                    )}
+
+                    {item.team_member_phone_number || item.team_member_email ? <hr /> : "" }
+                    
+                    {item.team_member_email ? (
+                      <div className="mb-2"><a href={`mailto:${item.team_member_email}`}>{item.team_member_email}</a></div>
+                    ) : (
+                      ""
+                    )}
+                    {item.team_member_phone_number ? (
+                      <p>{item.team_member_phone_number}</p>
+                    ) : (
+                      ""
+                    )}
+                    {item.team_member_phone_number || item.team_member_email ? <hr /> : "" }
+                   
+                    <div className="social">
+                {item.facebook_url ? (
+                  <Link to={item.facebook_url} target="_blank">
+                    <i className="fa fa-facebook-square" aria-hidden="true"></i>
+                  </Link>
+                ) : (
+                  ""
+                )}
+
+                {item.twitter_url ? (
+                  <Link to={item.twitter_url} target="_blank">
+                    <i className="fa fa-twitter-square" aria-hidden="true"></i>
+                  </Link>
+                ) : (
+                  ""
+                )}
+
+                {item.youtube_url ? (
+                  <Link to={item.youtube_url} target="_blank">
+                    <i className="fa fa-youtube-play" aria-hidden="true"></i>
+                  </Link>
+                ) : (
+                  ""
+                )}
+
+                {item.linkedIn_url ? (
+                  <Link to={item.linkedIn_url} target="_blank">
+                    <i className="fa fa-linkedin-square" aria-hidden="true"></i>
+                  </Link>
+                ) : (
+                  ""
+                )}
+
+                {item.instagram_url ? (
+                  <Link to={item.instagram_url} target="_blank">
+                    <i className="fa fa-instagram" aria-hidden="true"></i>
+                  </Link>
+                ) : (
+                  ""
+                )}
+
+                {item.vimeo_url ? (
+                  <Link to={item.vimeo_url} target="_blank">
+                    <i className="fa fa-vimeo" aria-hidden="true"></i>
+                  </Link>
+                ) : (
+                  ""
+                )}
+
+                {item.pinterest_url ? (
+                  <Link to={item.pinterest_url} target="_blank">
+                    <i className="fa fa-pinterest" aria-hidden="true"></i>
+                  </Link>
+                ) : (
+                  ""
+                )}
+                
+              </div>
                   </div>
                 </div>
               ))
@@ -289,6 +370,8 @@ const Team = () => {
               </p>
             )}
           </div>
+
+        </TeamStyled>
           <div className="row mb-4">
             {paginationData?.total_count ? (
               <CustomPagination
@@ -315,8 +398,9 @@ const Team = () => {
               ""
             )}
           </div>
+        
         </div>
-      </div>
+      
     </>
   );
 };
