@@ -6,7 +6,8 @@ import Title from "../../Common/Title";
 
 import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 import ModelBg from "../../Common/ModelBg";
-
+import { urlStringFormat } from "../../util/commonUtil";
+import { getCookie } from "../../util/cookieUtil";
 import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
 import { getImagePath } from "../../util/commonUtil";
@@ -30,6 +31,7 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
   const [bannerdata, setBannerData] = useState([]);
+  
   const ServiceBannerFormField = {
     imageTitle: {
       label: "Title",
@@ -160,8 +162,10 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
 
         <div>
           <Ancher
-            AncherLabel="More services"
-            Ancherpath="/services"
+            AncherLabel="More services" url
+            Ancherpath={`/services/${urlStringFormat(
+              getCookie("pageLoadServiceName"),
+            )}/`}
             AncherClass="btn btn-secondary d-flex justify-content-center align-items-center gap-3"
             AnchersvgColor="#ffffff"
           />
