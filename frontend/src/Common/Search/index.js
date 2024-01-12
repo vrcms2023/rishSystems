@@ -47,7 +47,7 @@ const Search = ({
   };
 
   return (
-    <div className="d-flex justify-conent-start align-items-center align-items-md-start flex-column">
+    <div className="d-flex justify-conent-start align-items-start flex-column">
       <div className="input-group mb-1 search">
         <input
           type="text"
@@ -66,9 +66,9 @@ const Search = ({
       </div>
       <div className="d-flex justify-conent-center align-items-center gap-2">
         {/* <span className="text-muted">Search by</span> */}
-        <span className="badge bg-secondary fw-normal px-4">
-          {searchfiledDeatails ? searchfiledDeatails : ""}
-        </span>
+        <small className="text-dark">
+        <span className="fw-bolder">Search by</span> : {searchfiledDeatails ? searchfiledDeatails : ""}
+        </small>
       </div>
     </div>
   );
