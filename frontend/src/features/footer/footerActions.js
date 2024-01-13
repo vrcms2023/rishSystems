@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
 
 export const getFooterValues = createAsyncThunk(
-  "project/clientProjects",
+  "footer/footerAddress",
   async (rejectWithValue) => {
     try {
       const { data } = await axiosClientServiceApi.get(
