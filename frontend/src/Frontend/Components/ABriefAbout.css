@@ -5,7 +5,7 @@
   /* border-left-width: 15px;
   border-style: Solid; */
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 /* .ABriefAbout .title::before,

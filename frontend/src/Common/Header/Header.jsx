@@ -4,17 +4,15 @@ import Button from "../Button";
 import {
   getCookie,
   removeAllCookies,
-  removeCookie,
-  setCookie,
 } from "../../util/cookieUtil";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/auth/authSlice";
 import { toast } from "react-toastify";
 import AdminHeader from "../../Admin/Components/Header";
-import _ from "lodash";
+// import _ from "lodash";
 
 import ModalBg from "../../Common/ModelBg";
-import EditIcon from "../AdminEditIcon";
+// import EditIcon from "../AdminEditIcon";
 import { hideHandBurgerIcon } from "../../util/ulrUtil";
 import { useAdminLoginStatus } from "../customhook/useAdminLoginStatus";
 
@@ -26,7 +24,7 @@ import "./Styles.css";
 
 // Images
 import Logo from "../../Images/logo.svg";
-import { axiosClientServiceApi } from "../../util/axiosUtil";
+// import { axiosClientServiceApi } from "../../util/axiosUtil";
 import { getUser } from "../../features/auth/authActions";
 import {
   storeServiceMenuValueinCookie,
@@ -263,13 +261,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
             aria-labelledby="ServicesnavbarDropdown"
           >
             {}
-            {serviceMenuList.length === 0 && isAdmin ? (
-              <li>
-                <Link to="/services/" className="dropdown-item">
-                  Add New Service
-                </Link>
-              </li>
-            ) : (
+            {
               serviceMenuList &&
               serviceMenuList.map((item) => (
                 <li key={item.id}>
@@ -286,7 +278,17 @@ export const ClientMenu = ({ serviceMenuList }) => {
                   </Link>
                 </li>
               ))
-            )}
+            }
+            {isAdmin ? 
+              <>
+              <li><hr class="dropdown-divider" /></li>
+               <li className="pt-3">
+               <Link to="/services/" className="dropdown-item btn btn-primary">
+                 Add New Service
+               </Link>
+             </li>
+             </>
+            : ""}
           </ul>
         </li>
 
