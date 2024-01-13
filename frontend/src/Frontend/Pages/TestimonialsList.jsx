@@ -174,6 +174,25 @@ const TestimonialsList = () => {
       {/* Add Clients */}
       <div className="container-fluid container-lg my-md-5 ">
         <div className="row">
+        {isAdmin ? (
+            <div className="col-md-12">
+              <div className="d-flex justify-content-end align-items-center mb-3">
+                {/* <span className="fw-bold me-2">Add Testimonials </span> */}
+                <button
+                  type="submit"
+                  className="btn btn-primary px-3"
+                  onClick={() => editHandler("addSection", true, {})}
+                >
+                  Add New Testimonials {" "}
+                  <i className="fa fa-plus ms-2" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="row">
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
             <Title title="Testimonials" cssClass="fs-1 pageTitle" />
           </div>
@@ -190,23 +209,7 @@ const TestimonialsList = () => {
               searchQuery={searchQuery}
             />
           </div>
-          {isAdmin ? (
-            <div className="col-md-6">
-              <div className="d-flex justify-content-end align-items-center mb-3">
-                <span className="fw-bold me-2">Add Testimonials </span>
-                <button
-                  type="submit"
-                  className="btn btn-primary px-3"
-                  onClick={() => editHandler("addSection", true, {})}
-                >
-                  {" "}
-                  <i className="fa fa-plus" aria-hidden="true"></i>
-                </button>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
+          
         </div>
 
         {componentEdit.editSection || componentEdit.addSection ? (
