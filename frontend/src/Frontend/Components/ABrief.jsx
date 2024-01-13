@@ -6,21 +6,22 @@ import Title from "../../Common/Title";
 
 import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 import ModelBg from "../../Common/ModelBg";
-import { urlStringFormat } from "../../util/commonUtil";
+import { storeServiceMenuValueinCookie, urlStringFormat } from "../../util/commonUtil";
 import { getCookie } from "../../util/cookieUtil";
 import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
-import { getImagePath } from "../../util/commonUtil";
+// import { getImagePath } from "../../util/commonUtil";
 import { getFormDynamicFields } from "../../util/dynamicFormFields";
 
 // Image Import
-import Logo from "../../../src/Images/logo.svg";
+// import Logo from "../../../src/Images/logo.svg";
 import circleArrow from "../../../src/Images/circleArrow.svg";
 import EditIcon from "../../Common/AdminEditIcon";
 
 // Styles
 import "./ABrief.css";
 import Ancher from "../../Common/Ancher";
+import { useSelector } from "react-redux";
 
 const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
   const editComponentObj = {
@@ -31,31 +32,36 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
   const [bannerdata, setBannerData] = useState([]);
+  const { serviceMenu } = useSelector(
+    (state) => state.serviceMenu,
+  );
+
+  console.log(serviceMenu, "ServicesMenu")
   
-  const ServiceBannerFormField = {
-    imageTitle: {
-      label: "Title",
-      type: "text",
-      fieldName: "imageTitle",
-    },
-    bannerTitle: {
-      label: "Sub Title",
-      type: "text",
-      fieldName: "bannerTitle",
-    },
-    imageDescription: {
-      label: "Description",
-      type: "textarea",
-      fieldName: "imageDescription",
-    },
-    pageType: {
-      label: "News Title",
-      readonly: true,
-      type: "hidden",
-      value: pageType ? pageType : "",
-      fieldName: "pageType",
-    },
-  };
+  // const ServiceBannerFormField = {
+  //   imageTitle: {
+  //     label: "Title",
+  //     type: "text",
+  //     fieldName: "imageTitle",
+  //   },
+  //   bannerTitle: {
+  //     label: "Sub Title",
+  //     type: "text",
+  //     fieldName: "bannerTitle",
+  //   },
+  //   imageDescription: {
+  //     label: "Description",
+  //     type: "textarea",
+  //     fieldName: "imageDescription",
+  //   },
+  //   pageType: {
+  //     label: "News Title",
+  //     readonly: true,
+  //     type: "hidden",
+  //     value: pageType ? pageType : "",
+  //     fieldName: "pageType",
+  //   },
+  // };
 
   const editHandler = (name, value) => {
     SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -69,7 +75,7 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
         const response = await axiosClientServiceApi.get(
           `banner/clientBannerIntro/${pageType}/`,
         );
-        if (response?.status == 200) {
+        if (response?.status === 200) {
           setBannerData(response.data.imageModel);
         }
       } catch (error) {
@@ -112,21 +118,22 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
             </svg>
           </p>
           <ul className="mt-5 list-unstyled servicesList">
-            <li>
+            {serviceMenu.length > 0 ? serviceMenu.slice(0, 3).map((item, index) => (
+              <li>
               <img src={circleArrow} alt="" />
-              <Link to="">
-                Program Management & Independent Verification & Validation
-                (IV&V) Support
+              <Link 
+                to={`/services/${urlStringFormat(
+                  item.services_page_title,
+                )}/`}
+                onClick={() => {
+                  storeServiceMenuValueinCookie(item);
+                }}
+              >
+                {item.services_page_title}
               </Link>
-            </li>
-            <li>
-              <img src={circleArrow} alt="" />
-              <Link to="">Software Design, Development & Maintenance</Link>
-            </li>
-            <li>
-              <img src={circleArrow} alt="" />
-              <Link to="">Infrastructure & Security</Link>
-            </li>
+            </li>  
+            )) : ""}
+           
           </ul>
         </div>
 
