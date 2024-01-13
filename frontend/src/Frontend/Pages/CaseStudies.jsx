@@ -179,14 +179,14 @@ const CaseStudies = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="d-flex justify-content-end align-items-center mb-3">
-                <span className="fw-bold me-2">Add content </span>
+                {/* <span className="fw-bold me-2">Add New </span> */}
                 <button
                   type="submit"
                   className="btn btn-primary px-3"
                   onClick={() => editHandler("addSection", true)}
                 >
-                  {" "}
-                  <i className="fa fa-plus" aria-hidden="true"></i>
+                  Add New Casestudy
+                  <i className="fa fa-plus ms-2" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
