@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'footer',
     'ourTeam',
     'imageAndVideoGallery',
+    'pagesAdministration',
     'debug_toolbar',
 ]
 

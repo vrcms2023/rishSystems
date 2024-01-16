@@ -174,7 +174,7 @@ const TestimonialsList = () => {
       {/* Add Clients */}
       <div className="container-fluid container-lg my-md-5 ">
         <div className="row">
-        {isAdmin ? (
+          {isAdmin ? (
             <div className="col-md-12">
               <div className="d-flex justify-content-end align-items-center mb-3">
                 {/* <span className="fw-bold me-2">Add Testimonials </span> */}
@@ -183,7 +183,7 @@ const TestimonialsList = () => {
                   className="btn btn-primary px-3"
                   onClick={() => editHandler("addSection", true, {})}
                 >
-                  Add New Testimonials {" "}
+                  Add New Testimonials{" "}
                   <i className="fa fa-plus ms-2" aria-hidden="true"></i>
                 </button>
               </div>
@@ -209,7 +209,6 @@ const TestimonialsList = () => {
               searchQuery={searchQuery}
             />
           </div>
-          
         </div>
 
         {componentEdit.editSection || componentEdit.addSection ? (

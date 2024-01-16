@@ -17,7 +17,6 @@ const ProjectGallery = () => {
     (state) => state.clientProjects,
   );
 
-
   const dispatch = useDispatch();
 
   useEffect(() => {

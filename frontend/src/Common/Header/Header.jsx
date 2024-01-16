@@ -1,10 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import { useNavigate, Link, NavLink } from "react-router-dom";
 import Button from "../Button";
-import {
-  getCookie,
-  removeAllCookies,
-} from "../../util/cookieUtil";
+import { getCookie, removeAllCookies } from "../../util/cookieUtil";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/auth/authSlice";
 import { toast } from "react-toastify";
@@ -30,7 +27,7 @@ import {
   storeServiceMenuValueinCookie,
   urlStringFormat,
 } from "../../util/commonUtil";
-import { sortByCreatedDate } from "../../util/dataFormatUtil";
+
 import { getServiceValues } from "../../features/services/serviceActions";
 
 const Header = () => {
@@ -42,8 +39,6 @@ const Header = () => {
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const [userName, setUserName] = useState("");
-  const [loginState, setLoginState] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
   const { serviceMenu, serviceerror } = useSelector(
     (state) => state.serviceMenu,
@@ -76,8 +71,8 @@ const Header = () => {
     "password",
   ];
   const isHideBurgetIcon = hideHandBurgerIcon(burgetHide);
-  const [selectedServiceProject, setSelectedServiceProject] = useState({});
   const [serviceMenuList, setServiceMenuList] = useState([]);
+  const [userName, setUserName] = useState("");
 
   const editHandler = (name, value) => {
     SetComponentEdit((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -95,23 +90,19 @@ const Header = () => {
         storeServiceMenuValueinCookie(serviceMenu[0]);
       }
     }
-  }, [serviceMenu]);
+  }, [serviceMenu, dispatch]);
 
   useEffect(() => {
     if (userInfo || getCookie("access")) {
-      setLoginState(true);
       const uName = userInfo ? userInfo.userName : getCookie("userName");
       setUserName(uName);
     } else {
-      setLoginState(false);
       setUserName("");
     }
     if (!userInfo && getCookie("access")) {
       dispatch(getUser());
     }
   }, [userInfo]);
-
-
 
   const links = document.querySelectorAll("#navbarSupportedContent li");
 
@@ -128,7 +119,6 @@ const Header = () => {
 
   function logOutHandler() {
     removeAllCookies();
-    setLoginState(false);
     dispatch(logout());
     toast.success("Logout successfully");
     navigate("/");
@@ -186,35 +176,35 @@ const Header = () => {
   );
 };
 
-export const AdminMenu = ({ userName, logOutHandler }) => {
-  return (
-    <>
-      <ul className="mt-4 navbar-nav ms-auto mb-2 mb-lg-0">
-        <li className="text-dark text-capitalize d-flex justify-content-center align-items-center">
-          {userName ? (
-            <>
-              <i
-                className="fa fa-user-circle-o fs-1 text-secondary me-2 "
-                aria-hidden="true"
-              ></i>{" "}
-              {userName}
-            </>
-          ) : (
-            ""
-          )}
-        </li>
-        <li className="nav-item mx-3">
-          <Button
-            type="submit"
-            cssClass="btn border border-secondary fw-bold ms-3"
-            label="Logout"
-            handlerChange={logOutHandler}
-          />
-        </li>
-      </ul>
-    </>
-  );
-};
+// export const AdminMenu = ({ userName, logOutHandler }) => {
+//   return (
+//     <>
+//       <ul className="mt-4 navbar-nav ms-auto mb-2 mb-lg-0">
+//         <li className="text-dark text-capitalize d-flex justify-content-center align-items-center">
+//           {userName ? (
+//             <>
+//               <i
+//                 className="fa fa-user-circle-o fs-1 text-secondary me-2 "
+//                 aria-hidden="true"
+//               ></i>{" "}
+//               {userName}
+//             </>
+//           ) : (
+//             ""
+//           )}
+//         </li>
+//         <li className="nav-item mx-3">
+//           <Button
+//             type="submit"
+//             cssClass="btn border border-secondary fw-bold ms-3"
+//             label="Logout"
+//             handlerChange={logOutHandler}
+//           />
+//         </li>
+//       </ul>
+//     </>
+//   );
+// };
 export const ClientMenu = ({ serviceMenuList }) => {
   const isAdmin = useAdminLoginStatus();
   return (
@@ -261,8 +251,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
             aria-labelledby="ServicesnavbarDropdown"
           >
             {}
-            {
-              serviceMenuList &&
+            {serviceMenuList &&
               serviceMenuList.map((item) => (
                 <li key={item.id}>
                   <Link
@@ -277,18 +266,24 @@ export const ClientMenu = ({ serviceMenuList }) => {
                     {item.services_page_title}
                   </Link>
                 </li>
-              ))
-            }
-            {isAdmin ? 
+              ))}
+            {isAdmin ? (
               <>
-              <li><hr class="dropdown-divider" /></li>
-               <li className="pt-3">
-               <Link to="/services/" className="dropdown-item btn btn-primary">
-                 Add New Service
-               </Link>
-             </li>
-             </>
-            : ""}
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li className="pt-3">
+                  <Link
+                    to="/services/"
+                    className="dropdown-item btn btn-primary"
+                  >
+                    Add New Service
+                  </Link>
+                </li>
+              </>
+            ) : (
+              ""
+            )}
           </ul>
         </li>
 
@@ -419,6 +414,9 @@ export const ClientMenu = ({ serviceMenuList }) => {
                 </Link>
                 <Link to="/dashboard" className="dropdown-item">
                   Dashboard
+                </Link>
+                <Link to="/adminPagesConfigurtion" className="dropdown-item">
+                  Pages Configurtion
                 </Link>
               </li>
             </ul>

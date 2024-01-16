@@ -173,7 +173,7 @@ const ClientsList = () => {
       {/* Add Clients */}
       <div className="container-fluid container-lg my-md-5 ">
         <div className="row">
-        {isAdmin ? (
+          {isAdmin ? (
             <div className="col-md-12">
               <div className="d-flex justify-content-end align-items-center mb-3">
                 {/* <span className="fw-bold me-2">Add content </span> */}
@@ -182,7 +182,7 @@ const ClientsList = () => {
                   className="btn btn-primary px-3"
                   onClick={() => editHandler("addSection", true, {})}
                 >
-                  Add New Client {" "}
+                  Add New Client{" "}
                   <i className="fa fa-plus ms-2" aria-hidden="true"></i>
                 </button>
               </div>
@@ -190,7 +190,7 @@ const ClientsList = () => {
           ) : (
             ""
           )}
-        </div>        
+        </div>
 
         <div className="row">
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
@@ -209,7 +209,6 @@ const ClientsList = () => {
               searchQuery={searchQuery}
             />
           </div>
-          
         </div>
 
         {componentEdit.editSection || componentEdit.addSection ? (

@@ -68,7 +68,7 @@ const Team = () => {
         const response = await axiosClientServiceApi.get(
           `/ourteam/clentViewOurTeamDetails/`,
         );
-        console.log("team response", response)
+        console.log("team response", response);
         if (response?.status === 200) {
           setResponseData(response.data);
         }
@@ -182,9 +182,9 @@ const Team = () => {
               ""
             )}
           </div>
-          </div>
+        </div>
 
-          <div className="row">
+        <div className="row">
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
             <Title title="Our Team" cssClass="fs-1 pageTitle" />
           </div>
@@ -201,44 +201,40 @@ const Team = () => {
               searchQuery={searchQuery}
             />
           </div>
+        </div>
+
+        {componentEdit.editSection || componentEdit.addSection ? (
+          <div className="adminEditTestmonial">
+            <AddEditTeam
+              editHandler={editHandler}
+              category="team"
+              editCarousel={editCarousel}
+              setEditCarousel={setEditCarousel}
+              componentType={`${
+                componentEdit.editSection ? "editSection" : "addSection"
+              }`}
+              getImageListURL="ourteam/createteam/"
+              deleteImageURL="ourteam/UpdateOurteamDetail/"
+              imagePostURL="ourteam/createteam/"
+              imageUpdateURL="ourteam/UpdateOurteamDetail/"
+              imageLabel="Add Profile Image"
+              showDescription={false}
+              showExtraFormFields={getTeamMemberFields()}
+              dimensions={imageDimensionsJson("teams")}
+            />
           </div>
-          
-          
-          {componentEdit.editSection || componentEdit.addSection ? (
-            <div className="adminEditTestmonial">
-              <AddEditTeam
-                editHandler={editHandler}
-                category="team"
-                editCarousel={editCarousel}
-                setEditCarousel={setEditCarousel}
-                componentType={`${
-                  componentEdit.editSection ? "editSection" : "addSection"
-                }`}
-                getImageListURL="ourteam/createteam/"
-                deleteImageURL="ourteam/UpdateOurteamDetail/"
-                imagePostURL="ourteam/createteam/"
-                imageUpdateURL="ourteam/UpdateOurteamDetail/"
-                imageLabel="Add Profile Image"
-                showDescription={false}
-                showExtraFormFields={getTeamMemberFields()}
-                dimensions={imageDimensionsJson("teams")}
-              />
-            </div>
-          ) : (
-            ""
-          )}
+        ) : (
+          ""
+        )}
 
-
-          <TeamStyled>
+        <TeamStyled>
           <div className="row ">
             {team.length > 0 ? (
               team.map((item, index) => (
                 <div
                   key={item.id}
                   className={`col-md-4 mb-2 px-4 ${
-                    isAdmin
-                      ? "border border-warning position-relative"
-                      : ""
+                    isAdmin ? "border border-warning position-relative" : ""
                   } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
                 >
                   {isAdmin ? (
@@ -262,12 +258,12 @@ const Team = () => {
                     ""
                   )}
                   <img
-                        src={getImagePath(item.path)}
-                        alt=""
-                        className="img-fluid"
-                      />
+                    src={getImagePath(item.path)}
+                    alt=""
+                    className="img-fluid"
+                  />
 
-                    <div className="">
+                  <div className="">
                     {item.team_member_name ? (
                       <Title
                         title={item.team_member_name}
@@ -276,23 +272,35 @@ const Team = () => {
                     ) : (
                       ""
                     )}
-                    
+
                     {item.team_member_designation ? (
-                      <small className="mb-1">{item.team_member_designation}</small>
-                    ) : (
-                      ""
-                    )}
-                    
-                    {item.team_member_about_us ? (
-                      <p className="aboutMe lineClamp lc3">{item.team_member_about_us}</p>
+                      <small className="mb-1">
+                        {item.team_member_designation}
+                      </small>
                     ) : (
                       ""
                     )}
 
-                    {item.team_member_phone_number || item.team_member_email ? <hr /> : "" }
-                    
+                    {item.team_member_about_us ? (
+                      <p className="aboutMe lineClamp lc3">
+                        {item.team_member_about_us}
+                      </p>
+                    ) : (
+                      ""
+                    )}
+
+                    {item.team_member_phone_number || item.team_member_email ? (
+                      <hr />
+                    ) : (
+                      ""
+                    )}
+
                     {item.team_member_email ? (
-                      <div className="mb-2"><a href={`mailto:${item.team_member_email}`}>{item.team_member_email}</a></div>
+                      <div className="mb-2">
+                        <a href={`mailto:${item.team_member_email}`}>
+                          {item.team_member_email}
+                        </a>
+                      </div>
                     ) : (
                       ""
                     )}
@@ -301,66 +309,81 @@ const Team = () => {
                     ) : (
                       ""
                     )}
-                    {item.team_member_phone_number || item.team_member_email ? <hr /> : "" }
-                   
+                    {item.team_member_phone_number || item.team_member_email ? (
+                      <hr />
+                    ) : (
+                      ""
+                    )}
+
                     <div className="social">
-                {item.facebook_url ? (
-                  <Link to={item.facebook_url} target="_blank">
-                    <i className="fa fa-facebook-square" aria-hidden="true"></i>
-                  </Link>
-                ) : (
-                  ""
-                )}
+                      {item.facebook_url ? (
+                        <Link to={item.facebook_url} target="_blank">
+                          <i
+                            className="fa fa-facebook-square"
+                            aria-hidden="true"
+                          ></i>
+                        </Link>
+                      ) : (
+                        ""
+                      )}
 
-                {item.twitter_url ? (
-                  <Link to={item.twitter_url} target="_blank">
-                    <i className="fa fa-twitter-square" aria-hidden="true"></i>
-                  </Link>
-                ) : (
-                  ""
-                )}
+                      {item.twitter_url ? (
+                        <Link to={item.twitter_url} target="_blank">
+                          <i
+                            className="fa fa-twitter-square"
+                            aria-hidden="true"
+                          ></i>
+                        </Link>
+                      ) : (
+                        ""
+                      )}
 
-                {item.youtube_url ? (
-                  <Link to={item.youtube_url} target="_blank">
-                    <i className="fa fa-youtube-play" aria-hidden="true"></i>
-                  </Link>
-                ) : (
-                  ""
-                )}
+                      {item.youtube_url ? (
+                        <Link to={item.youtube_url} target="_blank">
+                          <i
+                            className="fa fa-youtube-play"
+                            aria-hidden="true"
+                          ></i>
+                        </Link>
+                      ) : (
+                        ""
+                      )}
 
-                {item.linkedIn_url ? (
-                  <Link to={item.linkedIn_url} target="_blank">
-                    <i className="fa fa-linkedin-square" aria-hidden="true"></i>
-                  </Link>
-                ) : (
-                  ""
-                )}
+                      {item.linkedIn_url ? (
+                        <Link to={item.linkedIn_url} target="_blank">
+                          <i
+                            className="fa fa-linkedin-square"
+                            aria-hidden="true"
+                          ></i>
+                        </Link>
+                      ) : (
+                        ""
+                      )}
 
-                {item.instagram_url ? (
-                  <Link to={item.instagram_url} target="_blank">
-                    <i className="fa fa-instagram" aria-hidden="true"></i>
-                  </Link>
-                ) : (
-                  ""
-                )}
+                      {item.instagram_url ? (
+                        <Link to={item.instagram_url} target="_blank">
+                          <i className="fa fa-instagram" aria-hidden="true"></i>
+                        </Link>
+                      ) : (
+                        ""
+                      )}
 
-                {item.vimeo_url ? (
-                  <Link to={item.vimeo_url} target="_blank">
-                    <i className="fa fa-vimeo" aria-hidden="true"></i>
-                  </Link>
-                ) : (
-                  ""
-                )}
+                      {item.vimeo_url ? (
+                        <Link to={item.vimeo_url} target="_blank">
+                          <i className="fa fa-vimeo" aria-hidden="true"></i>
+                        </Link>
+                      ) : (
+                        ""
+                      )}
 
-                {item.pinterest_url ? (
-                  <Link to={item.pinterest_url} target="_blank">
-                    <i className="fa fa-pinterest" aria-hidden="true"></i>
-                  </Link>
-                ) : (
-                  ""
-                )}
-                
-              </div>
+                      {item.pinterest_url ? (
+                        <Link to={item.pinterest_url} target="_blank">
+                          <i className="fa fa-pinterest" aria-hidden="true"></i>
+                        </Link>
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   </div>
                 </div>
               ))
@@ -370,37 +393,34 @@ const Team = () => {
               </p>
             )}
           </div>
-
         </TeamStyled>
-          <div className="row mb-4">
-            {paginationData?.total_count ? (
-              <CustomPagination
-                paginationData={paginationData}
-                paginationURL={
-                  isAdmin
-                    ? "/ourteam/createteam/"
-                    : "/clieourteamnt/clentViewOurTeamDetails/"
-                }
-                paginationSearchURL={
-                  searchQuery
-                    ? `/ourteam/OurteamSearchAPIView/${searchQuery}/`
-                    : isAdmin
-                    ? "/ourteam/createteam/"
-                    : "/ourteam/clentViewOurTeamDetails/"
-                }
-                searchQuery={searchQuery}
-                setCurrentPage={setCurrentPage}
-                currentPage={currentPage}
-                setResponseData={setResponseData}
-                pageLoadResult={pageLoadResult}
-              />
-            ) : (
-              ""
-            )}
-          </div>
-        
+        <div className="row mb-4">
+          {paginationData?.total_count ? (
+            <CustomPagination
+              paginationData={paginationData}
+              paginationURL={
+                isAdmin
+                  ? "/ourteam/createteam/"
+                  : "/clieourteamnt/clentViewOurTeamDetails/"
+              }
+              paginationSearchURL={
+                searchQuery
+                  ? `/ourteam/OurteamSearchAPIView/${searchQuery}/`
+                  : isAdmin
+                  ? "/ourteam/createteam/"
+                  : "/ourteam/clentViewOurTeamDetails/"
+              }
+              searchQuery={searchQuery}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+              setResponseData={setResponseData}
+              pageLoadResult={pageLoadResult}
+            />
+          ) : (
+            ""
+          )}
         </div>
-      
+      </div>
     </>
   );
 };

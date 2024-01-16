@@ -54,7 +54,7 @@ const Projects = () => {
   }, []);
 
   useEffect(() => {
-  removeActiveClass()
+    removeActiveClass();
   }, []);
 
   const editHandler = (name, value) => {
