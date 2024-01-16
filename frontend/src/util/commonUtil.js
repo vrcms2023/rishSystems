@@ -1,9 +1,19 @@
 import moment from "moment";
 import { getBaseURL } from "./ulrUtil";
+import _ from "lodash";
 import { removeCookie, setCookie } from "./cookieUtil";
 
 export const generateOptionLength = (values) => {
-  return Array.from({ length: values }, (_, i) => i + 1);
+  let value = Array.from({ length: values }, (_, i) => i + 1);
+  let optionList = [];
+  value.forEach(function test(item) {
+    let option = {
+      label: item,
+      value: item,
+    };
+    optionList.push(option);
+  });
+  return optionList;
 };
 
 export const showPosteddate = (dt) => {
@@ -73,4 +83,35 @@ export const paginationDataFormat = (data) => {
     next_url: data.next,
     previous_url: data.previous,
   };
+};
+
+export const getMenuObject = (data) => {
+  const parentMenu = _.filter(data, (item) => {
+    return item.is_Parent;
+  });
+  const sortParentMenu = _.sortBy(parentMenu, (item) => {
+    return item.page_position;
+  });
+  const childList = _.filter(data, (item) => {
+    return !item.is_Parent;
+  });
+
+  sortParentMenu.forEach((parent) => {
+    childList.forEach((child) => {
+      if (child?.page_parent_ID === parent?.id) {
+        if (parent.childMenu) {
+          parent.childMenu.push(child);
+        } else {
+          parent["childMenu"] = [];
+          parent.childMenu.push(child);
+        }
+      }
+      if (parent?.childMenu?.length > 0) {
+        parent.childMenu = _.sortBy(parent.childMenu, (item) => {
+          return item.page_position;
+        });
+      }
+    });
+  });
+  return sortParentMenu;
 };

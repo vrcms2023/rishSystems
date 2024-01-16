@@ -61,6 +61,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import CaseStudiesDetails from "./Frontend/Pages/caseStudies-details";
 import Team from "./Frontend/Pages/Team";
+import PagesConfiguration from "./Admin/Pages/Auth/PagesConfiguration";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -250,7 +251,15 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            ContactUSAdmin
+            <Route
+              exact
+              path="/adminPagesConfigurtion"
+              element={
+                <ProtectedRoute>
+                  <PagesConfiguration />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
           {isHideMenu ? null : <Footer />}
         </BrowserRouter>

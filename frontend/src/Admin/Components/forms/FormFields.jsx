@@ -24,6 +24,7 @@ export const InputFields = ({
               {...register(fieldName)}
               value={value}
               type={type}
+              onChange={rest.onChange}
               className="form-control p-2"
             />
           </div>
@@ -69,6 +70,27 @@ export const InputFields = ({
               value={value}
               rows="7"
             ></textarea>
+          </div>
+        </div>
+      );
+    case "checkbox":
+      return (
+        <div className="mb-3 row">
+          <label
+            htmlFor=""
+            className="col-sm-3 col-form-label text-start text-md-end text-capitalize"
+          >
+            {label}
+          </label>
+          <div className="col-sm-9">
+            <input
+              {...{
+                checked: rest.checked,
+                onChange: rest.changeHandler,
+              }}
+              type={type}
+              className="form-check-input"
+            />
           </div>
         </div>
       );
@@ -136,7 +158,13 @@ export const InputField = ({
   );
 };
 
-export const SelectField = ({ label, fieldName, register, options }) => {
+export const SelectField = ({
+  label,
+  fieldName,
+  register,
+  options,
+  ...rest
+}) => {
   return (
     <div className="mb-3 row">
       <label
@@ -147,15 +175,14 @@ export const SelectField = ({ label, fieldName, register, options }) => {
       </label>
       <div className="col-sm-9">
         <select
+          defaultValue={"Choose..."}
           className="custom-select custom-select-lg form-control p-2"
           {...register(fieldName)}
         >
-          <option selected value="0">
-            Choose...
-          </option>
+          <option value="0">Choose...</option>
           {options.map((option, index) => (
-            <option key={index} value={option}>
-              {option}
+            <option key={index} value={option.value}>
+              {option.label}
             </option>
           ))}
         </select>

@@ -6,7 +6,10 @@ import Title from "../../Common/Title";
 
 import { useAdminLoginStatus } from "../../Common/customhook/useAdminLoginStatus";
 import ModelBg from "../../Common/ModelBg";
-import { storeServiceMenuValueinCookie, urlStringFormat } from "../../util/commonUtil";
+import {
+  storeServiceMenuValueinCookie,
+  urlStringFormat,
+} from "../../util/commonUtil";
 import { getCookie } from "../../util/cookieUtil";
 import ImageInputsForm from "../../Admin/Components/forms/ImgTitleIntoForm";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
@@ -32,12 +35,10 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
   const [bannerdata, setBannerData] = useState([]);
-  const { serviceMenu } = useSelector(
-    (state) => state.serviceMenu,
-  );
+  const { serviceMenu } = useSelector((state) => state.serviceMenu);
 
-  console.log(serviceMenu, "ServicesMenu")
-  
+  console.log(serviceMenu, "ServicesMenu");
+
   // const ServiceBannerFormField = {
   //   imageTitle: {
   //     label: "Title",
@@ -118,22 +119,23 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
             </svg>
           </p>
           <ul className="mt-5 list-unstyled servicesList">
-            {serviceMenu.length > 0 ? serviceMenu.slice(0, 3).map((item, index) => (
-              <li>
-              <img src={circleArrow} alt="" />
-              <Link 
-                to={`/services/${urlStringFormat(
-                  item.services_page_title,
-                )}/`}
-                onClick={() => {
-                  storeServiceMenuValueinCookie(item);
-                }}
-              >
-                {item.services_page_title}
-              </Link>
-            </li>  
-            )) : ""}
-           
+            {serviceMenu.length > 0
+              ? serviceMenu.slice(0, 3).map((item, index) => (
+                  <li>
+                    <img src={circleArrow} alt="" />
+                    <Link
+                      to={`/services/${urlStringFormat(
+                        item.services_page_title,
+                      )}/`}
+                      onClick={() => {
+                        storeServiceMenuValueinCookie(item);
+                      }}
+                    >
+                      {item.services_page_title}
+                    </Link>
+                  </li>
+                ))
+              : ""}
           </ul>
         </div>
 
@@ -169,7 +171,8 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
 
         <div>
           <Ancher
-            AncherLabel="More services" url
+            AncherLabel="More services"
+            url
             Ancherpath={`/services/${urlStringFormat(
               getCookie("pageLoadServiceName"),
             )}/`}
