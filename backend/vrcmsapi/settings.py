@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'ourTeam',
     'imageAndVideoGallery',
     'pagesAdministration',
+    'pagePermissions',
     'debug_toolbar',
 ]
 

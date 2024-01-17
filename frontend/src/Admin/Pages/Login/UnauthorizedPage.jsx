@@ -8,11 +8,11 @@ const UnauthorizedPage = () => {
   const dispatch = useDispatch();
   const userName = localStorage.getItem("userName");
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(logout());
-    }, 5000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     dispatch(logout());
+  //   }, 5000);
+  // }, []);
 
   return (
     <div

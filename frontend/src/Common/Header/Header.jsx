@@ -93,7 +93,7 @@ const Header = () => {
   }, [serviceMenu, dispatch]);
 
   useEffect(() => {
-    if (userInfo || getCookie("access")) {
+    if (userInfo) {
       const uName = userInfo ? userInfo.userName : getCookie("userName");
       setUserName(uName);
     } else {
@@ -207,6 +207,7 @@ const Header = () => {
 // };
 export const ClientMenu = ({ serviceMenuList }) => {
   const isAdmin = useAdminLoginStatus();
+  const { userInfo } = useSelector((state) => state.auth);
   return (
     <StyledMenu>
       <ul className="navbar-nav ms-auto mb-2 mb-lg-0 menu">
@@ -400,11 +401,26 @@ export const ClientMenu = ({ serviceMenuList }) => {
               aria-labelledby="AdminSettingnavbarDropdown"
             >
               <li>
+                {userInfo?.is_admin ? (
+                  <>
+                    <Link to="/userAdmin" className="dropdown-item">
+                      Users
+                    </Link>
+                    <Link to="/userPermission" className="dropdown-item">
+                      User Pages Permissions
+                    </Link>
+                    <Link
+                      to="/adminPagesConfigurtion"
+                      className="dropdown-item"
+                    >
+                      Pages Configurtion
+                    </Link>
+                  </>
+                ) : (
+                  ""
+                )}
                 <Link to="/contactUSList" className="dropdown-item">
                   Contact List
-                </Link>
-                <Link to="/userAdmin" className="dropdown-item">
-                  Users
                 </Link>
                 <Link to="/change_password" className="dropdown-item">
                   Change Password
@@ -414,9 +430,6 @@ export const ClientMenu = ({ serviceMenuList }) => {
                 </Link>
                 <Link to="/dashboard" className="dropdown-item">
                   Dashboard
-                </Link>
-                <Link to="/adminPagesConfigurtion" className="dropdown-item">
-                  Pages Configurtion
                 </Link>
               </li>
             </ul>
