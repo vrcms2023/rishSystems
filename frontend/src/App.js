@@ -62,6 +62,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import CaseStudiesDetails from "./Frontend/Pages/caseStudies-details";
 import Team from "./Frontend/Pages/Team";
 import PagesConfiguration from "./Admin/Pages/Auth/PagesConfiguration";
+import UserPagePermission from "./Admin/Pages/Auth/UserPagePermission";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -84,12 +85,13 @@ function App() {
     "/testimonial",
     "/contactUSList",
     "/userAdmin",
+    "/userPermission",
   ];
   let isHideMenu =
     pathList.indexOf(window.location.pathname) >= 0 ? true : false;
 
   useEffect(() => {
-    if (userInfo || getCookie("access")) {
+    if (userInfo) {
       setLoginState(true);
     } else {
       setLoginState(false);
@@ -217,7 +219,7 @@ function App() {
               path="/userAdmin"
               element={
                 <ProtectedRoute>
-                  <UserAdmin />{" "}
+                  {userInfo?.is_admin ? <UserAdmin /> : <UnauthorizedPage />}
                 </ProtectedRoute>
               }
             />
@@ -256,7 +258,24 @@ function App() {
               path="/adminPagesConfigurtion"
               element={
                 <ProtectedRoute>
-                  <PagesConfiguration />
+                  {userInfo?.is_admin ? (
+                    <PagesConfiguration />
+                  ) : (
+                    <UnauthorizedPage />
+                  )}
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/userPermission"
+              element={
+                <ProtectedRoute>
+                  {userInfo?.is_admin ? (
+                    <UserPagePermission />
+                  ) : (
+                    <UnauthorizedPage />
+                  )}
                 </ProtectedRoute>
               }
             />
