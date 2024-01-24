@@ -64,23 +64,5 @@ class UpdatePageDetails(APIView):
 Client Service View
 """
     
-class ClientPageDetailsAPIView(generics.CreateAPIView):
-    permission_classes = [permissions.AllowAny]
-    queryset = PageDetails.objects.all()
-    serializer_class = PagesAdministrationSerializer
 
-    """
-    List all PageDetails, or create a new PageDetails.
-    """
-
-    def get_object(self):
-        try:
-            return PageDetails.objects.get(page_isActive=True)
-        except PageDetails.DoesNotExist:
-            raise Http404
-
-    def get(self, request, format=None):
-        snippets = self.get_object()
-        serializer = PagesAdministrationSerializer(snippets, many=True)
-        return Response({"PageDetails": serializer.data}, status=status.HTTP_200_OK)
     
