@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,8 @@ import { getCookie } from "../../../util/cookieUtil";
 import { confirmAlert } from "react-confirm-alert";
 import DeleteDialog from "../../../Common/DeleteDialog";
 import { getMenuObject } from "../../../util/commonUtil";
+import Button from "../../../Common/Button";
+import Error from "../../Components/Error";
 
 const UserPagePermission = () => {
   const [userDetails, setUserDetails] = useState([]);
@@ -17,15 +19,21 @@ const UserPagePermission = () => {
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
   const [menuDetails, setMenuDetails] = useState([]);
+  const [menuList, setMenuList] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [isCheckAll, setIsCheckAll] = useState(false);
-  const [isCheck, setIsCheck] = useState([]);
+  const [isUserCheck, setIsUserCheck] = useState([]);
+  const [isMenuCheck, setIsMenuCheck] = useState([]);
+  const [userPermission, setUserPermission] = useState({});
 
   useEffect(() => {
     setUserName(getCookie("userName"));
     setisSuperAdmin(JSON.parse(getCookie("is_admin")));
     setUserId(JSON.parse(getCookie("userId")));
   }, []);
+
+
+  
 
   /**
    * get User details
@@ -43,6 +51,7 @@ const UserPagePermission = () => {
     }
   };
 
+
   /**
    * get Menu details
    */
@@ -50,8 +59,9 @@ const UserPagePermission = () => {
     try {
       const response = await axiosServiceApi.get(`/pageMenu/createPageMenu/`);
       if (response?.status === 200 && response?.data?.PageDetails?.length > 0) {
-        const result = getMenuObject(response.data.PageDetails);
-        setMenuDetails(result);
+        const res =JSON.parse(JSON.stringify(response.data.PageDetails));
+        setMenuList(res)
+        setMenuDetails(getMenuObject(response.data.PageDetails));
       } else {
         setMenuDetails([]);
       }
@@ -65,17 +75,128 @@ const UserPagePermission = () => {
     getMenuDetails();
   }, []);
 
-  const userSelection = (user) => {
-    console.log(user);
+  const handleSelectAll = e => {
+    setIsCheckAll(!isCheckAll);
+    const listOfObj = menuList.map(item =>  ({id :item.id, name :item.page_label}))
+    setIsMenuCheck(listOfObj);
+    if (isCheckAll) {
+      setIsMenuCheck([]);
+    }
+  };
+
+  const userSelection = (e, user) => {
+    const { id, checked } = e.target;
+    setIsMenuCheck([]);
+    setIsCheckAll(false)
+    setErrorMessage('')
+    setIsUserCheck([...isUserCheck, {id, user}]);
+    if(checked){
+      getSelectedUserPermisisons(id)
+    }
+    
+    if (!checked) {
+      setIsUserCheck(isUserCheck.filter((item) => item.id !== id));
+    }
   };
 
   const handleClick = (e) => {
-    const { id, checked, name } = e.target;
-    setIsCheck([...isCheck, id]);
+    const { id, name, checked } = e.target;
+    setIsCheckAll(false);
+    setIsMenuCheck([...isMenuCheck, {id, name}]);
     if (!checked) {
-      setIsCheck(isCheck.filter((item) => item !== id));
+      setIsMenuCheck(isMenuCheck.filter((item) => item.id !== id));
     }
   };
+
+  const isObjectChecked = (ObbArray, id) =>{
+    const item = ObbArray.filter((item) => item.id === id)
+    if(item.length > 0){
+      return true
+    }else {
+     return false
+    }
+  }
+
+  const isObjectDisabled = (ObbArray, id) =>{
+    if(ObbArray.length === 0) return; 
+    const item = ObbArray.filter((item) => item.id === id)
+    if(item.length > 0){
+      return false
+    }else {
+     return true
+    }
+  }
+
+  const saveHandle = async () => {
+   
+    const selectedUser = isUserCheck[0]?.user
+    if(!selectedUser) {
+      setErrorMessage("Please select user")
+      window.scrollTo(0, 0);
+      return;
+    }
+    const id = userPermission?.id;
+    const data = {
+      user_name : selectedUser.userName,
+      user_id : selectedUser.id,
+      user_email : selectedUser.email,
+      user_permission_list : isMenuCheck,
+      created_by :getCookie("userName")
+    }
+
+    if (id) {
+      userPermission.user_permission_list = isMenuCheck
+      userPermission["updated_by"] = getCookie("userName");
+    } 
+   
+    console.log(data, userPermission)
+    try {
+      let response = '';
+      if (id) {
+        response = await axiosServiceApi.patch(`/pagePermission/updatePermissions/${id}/`,
+        userPermission,
+      );
+      }else {
+        response = await axiosServiceApi.post(`/pagePermission/createPermissions/`,
+        data,
+      );
+      }
+      
+      if ((response?.status === 201 || response?.status === 200) && response?.data?.userPermissions) {
+          console.log(response?.data?.userPermissions)
+          setUserPermission(response?.data?.userPermissions)
+      }else{
+        setUserPermission({})
+      }
+    } catch (error) {
+      toast.error("Unable to save user permission");
+    }
+  }
+
+
+  /**
+   * get User details
+   */
+  const getSelectedUserPermisisons = async (id) => {
+    try {
+      const response = await axiosServiceApi.get(`/pagePermission/updatePermissions/${id}/`);
+      if (response?.status === 200 && response?.data?.userPermissions) {
+        const permission = response?.data?.userPermissions
+        setUserPermission(permission)
+        setIsMenuCheck(permission.user_permission_list)
+        if(menuList.length === permission.user_permission_list.length){
+          setIsCheckAll(true);
+        }
+      } else {
+        setUserPermission({})
+      }
+    } catch (error) {
+      toast.error("Unable to load user details");
+      setUserPermission({})
+    }
+  };
+
+
 
   const childContent = (menu, isChild) => {
     return (
@@ -96,7 +217,8 @@ const UserPagePermission = () => {
                 name={menu.page_label}
                 id={menu.id}
                 handleClick={handleClick}
-                isChecked={isCheck.includes(menu.id)}
+                isChecked={isObjectChecked(isMenuCheck, menu.id)}
+                disabled={false}
               />
             </span>
           ) : (
@@ -125,6 +247,9 @@ const UserPagePermission = () => {
 
       <div className="row px-3 px-lg-5 py-4 table-responsive">
         <div className="col-6">
+        {errorMessage ? (
+          <Error>{errorMessage}</Error>
+        ) :''}
           <table className="table table-striped table-hover">
             <thead>
               <tr>
@@ -143,14 +268,18 @@ const UserPagePermission = () => {
                     {user.email}
                   </td>
                   <td className={`${user.is_admin ? "text-danger" : ""}`}>
+                   
                     {user.id !== userId && !user.is_admin ? (
-                      <input
-                        name="userCheckbox"
-                        type="checkbox"
-                        onClick={() => {
-                          userSelection(user);
-                        }}
+                       <Checkbox
+                          key={user.id}
+                          type="checkbox"
+                          name={user.userName}
+                          id={user.id}
+                          handleClick={(e) => {userSelection(e, user);}}
+                          isChecked={isObjectChecked(isUserCheck, user.id.toString())}
+                          disabled={isObjectDisabled(isUserCheck, user.id.toString())}
                       />
+                     
                     ) : (
                       ""
                     )}
@@ -162,26 +291,41 @@ const UserPagePermission = () => {
         </div>
         <div className="col-6">
           <ul className="list-group">
+            <li className="list-group-item d-flex justify-content-between align-items-start">
+              Select All 
+            <span className="badge">
+              <Checkbox
+                type="checkbox"
+                name="selectAll"
+                id="selectAll"
+                handleClick={handleSelectAll}
+                isChecked={isCheckAll}
+              />
+            </span>
+            </li>
+          </ul>
+          <ul className="list-group">
             {menuDetails?.map((menu) => childContent(menu, false))}
           </ul>
-
-          {/* {menuDetails?.length > 0 ? (
-                    <ul class="list-group">
-                        <li class="list-group-item">{page_label}</li>
-                        {menuDetails?.childMenu?.length > 0 ? (
-                          <ul class="list-group">
-                            <li class="list-group-item">{page_label}</li>
-                          </ul>
-                        ) :'' }
-                    </ul>
-                ):''} */}
         </div>
       </div>
+      <div className="row">
+            <div className="d-flex justify-content-center align-items-center gap-1 gap-md-3 ">
+          
+              <Button
+                type="submit"
+                cssClass="btn btn-primary"
+                label={"save"}
+                handlerChange={saveHandle}
+              />
+            
+            </div>
+          </div>
     </div>
   );
 };
 
-const Checkbox = ({ id, type, name, handleClick, isChecked }) => {
+const Checkbox = ({ id, type, name, handleClick, isChecked, disabled }) => {
   return (
     <input
       id={id}
@@ -189,6 +333,7 @@ const Checkbox = ({ id, type, name, handleClick, isChecked }) => {
       type={type}
       onChange={handleClick}
       checked={isChecked}
+      disabled={disabled}
     />
   );
 };

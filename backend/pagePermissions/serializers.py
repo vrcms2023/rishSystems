@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import *
 
 
-class CaseStudiesSerializer(serializers.ModelSerializer):
+class UserPermissionsSerializer(serializers.ModelSerializer):
      class Meta:
-        fields = '__all__'
+         model = UserPermissions
+         fields = '__all__'
