@@ -37,8 +37,6 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
   const [bannerdata, setBannerData] = useState([]);
   const { serviceMenu } = useSelector((state) => state.serviceMenu);
 
-  console.log(serviceMenu, "ServicesMenu");
-
   // const ServiceBannerFormField = {
   //   imageTitle: {
   //     label: "Title",
@@ -121,7 +119,7 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
           <ul className="mt-5 list-unstyled servicesList">
             {serviceMenu.length > 0
               ? serviceMenu.slice(0, 3).map((item, index) => (
-                  <li>
+                  <li key={index}>
                     <img src={circleArrow} alt="" />
                     <Link
                       to={`/services/${urlStringFormat(
