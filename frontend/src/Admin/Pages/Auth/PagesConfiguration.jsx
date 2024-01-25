@@ -110,16 +110,16 @@ const PagesConfiguration = () => {
   const childContent = (page, isChild) => {
     return (
       <React.Fragment key={page.id}>
-        <tr key={page.id} className={`${isChild ? "table-info" : ""}`}>
-          <td width="20%">
-            <div>{page.page_label}</div>
+        <tr key={page.id}>
+          <td className="p-2">
+            {page.page_label}
           </td>
-          <td width="20%">{page.page_url}</td>
-          <td width="20%">{page.is_Parent ? "Parent Menu" : "Child Menu"}</td>
-          <td width="12%" className="text-center">
+          <td>{page.page_url}</td>
+          <td >{page.is_Parent ? "Parent Menu" : "Child Menu"}</td>
+          <td className="text-center">
             {page.page_position}
           </td>
-          <td width="13%" className="text-center">
+          <td className="text-center">
             <input
               type="checkbox"
               checked={page.page_isActive}
@@ -129,7 +129,7 @@ const PagesConfiguration = () => {
               }}
             />
           </td>
-          <td width="15%" className="text-center">
+          <td  className="text-center">
             <Link
               to=""
               onClick={() => editHandler("menu", true, page)}
@@ -154,8 +154,22 @@ const PagesConfiguration = () => {
             </Link>
           </td>
         </tr>
-        {page.childMenu?.length > 0
+        {/* {page.childMenu?.length > 0
           ? page.childMenu.map((child) => childContent(child, true))
+          : ""} */}
+
+{page.childMenu?.length > 0
+          ? (
+            <tr>
+      <td colspan="6">
+        <table class="table m-4 w-75 border">
+          {
+            page.childMenu.map((child) => childContent(child, true))
+          }
+            </table>
+            </td>
+            </tr>
+            )
           : ""}
       </React.Fragment>
     );
@@ -164,7 +178,11 @@ const PagesConfiguration = () => {
   return (
     <div className="container-fluid pt-5">
       <div className="position-relative">
-        <EditIcon editHandler={() => editHandler("menu", true)} />
+        <div className="text-end">
+        <Link className="btn btn-primary" onClick={() => editHandler("menu", true)}>
+          Add <i class="fa fa-plus mx-2" aria-hidden="true"></i></Link>
+        {/* <EditIcon editHandler={() => editHandler("menu", true)} /> */}
+        </div>
 
         {componentEdit.menu ? (
           <div className="adminEditTestmonial">
@@ -187,7 +205,7 @@ const PagesConfiguration = () => {
 
       <div className="row px-3 px-lg-5 py-4 table-responsive">
         {isSuperAdmin ? (
-          <table className="table table-striped table-hover">
+          <table className="table table-striped">
             <thead>
               <tr>
                 <th>Menu Lable</th>
