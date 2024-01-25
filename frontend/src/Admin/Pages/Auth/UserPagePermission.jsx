@@ -208,7 +208,7 @@ const UserPagePermission = () => {
               : ""
           }`}
         >
-          {menu.page_label}
+          <span className={`${ !menu.childMenu ? "fw-bold" : "child"}`}>{menu.page_label}</span>
           {!menu.childMenu ? (
             <span className="badge">
               <Checkbox
@@ -219,6 +219,7 @@ const UserPagePermission = () => {
                 handleClick={handleClick}
                 isChecked={isObjectChecked(isMenuCheck, menu.id)}
                 disabled={false}
+                
               />
             </span>
           ) : (
@@ -240,17 +241,23 @@ const UserPagePermission = () => {
   return (
     <div className="container-fluid pt-5">
       <div className="row px-3 px-lg-5">
-        <div className="text-end d-flex justify-content-between">
+        <div className="text-end d-flex justify-content-between align-items-center">
           <Title title={"User's page Permission"} cssClass="fs-1 pageTitle" />
+          <Button
+            type="submit"
+            cssClass="btn btn-primary"
+            label={"save"}
+            handlerChange={saveHandle}
+          />
         </div>
       </div>
 
-      <div className="row px-3 px-lg-5 py-4 table-responsive">
-        <div className="col-6">
+      <div className="row px-3 px-lg-5 py-4">
+        <div className="col-md-5">
         {errorMessage ? (
           <Error>{errorMessage}</Error>
         ) :''}
-          <table className="table table-striped table-hover">
+          <table className="table">
             <thead>
               <tr>
                 <th>Name</th>
@@ -289,9 +296,9 @@ const UserPagePermission = () => {
             </tbody>
           </table>
         </div>
-        <div className="col-6">
-          <ul className="list-group">
-            <li className="list-group-item d-flex justify-content-between align-items-start">
+        <div className="col-md-7 bg-light p-4">
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item d-flex justify-content-between align-items-start bg-warning">
               Select All 
             <span className="badge">
               <Checkbox
@@ -304,7 +311,7 @@ const UserPagePermission = () => {
             </span>
             </li>
           </ul>
-          <ul className="list-group">
+          <ul className="list-group list-group-flush">
             {menuDetails?.map((menu) => childContent(menu, false))}
           </ul>
         </div>
@@ -334,6 +341,7 @@ const Checkbox = ({ id, type, name, handleClick, isChecked, disabled }) => {
       onChange={handleClick}
       checked={isChecked}
       disabled={disabled}
+      className="form-check-input border border-secondary"
     />
   );
 };

@@ -127,6 +127,7 @@ const PagesConfiguration = () => {
               onClick={() => {
                 activeDeactiveUser(page);
               }}
+              className="form-check-input border border-secondary"
             />
           </td>
           <td  className="text-center">
