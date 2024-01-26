@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense  } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
@@ -10,59 +10,62 @@ import {
 } from "react-router-dom";
 
 // Components
+import LoadingSpinner from "./Common/LoadingSpinner";
 import Footer from "./Common/Footer/Footer";
 import Header from "./Common/Header/Header";
-import LoadingSpinner from "./Common/LoadingSpinner";
 import TopStrip from "./Common/Header/TopStrip";
-import { GlobalStyles } from "./Common/StyledComponents/GlobalStyles";
-
-import Home from "./Frontend/Pages/Home/index";
-import About from "./Frontend/Pages/About";
-import Projects from "./Frontend/Pages/Projects";
-import ProjectGallery from "./Frontend/Pages/ProjectGallery";
-import Services from "./Frontend/Pages/Services";
-import Careers from "./Frontend/Pages/Careers";
-import CareerDetails from "./Frontend/Pages/career-details";
-import Contact from "./Frontend/Pages/Contact";
-import TestimonialsList from "./Frontend/Pages/TestimonialsList";
-import ClientsList from "./Frontend/Pages/ClientsList";
-import CaseStudies from "./Frontend/Pages/CaseStudies";
+import Loading from "./Common/Loading";
 import ProtectedRoute from "./Frontend/Components/ProtectedRoute";
-import ProjectTabs from "./Frontend/Components/ProjectsTabs/ProjecTabs";
-import NewsAndUpdates from "./Frontend/Pages/NewsAndUpdates";
-import PageNotFound from "./Frontend/Pages/PageNotFound";
 
-import Dashboard from "./Admin/Pages/Login/Dashboard";
-import AddProject from "./Admin/Pages/Login/AddProject";
-import AdminNews from "./Admin/Pages/Login/AdminNews";
-import AdminTestimonial from "./Admin/Pages/Login/AdminTestimonial";
 import MainPage from "./Admin/Pages/Login/MainPage";
-import Login from "./Admin/Pages/Auth/Login";
-import Registration from "./Admin/Pages/Auth/Registration";
-import Activation from "./Admin/Pages/Auth/Activation";
-import ResendActivationEmail from "./Admin/Pages/Auth/ResendActivationEmail";
-import ChangePassword from "./Admin/Pages/Auth/ChangePassword";
-import ResetPassword from "./Admin/Pages/Auth/ResetPassword";
-import ResetPasswordConfirmation from "./Admin/Pages/Auth/ResetPasswordConfirmation";
-import AuthForm from "./Admin/Pages/Auth/AuthForm";
-import UserAdmin from "./Admin/Pages/Auth/UserAdmin";
-import UnauthorizedPage from "./Admin/Pages/Login/UnauthorizedPage";
-import ContactUSAdmin from "./Admin/Pages/Auth/ContactUSAdmin";
-
 import { getCookie } from "./util/cookieUtil";
 import { removeActiveClass } from "./util/ulrUtil";
 
 // Themes
 import ThemeOne from "./Common/StyledThemes/ThemeOne.json";
+import { GlobalStyles } from "./Common/StyledComponents/GlobalStyles";
 
 // CSS
 import "./App.css";
 import "react-toastify/dist/ReactToastify.min.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import CaseStudiesDetails from "./Frontend/Pages/caseStudies-details";
-import Team from "./Frontend/Pages/Team";
-import PagesConfiguration from "./Admin/Pages/Auth/PagesConfiguration";
-import UserPagePermission from "./Admin/Pages/Auth/UserPagePermission";
+
+// Lazy Loading
+const PageNotFound = lazy(() => import("./Frontend/Pages/PageNotFound"));
+const Home = lazy(() => import("./Frontend/Pages/Home/index"));
+const About = lazy(() => import("./Frontend/Pages/About"));
+const Contact = lazy(() => import("./Frontend/Pages/Contact"));
+const Services = lazy(() => import("./Frontend/Pages/Services"));
+const ClientsList = lazy(() => import("./Frontend/Pages/ClientsList"));
+const Careers = lazy(() => import("./Frontend/Pages/Careers"));
+const CareerDetails = lazy(() => import("./Frontend/Pages/career-details"));
+const Team = lazy(() => import("./Frontend/Pages/Team"));
+const Projects = lazy(() => import("./Frontend/Pages/Projects"));
+const ProjectTabs = lazy(() => import("./Frontend/Components/ProjectsTabs/ProjecTabs"));
+const ProjectGallery = lazy(() => import("./Frontend/Pages/ProjectGallery"));
+const CaseStudies = lazy(() => import("./Frontend/Pages/CaseStudies"));
+const CaseStudiesDetails = lazy(() => import("./Frontend/Pages/caseStudies-details"));
+const NewsAndUpdates = lazy(() => import("./Frontend/Pages/NewsAndUpdates"));
+const TestimonialsList = lazy(() => import("./Frontend/Pages/TestimonialsList"));
+
+const Login = lazy(() => import("./Admin/Pages/Auth/Login"));
+const Registration = lazy(() => import("./Admin/Pages/Auth/Registration"));
+const ChangePassword = lazy(() => import("./Admin/Pages/Auth/ChangePassword"));
+const ResetPassword = lazy(() => import("./Admin/Pages/Auth/ResetPassword"));
+const ResetPasswordConfirmation = lazy(() => import("./Admin/Pages/Auth/ResetPasswordConfirmation"));
+const Activation = lazy(() => import("./Admin/Pages/Auth/Activation"));
+const ResendActivationEmail = lazy(() => import("./Admin/Pages/Auth/ResendActivationEmail"));
+const Dashboard = lazy(() => import("./Admin/Pages/Login/Dashboard"));
+const UserAdmin = lazy(() => import("./Admin/Pages/Auth/UserAdmin"));
+const UnauthorizedPage = lazy(() => import("./Admin/Pages/Login/UnauthorizedPage"));
+const AuthForm = lazy(() => import("./Admin/Pages/Auth/AuthForm"));
+const AddProject = lazy(() => import("./Admin/Pages/Login/AddProject"));
+const AdminNews = lazy(() => import("./Admin/Pages/Login/AdminNews"));
+const ContactUSAdmin = lazy(() => import("./Admin/Pages/Auth/ContactUSAdmin"));
+const PagesConfiguration = lazy(() => import("./Admin/Pages/Auth/PagesConfiguration"));
+const UserPagePermission = lazy(() => import("./Admin/Pages/Auth/UserPagePermission"));
+const AdminTestimonial = lazy(() => import("./Admin/Pages/Login/AdminTestimonial"));
+
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -111,176 +114,69 @@ function App() {
       }
     });
   };
+
+  const lazyText = "L o a d i n g . . ."
   return (
     <>
       <ThemeProvider theme={ThemeOne}>
         <GlobalStyles />
         <BrowserRouter>
-          {isLoading ? <LoadingSpinner /> : ""}
-          {/* <LoadingSpinner />  */}
+          {/* {isLoading ? <LoadingSpinner /> : ""} */}
           <TopStrip />
           <Header />
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/about" element={<About />} />
-            <Route exact path="/projects" element={<Projects />} />
-            <Route exact path="/project-details" element={<ProjectTabs />} />
-            <Route exact path="/gallery" element={<ProjectGallery />} />
-            <Route exact path="/services" element={<Services />} />
-            <Route exact path="/services/:uid/" element={<Services />} />
-            <Route exact path="/careers" element={<Careers />} />
-            <Route
-              exact
-              path="/career-details/:id/"
-              element={<CareerDetails />}
-            />
-            <Route exact path="/contact" element={<Contact />} />
-            <Route exact path="/testimonials" element={<TestimonialsList />} />
-            <Route exact path="/clients" element={<ClientsList />} />
-            <Route exact path="/team" element={<Team />} />
-            <Route exact path="/casestudies" element={<CaseStudies />} />
-            <Route
-              exact
-              path="/casestudies-details/:id/"
-              element={<CaseStudiesDetails />}
-            />
-            <Route exact path="/news" element={<NewsAndUpdates />} />
-            {/* <Route exact path="/testmonial" element={<Testimonial />} /> */}
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/register" element={<Registration />} />
-            <Route exact path="/authForm" element={<AuthForm />} />
-            <Route
-              exact
-              path="/activate/:uid/:token"
-              element={<Activation />}
-            />
-            <Route exact path="/reset_password" element={<ResetPassword />} />
-            <Route exact path="/unauthorized" element={<UnauthorizedPage />} />
-            <Route
-              exact
-              path="/resend_activation"
-              element={<ResendActivationEmail />}
-            />
-            <Route
-              exact
-              path="/password/reset/:uid/:token"
-              element={<ResetPasswordConfirmation />}
-            />
-            <Route path="*" element={<PageNotFound />} />
-            {/* <Route
-              exact
-              path="/main"
-              element={
-                <ProtectedRoute>
-                  {" "}
-                  <MainPage />{" "}
-                </ProtectedRoute>
-              }
-            /> */}
-            <Route
-              exact
-              path="/change_password"
-              element={
-                <ProtectedRoute>
-                  {" "}
-                  <ChangePassword />{" "}
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              exact
-              path="/addproject"
-              element={
-                <ProtectedRoute>
-                  <AddProject />{" "}
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              exact
-              path="/editproject/:id"
-              element={
-                <ProtectedRoute>
-                  <AddProject />{" "}
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              exact
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />{" "}
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              exact
-              path="/userAdmin"
-              element={
-                <ProtectedRoute>
-                  {userInfo?.is_admin ? <UserAdmin /> : <UnauthorizedPage />}
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              exact
-              path="/adminNews"
-              element={
-                <ProtectedRoute>
-                  {" "}
-                  <AdminNews />{" "}
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              exact
-              path="/testimonial"
-              element={
-                <ProtectedRoute>
-                  {" "}
-                  <AdminTestimonial />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              exact
-              path="/contactUSList"
-              element={
-                <ProtectedRoute>
-                  {" "}
-                  <ContactUSAdmin />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              exact
-              path="/adminPagesConfigurtion"
-              element={
-                <ProtectedRoute>
-                  {userInfo?.is_admin ? (
-                    <PagesConfiguration />
-                  ) : (
-                    <UnauthorizedPage />
-                  )}
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              exact
-              path="/userPermission"
-              element={
-                <ProtectedRoute>
-                  {userInfo?.is_admin ? (
-                    <UserPagePermission />
-                  ) : (
-                    <UnauthorizedPage />
-                  )}
-                </ProtectedRoute>
-              }
-            />
+            <Route exact path="*" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><PageNotFound /></Suspense>} />
+            <Route exact path="/" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Home /></Suspense>} />
+            <Route exact path="/about" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><About /></Suspense>} />
+            <Route exact path="/contact" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Contact /></Suspense>} />
+            <Route exact path="/services" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Services /></Suspense>} />
+            <Route exact path="/services/:uid/" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Services /></Suspense>} />
+            <Route exact path="/clients" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ClientsList /></Suspense>} />
+            <Route exact path="/careers" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Careers /></Suspense>} />
+            <Route exact path="/career-details/:id/" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><CareerDetails /></Suspense>} />
+            <Route exact path="/team" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Team /></Suspense>} />
+            <Route exact path="/projects" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Projects /></Suspense>} />
+            <Route exact path="/project-details" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ProjectTabs /></Suspense>} />
+            <Route exact path="/gallery" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ProjectGallery /></Suspense>} />
+            <Route exact path="/casestudies" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><CaseStudies /></Suspense>} />
+            <Route exact path="/casestudies-details/:id/" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><CaseStudiesDetails /></Suspense>} />
+            <Route exact path="/news" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><NewsAndUpdates /></Suspense>} />
+            <Route exact path="/testimonials" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><TestimonialsList /></Suspense>} />
+            <Route exact path="/login" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Login /></Suspense>} />
+            <Route exact path="/register" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Registration /></Suspense>} />
+            <Route exact path="/change_password" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}>
+              <ProtectedRoute> <ChangePassword /> </ProtectedRoute>
+            </Suspense>} />
+            <Route exact path="/reset_password" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ResetPassword /></Suspense>} />
+            <Route exact path="/password/reset/:uid/:token" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ResetPasswordConfirmation /></Suspense>} />
+            <Route exact path="/activate/:uid/:token" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Activation /></Suspense>} />
+            <Route exact path="/resend_activation" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ResendActivationEmail /></Suspense>} />
+
+            <Route exact path="/dashboard" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}>
+              <ProtectedRoute> <Dashboard /> </ProtectedRoute>
+            </Suspense>} />
+
+            <Route exact path="/userAdmin" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}>
+              <ProtectedRoute> {userInfo?.is_admin ? <UserAdmin /> : <UnauthorizedPage />} </ProtectedRoute>
+            </Suspense>} />
+            <Route exact path="/userPermission" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}>
+            <ProtectedRoute> {userInfo?.is_admin ? ( <UserPagePermission /> ) : ( <UnauthorizedPage /> )} </ProtectedRoute>
+            </Suspense>} />
+
+            <Route exact path="/unauthorized" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><UnauthorizedPage /></Suspense>} />
+            <Route exact path="/authForm" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><AuthForm /></Suspense>} />
+            <Route exact path="/addproject" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><AddProject /></Suspense>} />
+            <Route exact path="/editproject/:id" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><AddProject /></Suspense>} />
+            <Route exact path="/adminNews" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><AdminNews /></Suspense>} />
+            <Route exact path="/contactUSList" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ContactUSAdmin /></Suspense>} />
+            <Route exact path="/adminPagesConfigurtion" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}>
+            <ProtectedRoute> {userInfo?.is_admin ? ( <PagesConfiguration /> ) : ( <UnauthorizedPage /> )} </ProtectedRoute>
+            </Suspense>} />
+            <Route exact path="/testimonial" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><AdminTestimonial /></Suspense>} />
+
           </Routes>
           {isHideMenu ? null : <Footer />}
+          
         </BrowserRouter>
       </ThemeProvider>
       <ToastContainer autoClose={2000} theme="colored" />
