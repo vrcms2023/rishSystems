@@ -11,6 +11,7 @@ import {
 
 // Components
 import LoadingSpinner from "./Common/LoadingSpinner";
+import SkeletonPage from "./Common/Skeltons/SkeletonPage";
 import Footer from "./Common/Footer/Footer";
 import Header from "./Common/Header/Header";
 import TopStrip from "./Common/Header/TopStrip";
@@ -126,7 +127,7 @@ function App() {
           <Header />
           <Routes>
             <Route exact path="*" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><PageNotFound /></Suspense>} />
-            <Route exact path="/" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Home /></Suspense>} />
+            <Route exact path="/" element={<Suspense fallback={<SkeletonPage />}><Home /></Suspense>} />
             <Route exact path="/about" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><About /></Suspense>} />
             <Route exact path="/contact" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Contact /></Suspense>} />
             <Route exact path="/services" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Services /></Suspense>} />
