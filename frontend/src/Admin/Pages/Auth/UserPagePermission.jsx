@@ -208,7 +208,7 @@ const UserPagePermission = () => {
               : ""
           }`}
         >
-          <span className={`${ !menu.childMenu ? "fw-bold" : "child"}`}>{menu.page_label}</span>
+          <span className={`${ menu.is_Parent ? "fw-bold" : "child"}`}>{menu.page_label}</span>
           {!menu.childMenu ? (
             <span className="badge">
               <Checkbox
