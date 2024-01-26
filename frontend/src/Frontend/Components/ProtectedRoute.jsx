@@ -16,7 +16,7 @@ const ProtectedRoute = (props) => {
         ? JSON.parse(getCookie("is_appAccess"))
         : false;
 
-      if (!userInfo) {
+      if (!userInfo && !userToken) {
         setIsLoggedIn(false);
         return navigate("/login");
       }
