@@ -126,54 +126,55 @@ function App() {
           <TopStrip />
           <Header />
           <Routes>
-            <Route exact path="*" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><PageNotFound /></Suspense>} />
+            {/* <Route exact path="*" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><PageNotFound /></Suspense>} /> */}
+            <Route exact path="*" element={<Suspense fallback={<SkeletonPage />}><PageNotFound /></Suspense>} />
             <Route exact path="/" element={<Suspense fallback={<SkeletonPage />}><Home /></Suspense>} />
-            <Route exact path="/about" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><About /></Suspense>} />
-            <Route exact path="/contact" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Contact /></Suspense>} />
-            <Route exact path="/services" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Services /></Suspense>} />
-            <Route exact path="/services/:uid/" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Services /></Suspense>} />
-            <Route exact path="/clients" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ClientsList /></Suspense>} />
-            <Route exact path="/careers" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Careers /></Suspense>} />
-            <Route exact path="/career-details/:id/" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><CareerDetails /></Suspense>} />
-            <Route exact path="/team" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Team /></Suspense>} />
-            <Route exact path="/projects" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Projects /></Suspense>} />
-            <Route exact path="/project-details" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ProjectTabs /></Suspense>} />
-            <Route exact path="/gallery" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ProjectGallery /></Suspense>} />
-            <Route exact path="/casestudies" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><CaseStudies /></Suspense>} />
-            <Route exact path="/casestudies-details/:id/" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><CaseStudiesDetails /></Suspense>} />
-            <Route exact path="/news" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><NewsAndUpdates /></Suspense>} />
-            <Route exact path="/testimonials" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><TestimonialsList /></Suspense>} />
-            <Route exact path="/login" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Login /></Suspense>} />
-            <Route exact path="/register" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Registration /></Suspense>} />
-            <Route exact path="/change_password" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}>
+            <Route exact path="/about" element={<Suspense fallback={<SkeletonPage />}><About /></Suspense>} />
+            <Route exact path="/contact" element={<Suspense fallback={<SkeletonPage />}><Contact /></Suspense>} />
+            <Route exact path="/services" element={<Suspense fallback={<SkeletonPage />}><Services /></Suspense>} />
+            <Route exact path="/services/:uid/" element={<Suspense fallback={<SkeletonPage />}><Services /></Suspense>} />
+            <Route exact path="/clients" element={<Suspense fallback={<SkeletonPage />}><ClientsList /></Suspense>} />
+            <Route exact path="/careers" element={<Suspense fallback={<SkeletonPage />}><Careers /></Suspense>} />
+            <Route exact path="/career-details/:id/" element={<Suspense fallback={<SkeletonPage />}><CareerDetails /></Suspense>} />
+            <Route exact path="/team" element={<Suspense fallback={<SkeletonPage />}><Team /></Suspense>} />
+            <Route exact path="/projects" element={<Suspense fallback={<SkeletonPage />}><Projects /></Suspense>} />
+            <Route exact path="/project-details" element={<Suspense fallback={<SkeletonPage />}><ProjectTabs /></Suspense>} />
+            <Route exact path="/gallery" element={<Suspense fallback={<SkeletonPage />}><ProjectGallery /></Suspense>} />
+            <Route exact path="/casestudies" element={<Suspense fallback={<SkeletonPage />}><CaseStudies /></Suspense>} />
+            <Route exact path="/casestudies-details/:id/" element={<Suspense fallback={<SkeletonPage />}><CaseStudiesDetails /></Suspense>} />
+            <Route exact path="/news" element={<Suspense fallback={<SkeletonPage />}><NewsAndUpdates /></Suspense>} />
+            <Route exact path="/testimonials" element={<Suspense fallback={<SkeletonPage />}><TestimonialsList /></Suspense>} />
+            <Route exact path="/login" element={<Suspense fallback={<SkeletonPage />}><Login /></Suspense>} />
+            <Route exact path="/register" element={<Suspense fallback={<SkeletonPage />}><Registration /></Suspense>} />
+            <Route exact path="/change_password" element={<Suspense fallback={<SkeletonPage />}>
               <ProtectedRoute> <ChangePassword /> </ProtectedRoute>
             </Suspense>} />
-            <Route exact path="/reset_password" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ResetPassword /></Suspense>} />
-            <Route exact path="/password/reset/:uid/:token" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ResetPasswordConfirmation /></Suspense>} />
-            <Route exact path="/activate/:uid/:token" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><Activation /></Suspense>} />
-            <Route exact path="/resend_activation" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ResendActivationEmail /></Suspense>} />
+            <Route exact path="/reset_password" element={<Suspense fallback={<SkeletonPage />}><ResetPassword /></Suspense>} />
+            <Route exact path="/password/reset/:uid/:token" element={<Suspense fallback={<SkeletonPage />}><ResetPasswordConfirmation /></Suspense>} />
+            <Route exact path="/activate/:uid/:token" element={<Suspense fallback={<SkeletonPage />}><Activation /></Suspense>} />
+            <Route exact path="/resend_activation" element={<Suspense fallback={<SkeletonPage />}><ResendActivationEmail /></Suspense>} />
 
-            <Route exact path="/dashboard" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}>
+            <Route exact path="/dashboard" element={<Suspense fallback={<SkeletonPage />}>
               <ProtectedRoute> <Dashboard /> </ProtectedRoute>
             </Suspense>} />
 
-            <Route exact path="/userAdmin" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}>
+            <Route exact path="/userAdmin" element={<Suspense fallback={<SkeletonPage />}>
               <ProtectedRoute> {userInfo?.is_admin ? <UserAdmin /> : <UnauthorizedPage />} </ProtectedRoute>
             </Suspense>} />
-            <Route exact path="/userPermission" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}>
+            <Route exact path="/userPermission" element={<Suspense fallback={<SkeletonPage />}>
             <ProtectedRoute> {userInfo?.is_admin ? ( <UserPagePermission /> ) : ( <UnauthorizedPage /> )} </ProtectedRoute>
             </Suspense>} />
 
-            <Route exact path="/unauthorized" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><UnauthorizedPage /></Suspense>} />
-            <Route exact path="/authForm" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><AuthForm /></Suspense>} />
-            <Route exact path="/addproject" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><AddProject /></Suspense>} />
-            <Route exact path="/editproject/:id" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><AddProject /></Suspense>} />
-            <Route exact path="/adminNews" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><AdminNews /></Suspense>} />
-            <Route exact path="/contactUSList" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><ContactUSAdmin /></Suspense>} />
-            <Route exact path="/adminPagesConfigurtion" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}>
+            <Route exact path="/unauthorized" element={<Suspense fallback={<SkeletonPage />}><UnauthorizedPage /></Suspense>} />
+            <Route exact path="/authForm" element={<Suspense fallback={<SkeletonPage />}><AuthForm /></Suspense>} />
+            <Route exact path="/addproject" element={<Suspense fallback={<SkeletonPage />}><AddProject /></Suspense>} />
+            <Route exact path="/editproject/:id" element={<Suspense fallback={<SkeletonPage />}><AddProject /></Suspense>} />
+            <Route exact path="/adminNews" element={<Suspense fallback={<SkeletonPage />}><AdminNews /></Suspense>} />
+            <Route exact path="/contactUSList" element={<Suspense fallback={<SkeletonPage />}><ContactUSAdmin /></Suspense>} />
+            <Route exact path="/adminPagesConfigurtion" element={<Suspense fallback={<SkeletonPage />}>
             <ProtectedRoute> {userInfo?.is_admin ? ( <PagesConfiguration /> ) : ( <UnauthorizedPage /> )} </ProtectedRoute>
             </Suspense>} />
-            <Route exact path="/testimonial" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><AdminTestimonial /></Suspense>} />
+            <Route exact path="/testimonial" element={<Suspense fallback={<SkeletonPage />}><AdminTestimonial /></Suspense>} />
 
           </Routes>
           {isHideMenu ? null : <Footer />}
