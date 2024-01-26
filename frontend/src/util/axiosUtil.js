@@ -57,33 +57,33 @@ const responseInterceptorResponseHanler = async (response) => {
 
 const responseInterceptorErrortHanler = async (error) => {
   store.dispatch(stoptLoading());
-  if (error.code === "ERR_NETWORK") {
+  if (error?.code === "ERR_NETWORK") {
     window.location = "/login";
   }
-  if (error.response.status === 401) {
+  if (error?.response?.status === 401) {
     window.location = "/login";
     //return Promise.reject(error.response.data.detail);
   }
-  if (error.response.status === 404) {
+  if (error?.response?.status === 404) {
     return Promise.reject(error.response.statusText);
   }
-  const key = Object.keys(error.response.data)[0];
+  const key = Object.keys(error?.response?.data)[0];
   return Promise.reject(error.response.data[key]);
 };
 
 const clientresponseInterceptorErrortHanler = async (error) => {
   store.dispatch(stoptLoading());
-  if (error.code === "ERR_NETWORK") {
+  if (error?.code === "ERR_NETWORK") {
     return Promise.reject(error.code);
   }
-  if (error.response.status === 401) {
-    return Promise.reject(error.response.data.detail);
+  if (error?.response?.status === 401) {
+    return Promise.reject(error?.response?.data?.detail);
   }
-  if (error.response.status === 404) {
-    return Promise.reject(error.response.statusText);
+  if (error?.response?.status === 404) {
+    return Promise.reject(error?.response?.statusText);
   }
-  const key = Object.keys(error.response.data)[0];
-  return Promise.reject(error.response.data[key]);
+  const key = Object.keys(error?.response?.data)[0];
+  return Promise.reject(error?.response?.data[key]);
 };
 
 axiosServiceApi.interceptors.request.use(
