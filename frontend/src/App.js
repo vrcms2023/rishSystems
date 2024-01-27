@@ -11,11 +11,11 @@ import {
 
 // Components
 import LoadingSpinner from "./Common/LoadingSpinner";
+import Loading from "./Common/Loading";
 import SkeletonPage from "./Common/Skeltons/SkeletonPage";
 import Footer from "./Common/Footer/Footer";
 import Header from "./Common/Header/Header";
 import TopStrip from "./Common/Header/TopStrip";
-import Loading from "./Common/Loading";
 import ProtectedRoute from "./Frontend/Components/ProtectedRoute";
 
 import MainPage from "./Admin/Pages/Login/MainPage";
@@ -116,7 +116,7 @@ function App() {
     });
   };
 
-  const lazyText = "L o a d i n g . . ."
+  // const lazyText = "L o a d i n g . . ."
   return (
     <>
       <ThemeProvider theme={ThemeOne}>
@@ -125,58 +125,46 @@ function App() {
           {/* {isLoading ? <LoadingSpinner /> : ""} */}
           <TopStrip />
           <Header />
+          <Suspense fallback={<SkeletonPage />}>
           <Routes>
             {/* <Route exact path="*" element={<Suspense fallback={<Loading text={lazyText} cssClasses="" />}><PageNotFound /></Suspense>} /> */}
-            <Route exact path="*" element={<Suspense fallback={<SkeletonPage />}><PageNotFound /></Suspense>} />
-            <Route exact path="/" element={<Suspense fallback={<SkeletonPage />}><Home /></Suspense>} />
-            <Route exact path="/about" element={<Suspense fallback={<SkeletonPage />}><About /></Suspense>} />
-            <Route exact path="/contact" element={<Suspense fallback={<SkeletonPage />}><Contact /></Suspense>} />
-            <Route exact path="/services" element={<Suspense fallback={<SkeletonPage />}><Services /></Suspense>} />
-            <Route exact path="/services/:uid/" element={<Suspense fallback={<SkeletonPage />}><Services /></Suspense>} />
-            <Route exact path="/clients" element={<Suspense fallback={<SkeletonPage />}><ClientsList /></Suspense>} />
-            <Route exact path="/careers" element={<Suspense fallback={<SkeletonPage />}><Careers /></Suspense>} />
-            <Route exact path="/career-details/:id/" element={<Suspense fallback={<SkeletonPage />}><CareerDetails /></Suspense>} />
-            <Route exact path="/team" element={<Suspense fallback={<SkeletonPage />}><Team /></Suspense>} />
-            <Route exact path="/projects" element={<Suspense fallback={<SkeletonPage />}><Projects /></Suspense>} />
-            <Route exact path="/project-details" element={<Suspense fallback={<SkeletonPage />}><ProjectTabs /></Suspense>} />
-            <Route exact path="/gallery" element={<Suspense fallback={<SkeletonPage />}><ProjectGallery /></Suspense>} />
-            <Route exact path="/casestudies" element={<Suspense fallback={<SkeletonPage />}><CaseStudies /></Suspense>} />
-            <Route exact path="/casestudies-details/:id/" element={<Suspense fallback={<SkeletonPage />}><CaseStudiesDetails /></Suspense>} />
-            <Route exact path="/news" element={<Suspense fallback={<SkeletonPage />}><NewsAndUpdates /></Suspense>} />
-            <Route exact path="/testimonials" element={<Suspense fallback={<SkeletonPage />}><TestimonialsList /></Suspense>} />
-            <Route exact path="/login" element={<Suspense fallback={<SkeletonPage />}><Login /></Suspense>} />
-            <Route exact path="/register" element={<Suspense fallback={<SkeletonPage />}><Registration /></Suspense>} />
-            <Route exact path="/change_password" element={<Suspense fallback={<SkeletonPage />}>
-              <ProtectedRoute> <ChangePassword /> </ProtectedRoute>
-            </Suspense>} />
-            <Route exact path="/reset_password" element={<Suspense fallback={<SkeletonPage />}><ResetPassword /></Suspense>} />
-            <Route exact path="/password/reset/:uid/:token" element={<Suspense fallback={<SkeletonPage />}><ResetPasswordConfirmation /></Suspense>} />
-            <Route exact path="/activate/:uid/:token" element={<Suspense fallback={<SkeletonPage />}><Activation /></Suspense>} />
-            <Route exact path="/resend_activation" element={<Suspense fallback={<SkeletonPage />}><ResendActivationEmail /></Suspense>} />
-
-            <Route exact path="/dashboard" element={<Suspense fallback={<SkeletonPage />}>
-              <ProtectedRoute> <Dashboard /> </ProtectedRoute>
-            </Suspense>} />
-
-            <Route exact path="/userAdmin" element={<Suspense fallback={<SkeletonPage />}>
-              <ProtectedRoute> {userInfo?.is_admin ? <UserAdmin /> : <UnauthorizedPage />} </ProtectedRoute>
-            </Suspense>} />
-            <Route exact path="/userPermission" element={<Suspense fallback={<SkeletonPage />}>
-            <ProtectedRoute> {userInfo?.is_admin ? ( <UserPagePermission /> ) : ( <UnauthorizedPage /> )} </ProtectedRoute>
-            </Suspense>} />
-
-            <Route exact path="/unauthorized" element={<Suspense fallback={<SkeletonPage />}><UnauthorizedPage /></Suspense>} />
-            <Route exact path="/authForm" element={<Suspense fallback={<SkeletonPage />}><AuthForm /></Suspense>} />
-            <Route exact path="/addproject" element={<Suspense fallback={<SkeletonPage />}><AddProject /></Suspense>} />
-            <Route exact path="/editproject/:id" element={<Suspense fallback={<SkeletonPage />}><AddProject /></Suspense>} />
-            <Route exact path="/adminNews" element={<Suspense fallback={<SkeletonPage />}><AdminNews /></Suspense>} />
-            <Route exact path="/contactUSList" element={<Suspense fallback={<SkeletonPage />}><ContactUSAdmin /></Suspense>} />
-            <Route exact path="/adminPagesConfigurtion" element={<Suspense fallback={<SkeletonPage />}>
-            <ProtectedRoute> {userInfo?.is_admin ? ( <PagesConfiguration /> ) : ( <UnauthorizedPage /> )} </ProtectedRoute>
-            </Suspense>} />
-            <Route exact path="/testimonial" element={<Suspense fallback={<SkeletonPage />}><AdminTestimonial /></Suspense>} />
-
+              <Route exact path="*" element={<PageNotFound />} />
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/about" element={<About />} />
+              <Route exact path="/contact" element={<Contact />} />
+              <Route exact path="/services" element={<Services />} />
+              <Route exact path="/services/:uid/" element={<Services />} />
+              <Route exact path="/clients" element={<ClientsList />} />
+              <Route exact path="/careers" element={<Careers />} />
+              <Route exact path="/career-details/:id/" element={<CareerDetails />} />
+              <Route exact path="/team" element={<Team />} />
+              <Route exact path="/projects" element={<Projects />} />
+              <Route exact path="/project-details" element={<ProjectTabs />} />
+              <Route exact path="/gallery" element={<ProjectGallery />} />
+              <Route exact path="/casestudies" element={<CaseStudies />} />
+              <Route exact path="/casestudies-details/:id/" element={<CaseStudiesDetails />} />
+              <Route exact path="/news" element={<NewsAndUpdates />} />
+              <Route exact path="/testimonials" element={<TestimonialsList />} />
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/register" element={<Registration />} />
+              <Route exact path="/change_password" element={ <ProtectedRoute> <ChangePassword /> </ProtectedRoute> } />
+              <Route exact path="/reset_password" element={<ResetPassword />} />
+              <Route exact path="/password/reset/:uid/:token" element={<ResetPasswordConfirmation />} />
+              <Route exact path="/activate/:uid/:token" element={<Activation />} />
+              <Route exact path="/resend_activation" element={<ResendActivationEmail />} />
+              <Route exact path="/dashboard" element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute> } />
+              <Route exact path="/userAdmin" element={ <ProtectedRoute> {userInfo?.is_admin ? <UserAdmin /> : <UnauthorizedPage />} </ProtectedRoute> } />
+              <Route exact path="/userPermission" element={ <ProtectedRoute> {userInfo?.is_admin ? ( <UserPagePermission /> ) : ( <UnauthorizedPage /> )} </ProtectedRoute> } />
+              <Route exact path="/unauthorized" element={<UnauthorizedPage />} />
+              <Route exact path="/authForm" element={<AuthForm />} />
+              <Route exact path="/addproject" element={<AddProject />} />
+              <Route exact path="/editproject/:id" element={<AddProject />} />
+              <Route exact path="/adminNews" element={<AdminNews />} />
+              <Route exact path="/contactUSList" element={<ContactUSAdmin />} />
+              <Route exact path="/adminPagesConfigurtion" element={ <ProtectedRoute> {userInfo?.is_admin ? ( <PagesConfiguration /> ) : ( <UnauthorizedPage /> )} </ProtectedRoute> } />
+              <Route exact path="/testimonial" element={<AdminTestimonial />} />
           </Routes>
+          </Suspense>
           {isHideMenu ? null : <Footer />}
           
         </BrowserRouter>
