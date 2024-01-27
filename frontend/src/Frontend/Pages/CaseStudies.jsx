@@ -24,6 +24,8 @@ import Search from "../../Common/Search";
 import CustomPagination from "../../Common/CustomPagination";
 import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 import { CaseStudiesPageStyled } from "../../Common/StyledComponents/Styled-Casestudies";
+import { useSelector } from "react-redux";
+import SkeletonImage from "../../Common/Skeltons/SkeletonImage";
 
 const CaseStudies = () => {
   const editComponentObj = {
@@ -34,6 +36,7 @@ const CaseStudies = () => {
   };
 
   const pageType = "casestudies";
+  const { isLoading } = useSelector((state) => state.loader);
   const isAdmin = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [clientsList, setClientsList] = useState([]);
@@ -240,7 +243,18 @@ const CaseStudies = () => {
         )}
 
         <CaseStudiesPageStyled>
-          <div className=" caseStudie my-5">
+          <div className="caseStudie my-5">
+
+          {isLoading ? 
+            <div className="row">
+              {[1,2,3,4].map((item, index) => (
+                <div className="col-12" key={index}>
+                  <SkeletonImage />
+                </div>
+              ))}
+            </div>
+          : ""}
+
             {clientsList.length > 0 ? (
               clientsList.map((item, index) => (
                 <div
@@ -297,18 +311,18 @@ const CaseStudies = () => {
                     </div>
                   </div>
 
-                  <div className="col-sm-3 d-none d-sm-flex p-3 d-flex justify-content-center align-items-center">
+                  <div className="col-sm-3 d-none d-sm-flex p-3">
                     <img
                       src={getImagePath(item.path)}
                       alt=""
-                      className="img-fluid shadow-lg border border-4 rounded-circle caseStudieImg"
+                      className="img-fluid rounded-circle border border-3 border-light shadow-lg img-thumbnail caseStudieImg"
                     />
                   </div>
                 </div>
               ))
             ) : (
               <p className="text-center text-muted py-5">
-                Please add page contents...
+                {!isLoading && <p>Please add page contents...</p>}
               </p>
             )}
           </div>

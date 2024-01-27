@@ -23,6 +23,9 @@ import { removeActiveClass } from "../../util/ulrUtil";
 import Search from "../../Common/Search";
 import { sortCreatedDateByDesc } from "../../util/dataFormatUtil";
 import CustomPagination from "../../Common/CustomPagination";
+import SkeletonImage from "../../Common/Skeltons/SkeletonImage";
+import { useSelector } from "react-redux";
+import { TestimonialsListPageStyled } from "../../Common/StyledComponents/Styled-TestimonialsList";
 
 const TestimonialsList = () => {
   const editComponentObj = {
@@ -34,6 +37,7 @@ const TestimonialsList = () => {
   };
 
   const pageType = "testimonial";
+  const { isLoading } = useSelector((state) => state.loader);
   const isAdmin = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [clientsList, setClientsList] = useState([]);
@@ -235,7 +239,18 @@ const TestimonialsList = () => {
           ""
         )}
 
-        <div className="row aboutPage">
+        <TestimonialsListPageStyled>
+        <div className="testimonialsPage my-5">
+        {isLoading ? 
+            <div className="row">
+              {[1,2,3,4].map((item, index) => (
+                <div className="col-12" key={index}>
+                  <SkeletonImage />
+                </div>
+              ))}
+            </div>
+          : ""}
+
           {clientsList.length > 0 ? (
             clientsList.map((item, index) => (
               <>
@@ -267,7 +282,7 @@ const TestimonialsList = () => {
                   ) : (
                     ""
                   )}
-                  <div className="col-12 col-lg-7 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
+                  <div className="col-12 col-lg-10 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
                     {item.testimonial_title ? (
                       <Title
                         title={item.testimonial_title}
@@ -284,12 +299,12 @@ const TestimonialsList = () => {
                     />
                   </div>
 
-                  <div className="col-lg-5 d-none d-lg-block h-100">
-                    <div className="h-100 p-3 p-md-5 py-md-4 d-flex flex-column justify-content-center align-items-center reset ">
+                  <div className="col-lg-2 d-none d-lg-block h-100">
+                    <div className="h-100 p-3 p-md-5 py-md-4 testimonialAvatar ">
                       <img
                         src={getImagePath(item.path)}
                         alt=""
-                        className="img-fluid"
+                        className="img-fluid rounded-circle border border-3 border-light shadow-lg img-thumbnail "
                       />
                     </div>
                   </div>
@@ -299,10 +314,11 @@ const TestimonialsList = () => {
             ))
           ) : (
             <p className="text-center text-muted py-5">
-              Please add page contents...
+              {!isLoading && <p>Please add page contents...</p>}
             </p>
           )}
         </div>
+        </TestimonialsListPageStyled>
         {paginationData?.total_count ? (
           <CustomPagination
             paginationData={paginationData}
