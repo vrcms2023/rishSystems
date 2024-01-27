@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
+import { useSelector } from "react-redux";
 
 // Components
 import Title from "../../Common/Title";
@@ -25,8 +26,9 @@ import EditIcon from "../../Common/AdminEditIcon";
 // Styles
 import { NewsStyled } from "../../Common/StyledComponents/Styled-News";
 import Ancher from "../../Common/Ancher";
+import SkeletonNews from "../../Common/Skeltons/SkeltonNews";
 
-const HomeNews = ({ addNewsState, news, setNews, setPageloadResults }) => {
+const HomeNews = ({ addNewsState, news, setNews, setPageloadResults, pagetype }) => {
   const location = useLocation();
   const baseURL = getBaseURL();
   const editComponentObj = {
@@ -34,6 +36,7 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults }) => {
   };
 
   const pageType = "homeNew";
+  const { isLoading } = useSelector((state) => state.loader);
   const isAdmin = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
@@ -57,10 +60,13 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults }) => {
         const response = await axiosClientServiceApi.get(
           `/appNews/clientAppNews/`,
         );
+        console.log(response.data.results, "News Component")
         if (response?.status === 200) {
           //const data = sortCreatedDateByDesc(response.data.appNews);
+
           setPageloadResults(true);
-          setNews(response.data);
+          const data = (pagetype === "home") ? response.data.results.slice(0, 4) : response.data.results
+          setNews(data);
         }
       } catch (error) {
         console.log("unable to access ulr because of server is down");
@@ -112,8 +118,18 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults }) => {
 
   return (
     <>
+      {isLoading ? 
+        <div className="row">
+          {[1,2,3,4].map((item, index) => (
+            <div className="col-md-6 col-lg-3 mb-4 mb-lg-0" key={index}>
+              <SkeletonNews />
+            </div>
+          ))}
+        </div>
+      : ""}
+
       {news.length > 0 ? (
-        news.map((item, index) => (
+        news.map((item) => (
           <div className="col-md-6 col-lg-3 mb-4 mb-lg-0" key={item.id}>
             <NewsStyled>
               <div className="card homeNews">
@@ -185,7 +201,6 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults }) => {
         <div className="text-center">
           {isAdmin ? (
             <>
-              {/* {location.pathname} */}
               {location.pathname === "/news" ? (
                 <p className="text-center fs-6">Please add news items</p>
               ) : (
@@ -207,9 +222,9 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults }) => {
             </>
           ) : (
             <p className="text-center fs-6">
-              Currently there are no news items found.
+             {!isLoading && "Currently there are no news items found."} 
             </p>
-          )}
+          ) }
         </div>
       )}
 
