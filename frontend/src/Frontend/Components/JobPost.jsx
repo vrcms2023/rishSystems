@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { confirmAlert } from "react-confirm-alert";
+import { useSelector } from "react-redux";
 
 // Components
 import useAdminLoginStatus from "../../Common/customhook/useAdminLoginStatus";
@@ -19,6 +20,7 @@ import {
 import { showPosteddate } from "../../util/commonUtil";
 
 import EditIcon from "../../Common/AdminEditIcon";
+import SkeletonNews from "../../Common/Skeltons/SkeltonNews";
 // Styles
 
 const JobPost = ({ addJobs, posts, setPosts, setPageloadResults }) => {
@@ -26,6 +28,7 @@ const JobPost = ({ addJobs, posts, setPosts, setPageloadResults }) => {
     job: false,
   };
 
+  const { isLoading } = useSelector((state) => state.loader);
   const [editPost, setEditPosts] = useState({});
   const [show, setShow] = useState(false);
   const isAdmin = useAdminLoginStatus();
@@ -112,6 +115,16 @@ const JobPost = ({ addJobs, posts, setPosts, setPageloadResults }) => {
 
   return (
     <>
+      {isLoading ? 
+        <div className="row">
+          {[1,2,3,4].map((item, index) => (
+            <div className="col-md-6 col-lg-3 mb-4 mb-lg-0" key={index}>
+              <SkeletonNews />
+            </div>
+          ))}
+        </div>
+      : ""}
+
       {posts?.length > 0 ? (
         posts.map((item, index) => (
           <div
