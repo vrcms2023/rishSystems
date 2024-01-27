@@ -5,6 +5,7 @@ import Title from "../Title";
 import { axiosClientServiceApi } from "../../util/axiosUtil";
 import { getBaseURL } from "../../util/ulrUtil";
 import { getDummyImage, getImagePath } from "../../util/commonUtil";
+import SkeletonImage from "../Skeltons/SkeletonImage";
 
 // Styles
 import { PageBannerStyled } from "../StyledComponents/Styled-PageBanner";
@@ -68,13 +69,18 @@ const Banner = ({ getBannerAPIURL, bannerState, pageLoadServiceName }) => {
             </small>
           )}
         </div>
-        <img
+        { bannerdata.path ? 
+        (
+          <img
           src={
             bannerdata?.path ? getImagePath(bannerdata.path) : getDummyImage()
           }
           alt={bannerdata.alternitivetext}
           className="w-100"
         />
+        )
+        : <SkeletonImage /> }
+        
       </div>
     </PageBannerStyled>
   );

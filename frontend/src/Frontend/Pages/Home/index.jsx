@@ -41,6 +41,7 @@ const Home = () => {
   const [testimonis, setTestmonis] = useState([]);
   const isAdmin = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
+  const [pageLoadResult, setPageloadResults] = useState(false);
   const [show, setShow] = useState(false);
   const [news, setNews] = useState([]);
 
@@ -49,6 +50,7 @@ const Home = () => {
     setShow(!show);
     document.body.style.overflow = "hidden";
   };
+
 
   useEffect(() => {
     // window.scrollTo(0, 0);
@@ -201,7 +203,7 @@ const Home = () => {
             <div className="container">
               <h2 className="mb-5 fw-bold">News</h2>
               <div className="row">
-                <HomeNews news={news} setNews={setNews} />
+                <HomeNews news={news} setNews={setNews} setPageloadResults={setPageloadResults} pagetype={pageType} />
               </div>
             </div>
           </div>

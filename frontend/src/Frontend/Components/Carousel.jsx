@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 // Components
 import { axiosClientServiceApi } from "../../util/axiosUtil";
@@ -7,8 +8,10 @@ import { getImagePath } from "../../util/commonUtil";
 
 // Styles
 import "./Carousel.css";
+import SkeletonImage from "../../Common/Skeltons/SkeletonImage";
 
 const Carousel = ({ carouselState }) => {
+  const { isLoading } = useSelector((state) => state.loader);
   const [carousel, setCarousel] = useState([]);
   const baseURL = getBaseURL();
 
@@ -39,6 +42,9 @@ const Carousel = ({ carouselState }) => {
       data-bs-ride="carousel"
     >
       <div className="carousel-inner">
+
+      {isLoading ?  <SkeletonImage /> : ""}
+      
         {carousel.length > 0 ? (
           carousel?.map((item, index) => (
             <div
@@ -78,7 +84,7 @@ const Carousel = ({ carouselState }) => {
           ))
         ) : (
           <div className="d-flex justify-content-center align-items-center fs-5 text-muted text-center noImg">
-            Please add images for Carousel...
+            {!isLoading && <p>Please add images for Carousel...</p> }
           </div>
         )}
         {/* {carousel?.map((item, index) => (

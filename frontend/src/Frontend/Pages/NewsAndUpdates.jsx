@@ -56,7 +56,7 @@ const NewsAndUpdates = () => {
   });
 
   const setResponseData = (data) => {
-    setNews(data.results.length > 0 ? sortCreatedDateByDesc(data.results) : []);
+    setNews(data.length > 0 ? sortCreatedDateByDesc(data) : []);
     setPaginationData(paginationDataFormat(data));
     setCurrentPage(1);
   };
@@ -169,6 +169,7 @@ const NewsAndUpdates = () => {
             news={news}
             setNews={setResponseData}
             setPageloadResults={setPageloadResults}
+            pagetype={pageType}
           />
           <div>
             {paginationData?.total_count ? (
