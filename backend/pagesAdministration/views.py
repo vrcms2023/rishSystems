@@ -64,5 +64,13 @@ class UpdatePageDetails(APIView):
 Client Service View
 """
     
-
+class ClientMenuListAPIView(generics.ListAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = PagesAdministrationSerializer
+    pagination_class = PageDetails
+  
+    def get(self, request, format=None):
+        snippets = PageDetails.objects.all()
+        serializer = PagesAdministrationSerializer(snippets, many=True)
+        return Response({"PageDetails": serializer.data}, status=status.HTTP_200_OK)
     

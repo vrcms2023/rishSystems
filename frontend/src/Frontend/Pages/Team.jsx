@@ -33,7 +33,7 @@ const Team = () => {
   };
 
   const pageType = "teams";
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
   const [team, setTeam] = useState([]);
@@ -114,10 +114,8 @@ const Team = () => {
   return (
     <>
       <div className="position-relative">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("banner", true)} />
-        ) : (
-          ""
         )}
         <Banner
           getBannerAPIURL={`banner/clientBannerIntro/${pageType}-banner/`}
@@ -141,10 +139,8 @@ const Team = () => {
       )}
 
       {/* Brief Introduction */}
-      {isAdmin ? (
+      {isAdmin && hasPermission && (
         <EditIcon editHandler={() => editHandler("briefIntro", true)} />
-      ) : (
-        ""
       )}
 
       <BriefIntroFrontend
@@ -167,7 +163,7 @@ const Team = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-12 mt-4">
-            {isAdmin ? (
+            {isAdmin && hasPermission && (
               <div className="text-end mb-4">
                 <Link
                   to="#"
@@ -178,8 +174,6 @@ const Team = () => {
                   <i className="fa fa-plus ms-2" aria-hidden="true"></i>
                 </Link>
               </div>
-            ) : (
-              ""
             )}
           </div>
         </div>
@@ -237,7 +231,7 @@ const Team = () => {
                     isAdmin ? "border border-warning position-relative" : ""
                   } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
                 >
-                  {isAdmin ? (
+                  {isAdmin && hasPermission && (
                     <>
                       <EditIcon
                         editHandler={() =>
@@ -254,8 +248,6 @@ const Team = () => {
                         ></i>
                       </Link>
                     </>
-                  ) : (
-                    ""
                   )}
                   <img
                     src={getImagePath(item.path)}

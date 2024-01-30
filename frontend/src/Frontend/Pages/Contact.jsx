@@ -45,7 +45,7 @@ const Contact = () => {
   const defautURL =
     "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15226.413145928846!2d78.441906!3d17.430816!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x80e4d67809745a48!2sHPR+INFRA+PROJECTS!5e0!3m2!1sen!2sin!4v1442574301202";
   const pageType = "contactus";
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [formData, setFormData] = useState(formObject);
   const [mesg, setMesg] = useState("");
@@ -164,10 +164,8 @@ const Contact = () => {
     <ContactPageStyled>
       {/* Page Banner Component */}
       <div className="position-relative">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("banner", true)} />
-        ) : (
-          ""
         )}
         <Banner
           getBannerAPIURL={`banner/clientBannerIntro/${pageType}-banner/`}
@@ -192,10 +190,8 @@ const Contact = () => {
       )}
 
       {/* Introduction */}
-      {isAdmin ? (
+      {isAdmin && hasPermission && (
         <EditIcon editHandler={() => editHandler("briefIntro", true)} />
-      ) : (
-        ""
       )}
 
       <BriefIntroFrontend
@@ -218,10 +214,8 @@ const Contact = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="contactAddress position-relative col-md-4 text-white d-flex justify-content-start align-items-start blueBg-500 p-5 py-3 p-md-5">
-            {isAdmin ? (
+            {isAdmin && hasPermission && (
               <EditIcon editHandler={() => editHandler("address", true)} />
-            ) : (
-              ""
             )}
             <div className="address`">
               <Title title="Address" cssClass="fs-3" />
@@ -416,10 +410,8 @@ const Contact = () => {
 
         <div className="row">
           <div className="col">
-            {isAdmin ? (
+            {isAdmin && hasPermission && (
               <EditIcon editHandler={() => editHandler("map", true)} />
-            ) : (
-              ""
             )}
 
             <iframe

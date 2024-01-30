@@ -14,12 +14,9 @@ import { TopStripStyled } from "../StyledComponents/Styled-Topstrip";
 
 const TopStrip = () => {
   const [footerValues, setFooterValues] = useState([]);
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [userName, setUserName] = useState("");
-  const [loginState, setLoginState] = useState(false);
-  const { userInfo } = useSelector((state) => state.auth);
   const { footerData, error } = useSelector((state) => state.footerData);
 
   useEffect(() => {
@@ -27,16 +24,6 @@ const TopStrip = () => {
       setFooterValues(footerData.address[0]);
     }
   }, [footerData]);
-
-  useEffect(() => {
-    if (userInfo || getCookie("access")) {
-      const uName = userInfo ? userInfo.userName : getCookie("userName");
-      setUserName(uName);
-    } else {
-      setLoginState(false);
-      setUserName("");
-    }
-  }, [userInfo]);
 
   function logOutHandler() {
     removeAllCookies();
@@ -70,11 +57,11 @@ const TopStrip = () => {
             ""
           )}
 
-          {isAdmin ? (
+          {isAdmin && (
             <>
               <span className="d-none d-md-flex">
                 <i className="fa fa-user-o" aria-hidden="true"></i> &nbsp;
-                {userName}
+                {getCookie("userName")}
               </span>
 
               <span>
@@ -83,8 +70,6 @@ const TopStrip = () => {
                 </a>
               </span>
             </>
-          ) : (
-            ""
           )}
         </div>
       </div>

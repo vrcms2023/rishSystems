@@ -129,7 +129,7 @@ const UserAdmin = () => {
                     {user.email}
                   </td>
                   <td className={`${user.is_admin ? "text-danger" : ""}`}>
-                    {user.is_admin ? "Super Admin" : "User"}
+                    {user.is_admin ? "Super Admin" : "Maintainer"}
                   </td>
                   <td className={`${user.is_admin ? "text-danger" : ""}`}>
                     <span

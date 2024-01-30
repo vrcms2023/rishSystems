@@ -8,6 +8,6 @@ class PageDetails(BaseModel):
     page_isActive =     models.BooleanField(default=True)
     is_Parent =         models.BooleanField(default=True)
     page_parent_ID =    models.CharField(max_length=100, null=True, blank=True)
-    page_position =    models.IntegerField(default=0)
-    
-  
+    page_position =     models.IntegerField(default=0)
+    is_Admin_menu =     models.BooleanField(default=False)
+    is_Client_menu =    models.BooleanField(default=True)

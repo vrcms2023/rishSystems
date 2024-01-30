@@ -38,7 +38,7 @@ const NewsAndUpdates = () => {
   const [news, setNews] = useState([]);
   const [show, setShow] = useState(false);
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [showModal, setShowModal] = useState(false);
   const [obj, setObj] = useState({});
 
@@ -84,10 +84,8 @@ const NewsAndUpdates = () => {
     <>
       {/* Page Banner Component */}
       <div className="position-relative">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("banner", true)} />
-        ) : (
-          ""
         )}
         <Banner
           getBannerAPIURL={`banner/clientBannerIntro/${pageType}-banner/`}
@@ -111,7 +109,7 @@ const NewsAndUpdates = () => {
       )}
 
       <div className="container my-4 newsAndUpdates">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <div className="text-end mb-4">
             <Link
               to="#"
@@ -122,8 +120,6 @@ const NewsAndUpdates = () => {
               <i className="fa fa-plus ms-2" aria-hidden="true"></i>
             </Link>
           </div>
-        ) : (
-          ""
         )}
 
         <div className="row mb-4">

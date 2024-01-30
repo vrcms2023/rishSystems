@@ -29,7 +29,7 @@ const CaseStudiesDetails = () => {
   const [show, setShow] = useState(false);
   const [editCarousel, setEditCarousel] = useState({});
   const pageType = "casestudiedetails";
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
 
   useEffect(() => {
     const getCAseStutiesvalues = async () => {
@@ -61,10 +61,8 @@ const CaseStudiesDetails = () => {
     <CaseStudiesPageStyled>
       {/* Page Banner Component */}
       <div className="position-relative">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("banner", true)} />
-        ) : (
-          ""
         )}
         <Banner
           getBannerAPIURL={`banner/clientBannerIntro/${pageType}-banner/`}
@@ -88,10 +86,8 @@ const CaseStudiesDetails = () => {
       )}
 
       {/* Brief Introduction */}
-      {isAdmin ? (
+      {isAdmin && hasPermission && (
         <EditIcon editHandler={() => editHandler("briefIntro", true)} />
-      ) : (
-        ""
       )}
 
       <BriefIntroFrontend

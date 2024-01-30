@@ -37,7 +37,7 @@ const ClientsList = () => {
 
   const pageType = "clients";
   const { isLoading } = useSelector((state) => state.loader);
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [clientsList, setClientsList] = useState([]);
   const [show, setShow] = useState(false);
@@ -124,10 +124,8 @@ const ClientsList = () => {
     <>
       {/* Page Banner Component */}
       <div className="position-relative">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("banner", true)} />
-        ) : (
-          ""
         )}
         <Banner
           getBannerAPIURL={`banner/clientBannerIntro/${pageType}-banner/`}
@@ -151,10 +149,8 @@ const ClientsList = () => {
       )}
 
       {/* Brief Introduction */}
-      {isAdmin ? (
+      {isAdmin && hasPermission && (
         <EditIcon editHandler={() => editHandler("briefIntro", true)} />
-      ) : (
-        ""
       )}
 
       <BriefIntroFrontend
@@ -177,7 +173,7 @@ const ClientsList = () => {
       {/* Add Clients */}
       <div className="container-fluid container-lg my-md-5 ">
         <div className="row">
-          {isAdmin ? (
+          {isAdmin && hasPermission && (
             <div className="col-md-12">
               <div className="d-flex justify-content-end align-items-center mb-3">
                 {/* <span className="fw-bold me-2">Add content </span> */}
@@ -191,8 +187,6 @@ const ClientsList = () => {
                 </button>
               </div>
             </div>
-          ) : (
-            ""
           )}
         </div>
 
@@ -241,15 +235,17 @@ const ClientsList = () => {
 
         <ClientStyled>
           <div className="clients my-5">
-          {isLoading ? 
-            <div className="row">
-              {[1,2,3,4].map((item, index) => (
-                <div className="col-12" key={index}>
-                  <SkeletonImage />
-                </div>
-              ))}
-            </div>
-          : ""}
+            {isLoading ? (
+              <div className="row">
+                {[1, 2, 3, 4].map((item, index) => (
+                  <div className="col-12" key={index}>
+                    <SkeletonImage />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              ""
+            )}
 
             {clientsList.length > 0 ? (
               clientsList.map((item, index) => (
@@ -262,7 +258,7 @@ const ClientsList = () => {
                         : ""
                     } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
                   >
-                    {isAdmin ? (
+                    {isAdmin && hasPermission && (
                       <>
                         <EditIcon
                           editHandler={() =>
@@ -279,8 +275,6 @@ const ClientsList = () => {
                           ></i>
                         </Link>
                       </>
-                    ) : (
-                      ""
                     )}
                     <div className="col-12 col-lg-10 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column clientDetails">
                       {item.client_title ? (
@@ -300,11 +294,11 @@ const ClientsList = () => {
                     </div>
 
                     <div className="col-lg-2 d-none d-lg-block h-100 clientAvatar">
-                        <img
-                          src={getImagePath(item.path)}
-                          alt=""
-                          className="img-fluid rounded-circle border border-3 border-light shadow-lg img-thumbnail"
-                        />
+                      <img
+                        src={getImagePath(item.path)}
+                        alt=""
+                        className="img-fluid rounded-circle border border-3 border-light shadow-lg img-thumbnail"
+                      />
                     </div>
                   </div>
                   <hr className="border-secondary" />

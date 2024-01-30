@@ -13,14 +13,23 @@ import {
   setCookie,
   getCookie,
 } from "../../../util/cookieUtil";
-import { userLogin, getUser } from "../../../features/auth/authActions";
+import {
+  userLogin,
+  getUser,
+  getSelectedUserPermissions,
+  getMenus,
+} from "../../../features/auth/authActions";
+import { updatedPermisisons } from "../../../features/auth/authSlice";
 import CSRFToken from "../../../Frontend/Components/CRSFToken";
 
 // CSS Styles
 import { LoginStyled } from "../../../Common/StyledComponents/Styled-Login";
 
 const Login = () => {
-  const { access, userInfo, error } = useSelector((state) => state.auth);
+  const { access, userInfo, error, permissions } = useSelector(
+    (state) => state.auth,
+  );
+
   const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm();
@@ -36,20 +45,31 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
+      if (!userInfo.is_admin) {
+        dispatch(getSelectedUserPermissions(userInfo.id));
+      } else {
+        dispatch(updatedPermisisons());
+      }
+
       toast.success(`${userInfo.userName} Login successfully `);
       setCookie("email", userInfo.email);
       setCookie("userName", userInfo.userName);
       setCookie("userId", userInfo.id);
       setCookie("is_admin", JSON.parse(userInfo.is_admin));
       setCookie("is_appAccess", JSON.parse(userInfo.is_appAccess));
-      navigate("/");
-      window.location.reload();
     } else {
       if (getCookie("email")) {
         removeAllCookies();
       }
     }
   }, [userInfo]);
+
+  useEffect(() => {
+    if (permissions.length > 0) {
+      navigate("/");
+      window.location.reload();
+    }
+  }, [permissions]);
 
   const submitForm = (data) => {
     dispatch(userLogin(data));

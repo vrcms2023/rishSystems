@@ -42,9 +42,8 @@ const Carousel = ({ carouselState }) => {
       data-bs-ride="carousel"
     >
       <div className="carousel-inner">
+        {isLoading ? <SkeletonImage /> : ""}
 
-      {isLoading ?  <SkeletonImage /> : ""}
-      
         {carousel.length > 0 ? (
           carousel?.map((item, index) => (
             <div
@@ -84,7 +83,7 @@ const Carousel = ({ carouselState }) => {
           ))
         ) : (
           <div className="d-flex justify-content-center align-items-center fs-5 text-muted text-center noImg">
-            {!isLoading && <p>Please add images for Carousel...</p> }
+            {!isLoading && <p>Please add images for Carousel...</p>}
           </div>
         )}
         {/* {carousel?.map((item, index) => (

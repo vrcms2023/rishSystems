@@ -57,7 +57,7 @@ export const getUser = createAsyncThunk(
       return data;
     } catch (error) {
       // return custom error message from API if any
-      if (error.response && error.response.data) {
+      if (error?.response?.data) {
         const key = Object.keys(error.response.data);
         return rejectWithValue(error.response.data[key][0]);
       } else {
@@ -75,7 +75,49 @@ export const getRefreshToken = createAsyncThunk(
       return data;
     } catch (error) {
       // return custom error message from API if any
-      if (error.response && error.response.data) {
+      if (error?.response?.data) {
+        const key = Object.keys(error.response.data);
+        return rejectWithValue(error.response.data[key][0]);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  },
+);
+
+export const getSelectedUserPermissions = createAsyncThunk(
+  "auth/getSelectedUserPermissions",
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosServiceApi.get(
+        `/pagePermission/updatePermissions/${id}/`,
+      );
+
+      return data;
+    } catch (error) {
+      // return custom error message from API if any
+      if (error?.response?.data) {
+        const key = Object.keys(error.response.data);
+        return rejectWithValue(error.response.data[key][0]);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  },
+);
+
+export const getMenu = createAsyncThunk(
+  "auth/getMenus",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosClientServiceApi.get(
+        `/pageMenu/getPageMenu/`,
+      );
+
+      return data;
+    } catch (error) {
+      // return custom error message from API if any
+      if (error?.response?.data) {
         const key = Object.keys(error.response.data);
         return rejectWithValue(error.response.data[key][0]);
       } else {

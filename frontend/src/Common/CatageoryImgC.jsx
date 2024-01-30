@@ -9,6 +9,7 @@ import { axiosServiceApi } from "../util/axiosUtil";
 import { getBaseURL } from "../util/ulrUtil";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookie } from "../util/cookieUtil";
+import useAdminLoginStatus from "./customhook/useAdminLoginStatus";
 
 const CatageoryImgC = ({
   title,
@@ -25,7 +26,7 @@ const CatageoryImgC = ({
   const navigate = useNavigate();
   const baseURL = getBaseURL();
   const { userInfo } = useSelector((state) => state.auth);
-
+  const { isAdmin } = useAdminLoginStatus();
   /**
    * get selected Images for edit
    */
@@ -73,7 +74,7 @@ const CatageoryImgC = ({
   };
 
   const downloadPDF = (url) => {
-    if (userInfo || getCookie("access")) {
+    if (isAdmin) {
       return true;
     }
 

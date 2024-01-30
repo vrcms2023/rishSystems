@@ -38,7 +38,7 @@ const TestimonialsList = () => {
 
   const pageType = "testimonial";
   const { isLoading } = useSelector((state) => state.loader);
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [clientsList, setClientsList] = useState([]);
   const [show, setShow] = useState(false);
@@ -125,10 +125,8 @@ const TestimonialsList = () => {
     <>
       {/* Page Banner Component */}
       <div className="position-relative">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("banner", true)} />
-        ) : (
-          ""
         )}
         <Banner
           getBannerAPIURL={`banner/clientBannerIntro/${pageType}-banner/`}
@@ -152,10 +150,8 @@ const TestimonialsList = () => {
       )}
 
       {/* Brief Introduction */}
-      {isAdmin ? (
+      {isAdmin && hasPermission && (
         <EditIcon editHandler={() => editHandler("briefIntro", true)} />
-      ) : (
-        ""
       )}
 
       <BriefIntroFrontend
@@ -178,7 +174,7 @@ const TestimonialsList = () => {
       {/* Add Clients */}
       <div className="container-fluid container-lg my-md-5 ">
         <div className="row">
-          {isAdmin ? (
+          {isAdmin && hasPermission && (
             <div className="col-md-12">
               <div className="d-flex justify-content-end align-items-center mb-3">
                 {/* <span className="fw-bold me-2">Add Testimonials </span> */}
@@ -192,8 +188,6 @@ const TestimonialsList = () => {
                 </button>
               </div>
             </div>
-          ) : (
-            ""
           )}
         </div>
         <div className="row">
@@ -240,84 +234,84 @@ const TestimonialsList = () => {
         )}
 
         <TestimonialsListPageStyled>
-        <div className="testimonialsPage my-5">
-        {isLoading ? 
-            <div className="row">
-              {[1,2,3,4].map((item, index) => (
-                <div className="col-12" key={index}>
-                  <SkeletonImage />
-                </div>
-              ))}
-            </div>
-          : ""}
-
-          {clientsList.length > 0 ? (
-            clientsList.map((item, index) => (
-              <>
-                <div
-                  key={item.id}
-                  className={`row mb-2 ${
-                    isAdmin
-                      ? "border border-warning mb-3 position-relative"
-                      : ""
-                  } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
-                >
-                  {isAdmin ? (
-                    <>
-                      <EditIcon
-                        editHandler={() =>
-                          editHandler("editSection", true, item)
-                        }
-                      />
-                      <Link
-                        className="deleteSection"
-                        onClick={() => deleteAboutSection(item)}
-                      >
-                        <i
-                          className="fa fa-trash-o text-danger fs-4"
-                          aria-hidden="true"
-                        ></i>
-                      </Link>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                  <div className="col-12 col-lg-10 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
-                    {item.testimonial_title ? (
-                      <Title
-                        title={item.testimonial_title}
-                        cssClass="fs-1 fw-bold mb-1"
-                      />
-                    ) : (
-                      ""
-                    )}
-
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: item.testimonial_description,
-                      }}
-                    />
+          <div className="testimonialsPage my-5">
+            {isLoading ? (
+              <div className="row">
+                {[1, 2, 3, 4].map((item, index) => (
+                  <div className="col-12" key={index}>
+                    <SkeletonImage />
                   </div>
+                ))}
+              </div>
+            ) : (
+              ""
+            )}
 
-                  <div className="col-lg-2 d-none d-lg-block h-100">
-                    <div className="h-100 p-3 p-md-5 py-md-4 testimonialAvatar ">
-                      <img
-                        src={getImagePath(item.path)}
-                        alt=""
-                        className="img-fluid rounded-circle border border-3 border-light shadow-lg img-thumbnail "
+            {clientsList.length > 0 ? (
+              clientsList.map((item, index) => (
+                <>
+                  <div
+                    key={item.id}
+                    className={`row mb-2 ${
+                      isAdmin
+                        ? "border border-warning mb-3 position-relative"
+                        : ""
+                    } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
+                  >
+                    {isAdmin && hasPermission && (
+                      <>
+                        <EditIcon
+                          editHandler={() =>
+                            editHandler("editSection", true, item)
+                          }
+                        />
+                        <Link
+                          className="deleteSection"
+                          onClick={() => deleteAboutSection(item)}
+                        >
+                          <i
+                            className="fa fa-trash-o text-danger fs-4"
+                            aria-hidden="true"
+                          ></i>
+                        </Link>
+                      </>
+                    )}
+                    <div className="col-12 col-lg-10 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
+                      {item.testimonial_title ? (
+                        <Title
+                          title={item.testimonial_title}
+                          cssClass="fs-1 fw-bold mb-1"
+                        />
+                      ) : (
+                        ""
+                      )}
+
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: item.testimonial_description,
+                        }}
                       />
                     </div>
+
+                    <div className="col-lg-2 d-none d-lg-block h-100">
+                      <div className="h-100 p-3 p-md-5 py-md-4 testimonialAvatar ">
+                        <img
+                          src={getImagePath(item.path)}
+                          alt=""
+                          className="img-fluid rounded-circle border border-3 border-light shadow-lg img-thumbnail "
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <hr className="border-secondary" />
-              </>
-            ))
-          ) : (
-            <p className="text-center text-muted py-5">
-              {!isLoading && <p>Please add page contents...</p>}
-            </p>
-          )}
-        </div>
+                  <hr className="border-secondary" />
+                </>
+              ))
+            ) : (
+              <p className="text-center text-muted py-5">
+                {!isLoading && <p>Please add page contents...</p>}
+              </p>
+            )}
+          </div>
         </TestimonialsListPageStyled>
         {paginationData?.total_count ? (
           <CustomPagination

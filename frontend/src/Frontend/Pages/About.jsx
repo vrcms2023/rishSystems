@@ -38,7 +38,7 @@ const About = () => {
   };
 
   const pageType = "aboutus";
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [aboutList, setAboutList] = useState([]);
   const [show, setShow] = useState(false);
@@ -116,10 +116,8 @@ const About = () => {
     <>
       {/* Page Banner Component */}
       <div className="position-relative">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("banner", true)} />
-        ) : (
-          ""
         )}
         <Banner
           getBannerAPIURL={`banner/clientBannerIntro/${pageType}-banner/`}
@@ -143,10 +141,8 @@ const About = () => {
       )}
 
       {/* Introduction */}
-      {isAdmin ? (
+      {isAdmin && hasPermission && (
         <EditIcon editHandler={() => editHandler("briefIntro", true)} />
-      ) : (
-        ""
       )}
 
       <BriefIntroFrontend
@@ -172,7 +168,7 @@ const About = () => {
             <div className="col-md-6 fs-3 mt-4 mt-md-0">
               <Title title="About Us" cssClass="fs-1 pageTitle" />
             </div>
-            {isAdmin ? (
+            {isAdmin && hasPermission && (
               <div className="col-md-6">
                 <div className="d-flex justify-content-end align-items-center mb-3">
                   <span className="fw-bold me-2">Add content </span>
@@ -186,8 +182,6 @@ const About = () => {
                   </button>
                 </div>
               </div>
-            ) : (
-              ""
             )}
           </div>
 
@@ -227,7 +221,7 @@ const About = () => {
                         : ""
                     } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
                   >
-                    {isAdmin ? (
+                    {isAdmin && hasPermission && (
                       <>
                         <EditIcon
                           editHandler={() =>
@@ -244,8 +238,6 @@ const About = () => {
                           ></i>
                         </Link>
                       </>
-                    ) : (
-                      ""
                     )}
                     <div className="col-12 col-lg-7 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
                       {item.aboutus_title ? (
