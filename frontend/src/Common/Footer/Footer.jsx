@@ -34,7 +34,7 @@ const Footer = () => {
   const [footerValues, setFooterValues] = useState(false);
   const [show, setShow] = useState(false);
   const [modelShow, setModelShow] = useState(false);
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [termsAndPolicyData, setTermsAndPolicyData] = useState({});
   const [termsAndConditionData, setTermsAndConditionData] = useState({});
@@ -144,10 +144,8 @@ const Footer = () => {
             </div>
             <hr className="d-block d-md-none" />
             <div className="col-md-3 pb-3 pb-md-0">
-              {isAdmin ? (
+              {isAdmin && (
                 <EditIcon editHandler={() => editHandler("address", true)} />
-              ) : (
-                ""
               )}
 
               <div className="text-center text-md-start">
@@ -257,10 +255,8 @@ const Footer = () => {
         </div>
 
         <div className="text-center p-3 footerCopyRights">
-          {isAdmin ? (
+          {isAdmin && (
             <EditIcon editHandler={() => editHandler("termsPolacy", true)} />
-          ) : (
-            ""
           )}
 
           <div className="d-flex justify-content-center align-items-center flex-column flex-md-row gap-1 gap-md-2">

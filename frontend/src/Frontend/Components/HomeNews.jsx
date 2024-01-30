@@ -28,7 +28,13 @@ import { NewsStyled } from "../../Common/StyledComponents/Styled-News";
 import Ancher from "../../Common/Ancher";
 import SkeletonNews from "../../Common/Skeltons/SkeltonNews";
 
-const HomeNews = ({ addNewsState, news, setNews, setPageloadResults, pagetype }) => {
+const HomeNews = ({
+  addNewsState,
+  news,
+  setNews,
+  setPageloadResults,
+  pagetype,
+}) => {
   const location = useLocation();
   const baseURL = getBaseURL();
   const editComponentObj = {
@@ -37,7 +43,7 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults, pagetype })
 
   const pageType = "homeNew";
   const { isLoading } = useSelector((state) => state.loader);
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
 
@@ -60,12 +66,15 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults, pagetype })
         const response = await axiosClientServiceApi.get(
           `/appNews/clientAppNews/`,
         );
-        console.log(response.data.results, "News Component")
+        console.log(response.data.results, "News Component");
         if (response?.status === 200) {
           //const data = sortCreatedDateByDesc(response.data.appNews);
 
           setPageloadResults(true);
-          const data = (pagetype === "home") ? response.data.results.slice(0, 4) : response.data.results
+          const data =
+            pagetype === "home"
+              ? response.data.results.slice(0, 4)
+              : response.data.results;
           setNews(data);
         }
       } catch (error) {
@@ -118,15 +127,17 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults, pagetype })
 
   return (
     <>
-      {isLoading ? 
+      {isLoading ? (
         <div className="row">
-          {[1,2,3,4].map((item, index) => (
+          {[1, 2, 3, 4].map((item, index) => (
             <div className="col-md-6 col-lg-3 mb-4 mb-lg-0" key={index}>
               <SkeletonNews />
             </div>
           ))}
         </div>
-      : ""}
+      ) : (
+        ""
+      )}
 
       {news.length > 0 ? (
         news.map((item) => (
@@ -134,7 +145,7 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults, pagetype })
             <NewsStyled>
               <div className="card homeNews">
                 {/* Edit News */}
-                {isAdmin ? (
+                {isAdmin && hasPermission && (
                   <div className="d-flex justify-content-end gap-2">
                     {/* <EditIcon editHandler={() => editHandler("news", true, item)} /> */}
                     <Link
@@ -157,8 +168,6 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults, pagetype })
                       ></i>
                     </Link>
                   </div>
-                ) : (
-                  ""
                 )}
 
                 <img
@@ -199,7 +208,7 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults, pagetype })
         ))
       ) : (
         <div className="text-center">
-          {isAdmin ? (
+          {isAdmin && hasPermission ? (
             <>
               {location.pathname === "/news" ? (
                 <p className="text-center fs-6">Please add news items</p>
@@ -222,9 +231,9 @@ const HomeNews = ({ addNewsState, news, setNews, setPageloadResults, pagetype })
             </>
           ) : (
             <p className="text-center fs-6">
-             {!isLoading && "Currently there are no news items found."} 
+              {!isLoading && "Currently there are no news items found."}
             </p>
-          ) }
+          )}
         </div>
       )}
 

@@ -22,24 +22,29 @@ import "./Styles.css";
 // Images
 import Logo from "../../Images/logo.svg";
 // import { axiosClientServiceApi } from "../../util/axiosUtil";
-import { getUser } from "../../features/auth/authActions";
+import {
+  getMenu,
+  getSelectedUserPermissions,
+  getUser,
+} from "../../features/auth/authActions";
 import {
   storeServiceMenuValueinCookie,
   urlStringFormat,
 } from "../../util/commonUtil";
 
 import { getServiceValues } from "../../features/services/serviceActions";
+import { showContentPerRole } from "../../util/permissions";
 
 const Header = () => {
   const editComponentObj = {
     logo: false,
     menu: false,
   };
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo, menuList } = useSelector((state) => state.auth);
   const { serviceMenu, serviceerror } = useSelector(
     (state) => state.serviceMenu,
   );
@@ -96,11 +101,15 @@ const Header = () => {
     if (userInfo) {
       const uName = userInfo ? userInfo.userName : getCookie("userName");
       setUserName(uName);
+      dispatch(getSelectedUserPermissions(userInfo?.id));
     } else {
       setUserName("");
     }
     if (!userInfo && getCookie("access")) {
       dispatch(getUser());
+    }
+    if (menuList.length === 0) {
+      dispatch(getMenu());
     }
   }, [userInfo]);
 
@@ -144,13 +153,6 @@ const Header = () => {
             <img src={Logo} alt="" />
           </Link>
 
-          {/* LOGO EDIT OPTION */}
-          {/* {isAdmin ? (
-            <EditIcon editHandler={() => editHandler("menu", true)} />
-          ) : (
-            ""
-          )} */}
-
           {!isHideBurgetIcon ? (
             <button
               className="navbar-toggler"
@@ -176,38 +178,34 @@ const Header = () => {
   );
 };
 
-// export const AdminMenu = ({ userName, logOutHandler }) => {
-//   return (
-//     <>
-//       <ul className="mt-4 navbar-nav ms-auto mb-2 mb-lg-0">
-//         <li className="text-dark text-capitalize d-flex justify-content-center align-items-center">
-//           {userName ? (
-//             <>
-//               <i
-//                 className="fa fa-user-circle-o fs-1 text-secondary me-2 "
-//                 aria-hidden="true"
-//               ></i>{" "}
-//               {userName}
-//             </>
-//           ) : (
-//             ""
-//           )}
-//         </li>
-//         <li className="nav-item mx-3">
-//           <Button
-//             type="submit"
-//             cssClass="btn border border-secondary fw-bold ms-3"
-//             label="Logout"
-//             handlerChange={logOutHandler}
-//           />
-//         </li>
-//       </ul>
-//     </>
-//   );
-// };
 export const ClientMenu = ({ serviceMenuList }) => {
-  const isAdmin = useAdminLoginStatus();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
+  const { userInfo, menuList } = useSelector((state) => state.auth);
+
+  const ChildMenuContent = (menu) => {
+    return (
+      <React.Fragment key={menu.id}>
+        <li className={`nav-item ${menu.childMenu ? "dropdown" : ""}`}>
+          <NavLink
+            to={menu.page_url}
+            className={`${menu.is_Parent ? "nav-Link" : "dropdown-item"}`}
+          >
+            {menu.page_label}
+            {menu.childMenu?.length > 0 ? (
+              <ul className="dropdown-menu">
+                {menu.childMenu.map((childMenu) =>
+                  ChildMenuContent(childMenu, true),
+                )}
+              </ul>
+            ) : (
+              ""
+            )}
+          </NavLink>
+        </li>
+      </React.Fragment>
+    );
+  };
+
   return (
     <StyledMenu>
       <ul className="navbar-nav ms-auto mb-2 mb-lg-0 menu">
@@ -401,7 +399,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
               aria-labelledby="AdminSettingnavbarDropdown"
             >
               <li>
-                {userInfo?.is_admin ? (
+                {showContentPerRole(userInfo, false) ? (
                   <>
                     <Link to="/userAdmin" className="dropdown-item">
                       Users
@@ -438,6 +436,9 @@ export const ClientMenu = ({ serviceMenuList }) => {
           ""
         )}
       </ul>
+      {/* <ul className="navbar-nav ms-auto mb-2 mb-lg-0 menu">
+      {menuList?.map((menu) => ChildMenuContent(menu, false))}
+      </ul> */}
     </StyledMenu>
   );
 };

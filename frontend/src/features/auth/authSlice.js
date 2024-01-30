@@ -4,8 +4,11 @@ import {
   userLogin,
   getUser,
   getRefreshToken,
+  getSelectedUserPermissions,
+  getMenu,
 } from "./authActions";
 import { removeAllCookies } from "../../util/cookieUtil";
+import { getMenuObject } from "../../util/commonUtil";
 
 // initialize userToken from local storage
 const userToken = localStorage.getItem("access")
@@ -21,6 +24,8 @@ const initialState = {
   success: false,
   accountVerfy: false,
   isAuthenticated: false,
+  permissions: [],
+  menuList: [],
 };
 
 const authSlice = createSlice({
@@ -45,6 +50,10 @@ const authSlice = createSlice({
     updatedState: (state) => {
       state.error = false;
       state.success = false;
+    },
+    updatedPermisisons: (state) => {
+      state.error = false;
+      state.permissions = ["ALL"];
     },
   },
   extraReducers: {
@@ -85,7 +94,7 @@ const authSlice = createSlice({
     },
     [getUser.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.userInfo = payload; // registration successful
+      state.userInfo = payload; // get user informaiton
     },
     [getUser.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -107,9 +116,39 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = payload;
     },
+
+    // get permissions
+    [getSelectedUserPermissions.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [getSelectedUserPermissions.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.permissions = payload?.userPermissions?.user_permission_list;
+    },
+    [getSelectedUserPermissions.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+
+    // get Menu
+    [getMenu.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [getMenu.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.menuList =
+        payload?.PageDetails && getMenuObject(payload?.PageDetails);
+    },
+    [getMenu.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
   },
 });
 
-export const { logout, setCredentials, updatedState } = authSlice.actions;
+export const { logout, setCredentials, updatedState, updatedPermisisons } =
+  authSlice.actions;
 
 export default authSlice.reducer;

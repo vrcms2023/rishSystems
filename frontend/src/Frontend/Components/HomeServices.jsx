@@ -24,7 +24,7 @@ const HomeServices = ({ title }) => {
     service: false,
   };
 
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
   const [clientServiceList, setClientServiceList] = useState([]);
@@ -60,13 +60,6 @@ const HomeServices = ({ title }) => {
             className="row service mb-3 mb-md-5"
             key={`${index}+homeService`}
           >
-            <div className="position-relative">
-              {/* {isAdmin ? (
-              <EditIcon editHandler={() => editHandler("service", true)} />
-            ) : (
-              ""
-            )} */}
-            </div>
             <div className="col-md-6 p-2 homeServiceImg">
               <img
                 src={

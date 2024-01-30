@@ -13,13 +13,11 @@ import EditIcon from "../../../Common/AdminEditIcon";
 import ABrief from "../../Components/ABrief";
 import ABriefAbout from "../../Components/ABriefAbout";
 import HomeNews from "../../Components/HomeNews";
-import HomeServices from "../../Components/HomeServices";
 import { axiosClientServiceApi } from "../../../util/axiosUtil";
 import { removeActiveClass } from "../../../util/ulrUtil";
 import {
   getCarouselFields,
   getTestimonialsFields,
-  getImageDimensions,
   imageDimensionsJson,
 } from "../../../util/dynamicFormFields";
 
@@ -39,7 +37,7 @@ const Home = () => {
 
   const pageType = "home";
   const [testimonis, setTestmonis] = useState([]);
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [pageLoadResult, setPageloadResults] = useState(false);
   const [show, setShow] = useState(false);
@@ -50,7 +48,6 @@ const Home = () => {
     setShow(!show);
     document.body.style.overflow = "hidden";
   };
-
 
   useEffect(() => {
     // window.scrollTo(0, 0);
@@ -84,10 +81,8 @@ const Home = () => {
         {/* Carousel */}
         <div className="row">
           <div className="col-md-12 p-0 carousel">
-            {isAdmin ? (
+            {isAdmin && hasPermission && (
               <EditIcon editHandler={() => editHandler("carousel", true)} />
-            ) : (
-              ""
             )}
             <Carousel carouselState={componentEdit.carousel} />
           </div>
@@ -113,10 +108,8 @@ const Home = () => {
         )}
 
         {/* Introduction */}
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("briefIntro", true)} />
-        ) : (
-          ""
         )}
         <div className="row my-4">
           <BriefIntroFrontend
@@ -174,10 +167,8 @@ const Home = () => {
 
           <div className="col-md-4 p-5 testimonials text-center">
             testmonial
-            {isAdmin ? (
+            {isAdmin && hasPermission && (
               <EditIcon editHandler={() => editHandler("testmonial", true)} />
-            ) : (
-              ""
             )}
             {/* Testimonials */}
             {testimonis.length < 1 ? (
@@ -203,7 +194,12 @@ const Home = () => {
             <div className="container">
               <h2 className="mb-5 fw-bold">News</h2>
               <div className="row">
-                <HomeNews news={news} setNews={setNews} setPageloadResults={setPageloadResults} pagetype={pageType} />
+                <HomeNews
+                  news={news}
+                  setNews={setNews}
+                  setPageloadResults={setPageloadResults}
+                  pagetype={pageType}
+                />
               </div>
             </div>
           </div>

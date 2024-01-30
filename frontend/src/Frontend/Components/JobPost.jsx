@@ -31,7 +31,7 @@ const JobPost = ({ addJobs, posts, setPosts, setPageloadResults }) => {
   const { isLoading } = useSelector((state) => state.loader);
   const [editPost, setEditPosts] = useState({});
   const [show, setShow] = useState(false);
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const userCookie = getCookie("access");
 
@@ -115,28 +115,26 @@ const JobPost = ({ addJobs, posts, setPosts, setPageloadResults }) => {
 
   return (
     <>
-      {isLoading ? 
+      {isLoading ? (
         <div className="row">
-          {[1,2,3,4].map((item, index) => (
+          {[1, 2, 3, 4].map((item, index) => (
             <div className="col-md-6 col-lg-3 mb-4 mb-lg-0" key={index}>
               <SkeletonNews />
             </div>
           ))}
         </div>
-      : ""}
+      ) : (
+        ""
+      )}
 
       {posts?.length > 0 ? (
         posts.map((item, index) => (
           <div
             className={`col-md-6 col-lg-3 mt-3 mt-md-4 position-relative`}
-            // <div
-            // className={`col-sm-6 col-md-4 col-lg-3 mt-3 mt-md-5 position-relative ${
-            //   item.publish ? "border border-success" : ""
-            // }`}
             key={item.id}
           >
             <div className="d-flex gap-5 gap-sm-4 gap-md-3 gap-lg-3 justify-content-end mb-2 p-1">
-              {isAdmin ? (
+              {isAdmin && hasPermission ? (
                 <>
                   <div>
                     <Link
@@ -303,7 +301,7 @@ const JobPost = ({ addJobs, posts, setPosts, setPageloadResults }) => {
               At present there are not news items are available.
             </p>
           )}
-          {isAdmin ? (
+          {isAdmin && hasPermission && (
             <>
               <p className="text-center fs-4">
                 There are no news items found. Please create news items.
@@ -313,8 +311,6 @@ const JobPost = ({ addJobs, posts, setPosts, setPageloadResults }) => {
                 <i className="fa fa-plus mx-2" aria-hidden="true"></i>{" "}
               </Link>
             </>
-          ) : (
-            ""
           )}
         </div>
       )}

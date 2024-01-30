@@ -43,7 +43,7 @@ const Services = () => {
   };
 
   const pageType = "services";
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
   const [selectedServiceProject, setSelectedServiceProject] = useState({});
@@ -164,10 +164,8 @@ const Services = () => {
     <>
       {/* Page Banner Component */}
       <div className="position-relative">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("banner", true)} />
-        ) : (
-          ""
         )}
         <Banner
           getBannerAPIURL={`banner/clientBannerIntro/${pageType}-${pageLoadServiceName}-banner/`}
@@ -198,10 +196,8 @@ const Services = () => {
 
       <ServicesStyled>
         {/* Introduction */}
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("briefIntro", true)} />
-        ) : (
-          ""
         )}
         <BriefIntroFrontend
           introState={componentEdit.briefIntro}
@@ -223,14 +219,12 @@ const Services = () => {
         {/* End Of Introduction */}
 
         {/* Add Service Page */}
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <AddService
             setSelectedServiceProject={setSelectedServiceProject}
             selectedServiceProject={selectedServiceProject}
             pageType="service"
           />
-        ) : (
-          ""
         )}
         {/* End of Add Service Page */}
 
@@ -238,7 +232,7 @@ const Services = () => {
           className="container my-md-5 py-md-4 servicesPage"
           id="servicesPage"
         >
-          {isAdmin && selectedServiceProject?.id ? (
+          {isAdmin && hasPermission && selectedServiceProject?.id && (
             <div className="d-flex justify-content-end align-items-center mb-3">
               <span className="mx-2 text-dark">
                 {" "}
@@ -258,8 +252,6 @@ const Services = () => {
                 <i className="fa fa-plus" aria-hidden="true"></i>
               </button>
             </div>
-          ) : (
-            ""
           )}
 
           {componentEdit.editSection || componentEdit.addSection ? (
@@ -309,7 +301,7 @@ const Services = () => {
               } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
               key={item.id}
             >
-              {isAdmin ? (
+              {isAdmin && hasPermission && (
                 <>
                   <EditIcon
                     editHandler={() => editHandler("editSection", true, item)}
@@ -324,8 +316,6 @@ const Services = () => {
                     ></i>
                   </Link>
                 </>
-              ) : (
-                ""
               )}
               <div className="col-md-6">
                 <Title

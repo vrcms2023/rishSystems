@@ -24,7 +24,7 @@ const ABriefAbout = ({ cssClass, dimensions }) => {
     whoweare: false,
   };
   const pageType = "HomeWhoWeAre";
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
   const [bannerData, setBannerData] = useState("");
@@ -60,10 +60,8 @@ const ABriefAbout = ({ cssClass, dimensions }) => {
       </div>
       <div className="col-md-7">
         {/* Edit News */}
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("whoweare", true)} />
-        ) : (
-          ""
         )}
         <div className="row h-100">
           <div className="col-md-12 p-4 pt-0 p-lg-5 pt-lg-0 d-flex justify-content-center align-items-start flex-column">

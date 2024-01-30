@@ -31,7 +31,7 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
     homecareers: false,
   };
   const pageType = "homePageCareer";
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
   const [bannerdata, setBannerData] = useState([]);
@@ -144,10 +144,8 @@ const ABrief = ({ title, cssClass, linkClass, moreLink, dimensions }) => {
         /> */}
       </div>
       <div className="col-12 col-lg-6 p-4 d-flex justify-content-center align-items-start flex-column position-relative briefServices">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("homecareers", true)} />
-        ) : (
-          ""
         )}
         {bannerdata ? (
           <Title title={bannerdata.banner_title} cssClass={cssClass} />

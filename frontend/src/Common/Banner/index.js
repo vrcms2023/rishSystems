@@ -69,18 +69,17 @@ const Banner = ({ getBannerAPIURL, bannerState, pageLoadServiceName }) => {
             </small>
           )}
         </div>
-        { bannerdata.path ? 
-        (
+        {bannerdata.path ? (
           <img
-          src={
-            bannerdata?.path ? getImagePath(bannerdata.path) : getDummyImage()
-          }
-          alt={bannerdata.alternitivetext}
-          className="w-100"
-        />
-        )
-        : <SkeletonImage /> }
-        
+            src={
+              bannerdata?.path ? getImagePath(bannerdata.path) : getDummyImage()
+            }
+            alt={bannerdata.alternitivetext}
+            className="w-100"
+          />
+        ) : (
+          <SkeletonImage />
+        )}
       </div>
     </PageBannerStyled>
   );

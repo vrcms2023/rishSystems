@@ -39,7 +39,7 @@ const Careers = () => {
   };
 
   const pageType = "careers";
-  const isAdmin = useAdminLoginStatus();
+  const { isAdmin, hasPermission } = useAdminLoginStatus();
   const [componentEdit, SetComponentEdit] = useState(editComponentObj);
   const [show, setShow] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -75,10 +75,8 @@ const Careers = () => {
     <>
       {/* Page Banner Component */}
       <div className="position-relative careersPage">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <EditIcon editHandler={() => editHandler("banner", true)} />
-        ) : (
-          ""
         )}
         <Banner
           getBannerAPIURL={`banner/clientBannerIntro/${pageType}-banner/`}
@@ -103,10 +101,8 @@ const Careers = () => {
       )}
 
       {/* Introduction */}
-      {isAdmin ? (
+      {isAdmin && hasPermission && (
         <EditIcon editHandler={() => editHandler("briefIntro", true)} />
-      ) : (
-        ""
       )}
       <BriefIntroFrontend
         introState={componentEdit.briefIntro}
@@ -126,7 +122,7 @@ const Careers = () => {
       )}
 
       <div className="container mt-4 my-md-5 careerItems">
-        {isAdmin ? (
+        {isAdmin && hasPermission && (
           <div className="text-end mb-4">
             <Link
               to="#"
@@ -137,8 +133,6 @@ const Careers = () => {
               <i className="fa fa-plus ms-2" aria-hidden="true"></i>
             </Link>
           </div>
-        ) : (
-          ""
         )}
 
         {componentEdit.addjob ? (
