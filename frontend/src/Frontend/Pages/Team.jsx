@@ -178,7 +178,7 @@ const Team = () => {
           </div>
         </div>
 
-        <div className="row">
+        <div className="row mb-4 py-4">
           <div className="col-md-6 fs-3 mt-4 mt-md-0">
             <Title title="Our Team" cssClass="fs-1 pageTitle" />
           </div>
@@ -222,12 +222,12 @@ const Team = () => {
         )}
 
         <TeamStyled>
-          <div className="row ">
+          <div className="row">
             {team.length > 0 ? (
               team.map((item, index) => (
                 <div
                   key={item.id}
-                  className={`col-md-4 mb-2 px-4 ${
+                  className={`col-md-4 ${
                     isAdmin ? "border border-warning position-relative" : ""
                   } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
                 >
@@ -255,7 +255,7 @@ const Team = () => {
                     className="img-fluid"
                   />
 
-                  <div className="">
+                  <div className="p-3">
                     {item.team_member_name ? (
                       <Title
                         title={item.team_member_name}
