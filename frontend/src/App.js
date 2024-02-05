@@ -1,17 +1,12 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { lazy, Suspense } from "react";
+import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useSearchParams,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Components
 import LoadingSpinner from "./Common/LoadingSpinner";
-import Loading from "./Common/Loading";
+import { HideFooterForAdmin } from "./util/commonUtil";
 import SkeletonPage from "./Common/Skeltons/SkeletonPage";
 import Footer from "./Common/Footer/Footer";
 import Header from "./Common/Header/Header";
@@ -40,16 +35,16 @@ const CareerDetails = lazy(() => import("./Frontend/Pages/career-details"));
 const Team = lazy(() => import("./Frontend/Pages/Team"));
 const Projects = lazy(() => import("./Frontend/Pages/Projects"));
 const ProjectTabs = lazy(() =>
-  import("./Frontend/Components/ProjectsTabs/ProjecTabs"),
+  import("./Frontend/Components/ProjectsTabs/ProjecTabs")
 );
 const ProjectGallery = lazy(() => import("./Frontend/Pages/ProjectGallery"));
 const CaseStudies = lazy(() => import("./Frontend/Pages/CaseStudies"));
 const CaseStudiesDetails = lazy(() =>
-  import("./Frontend/Pages/caseStudies-details"),
+  import("./Frontend/Pages/caseStudies-details")
 );
 const NewsAndUpdates = lazy(() => import("./Frontend/Pages/NewsAndUpdates"));
 const TestimonialsList = lazy(() =>
-  import("./Frontend/Pages/TestimonialsList"),
+  import("./Frontend/Pages/TestimonialsList")
 );
 
 const Login = lazy(() => import("./Admin/Pages/Auth/Login"));
@@ -57,71 +52,42 @@ const Registration = lazy(() => import("./Admin/Pages/Auth/Registration"));
 const ChangePassword = lazy(() => import("./Admin/Pages/Auth/ChangePassword"));
 const ResetPassword = lazy(() => import("./Admin/Pages/Auth/ResetPassword"));
 const ResetPasswordConfirmation = lazy(() =>
-  import("./Admin/Pages/Auth/ResetPasswordConfirmation"),
+  import("./Admin/Pages/Auth/ResetPasswordConfirmation")
 );
 const Activation = lazy(() => import("./Admin/Pages/Auth/Activation"));
 const ResendActivationEmail = lazy(() =>
-  import("./Admin/Pages/Auth/ResendActivationEmail"),
+  import("./Admin/Pages/Auth/ResendActivationEmail")
 );
 const Dashboard = lazy(() => import("./Admin/Pages/Login/Dashboard"));
 const UserAdmin = lazy(() => import("./Admin/Pages/Auth/UserAdmin"));
 const UnauthorizedPage = lazy(() =>
-  import("./Admin/Pages/Login/UnauthorizedPage"),
+  import("./Admin/Pages/Login/UnauthorizedPage")
 );
 const AuthForm = lazy(() => import("./Admin/Pages/Auth/AuthForm"));
 const AddProject = lazy(() => import("./Admin/Pages/Login/AddProject"));
 const AdminNews = lazy(() => import("./Admin/Pages/Login/AdminNews"));
 const ContactUSAdmin = lazy(() => import("./Admin/Pages/Auth/ContactUSAdmin"));
 const PagesConfiguration = lazy(() =>
-  import("./Admin/Pages/Auth/PagesConfiguration"),
+  import("./Admin/Pages/Auth/PagesConfiguration")
 );
 const UserPagePermission = lazy(() =>
-  import("./Admin/Pages/Auth/UserPagePermission"),
+  import("./Admin/Pages/Auth/UserPagePermission")
 );
 const AdminTestimonial = lazy(() =>
-  import("./Admin/Pages/Login/AdminTestimonial"),
+  import("./Admin/Pages/Login/AdminTestimonial")
 );
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
-  const pathList = [
-    "/login",
-    "/register",
-    "/unauthorized",
-    "/activate",
-    "/reset_password",
-    "/authForm",
-    "/resend_activation",
-    "/password",
-    "/adminNews",
-    "/main",
-    "/dashboard",
-    "/editproject",
-    "/addproject",
-    "/testimonial",
-    "/contactUSList",
-    "/userAdmin",
-    "/userPermission",
-  ];
-  let isHideMenu =
-    pathList.indexOf(window.location.pathname) >= 0 ? true : false;
+  const { isLoading } = useSelector((state) => state.loader);
+  const isHideMenu = HideFooterForAdmin();
 
-  const HideMenu = () => {
-    pathList.forEach((item) => {
-      const list = window.location.pathname.split("/");
-      if (list[1] === item) {
-        isHideMenu = true;
-      }
-    });
-  };
-
-  // const lazyText = "L o a d i n g . . ."
   return (
     <>
       <ThemeProvider theme={ThemeOne}>
         <GlobalStyles />
         <BrowserRouter>
-          {/* {isLoading ? <LoadingSpinner /> : ""} */}
+          {isLoading ? <LoadingSpinner /> : ""}
           <TopStrip />
           <Header />
           <Suspense fallback={<SkeletonPage />}>
@@ -240,7 +206,8 @@ function App() {
               <Route exact path="/testimonial" element={<AdminTestimonial />} />
             </Routes>
           </Suspense>
-          {isHideMenu ? null : <Footer />}
+
+          {!isHideMenu && <Footer />}
         </BrowserRouter>
       </ThemeProvider>
       <ToastContainer autoClose={2000} theme="colored" />

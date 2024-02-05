@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { axiosClientServiceApi } from "../../../util/axiosUtil";
 import { useParams } from "react-router-dom";
 import Title from "../../../Common/Title";
@@ -7,6 +6,7 @@ import Error from "../../Components/Error";
 
 // CSS Styles
 import { LoginStyled } from "../../../Common/StyledComponents/Styled-Login";
+import LoadingSpinner from "../../../Common/LoadingSpinner";
 
 const Activation = () => {
   const [verified, setVerified] = useState(false);
@@ -14,8 +14,6 @@ const Activation = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [serverError, setServerError] = useState(false);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     verify_account();
@@ -32,10 +30,10 @@ const Activation = () => {
     try {
       const response = await axiosClientServiceApi.post(
         `/user/auth/users/activation/`,
-        body,
+        body
       );
       setIsLoading(false);
-      if (response.status == 204) {
+      if (response.status === 204) {
         setVerified(true);
       }
     } catch (error) {
@@ -51,6 +49,7 @@ const Activation = () => {
   return (
     <LoginStyled>
       <div className="login">
+        {isLoading && <LoadingSpinner />}
         <div className="bg-white d-flex justify-content-center align-items-center flex-column">
           <div className="container">
             <div
@@ -61,12 +60,10 @@ const Activation = () => {
                 title="Verify your Account"
                 cssClass="text-center text-dark mb-4 fw-bold fs-4"
               />
-
               {verified ? (
                 <h5>
-                  {" "}
-                  Your Account verfied please click here to login{" "}
-                  <Link to="/login  ">Login</Link>
+                  Your Account verified please contact your application admin to
+                  activate your account
                 </h5>
               ) : (
                 <div>
@@ -79,12 +76,10 @@ const Activation = () => {
                   )}
                 </div>
               )}
-              {isLoading ? (
+              {isLoading && (
                 <div className="d-grid gap-2 mt-4">
                   <h5> Please wait your account is verfication in process </h5>
                 </div>
-              ) : (
-                ""
               )}
             </div>
           </div>
