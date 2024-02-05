@@ -115,3 +115,29 @@ export const getMenuObject = (data) => {
   });
   return sortParentMenu;
 };
+
+export const HideFooterForAdmin = () => {
+  const pathList = [
+    "/login",
+    "/register",
+    "/unauthorized",
+    "/activate",
+    "/reset_password",
+    "/authForm",
+    "/resend_activation",
+    "/password",
+    "/adminNews",
+    "/main",
+    "/dashboard",
+    "/editproject",
+    "/addproject",
+    "/testimonial",
+    "/contactUSList",
+    "/userAdmin",
+    "/userPermission",
+  ];
+  let isHideMenu =
+    pathList.indexOf(window.location.pathname) >= 0 ? true : false;
+
+  return isHideMenu;
+};
