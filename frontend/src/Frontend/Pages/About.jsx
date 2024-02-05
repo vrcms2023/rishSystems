@@ -275,11 +275,11 @@ const About = () => {
                     </div>
 
                     <div className="col-lg-5 d-none d-lg-block h-100">
-                      <div className="h-100 p-3 p-md-5 py-md-4 d-flex flex-column justify-content-center align-items-center reset ">
+                      <div className="h-100 p-3 p-md-5 py-md-4 d-flex flex-column justify-content-center align-items-center">
                         <img
                           src={getImagePath(item.path)}
                           alt=""
-                          className="img-fluid"
+                          className="img-fluid rounded-circle shadow-lg"
                         />
                       </div>
                     </div>
