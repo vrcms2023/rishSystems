@@ -176,6 +176,12 @@ const UserAdmin = () => {
         ) : (
           <h3>Not authorized to view this page </h3>
         )}
+        <div className="text-center">
+          <p className="text-white h4 bg-info m-5 p-4">After activating the user account, granting page permissions is also required to access the application.</p>
+
+
+          <Link to="/userPermission" className="btn btn-outline">Page Permissions</Link>
+        </div>
       </div>
     </div>
   );
