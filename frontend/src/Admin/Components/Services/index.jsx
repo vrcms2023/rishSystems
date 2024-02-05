@@ -184,8 +184,8 @@ const AddService = ({
   };
 
   return (
-    <div className="my-5 addNewServicePage">
-      <Title title="Add New Service" cssClass="h5 text-center" />
+    <div className="py-5 addNewServicePage bg-dark">
+      <Title title="Create New Service Page" cssClass="h2 mb-4 text-white text-center" />
 
       {/* <h3 className={`text-center ${selectedServiceProject && selectedServiceProject.publish ? 'border border-success' : ''} `}>Add New Service </h3> */}
 

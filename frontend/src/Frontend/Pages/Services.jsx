@@ -286,17 +286,21 @@ const Services = () => {
           <div className="row ">
             {/* {selectedServiceProject.services_page_title} */}
             <div className="col-12 col-md-8">
-              <Title
+            <Title
+                title={"Services"}
+                cssClass="fs-3 mb-2 pageTitle"
+              />
+              {/* <Title
                 title={TitleStringFormat(
                   selectedServiceProject.services_page_title,
                 )}
                 cssClass="fs-1 mb-2 pageTitle"
-              />
+              /> */}
             </div>
           </div>
           {selectedServiceList.map((item, index) => (
             <div
-              className={`row mb-5${
+              className={`row mb-5 ${
                 isAdmin ? "border border-warning mb-3 position-relative" : ""
               } ${index % 2 === 0 ? "normalCSS" : "flipCSS"}`}
               key={item.id}
@@ -317,7 +321,7 @@ const Services = () => {
                   </Link>
                 </>
               )}
-              <div className="col-md-6">
+              <div className="col-md-8 p-5">
                 <Title
                   title={
                     item.feature_title
@@ -338,7 +342,7 @@ const Services = () => {
                   dangerouslySetInnerHTML={{ __html: item.feature_description }}
                 />
               </div>
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <img src={getImagePath(item.path)} alt="" />
               </div>
             </div>
