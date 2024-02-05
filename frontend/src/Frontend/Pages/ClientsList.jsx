@@ -280,7 +280,7 @@ const ClientsList = () => {
                       {item.client_title ? (
                         <Title
                           title={item.client_title}
-                          cssClass="fs-1 fw-bold mb-1"
+                          cssClass="fs-4 fw-bold mb-2"
                         />
                       ) : (
                         ""

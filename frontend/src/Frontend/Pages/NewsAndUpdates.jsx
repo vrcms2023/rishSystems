@@ -122,7 +122,7 @@ const NewsAndUpdates = () => {
           </div>
         )}
 
-        <div className="row mb-4">
+        <div className="row mb-4 py-4">
           <div className="col-md-6">
             <Title title="News And Updates" cssClass="fs-1 pageTitle" />
           </div>

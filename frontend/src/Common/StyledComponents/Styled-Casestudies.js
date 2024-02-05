@@ -18,4 +18,9 @@ export const CaseStudiesPageStyled = styled.div`
     max-height: 150px;
     width: 100%;
   }
+
+  .caseStudieDetails ul {
+    margin: 25px;
+    padding: 0;
+  }
 `;

@@ -278,11 +278,11 @@ const CaseStudies = () => {
                       </Link>
                     </>
                   )}
-                  <div className="col-sm-9 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column">
+                  <div className="col-sm-9 p-3 p-md-4 py-md-4 d-flex justify-content-center align-items-start flex-column caseStudieDetails">
                     {item.case_studies_title ? (
                       <Title
                         title={item.case_studies_title}
-                        cssClass="fs-1 fw-bold mb-1"
+                        cssClass="fs-4 fw-bold mb-2"
                       />
                     ) : (
                       ""
@@ -304,7 +304,7 @@ const CaseStudies = () => {
                     </div>
                   </div>
 
-                  <div className="col-sm-3 d-none d-sm-flex p-3">
+                  <div className="col-sm-3 d-none d-sm-flex justify-content-center p-3">
                     <img
                       src={getImagePath(item.path)}
                       alt=""

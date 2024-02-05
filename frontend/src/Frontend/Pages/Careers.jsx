@@ -148,7 +148,7 @@ const Careers = () => {
         )}
         <div>
           <CareersPageStyled>
-            <div className="row">
+            <div className="row mb-4 py-4">
               <div className="col-md-6">
                 <Title title="Careers" cssClass="fs-3 pageTitle" />
               </div>
@@ -165,17 +165,19 @@ const Careers = () => {
                   searchQuery={searchQuery}
                 />
               </div>
+            </div>
 
-              <div className="row mb-5">
-                <JobPost
-                  addJobs={componentEdit.addjob}
-                  posts={posts}
-                  setPosts={setResponseData}
-                  setPageloadResults={setPageloadResults}
-                />
-              </div>
-
-              <div>
+            <div className="row">
+              <JobPost
+                addJobs={componentEdit.addjob}
+                posts={posts}
+                setPosts={setResponseData}
+                setPageloadResults={setPageloadResults}
+              />
+            </div>
+              
+          </CareersPageStyled>
+          <div>
                 {paginationData?.total_count ? (
                   <CustomPagination
                     paginationData={paginationData}
@@ -201,8 +203,6 @@ const Careers = () => {
                   ""
                 )}
               </div>
-            </div>
-          </CareersPageStyled>
         </div>
 
         {show && <ModelBg />}

@@ -180,9 +180,9 @@ const HomeNews = ({
                     title={
                       item.news_title ? item.news_title : "Update news Title"
                     }
-                    cssClass="fs-5 fw-bold lh-sm mb-2 lineClamp lc2"
+                    cssClass="fs-5 fw-bold lh-sm mb-2 lineClamp lc1"
                   />
-                  <div className="card-text mb-4 lineClamp lc5">
+                  <div className="card-text mb-4 lineClamp lc2">
                     {item.news_description ? (
                       <div
                         dangerouslySetInnerHTML={{
