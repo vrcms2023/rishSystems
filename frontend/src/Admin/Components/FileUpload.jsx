@@ -29,7 +29,7 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 registerPlugin(
   FilePondPluginFileValidateType,
   FilePondPluginImagePreview,
-  FilePondPluginImageExifOrientation,
+  FilePondPluginImageExifOrientation
 );
 
 const FileUpload = ({
@@ -187,7 +187,7 @@ const FileUpload = ({
    */
   const creteFileObj = async () => {
     let imageURL = "";
-    if (editImage.path.split("/")[0] !== "media") {
+    if (editImage.path.split("/")[0] === "http:") {
       imageURL = editImage.path;
     } else {
       imageURL = `${baseURL}${editImage.path}`;
@@ -199,7 +199,11 @@ const FileUpload = ({
       metadata = {
         type: `image/${editImage.contentType.replace(".", "")}`,
       };
-      return new File([data], editImage.originalname, metadata);
+      return new File(
+        [data],
+        `'${editImage.originalname}${editImage.contentType}'`,
+        metadata
+      );
     } else {
       return new File([data], editImage.originalname);
     }
@@ -225,7 +229,7 @@ const FileUpload = ({
 
       const response = await axiosFileUploadServiceApi.patch(
         `${imageUpdateURL}${editImage.id}/`,
-        formData,
+        formData
       );
       if (response?.status === 200) {
         updatedFileChnages([response]);
