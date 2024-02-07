@@ -26,7 +26,7 @@ export const useAdminLoginStatus = () => {
     if (getCookie("access") && permissionsPath.length > 0) {
       setHasPermission(true);
     }
-  }, [userInfo]);
+  }, [userInfo, permissions]);
 
   return { isAdmin, hasPermission };
 };
