@@ -166,25 +166,24 @@ const Home = () => {
           </div>
 
           <div className="col-md-4 p-5 testimonials text-center">
-            testmonial
             {isAdmin && hasPermission && (
               <EditIcon editHandler={() => editHandler("testmonial", true)} />
             )}
             {/* Testimonials */}
             {testimonis.length < 1 ? (
-              (testimonis.length, "Current No Testimonials Found")
-            ) : testimonis.length == 1 ? (
+              (testimonis.length, "No Testimonials Found")
+            ) : testimonis.length === 1 ? (
               <h4>Please add 2 or more testimonials.</h4>
             ) : testimonis.length > 1 ? (
               <Testimonials testimonis={testimonis} />
             ) : (
               ""
             )}
-            {testimonis.length > 0 ? (
+            {/* {testimonis.length > 0 ? (
               <Testimonials testimonis={testimonis} />
             ) : (
               ""
-            )}
+            )} */}
           </div>
         </div>
 
