@@ -210,11 +210,11 @@ body {
         font-size: 100px;
       }
       .article.lastSlide {
-        /* transform: translateX(-100%); */
+        // transform: translateX(-100%); 
       }
       
       .article.nextSlide {
-        /* transform: translateX(100%); */
+        //  transform: translateX(100%); 
       }
 }
 
