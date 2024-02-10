@@ -152,12 +152,12 @@ const UserPagePermission = () => {
       if (id) {
         response = await axiosServiceApi.patch(
           `/pagePermission/updatePermissions/${id}/`,
-          userPermission,
+          userPermission
         );
       } else {
         response = await axiosServiceApi.post(
           `/pagePermission/createPermissions/`,
-          data,
+          data
         );
       }
 
@@ -166,6 +166,7 @@ const UserPagePermission = () => {
         response?.data?.userPermissions
       ) {
         setUserPermission(response?.data?.userPermissions);
+        toast.success("Permission are update successfully");
       } else {
         setUserPermission({});
       }
@@ -180,7 +181,7 @@ const UserPagePermission = () => {
   const getSelectedUserPermisisons = async (id) => {
     try {
       const response = await axiosServiceApi.get(
-        `/pagePermission/updatePermissions/${id}/`,
+        `/pagePermission/updatePermissions/${id}/`
       );
       if (response?.status === 200 && response?.data?.userPermissions) {
         const permission = response?.data?.userPermissions;
@@ -193,7 +194,7 @@ const UserPagePermission = () => {
         setUserPermission({});
       }
     } catch (error) {
-      toast.error("Unable to load user details");
+      console.log("Unable to load user details");
       setUserPermission({});
     }
   };
@@ -285,11 +286,11 @@ const UserPagePermission = () => {
                         }}
                         isChecked={isObjectChecked(
                           isUserCheck,
-                          user.id.toString(),
+                          user.id.toString()
                         )}
                         disabled={isObjectDisabled(
                           isUserCheck,
-                          user.id.toString(),
+                          user.id.toString()
                         )}
                       />
                     ) : (
