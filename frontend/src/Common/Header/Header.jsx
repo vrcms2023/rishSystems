@@ -46,7 +46,7 @@ const Header = () => {
   const navigate = useNavigate();
   const { userInfo, menuList } = useSelector((state) => state.auth);
   const { serviceMenu, serviceerror } = useSelector(
-    (state) => state.serviceMenu,
+    (state) => state.serviceMenu
   );
   const dispatch = useDispatch();
   const onPageLoadAction = useRef(true);
@@ -194,7 +194,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
             {menu.childMenu?.length > 0 ? (
               <ul className="dropdown-menu">
                 {menu.childMenu.map((childMenu) =>
-                  ChildMenuContent(childMenu, true),
+                  ChildMenuContent(childMenu, true)
                 )}
               </ul>
             ) : (
@@ -213,7 +213,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
           <NavLink
             to="/"
             className={useCallback(({ isActive }) =>
-              isActive ? "nav-Link active" : "nav-Link",
+              isActive ? "nav-Link active" : "nav-Link"
             )}
           >
             Home
@@ -240,7 +240,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
             className={useCallback(({ isActive }) =>
               isActive
                 ? "nav-Link dropdown-toggle isChildAvailable active"
-                : "nav-Link dropdown-toggle isChildAvailable",
+                : "nav-Link dropdown-toggle isChildAvailable"
             )}
           >
             Services
@@ -255,7 +255,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
                 <li key={item.id}>
                   <Link
                     to={`/services/${urlStringFormat(
-                      item.services_page_title,
+                      item.services_page_title
                     )}/`}
                     onClick={() => {
                       storeServiceMenuValueinCookie(item);
@@ -296,7 +296,7 @@ export const ClientMenu = ({ serviceMenuList }) => {
             className={useCallback(({ isActive }) =>
               isActive
                 ? "nav-Link dropdown-toggle isChildAvailable active"
-                : "nav-Link dropdown-toggle isChildAvailable",
+                : "nav-Link dropdown-toggle isChildAvailable"
             )}
           >
             Clients
@@ -347,26 +347,6 @@ export const ClientMenu = ({ serviceMenuList }) => {
             Team
           </NavLink>
         </li>
-        <li className="nav-item">
-          <NavLink
-            to="/projects"
-            className={({ isActive }) =>
-              isActive ? "nav-Link active" : "nav-Link"
-            }
-          >
-            Projects
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/gallery"
-            className={({ isActive }) =>
-              isActive ? "nav-Link active" : "nav-Link"
-            }
-          >
-            Gallery
-          </NavLink>
-        </li>
 
         <li className="nav-item">
           <NavLink
@@ -407,12 +387,6 @@ export const ClientMenu = ({ serviceMenuList }) => {
                     <Link to="/userPermission" className="dropdown-item">
                       User Pages Permissions
                     </Link>
-                    <Link
-                      to="/adminPagesConfigurtion"
-                      className="dropdown-item"
-                    >
-                      Pages Configurtion
-                    </Link>
                   </>
                 ) : (
                   ""
@@ -422,12 +396,6 @@ export const ClientMenu = ({ serviceMenuList }) => {
                 </Link>
                 <Link to="/change_password" className="dropdown-item">
                   Change Password
-                </Link>
-                <Link to="/addproject" className="dropdown-item">
-                  Add Project
-                </Link>
-                <Link to="/dashboard" className="dropdown-item">
-                  Dashboard
                 </Link>
               </li>
             </ul>

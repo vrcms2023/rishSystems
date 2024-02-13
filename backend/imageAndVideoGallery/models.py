@@ -5,8 +5,8 @@ from common.BaseModel import ImageModel
 class imageAndVideo(ImageModel):
     image_title =       models.CharField(max_length=200, null=True, blank=True)
     image_description = models.CharField(max_length=500, null=True, blank=True)
-    likes  =            models.BooleanField(default=False)
-    Views =             models.CharField(max_length=500, null=True, blank=True)
-    Downloads  =        models.CharField(max_length=500, null=True, blank=True)
+    likes  =            models.CharField(max_length=100, null=True, blank=True)
+    Views =             models.CharField(max_length=100, null=True, blank=True)
+    Downloads  =        models.CharField(max_length=100, null=True, blank=True)
     location =          models.CharField(max_length=500, null=True, blank=True)
     imageDimension =    models.CharField(max_length=200, null=True, blank=True)
